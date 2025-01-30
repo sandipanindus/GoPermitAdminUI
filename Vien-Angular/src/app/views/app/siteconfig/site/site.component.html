@@ -1,0 +1,136 @@
+<div class="row">
+  <div class="col-12">
+    <div class="loading" style="display: none;" id="loading"></div>
+    <app-heading></app-heading>
+    <div class="top-right-button-container text-zero" style="display: flex;">
+      <div class="mr-2 mt-2">
+        <span class="text-muted text-small">Per Page </span>
+        <span dropdown class="d-inline-block position-relative">
+          <button class="btn btn-outline-dark btn-xs dropdown-toggle" type="button" data-toggle="dropdown"
+            aria-haspopup="true" aria-expanded="false" dropdownToggle>
+            {{itemsPerPage}}
+          </button>
+          <div class="dropdown-menu dropdown-menu-right dropdown-menu-sm text-right" *dropdownMenu>
+            <li role="menuitem" *ngFor="let item of itemOptionsPerPage"><a
+                [ngClass]="item === itemsPerPage ? 'dropdown-item active' : 'dropdown-item'"
+                (click)="onChangeItemsPerPage(item)">{{item}}</a></li>
+          </div>
+        </span>
+      </div>
+      <div *ngIf="add==true">
+        <button type="button" (click)="showAddNewModal()"
+          class="top-right-button btn btn-primary btn-lg mr-1">{{ 'pages.add-new' | translate}}</button>
+          <button class="btn btn-primary btn-lg my-1 ml-1" (click)="Clear()">Clear</button>
+          <button class="btn btn-primary btn-lg my-1 ml-1" (click)="SearchSite()">Search</button>
+      </div>
+
+
+    </div>
+
+    <form>
+      <div class="row justify-content-center mb-3 ml-3 input_cls form-group">
+        <div class="col-md-4 pl-0">
+          <input type="text" class="form-control my-3" [(ngModel)]="sitename" [ngModelOptions]="{standalone: true}"
+            placeholder="Site Name" style="border: none;border-bottom: 1px solid;" />
+        </div>
+        <div class="col-md-4 pl-0">
+          <input type="text" class="form-control my-3" [(ngModel)]="email" [ngModelOptions]="{standalone: true}"
+            placeholder="Email" style="border: none;border-bottom: 1px solid;" />
+        </div>
+        <div class="col-md-4 pl-0">
+          <input type="text" class="form-control my-3" placeholder="Mobile Number" [(ngModel)]="mobileno"
+            [ngModelOptions]="{standalone: true}" style="border: none;border-bottom: 1px solid;" />
+        </div>
+
+      </div>
+    </form>
+  </div>
+</div>
+
+<div class="row">
+  <div class="col-md-12 mb-4">
+    <div class="card scroll">
+      <div class="card-body">
+
+
+        <table class="table table-striped">
+          <thead>
+            <tr>
+              <th>{{ 'site.sno' | translate}}</th>
+              <th scope="col" (click)="onSortClick($event,'siteName')" class="up">{{ 'site.sitename' | translate}}</th>
+              <th scope="col" (click)="onSortClick($event,'email')" class="up">{{ 'site.email' | translate}}</th>
+              <th scope="col" (click)="onSortClick($event,'mobileNumber')" class="up">{{ 'site.mobilenumber' | translate}}</th>
+              <th scope="col">Action</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let site of sites let i=index">
+               <td>{{(((site.pageNo)-1)*10)+i+1}}</td>
+               <!-- <td>{{i+1}}</td> -->
+              <td>{{site.siteName}}</td>
+              <td>{{site.email}}</td>
+              <td>{{site.mobileNumber}}</td>
+              <td>
+                <div style="display: flex;" *ngIf="edit==true || delete==true || view==true">
+                  <div *ngIf="view==true">
+                    <a (click)="showViewModal(site.id)" style="font-size: 20px;">
+                      <div class="glyph-icon simple-icon-eye"></div>
+                    </a>
+                  </div>
+                  <div style="margin-left: 10px;" *ngIf="edit==true">
+                    <a (click)="showEditModal(site.id)" style="font-size: 20px;">
+                      <div class="glyph-icon simple-icon-pencil"></div>
+                    </a>
+                  </div>
+                  <div style="margin-left: 10px;" *ngIf="delete==true">
+                    <a style="font-size: 20px;" (click)="openModal(template,site.id)">
+                      <div class=" glyph-icon simple-icon-trash"></div>
+                    </a>
+                  </div>
+                </div>
+              </td>
+            </tr>
+
+          </tbody>
+        </table>
+        <div class="w-100 d-flex justify-content-center" *ngIf="showpage">
+          <pagination [rotate]="true" [(ngModel)]="currentPage" (pageChanged)="pageChanged($event)"
+            class="justify-content-center" [totalItems]="totalItems" [itemsPerPage]="itemsPerPage" [maxSize]="10"
+            [customNextTemplate]="nextTemplate" [customPreviousTemplate]="prevTemplate">
+          </pagination>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</div>
+<ng-template #nextTemplate let-disabled="disabled" let-currentPage="currentPage">
+  <i class='simple-icon-arrow-right'></i>
+</ng-template>
+<ng-template #prevTemplate let-disabled="disabled" let-currentPage="currentPage">
+  <i class='simple-icon-arrow-left'></i>
+</ng-template>
+
+
+<ng-template #loading>
+  <div class="loading"></div>
+</ng-template>
+
+<simple-notifications></simple-notifications>
+
+<br>
+<div *ngIf="message">
+  <br>
+  <pre class="border p-2 rounded">{{message}}</pre>
+</div>
+<ng-template #template>
+  <div class="modal-body text-center">
+    <h6 class="modal-title mb-4">{{'site.confirm-message' | translate}}</h6>
+    <button type="button" class="btn btn-outline-primary" (click)="confirm()">{{'modal.yes' | translate}}</button>
+    {{" "}}
+    <button type="button" class="btn btn-primary" (click)="decline()">{{'modal.no' | translate}}</button>
+  </div>
+</ng-template>
+<ngx-spinner bdColor="rgba(0,0,0,0.8)" size="medium" color="#fff" type="ball-clip-rotate-multiple" [fullScreen]="true">
+  <p style="color: white"> Please wait... </p>
+</ngx-spinner>

@@ -1,0 +1,425 @@
+<div class="row">
+  <div class="col-12">
+    <div class="card mb-4">
+      <div class="card-body">
+        <h5 class="mb-4">
+          {{ "vehicleregistration.Visitor" | translate }}
+        </h5>
+
+        <form>
+          <div class="form-group row col-lg-12">
+            <label class="col-sm-2 col-form-label">{{
+              "tenants.site" | translate
+            }}</label>
+            <div class="col-sm-4">
+              <select class="form-control" [ngModelOptions]="{ standalone: true }" id="txtsite" [(ngModel)]="siteId"
+                required="required" (change)="Getbaybysite()">
+                <option *ngFor="let site of sites" [value]="site.id">
+                  {{ site.siteName }}
+                </option>
+              </select>
+            </div>
+            <div class="col-xl-5 mb-4 mt-3 date_cls" *ngIf="showdatepicker">
+              <div class="date_cls card_cls">
+                <div class="card">
+                  <div class="calender_cls card-body">
+                    <h5 class="card-title">
+                      {{ "dashboards.calendar" | translate }}
+                    </h5>
+                    <div class="row">
+                      <div class="col-md-4">
+                        <p class="mb-0 pt-2">
+                          {{ viewDate | calendarDate: view + "ViewTitle":"en" }}
+                        </p>
+                      </div>
+                      <div class="col-md-8 text-right">
+                        <button type="button" class="btn btn-primary btn-sm" mwlCalendarToday [(viewDate)]="viewDate">
+                          Today</button>{{ " " }}
+                        <button type="button" mwlCalendarPreviousView [view]="view" [(viewDate)]="viewDate"
+                          class="btn btn-outline-primary calendar-nav-button icon-button small-icon" aria-label="prev">
+                          <span class="simple-icon-arrow-left"></span></button>{{ " " }}
+                        <button type="button" mwlCalendarNextView [view]="view" [(viewDate)]="viewDate"
+                          class="btn btn-outline-primary calendar-nav-button icon-button small-icon" aria-label="next">
+                          <span class="simple-icon-arrow-right"></span>
+                        </button>
+                      </div>
+                    </div>
+                    <br />
+                    <div [ngSwitch]="view">
+                      <mwl-calendar-month-view *ngSwitchCase="CalendarView.Month" [viewDate]="viewDate"
+                        [events]="events" [refresh]="refresh" weekStartsOn="1" (dayClicked)="eventClicked($event.day)">
+                      </mwl-calendar-month-view>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+
+<ng-template #template>
+  <div class="modal-header">
+    <h4 class="modal-title pull-left" id="my-modal-title">Driver Details:</h4>
+    <button type="button" title="Cancel" class="close pull-right" aria-label="Close" (click)="decline()">
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
+  <div class="modal-body" style="width: 110%">
+    <div class="row col-12" *ngFor="let i of details">
+      <div class="row col-lg-12" style="font-weight: 800">
+        <label class="col-sm-6 col-form-label">{{
+          "tenants.Drivername" | translate
+        }}</label>
+        <label class="col-sm-6 col-form-label">
+          {{ i.drivername }}
+        </label>
+      </div>
+
+      <div class="row col-lg-12" style="font-weight: 800">
+        <label class="col-sm-6 col-form-label">{{
+          "tenants.Bayno" | translate
+        }}</label>
+        <label class="col-sm-6 col-form-label">
+          {{ i.bayNO }}
+        </label>
+      </div>
+      <div class="row col-lg-12" style="font-weight: 800">
+        <label class="col-sm-6 col-form-label">{{
+          "tenants.vrm" | translate
+        }}</label>
+        <label class="col-sm-6 col-form-label">
+          {{ i.vrmno }}
+        </label>
+      </div>
+      <div class="row col-lg-12" style="font-weight: 800">
+        <label class="col-sm-6 col-form-label">{{
+          "tenants.email" | translate
+        }}</label>
+        <label class="col-sm-6 col-form-label">
+          {{ i.email }}
+        </label>
+      </div>
+      <div class="row col-lg-12" style="font-weight: 800">
+        <label class="col-sm-6 col-form-label">{{
+          "tenants.contactnumber" | translate
+        }}</label>
+        <label class="col-sm-6 col-form-label">
+          {{ i.phno }}
+        </label>
+      </div>
+      <div class="row col-lg-12" style="font-weight: 800">
+        <label class="col-sm-6 col-form-label">{{
+          "tenants.visiting" | translate
+        }}</label>
+        <label class="col-sm-6 col-form-label">
+          {{ i.tenantname }}
+        </label>
+      </div>
+
+      <div class="row col-lg-12" style="font-weight: 800">
+        <label class="col-sm-6 col-form-label">{{
+          "tenants.TenantContct" | translate
+        }}</label>
+        <label class="col-sm-6 col-form-label">
+          {{ i.tenantmobile }}
+        </label>
+      </div>
+      <div class="row col-lg-12" style="font-weight: 800">
+        <label class="col-sm-6 col-form-label">{{
+          "tenants.startdate" | translate
+        }}</label>
+        <label class="col-sm-6 col-form-label">
+          {{ i.startDate | date: "yyyy-MM-dd HH:mm:ss" }}
+        </label>
+      </div>
+      <div class="row col-lg-12" style="font-weight: 800">
+        <label class="col-sm-6 col-form-label">{{
+          "tenants.enddate" | translate
+        }}</label>
+        <label class="col-sm-6 col-form-label">
+          {{ i.endDate | date: "yyyy-MM-dd HH:mm:ss" }}
+        </label>
+      </div>
+    </div>
+  </div>
+</ng-template>
+
+<ngx-spinner bdColor="rgba(0,0,0,0.8)" size="medium" color="#fff" type="ball-clip-rotate-multiple" [fullScreen]="true">
+  <p style="color: white">Please wait...</p>
+</ngx-spinner>
+
+<div class="card" *ngIf="showtable">
+  <div class="card-body">
+    <div class="">
+      <div class="scroll_0">
+        <table class="table table-striped">
+          <thead style="background-color: gold;">
+            <tr>
+              <th style="width: 1%;"></th>
+              <th style="width: 2%;" id="bay{{ item.id }}" *ngFor="let item of Visitordetails">
+                {{ item.bayname }}
+              </th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <th>00:00</th>
+              <td *ngFor="let item of Visitordetails">
+                <span [tooltip]="tolTemplate" placement="auto" id="0-{{ item.id }}"> </span>
+              </td>
+            </tr>
+            <tr>
+              <th>01:00</th>
+              <td *ngFor="let item of Visitordetails">
+                <span [tooltip]="tolTemplate" placement="auto" id="1-{{ item.id }}"> </span>
+              </td>
+            </tr>
+            <tr>
+              <th>02:00</th>
+              <td *ngFor="let item of Visitordetails">
+                <span [tooltip]="tolTemplate" placement="auto" id="2-{{ item.id }}"> </span>
+              </td>
+            </tr>
+            <tr>
+              <th>03:00</th>
+
+              <td *ngFor="let item of Visitordetails">
+                <span [tooltip]="tolTemplate" placement="auto" id="3-{{ item.id }}"> </span>
+              </td>
+            </tr>
+            <tr>
+              <th>04:00</th>
+              <td *ngFor="let item of Visitordetails">
+                <span [tooltip]="tolTemplate" placement="auto" id="4-{{ item.id }}"> </span>
+              </td>
+            </tr>
+            <tr>
+              <th>05:00</th>
+
+              <td *ngFor="let item of Visitordetails">
+                <span [tooltip]="tolTemplate" placement="auto" id="5-{{ item.id }}"> </span>
+              </td>
+            </tr>
+            <tr>
+              <th>06:00</th>
+
+              <td *ngFor="let item of Visitordetails">
+                <span [tooltip]="tolTemplate" placement="auto" id="6-{{ item.id }}"> </span>
+              </td>
+            </tr>
+            <tr>
+              <th>07:00</th>
+
+              <td *ngFor="let item of Visitordetails">
+                <span [tooltip]="tolTemplate" placement="auto" id="7-{{ item.id }}"> </span>
+              </td>
+            </tr>
+            <tr>
+              <th>08:00</th>
+              <td *ngFor="let item of Visitordetails">
+                <span [tooltip]="tolTemplate" placement="auto" id="8-{{ item.id }}"> </span>
+              </td>
+            </tr>
+            <tr>
+              <th>09:00</th>
+              <td *ngFor="let item of Visitordetails">
+                <span [tooltip]="tolTemplate" placement="auto" id="9-{{ item.id }}"> </span>
+              </td>
+            </tr>
+            <tr>
+              <th>10:00</th>
+              <td *ngFor="let item of Visitordetails">
+                <span [tooltip]="tolTemplate" placement="auto" id="10-{{ item.id }}"> </span>
+              </td>
+            </tr>
+            <tr>
+              <th>11:00</th>
+
+              <td *ngFor="let item of Visitordetails">
+                <span [tooltip]="tolTemplate" placement="auto" id="11-{{ item.id }}"> </span>
+              </td>
+            </tr>
+            <tr>
+              <th>12:00</th>
+
+              <td *ngFor="let item of Visitordetails">
+                <span [tooltip]="tolTemplate" placement="auto" id="12-{{ item.id }}"> </span>
+              </td>
+            </tr>
+            <tr>
+              <th>13:00</th>
+
+              <td *ngFor="let item of Visitordetails">
+                <span [tooltip]="tolTemplate" placement="auto" id="13-{{ item.id }}"> </span>
+              </td>
+            </tr>
+            <tr>
+              <th>14:00</th>
+              <td *ngFor="let item of Visitordetails">
+                <span [tooltip]="tolTemplate" placement="auto" id="14-{{ item.id }}"> </span>
+              </td>
+            </tr>
+            <tr>
+              <th>15:00</th>
+
+              <td *ngFor="let item of Visitordetails">
+                <span [tooltip]="tolTemplate" placement="auto" id="15-{{ item.id }}"> </span>
+              </td>
+            </tr>
+            <tr>
+              <th>16:00</th>
+              <td *ngFor="let item of Visitordetails">
+                <span [tooltip]="tolTemplate" placement="auto" id="16-{{ item.id }}"> </span>
+              </td>
+            </tr>
+            <tr>
+              <th>17:00</th>
+
+              <td *ngFor="let item of Visitordetails">
+                <span class="no-gutters" [tooltip]="tolTemplate" placement="auto" id="17-{{ item.id }}"> </span>
+              </td>
+            </tr>
+            <tr>
+              <th>18:00</th>
+
+              <td *ngFor="let item of Visitordetails">
+                <span [tooltip]="tolTemplate" placement="auto" id="18-{{ item.id }}"> </span>
+              </td>
+            </tr>
+            <tr>
+              <th>19:00</th>
+
+              <td *ngFor="let item of Visitordetails">
+                <span [tooltip]="tolTemplate" placement="auto" id="19-{{ item.id }}"> </span>
+              </td>
+            </tr>
+            <tr>
+              <th>20:00</th>
+
+              <td *ngFor="let item of Visitordetails">
+                <span [tooltip]="tolTemplate" placement="auto" id="20-{{ item.id }}"> </span>
+              </td>
+            </tr>
+            <tr>
+              <th>21:00</th>
+
+              <td *ngFor="let item of Visitordetails">
+                <span [tooltip]="tolTemplate" placement="auto" id="21-{{ item.id }}"> </span>
+              </td>
+            </tr>
+            <tr>
+              <th>22:00</th>
+              <td *ngFor="let item of Visitordetails">
+                <span [tooltip]="tolTemplate" placement="auto" id="22-{{ item.id }}"> </span>
+              </td>
+            </tr>
+            <tr>
+              <th>23:00</th>
+              <td *ngFor="let item of Visitordetails">
+                <span [tooltip]="tolTemplate" placement="auto" id="23-{{ item.id }}"> </span>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="row" style="display: none;">
+  <div class="col-12">
+    <div class="card mb-4">
+      <div class="card-body">
+        <button type="button" class="btn btn-default btn-secondary mb-2" [tooltip]="tolTemplate" placement="auto">
+          {{ "popover-tooltip.auto" | translate }}
+        </button>
+        {{ " " }}
+
+
+
+      </div>
+    </div>
+  </div>
+</div>
+
+<ng-template #tolTemplate>
+  <div class="row col-12 no-gutters" *ngFor="let i of details">
+    <div class="row col-lg-12" style="font-weight: 500">
+      <label class="col-sm-6 col-form-label" style="text-align: left;">{{
+        "tenants.Drivername" | translate
+      }}</label>
+      <label class="col-sm-6 col-form-label" style="text-align: left;">
+        :{{ i.drivername | titlecase  }}
+      </label>
+    </div>
+    <div class="row col-lg-12" style="font-weight: 500">
+      <label class="col-sm-6 col-form-label" style="text-align: left;">{{
+        "tenants.Bayno" | translate
+      }}</label>
+      <label class="col-sm-6 col-form-label" style="text-align: left;">
+        :{{ i.bayNO | uppercase }}
+      </label>
+    </div>
+    <div class="row col-lg-12" style="font-weight: 500">
+      <label class="col-sm-6 col-form-label" style="text-align: left;">{{
+        "tenants.vrm" | translate
+      }}</label>
+      <label class="col-sm-6 col-form-label" style="text-align: left;">
+        :{{ i.vrmno | uppercase }}
+      </label>
+    </div>
+    <div class="row col-lg-12" style="font-weight: 500">
+      <label class="col-sm-6 col-form-label" style="text-align: left;">{{
+        "tenants.email" | translate
+      }}</label>
+      <label class="col-sm-6 col-form-label" style="text-align: left;">
+        :{{ i.email | titlecase }}
+      </label>
+    </div>
+    <div class="row col-lg-12" style="font-weight: 500">
+      <label class="col-sm-6 col-form-label" style="text-align: left;">{{
+        "tenants.contactnumber" | translate
+      }}</label>
+      <label class="col-sm-6 col-form-label" style="text-align: left;">
+        :{{ i.phno }}
+      </label>
+    </div>
+    <div class="row col-lg-12" style="font-weight: 500">
+      <label class="col-sm-6 col-form-label" style="text-align: left;">{{
+        "tenants.visiting" | translate
+      }}</label>
+      <label class="col-sm-6 col-form-label" style="text-align: left;">
+        :{{ i.tenantname | titlecase }}
+      </label>
+    </div>
+
+    <div class="row col-lg-12" style="font-weight: 500">
+      <label class="col-sm-6 col-form-label" style="text-align: left;">{{
+        "tenants.TenantContct" | translate
+      }}</label>
+      <label class="col-sm-6 col-form-label" style="text-align: left;">
+        :{{ i.tenantmobile }}
+      </label>
+    </div>
+    <div class="row col-lg-12" style="font-weight: 500">
+      <label class="col-sm-6 col-form-label" style="text-align: left; white-space: nowrap ;">{{
+        "tenants.parkingstartdate" | translate
+      }}</label>
+      <label class="col-sm-6 col-form-label" style="text-align: left;">
+        :{{ i.startDate | date: " HH:mm dd-MM-yyyy" }}
+      </label>
+    </div>
+    <div class="row col-lg-12" style="font-weight: 500">
+      <label class="col-sm-6 col-form-label" style="text-align: left;">{{
+        "tenants.parkingenddate" | translate
+      }}</label>
+      <label class="col-sm-6 col-form-label" style="text-align: left;">
+        :{{ i.endDate | date: " HH:mm dd-MM-yyyy" }}
+      </label>
+    </div>
+  </div>
+</ng-template>

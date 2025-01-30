@@ -1,0 +1,567 @@
+<div class="row">
+  <div class="col-12">
+    <div class="card mb-4">
+      <div class="card-body">
+        <h5 class="mb-4">
+          {{ "vehicleregistration.parlingshedule" | translate }}
+        </h5>
+
+        <form [formGroup]="vehicleregisterForm">
+          <div class="form-group row col-lg-12">
+            <label class="col-sm-2 col-form-label">{{
+              "tenants.site" | translate
+            }}</label>
+            <div class="col-sm-4">
+              <select
+                class="form-control"
+                [ngModelOptions]="{ standalone: true }"
+                id="txtsite"
+                [(ngModel)]="siteId"
+                required="required"
+                (change)="Getbaybysite()"
+              >
+                <option value="">Select</option>
+                <option *ngFor="let site of sites" [value]="site.id">
+                  {{ site.siteName }}
+                </option>
+              </select>
+            </div>
+            <label class="col-sm-2 col-form-label">{{
+              "tenants.bayconfig" | translate
+            }}</label>
+            <div class="col-sm-4">
+              <select
+                class="form-control"
+                [ngModelOptions]="{ standalone: true }"
+                id="txttenant"
+                [(ngModel)]="bayid"
+                required="required"
+                (change)="GetProfile()"
+              >
+                <option value="">Select</option>
+                <option *ngFor="let tenant of baylist" [ngValue]="tenant">
+                  {{ tenant.bayName }}
+                </option>
+              </select>
+            </div>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="row col-12 tenentDetail_cls" style="padding-right: 0%;">
+  <div class="col-xl-7 mb-4 tenentDetail_cls" style="padding-left: 0%;" *ngIf="showdatepicker">
+    <div class="card h-100">
+      <div class="card-body">
+        <h5 class="mb-4">
+          {{ "form-components.tenant" | translate }}
+        </h5>
+        <div class="form-group">
+          <div class="text-center">
+            <div class="card-body profile-card__body">
+              <div
+                class="profile-card__avatar"
+                style=" background-image: url({{ profilepath }});"
+              ></div>
+              <img class="img_res"
+                src="{{ profilepath }}"
+                style="
+                  background-repeat: repeat-x;
+                  width: 18%;
+                  height: 100px;
+                  border-radius: 50px;
+                  margin-top: -40px;
+                "
+              />
+
+              <div class="col-form-label">{{ Name }}</div>
+              <div class="col-form-label">{{ email }}</div>
+              <div class="col-form-label">{{ phno }}</div>
+              <div class="col-form-label">
+                Parking Session Startdate:{{ startdate | date: "dd-MM-yyyy" }}
+              </div>
+              <div class="col-form-label">
+                Parking Session Enddate:{{ enddate | date: " dd-MM-yyyy" }}
+              </div>
+              <!-- <div class="profile-card__email">{{ address.email }}</div>
+            <div class="profile-card__email" style="margin-top: -18px;">{{ address.phone }}</div> -->
+              <div class="row" *ngIf="showalert == true">
+                <div class="col-xs-12" style=" margin-top: -20px;">
+                  <div class="new-message-box">
+                    <div class="new-message-box-success">
+                      <div class="info-tab tip-icon-success" title="success">
+                        <i></i>
+                      </div>
+                      <div class="tip-box-success">
+                        <!--<p><strong>Tip:</strong> If you want to enable the fading transition effect while closing the alert boxes, apply the classes <code>.fade</code> and <code>.in</code> to them along with the contextual class.</p>-->
+                        <p>Parking schedule configured for  {{ selecteddate | date: " dd-MM-yyyy" }}</p>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="col-md-12 text-center" style=" margin-top: -23px;">
+              <div class="col-xs-12" *ngIf="showalert == false">
+                <div class="new-message-box">
+                  <div class="new-message-box-info">
+                    <div class="info-tab tip-icon-info" title="error">
+                      <i></i>
+                    </div>
+                    <div class="tip-box-info">
+                      <p>Parking schedule not configured for  {{ selecteddate | date: " dd-MM-yyyy" }}</p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="col-xl-5 mb-4 tenentDetail_cls" style="padding-right: 0%;" *ngIf="showdatepicker">
+    <div class="card">
+      <div class="card-body">
+        <h5 class="card-title">{{ "dashboards.calendar" | translate }}</h5>
+        <div class="row">
+          <div class="col-md-4">
+            <p class="mb-0 pt-2">
+              {{ viewDate | calendarDate: view + "ViewTitle":"en" }}
+            </p>
+          </div>
+          <div class="col-md-8 text-right">
+            <button
+              type="button"
+              class="btn btn-primary btn-sm"
+              mwlCalendarToday
+              [(viewDate)]="viewDate"
+            >
+              Today</button
+            >{{ " " }}
+            <button
+              type="button"
+              mwlCalendarPreviousView
+              [view]="view"
+              [(viewDate)]="viewDate"
+              class="btn btn-outline-primary calendar-nav-button icon-button small-icon"
+              aria-label="prev"
+            >
+              <span class="simple-icon-arrow-left"></span></button
+            >{{ " " }}
+            <button
+              type="button"
+              mwlCalendarNextView
+              [view]="view"
+              [(viewDate)]="viewDate"
+              class="btn btn-outline-primary calendar-nav-button icon-button small-icon"
+              aria-label="next"
+            >
+              <span class="simple-icon-arrow-right"></span>
+            </button>
+          </div>
+        </div>
+        <br />
+        <div [ngSwitch]="view">
+          <mwl-calendar-month-view
+            *ngSwitchCase="CalendarView.Month"
+            [viewDate]="viewDate"
+            [events]="events"
+            [refresh]="refresh"
+            weekStartsOn="1"
+            (dayClicked)="eventClicked($event.day)"
+          >
+          </mwl-calendar-month-view>
+        </div>
+      </div>
+    </div>
+
+    <div class="card h-100" style="display: none">
+      <div class="card-body">
+        <h5 class="mb-4">
+          {{ "form-components.parkingsheduletext" | translate }}
+        </h5>
+        <div class="form-group">
+          <bs-datepicker-inline
+            class="datepicker-inline"
+            [dateCustomClasses]="selectedClass"
+            [bsValue]="dateSelected"
+            (bsValueChange)="onbaynoset($event)"
+            [bsConfig]="{ showWeekNumbers: false }"
+          ></bs-datepicker-inline>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<simple-notifications></simple-notifications>
+<ngx-spinner
+  bdColor="rgba(0,0,0,0.8)"
+  size="medium"
+  color="#fff"
+  type="ball-clip-rotate-multiple"
+  [fullScreen]="true"
+>
+  <p style="color: white">Please wait...</p>
+</ngx-spinner>
+
+<div class="form-group" style="margin-top: 5px" *ngIf="Single">
+  <div class="card">
+    <div class="card-divider"></div>
+    <div class="card-body">
+      <div class="row no-gutters">
+        <div class="col-lg-12 col-lg-12 col-xl-12">
+          <form>
+            <div class="form-row"></div>
+            <div class="">
+              <div class="">
+                <div class="codepen-wrapper">
+                  <div
+                    class="registration-ui-gb-single"
+                    style="top: -3px; height: 49px"
+                  >
+                    GB
+                    <div class="registration-ui-logo"></div>
+                  </div>
+                  <input
+                    type="text"
+                    [(ngModel)]="vrmno"
+                    [ngModelOptions]="{ standalone: true }"
+                    style="
+                      height: 49px;
+                      margin: -3px 0px 0px 35px;
+                      text-transform: uppercase;
+                    "
+                    class="registration-ui"
+                    placeholder="VRM No"
+                    required
+                    maxlength="9"
+                  />
+                </div>
+              </div>
+            </div>
+            <div class="form-row" style="margin-top: 20px">
+              <div class="form-group col-md-4">
+                <label>Parking Session Valid From (Date & Time)</label>
+                <br />
+                <label
+                  >{{ parkingvalidfrom | date: "yyyy-MM-dd HH:mm:ss" }}
+                </label>
+              </div>
+            </div>
+            <div class="form-row">
+              <div class="form-group col-md-4">
+                <label>Parking Session Valid Till (Date & Time)</label>
+                <br />
+
+                <label
+                  >{{ parkingvalidTo | date: "yyyy-MM-dd HH:mm:ss" }}
+                </label>
+              </div>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="form-group" *ngIf="multiple">
+  <div class="dashboard__orders card bo1" style="overflow: auto">
+    <!-- <div class="card-header">
+        <h5></h5>
+    </div> -->
+    <div class="card-divider"></div>
+    <div class="card-table">
+      <div class="table-responsive-sm">
+        <table style="width: 50%">
+          <!-- <colgroup>
+                        <col class="" style="width: 24%;">
+                        <col class="" style="width: 25%;">
+                        <col class="" style="width: 25%;">
+                        <col class="" style="width: 25%;">
+
+                      </colgroup> -->
+          <thead>
+            <tr>
+              <!-- <th>Bay No</th>
+                    <th>Vehicle Make</th>
+                    <th>Model</th>
+                    <th>VRM No</th>
+                    <th>Parking Valid From</th>
+                    <th>Parking Valid Till</th> -->
+            </tr>
+          </thead>
+          <tbody style="text-align: center">
+            <tr>
+              <td
+                *ngFor="let i of iterations"
+                style="width: 1%"
+                class="td_size"
+              >
+                <!-- <input class="form-control"
+                                    id="vehicleno{{i.iterrations}}" type="text"
+                                    placeholder="VRM no"> -->
+
+                <div class="codepen-wrapper text-center">
+                  <div class="registration-ui-gb">
+                    GB
+                    <div class="registration-ui-logo"></div>
+                  </div>
+                  <input
+                    type="text"
+                    id="vehicleno{{ i.iterrations }}"
+                    style="text-transform: uppercase"
+                    maxlength="9"
+                    class="registration-ui"
+                    placeholder="VRM No"
+                  />
+                </div>
+              </td>
+            </tr>
+            <!-- <tr>
+                            <td *ngFor="let i of iterations">
+                                <input class="form-control" type="text"
+                                    class="form-control" id="make{{i.iterrations}}"
+                                    placeholder="Vehicle Make">
+
+                            </td>
+                        </tr>
+                        <tr>
+                            <td *ngFor="let i of iterations">
+                                <input class="form-control" type="text"
+                                    class="form-control" id="model{{i.iterrations}}"
+                                    placeholder="Vehicle Model">
+
+                            </td>
+                        </tr> -->
+
+            <tr>
+              <td
+                *ngFor="let i of iterations"
+                id="spn0{{ i.iterrations }}"
+                style="width: 1%"
+              >
+                <span id="spn0{{ i.iterrations }}">00:00</span>
+              </td>
+            </tr>
+            <tr>
+              <td
+                *ngFor="let i of iterations"
+                id="spn1{{ i.iterrations }}"
+                style="width: 1%"
+              >
+                <span id="spn1{{ i.iterrations }}">01:00</span>
+              </td>
+            </tr>
+            <tr>
+              <td
+                *ngFor="let i of iterations"
+                id="spn2{{ i.iterrations }}"
+                style="width: 1%"
+              >
+                <span id="spn2{{ i.iterrations }}">02:00</span>
+              </td>
+            </tr>
+            <tr>
+              <td
+                *ngFor="let i of iterations"
+                id="spn3{{ i.iterrations }}"
+                style="width: 1%"
+              >
+                <span id="spn3{{ i.iterrations }}">03:00</span>
+              </td>
+            </tr>
+            <tr>
+              <td
+                *ngFor="let i of iterations"
+                id="spn4{{ i.iterrations }}"
+                style="width: 1%"
+              >
+                <span id="spn4{{ i.iterrations }}">04:00</span>
+              </td>
+            </tr>
+            <tr>
+              <td
+                *ngFor="let i of iterations"
+                id="spn5{{ i.iterrations }}"
+                style="width: 1%"
+              >
+                <span id="spn5{{ i.iterrations }}">05:00</span>
+              </td>
+            </tr>
+            <tr>
+              <td
+                *ngFor="let i of iterations"
+                id="spn6{{ i.iterrations }}"
+                style="width: 1%"
+              >
+                <span id="spn6{{ i.iterrations }}">06:00</span>
+              </td>
+            </tr>
+            <tr>
+              <td
+                *ngFor="let i of iterations"
+                id="spn7{{ i.iterrations }}"
+                style="width: 1%"
+              >
+                <span id="spn7{{ i.iterrations }}">07:00</span>
+              </td>
+            </tr>
+            <tr>
+              <td
+                *ngFor="let i of iterations"
+                id="spn8{{ i.iterrations }}"
+                style="width: 1%"
+              >
+                <span id="spn8{{ i.iterrations }}">08:00</span>
+              </td>
+            </tr>
+            <tr>
+              <td
+                *ngFor="let i of iterations"
+                id="spn9{{ i.iterrations }}"
+                style="width: 1%"
+              >
+                <span id="spn9{{ i.iterrations }}">09:00</span>
+              </td>
+            </tr>
+            <tr>
+              <td
+                *ngFor="let i of iterations"
+                id="spn10{{ i.iterrations }}"
+                style="width: 1%"
+              >
+                <span id="spn10{{ i.iterrations }}">10:00</span>
+              </td>
+            </tr>
+            <tr>
+              <td
+                *ngFor="let i of iterations"
+                id="spn11{{ i.iterrations }}"
+                style="width: 1%"
+              >
+                <span id="spn11{{ i.iterrations }}">11:00</span>
+              </td>
+            </tr>
+            <tr>
+              <td
+                *ngFor="let i of iterations"
+                id="spn12{{ i.iterrations }}"
+                style="width: 1%"
+              >
+                <span id="spn12{{ i.iterrations }}">12:00</span>
+              </td>
+            </tr>
+            <tr>
+              <td
+                *ngFor="let i of iterations"
+                id="spn13{{ i.iterrations }}"
+                style="width: 1%"
+              >
+                <span id="spn13{{ i.iterrations }}">13:00</span>
+              </td>
+            </tr>
+            <tr>
+              <td
+                *ngFor="let i of iterations"
+                id="spn14{{ i.iterrations }}"
+                style="width: 1%"
+              >
+                <span id="spn14{{ i.iterrations }}">14:00</span>
+              </td>
+            </tr>
+            <tr>
+              <td
+                *ngFor="let i of iterations"
+                id="spn15{{ i.iterrations }}"
+                style="width: 1%"
+              >
+                <span id="spn15{{ i.iterrations }}">15:00</span>
+              </td>
+            </tr>
+            <tr>
+              <td
+                *ngFor="let i of iterations"
+                id="spn16{{ i.iterrations }}"
+                style="width: 1%"
+              >
+                <span id="spn16{{ i.iterrations }}">16:00</span>
+              </td>
+            </tr>
+            <tr>
+              <td
+                *ngFor="let i of iterations"
+                id="spn17{{ i.iterrations }}"
+                style="width: 1%"
+              >
+                <span id="spn17{{ i.iterrations }}">17:00</span>
+              </td>
+            </tr>
+            <tr>
+              <td
+                *ngFor="let i of iterations"
+                id="spn18{{ i.iterrations }}"
+                style="width: 1%"
+              >
+                <span id="spn18{{ i.iterrations }}">18:00</span>
+              </td>
+            </tr>
+            <tr>
+              <td
+                *ngFor="let i of iterations"
+                id="spn19{{ i.iterrations }}"
+                style="width: 1%"
+              >
+                <span id="spn19{{ i.iterrations }}">19:00</span>
+              </td>
+            </tr>
+            <tr>
+              <td
+                *ngFor="let i of iterations"
+                id="spn20{{ i.iterrations }}"
+                style="width: 1%"
+              >
+                <span id="spn20{{ i.iterrations }}">20:00</span>
+              </td>
+            </tr>
+            <tr>
+              <td
+                *ngFor="let i of iterations"
+                id="spn21{{ i.iterrations }}"
+                style="width: 1%"
+              >
+                <span id="spn21{{ i.iterrations }}">21:00</span>
+              </td>
+            </tr>
+            <tr>
+              <td
+                *ngFor="let i of iterations"
+                id="spn22{{ i.iterrations }}"
+                style="width: 1%"
+              >
+                <span id="spn22{{ i.iterrations }}">22:00</span>
+              </td>
+            </tr>
+            <tr>
+              <!-- (click)="selectingcolors(i.iterrations,'23')" -->
+              <td
+                *ngFor="let i of iterations"
+                id="spn23{{ i.iterrations }}"
+                style="width: 1%"
+              >
+                <span id="spn23{{ i.iterrations }}">23:00</span>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="row"></div>
+
+<div class="col-md-5"></div>

@@ -1,0 +1,18 @@
+.chkst{
+    display: flex;
+}
+.rd-st{
+    margin-left: 21px;
+}
+
+/* @media screen and (max-width: 767px) {
+    .rdst{
+        margin-left: 0!important;
+    }
+}
+
+@media screen and (max-width: 991px) and (min-width: 768px) {
+    .rdst{
+        margin-left: 0!important;
+    }
+} */

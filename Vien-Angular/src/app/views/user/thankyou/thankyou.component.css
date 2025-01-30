@@ -1,0 +1,27 @@
+.card_cls {
+  margin: auto;
+  width: 60%;
+  background: rgb(245 242 242 / 60%);
+  color: #333 !important;
+  box-shadow: 0 0px 56px rgba(0, 0, 0, 0.3);
+}
+
+@media screen and (max-width: 425px) {
+  .card_cls {
+    margin: auto;
+    width:100%;
+    background: rgb(245 242 242 / 60%);
+    color: #333 !important;
+    box-shadow: 0 0px 56px rgba(0, 0, 0, 0.3);
+  }
+}
+
+@media screen and (max-width: 768px) {
+  .card_cls {
+    margin: auto;
+    width:100%;
+    background: rgb(245 242 242 / 60%);
+    color: #333 !important;
+    box-shadow: 0 0px 56px rgba(0, 0, 0, 0.3);
+  }
+}

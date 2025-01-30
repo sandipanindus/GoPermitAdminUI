@@ -1,0 +1,117 @@
+<div class="card auth-card">
+  <div class="position-relative image-side ">
+    <p class=" text-white h2">MAGIC IS IN THE DETAILS</p>
+    <p class="white mb-0">
+      Please use the form to register.
+      <br>If you are a member, please
+      <a routerLink="/user/login" class="white white-underline-link">login</a>.
+    </p>
+  </div>
+  <div class="form-side">
+    <a class="c-pointer">
+      <span class="logo-single"></span>
+    </a>
+    <h6 class="mb-4">Tenant Register</h6>
+
+    <form #registerForm="ngForm" novalidate (ngSubmit)="onSubmit()">
+      <label class="form-group has-float-label">
+        <input class="form-control" required ngModel #firstName="ngModel" id="txtfirstname" name="firstName" />
+        <span>{{ 'tenants.firstname' | translate }}</span>
+        <div *ngIf="!firstName.valid && registerForm.submitted" class="invalid-tooltip">First Name is required!</div>
+      </label>
+      <label class="form-group has-float-label">
+        <input class="form-control" required ngModel #lastName="ngModel" id="txtlastname" name="lastName" />
+        <span>{{ 'tenants.lastname' | translate }}</span>
+        <div *ngIf="!lastName.valid && registerForm.submitted" class="invalid-tooltip">Last Name is required!</div>
+      </label>
+      <label class="form-group has-float-label">
+        <select id="role" class="form-control" id="txtsite" name="sitenameid" [ngModelOptions]="{standalone: true}" required ngModel #siteId="ngModel">
+          <option value="">Select</option>
+          <option *ngFor="let site of sites" [value]="site.id">{{site.siteName}}
+          </option>
+        </select>
+        <span>{{ 'tenants.site' | translate }}</span>
+        <div *ngIf="!siteId.valid && registerForm.submitted" class="invalid-tooltip">Site Name is required!</div>
+      </label>
+
+   
+      <label class="form-group has-float-label">
+        <input class="form-control" required ngModel #lastName="ngModel" id="txtaddress" name="address" />
+        <span>{{ 'tenants.address1' | translate }}</span>
+        <!-- <div *ngIf="!lastName.valid && registerForm.submitted" class="invalid-tooltip">Address is required!</div> -->
+      </label>
+      <label class="form-group has-float-label">
+        <input class="form-control" required ngModel #city="ngModel" id="txtcity"
+          name="city" />
+        <span>{{ 'tenants.city' | translate }}</span>
+        <!-- <div *ngIf="!organisationName.valid && registerForm.submitted" class="invalid-tooltip">Organisation Name is
+          required!</div> -->
+      </label>
+      <label class="form-group has-float-label">
+        <input class="form-control" required ngModel #state="ngModel" id="txtstate"
+          name="state" />
+        <span>{{ 'tenants.state' | translate }}</span>
+        <!-- <div *ngIf="!organisationName.valid && registerForm.submitted" class="invalid-tooltip">Organisation Name is
+          required!</div> -->
+      </label>
+      <label class="form-group has-float-label">
+        <input class="form-control" required ngModel #zipcode="ngModel" id="txtzipcode"
+          name="zipcode" />
+        <span>{{ 'tenants.zipcode' | translate }}</span>
+        <!-- <div *ngIf="!organisationName.valid && registerForm.submitted" class="invalid-tooltip">Organisation Name is
+          required!</div> -->
+      </label>
+      <label class="form-group has-float-label">
+        <input class="form-control" required ngModel #mobilenumber="ngModel" id="txtmobilenumber"
+          name="mobilenumber" />
+        <span>{{ 'tenants.mobilenumber' | translate }}</span>
+        <!-- <div *ngIf="!organisationName.valid && registerForm.submitted" class="invalid-tooltip">Organisation Name is
+          required!</div> -->
+      </label>
+
+      <label class="form-group has-float-label">
+        <input class="form-control" id="txtemail" required email ngModel #email="ngModel" name="email" />
+        <span>{{ 'tenants.email' | translate }}</span>
+        <div *ngIf="!email.valid && registerForm.submitted" class="invalid-tooltip">Email is required!</div>
+        <div *ngIf="email?.errors?.email && registerForm.submitted" class="invalid-tooltip">Email must be a valid
+          address!</div>
+      </label>
+      <label class="form-group has-float-label">
+        <select  class="form-control" id="txtparkingbay" name="parkingbayid" [ngModelOptions]="{standalone: true}" required ngModel #parkingbay="ngModel">
+          <option value="0" selected>0</option>
+          <option value="1">1</option>
+          <option value="2">2</option>
+          <option value="3">3</option>
+          <option value="4">4</option>
+          <option value="5">5</option>
+          <option value="6">6</option>
+
+
+        </select>
+        <span>{{ 'tenants.parkingbay' | translate }}</span>
+      </label>
+      <label class="form-group has-float-label">
+        <input class="form-control" id="txtpassword" type="password" placeholder="" required ngModel #password="ngModel"
+          name="password" />
+        <span>{{ 'user.password' | translate }}</span>
+        <div *ngIf="!password.valid && registerForm.submitted" class="invalid-tooltip">Password is required!</div>
+      </label>
+
+
+      <div class="d-flex justify-content-between align-items-center">
+
+        <app-state-button [btnClass]="'btn btn-primary btn-lg btn-shadow'" [currentState]="buttonState"
+          [isDisabled]="buttonDisabled" click="onLoginClick()">
+          {{ 'user.register-button' | translate  }}
+        </app-state-button>
+
+      </div>
+    </form>
+
+  </div>
+</div>
+<simple-notifications></simple-notifications>
+<ngx-spinner bdColor="rgba(0, 0, 0, 0.8)" size="medium" color="#fff" type="ball-clip-rotate-multiple"
+  [fullScreen]="true">
+  <p style="color: white"> Please wait... </p>
+</ngx-spinner>

@@ -1,0 +1,322 @@
+import { Component, OnInit, ViewChild, OnDestroy, Renderer2, TemplateRef, EventEmitter, Output, Input } from '@angular/core';
+import { ColumnMode, DatatableComponent, SelectionType } from '@swimlane/ngx-datatable';
+import { Router } from '@angular/router';
+import { AuthService } from 'src/app/shared/auth.service';
+import { BsModalService, BsModalRef } from 'ngx-bootstrap/modal';
+import { NotificationsService, NotificationType } from 'angular2-notifications';
+import { NgxSpinnerService } from 'ngx-spinner';
+import { TranslateService } from '@ngx-translate/core';
+import { DatePipe } from '@angular/common';
+@Component({
+  selector: 'app-auditlog',
+  templateUrl: './auditlog.component.html',
+  styles: [
+    `@media screen and (max-width: 330px) {
+       .scroll{
+         overflow:scroll !important;
+       }
+      }
+      @media screen and (max-width: 360px) {
+
+        .scroll{
+          overflow:scroll !important;
+        }
+      }
+      @media screen and (max-width: 425px) {
+        .input_cls {
+          margin-left: 0 !important;
+        }
+       }
+      @media screen and (max-width: 768px) {
+        .scroll{
+          overflow:scroll !important;
+        }
+      }
+    `
+  ],
+  providers: [
+    [DatePipe]
+  ]
+})
+export class AuditComponent implements OnInit, OnDestroy {
+  sitename = '';
+  tenant = '';
+  bayname = '';
+  label = "menu.auditlog";
+  fromdate = new Date();
+  todate = new Date();
+  view: boolean = false;
+  edit: boolean = false;
+  add: boolean = false;
+  delete: boolean = false;
+  modules: any = [];
+  ZatparkId: any;
+  showpage = false;
+  modalRef: BsModalRef;
+  message: string;
+  totalItems;
+  currentPage: number = 1;
+  sortDir = 1;
+  currentPageEvent = 1;
+  page: number;
+
+  limitsMaxSize = 10;
+  limitsCurrentPage = 1;
+  itemsPerPage: number = 10;
+  totalPage: number;
+
+  @Input() itemOptionsPerPage = [20, 50, 100];
+
+  @Output() itemsPerPageChange: EventEmitter<any> = new EventEmitter();
+  auditlogs: any = [];
+
+  constructor(private datePipe: DatePipe, private translate: TranslateService, private spinner: NgxSpinnerService, private modalService: BsModalService, private router: Router, private renderer: Renderer2, private notifications: NotificationsService, private authService: AuthService,) { }
+
+  ngOnInit() {
+    var element = document.getElementById("loading") as HTMLDivElement;
+    element.style.display = 'block';
+    this.renderer.addClass(document.body, 'right-menu');
+    this.GetScreens();
+    this.GetAuditLogs();
+  }
+  GetScreens() {
+    debugger;
+    var RoleId = localStorage.getItem("RoleId");
+    var loginId = localStorage.getItem("LoginId");
+    this.authService.GetScreens(RoleId, loginId, 0).subscribe((result: any) => {
+      var data = JSON.parse(result);
+      if (data.status == "200") {
+        this.modules = data.result;
+        for (var i = 0; i < this.modules.length; i++) {
+          for (var j = 0; j < this.modules[i].screensModel.length; j++) {
+            if (this.label == this.modules[i].screensModel[j].label) {
+              this.edit = this.modules[i].screensModel[j].edit;
+              this.add = this.modules[i].screensModel[j].add;
+              this.delete = this.modules[i].screensModel[j].delete;
+              this.view = this.modules[i].screensModel[j].view;
+            }
+          }
+        }
+      }
+      else {
+        // this.notifications.alert('Alert', result.message, NotificationType.Alert, { theClass: 'outline primary', timeOut: 2000, showProgressBar: false });
+      }
+    })
+  }
+  Clear() {
+    this.sitename = '';
+    this.tenant = '';
+    this.bayname = '';
+    this.currentPage = 1;
+    this.itemsPerPage = 10;
+    this.GetAuditLogs();
+  }
+  onSortClick(event, val) {
+    let target = event.currentTarget,
+      classList = target.classList;
+
+    if (classList.contains('up')) {
+      classList.remove('up');
+      classList.add('down');
+      this.sortDir = -1;
+    } else {
+      classList.add('up');
+      classList.remove('down');
+      this.sortDir = 1;
+    }
+    this.sortArr(val);
+  }
+
+  sortArr(colName: any) {
+    this.auditlogs.sort((a, b) => {
+      a = a[colName].toLowerCase();
+      b = b[colName].toLowerCase();
+      return a.localeCompare(b) * this.sortDir;
+    });
+  }
+  SearchAuditLog() {
+    debugger;
+    var element = document.getElementById("loading") as HTMLDivElement;
+    element.style.display = 'block';
+    var loginId = localStorage.getItem("LoginId");
+    var RoleId = localStorage.getItem("RoleId");
+    var SiteId = localStorage.getItem("SiteId");
+    var fromdate=this.datePipe.transform(this.fromdate, "yyyy-MM-dd");
+    var todate=this.datePipe.transform(this.todate, "yyyy-MM-dd");
+    if (this.sitename != '' || this.tenant != ''  || fromdate !='' || todate!='') {
+
+      if(this.fromdate!=undefined && this.todate!=undefined){
+        let date1= this.datePipe.transform(this.fromdate,"dd-MM-yyyy");
+        let date2= this.datePipe.transform(this.todate,"dd-MM-yyyy");
+        if(date2<date1){
+            this.alert("to date should be greater than from date");
+            element.style.display = 'none';
+
+            return;
+        }
+    }
+
+      this.authService.GetSearchAuditLogs(this.currentPage, this.itemsPerPage, this.tenant, this.sitename,fromdate,todate, SiteId).subscribe((result: any) => {
+        var finalresult = JSON.parse(result);
+        console.log(finalresult);
+        if (finalresult.status == "200") {
+          this.auditlogs = finalresult.result;
+          debugger
+console.log(finalresult)
+          element.style.display = 'none';
+          if (this.auditlogs.length > 0) {
+            this.totalItems = this.auditlogs[0].totalItem;
+            this.totalPage = this.auditlogs[0].totalPage;
+
+            this.showpage = true;
+
+          }
+          else {
+            this.totalItems = 0;
+            this.totalPage = 0;
+
+            this.showpage = false;
+          }
+        }
+        else {
+          element.style.display = 'none';
+          this.alert(result.message);
+          //  this.notifications.alert('Alert', result.message, NotificationType.Alert, { theClass: 'outline primary', timeOut: 2000, showProgressBar: false });
+
+        }
+      }, (error) => {
+        element.style.display = 'none';
+        this.error(error.message);
+        // this.notifications.create('Error', error.message, NotificationType.Bare, { theClass: 'outline primary', timeOut: 2000, showProgressBar: false });
+
+      });
+    }
+    else {
+      element.style.display = 'none';
+      window.location.reload();
+    }
+
+  }
+  onSuccess(msg) {
+    this.notifications.create(this.translate.instant('Success'),
+      this.translate.instant(msg), NotificationType.Success,
+      { timeOut: 3000, showProgressBar: true });
+  }
+  error(msg) {
+    this.notifications.create(this.translate.instant('Error'),
+      this.translate.instant(msg), NotificationType.Error, {
+      timeOut: 3000,
+      showProgressBar: true
+    });
+  }
+  alert(msg) {
+    this.notifications.create(this.translate.instant('Alert'),
+      this.translate.instant(msg), NotificationType.Alert, {
+      timeOut: 3000,
+      showProgressBar: true
+    });
+  }
+  GetAuditLogs() {
+    debugger
+    var loginId = localStorage.getItem("LoginId");
+    var RoleId = localStorage.getItem("RoleId");
+    var SiteId = localStorage.getItem("SiteId");
+    this.authService.GetAuditLogs(this.currentPage, this.itemsPerPage, RoleId, SiteId).subscribe((result: any) => {
+      var finalresult = JSON.parse(result);
+
+      if (finalresult.status == "200") {
+        debugger;
+        this.auditlogs = finalresult.result;
+        console.log(this.auditlogs)
+        var element = document.getElementById("loading") as HTMLDivElement;
+        element.style.display = 'none';
+        if (this.auditlogs.length > 0) {
+          this.totalItems = this.auditlogs[0].totalItem;
+          this.totalPage = this.auditlogs[0].totalPage;
+          if (this.totalItems > this.itemsPerPage) {
+            this.showpage = true;
+          }
+          else {
+            this.showpage = false;
+          }
+        }
+        else {
+          this.totalItems = 0;
+          this.totalPage = 0;
+          if (this.currentPage != 1) {
+            this.showpage = true;
+          }
+          else {
+            this.showpage = false;
+          }
+
+        }
+      }
+      else {
+        this.alert(result.message);
+        //  this.notifications.alert('Alert', result.message, NotificationType.Alert, { theClass: 'outline primary', timeOut: 2000, showProgressBar: false });
+
+      }
+    });
+  }
+  spinnerload() {
+    var element = document.getElementById("loading") as HTMLDivElement;
+    element.style.display = 'block';
+    setTimeout(() => {
+      element.style.display = 'none';
+    }, 1000);
+  }
+
+  ngAfterViewInit(): void {
+    // this.spinnerload();
+  }
+
+
+
+
+
+
+  ngOnDestroy() {
+    this.renderer.removeClass(document.body, 'right-menu');
+  }
+
+  getItems() {
+
+  }
+
+
+
+
+
+
+  onChangeItemsPerPage(item) {
+    this.itemsPerPageChange.emit(item);
+    this.itemsPerPage = item;
+    this.currentPage = 1;
+    this.SearchAuditLog();
+  }
+
+  pageChanged(event: any): void {
+    debugger;
+    this.page = event.page;
+    this.currentPage = this.page;
+    this.SearchAuditLog();
+  }
+  setPage(pageNo: number): void {
+    this.currentPage = pageNo;
+  }
+
+  onPage(event) {
+  }
+
+
+
+  onDetailToggle(event) {
+  }
+
+
+
+
+
+
+}

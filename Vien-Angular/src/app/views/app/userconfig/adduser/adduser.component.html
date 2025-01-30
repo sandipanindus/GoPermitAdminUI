@@ -1,0 +1,176 @@
+<div class="loading" style="display: none;" id="loading"></div>
+<div class="row">
+    <div class="col-12">
+        <div class="card mb-4">
+            <div class="card-body">
+                <h5 class="mb-4">{{ 'user.add-new-title' | translate }}</h5>
+
+                <form [formGroup]="userForm">
+
+                    <div class="form-group row col-lg-12">
+                        <label for="txtfirstname" class="col-sm-2 col-form-label">{{ 'user.firstname' | translate
+                            }}</label>
+                        <div class="col-sm-4">
+                            <input type="text" class="form-control" id="txtfirstname"
+                                placeholder="{{  'user.firstname' | translate }}" [(ngModel)]="firstname"
+                                required="required" formControlName="rfirstname"
+                                [ngClass]="{'is-invalid': usersubmitted && r.rfirstname.errors }">
+                            <div *ngIf="usersubmitted && r.rfirstname.errors" class="invalid-feedback">
+                                <div *ngIf="r.rfirstname.errors.required" class="invalid-tooltip">First name is required
+                                </div>
+                            </div>
+                        </div>
+                        <label for="txtlastname" class="col-sm-2 col-form-label">{{ 'user.lastname' | translate
+                            }}</label>
+                        <div class="col-sm-4">
+                            <input type="text" class="form-control" id="txtlastname"
+                                placeholder="{{  'user.lastname' | translate }}" [(ngModel)]="lastname"
+                                required="required" formControlName="rlastname"
+                                [ngClass]="{'is-invalid': usersubmitted && r.rlastname.errors }">
+                            <div *ngIf="usersubmitted && r.rlastname.errors" class="invalid-feedback">
+                                <div *ngIf="r.rlastname.errors.required" class="invalid-tooltip">Last name is required
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+
+
+                    <div class="form-group row col-lg-12">
+                        <label class="col-sm-2 col-form-label">{{ 'tenants.site' | translate }}</label>
+                        <div class="col-sm-4">
+                            <select class="form-control" id="txtsite" [(ngModel)]="siteId" required="required"
+                                formControlName="rsiteid"
+                                [ngClass]="{'is-invalid': usersubmitted && r.rsiteid.errors }">
+                                <option value="">Select</option>
+                                <option value="0">All</option>
+                                <option *ngFor="let site of sites" [value]="site.id">{{site.siteName}}
+                                </option>
+                            </select>
+                            <!-- <ng-multiselect-dropdown formControlName="rsiteid"  #txtsite id="txtsite" [placeholder]="'Select'"
+                              [settings]="dropdownsites" [data]="sitesdrop" [(ngModel)]="siteId"   [disabled]="false" (onSelect)="onItemSelect($event)"
+                               (onSelectAll)="onSelectAll($event)">
+                             </ng-multiselect-dropdown> -->
+                            <div *ngIf="usersubmitted && r.rsiteid.errors" class="invalid-feedback">
+                                <div *ngIf="r.rsiteid.errors.required" class="invalid-tooltip">Site is required
+                                </div>
+                            </div>
+                        </div>
+                        <label for="txtemail" class="col-sm-2 col-form-label">{{ 'user.email' | translate }}</label>
+                        <div class="col-sm-4">
+                            <input type="text" class="form-control" id="txtemail"
+                                placeholder="{{'user.email' | translate }}" [(ngModel)]="email" required="required"
+                                formControlName="remail" [ngClass]="{'is-invalid': usersubmitted && r.remail.errors }">
+                            <div *ngIf="usersubmitted && r.remail.errors" class="invalid-feedback">
+                                <div *ngIf="r.remail.errors.required" class="invalid-tooltip">Email is required</div>
+                                <div *ngIf="r.remail.errors.email" class="invalid-tooltip">Email must be a
+                                    valid email address</div>
+                            </div>
+                        </div>
+
+                    </div>
+
+
+
+                    <div class="form-group row col-lg-12">
+                        <label class="col-sm-2 col-form-label">{{ 'user.contactnumber' | translate }}</label>
+                        <div class="col-sm-4">
+                            <input type="text" id="txtcontactnumber" class="form-control"
+                                [ngModelOptions]="{standalone: true}"
+                                placeholder="{{  'user.contactnumber' | translate }}" [(ngModel)]="contactnumber"
+                                onkeypress="return (event.charCode > 64 && event.charCode < 91)  || (!event.shiftKey && event.charCode  >= 48 && event.charCode  <= 57 || event.charCode==43 || event.charCode==45)">
+                        </div>
+                        <label class="col-sm-2 col-form-label">{{ 'user.address1' | translate }}</label>
+                        <div class="col-sm-4">
+                            <input class="form-control" [(ngModel)]="address1" [ngModelOptions]="{standalone: true}"
+                                id="txtaddress1" placeholder="{{ 'user.address1' | translate }}" />
+                        </div>
+
+                    </div>
+
+
+
+                    <div class="form-group row col-lg-12">
+                        <label class="col-sm-2 col-form-label">{{ 'user.address2' | translate }}</label>
+                        <div class="col-sm-4">
+                            <input class="form-control" id="txtaddress2" [(ngModel)]="address2"
+                                [ngModelOptions]="{standalone: true}" placeholder="{{ 'user.address2' | translate }}" />
+                        </div>
+                        <label class="col-sm-2 col-form-label">{{ 'user.country' | translate }}</label>
+                        <div class="col-sm-4">
+                            <select class="form-control" [(ngModel)]="countryId" [ngModelOptions]="{standalone: true}"
+                                id="txtcountry">
+                                <option value="">Select</option>
+                                <option *ngFor="let country of countries" [value]="country.id">
+                                    {{country.countryName}}</option>
+                            </select>
+                        </div>
+
+                    </div>
+
+
+
+                    <div class="form-group row col-lg-12">
+                        <label class="col-sm-2 col-form-label">{{ 'user.state' | translate }}</label>
+                        <div class="col-sm-4">
+                            <input type="text" class="form-control" id="txtstate" [ngModelOptions]="{standalone: true}"
+                                placeholder="{{  'user.state' | translate }}" [(ngModel)]="state">
+                        </div>
+                        <label class="col-sm-2 col-form-label">{{ 'user.city' | translate }}</label>
+                        <div class="col-sm-4">
+                            <input type="text" class="form-control" id="txtcity" [ngModelOptions]="{standalone: true}"
+                                placeholder="{{  'user.city' | translate }}" [(ngModel)]="city">
+                        </div>
+
+                    </div>
+
+
+                    <div class="form-group row col-lg-12">
+                        <label class="col-sm-2 col-form-label">Postal Code</label>
+                        <div class="col-sm-4">
+                            <input type="text" class="form-control" id="txtzipcode"
+                                [ngModelOptions]="{standalone: true}" placeholder="{{'user.zipcode' | translate }}"
+                                [(ngModel)]="zipcode">
+                        </div>
+                        <label for="role" class="col-sm-2 col-form-label">{{ 'user.role' | translate }}</label>
+                        <div class="col-sm-4">
+                            <select id="role" class="form-control" id="txtrole" [(ngModel)]="roleId" required="required"
+                                formControlName="rroleid"
+                                [ngClass]="{'is-invalid': usersubmitted && r.rroleid.errors }">
+                                <option value="">Select</option>
+                                <option *ngFor="let role of roles" [value]="role.id">{{role.name}}
+                                </option>
+                            </select>
+                            
+                            <div *ngIf="usersubmitted && r.rroleid.errors" class="invalid-feedback">
+                                <div *ngIf="r.rroleid.errors.required" class="invalid-tooltip">Role is required
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+                    <div class="form-group row col-lg-12">
+                        <label for="active" class="col-sm-2 col-form-label">{{ 'user.active' | translate }}</label>
+                        <div class="col-sm-4" style="margin-top: 6px;">
+                            <input type="checkbox" id="userchkactive">
+                        </div>
+                    </div>
+                    <div style="display: flex;">
+                        <button class="btn btn-primary d-block mt-3 currentState" id="txtsubmit" type="submit"
+                            (click)="AddUser()">
+                            {{ 'user.submit' | translate }}
+                        </button>
+                        <!-- <button type="submit" class="btn btn-primary d-block mt-3">{{ 'role.submit' | translate }}</button> -->
+                        <button type="submit" style="margin-left: 15px;" class="btn btn-primary d-block mt-3"
+                            (click)="canceladduser()">{{ 'user.cancel' | translate }}</button>
+                    </div>
+                </form>
+
+            </div>
+        </div>
+    </div>
+</div>
+<simple-notifications></simple-notifications>
+<ngx-spinner bdColor="rgba(0,0,0,0.8)" size="medium" color="#fff" type="ball-clip-rotate-multiple" [fullScreen]="true">
+    <p style="color: white"> Please wait... </p>
+</ngx-spinner>

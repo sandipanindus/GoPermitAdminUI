@@ -1,0 +1,512 @@
+.codepen-wrapper {
+  width: 50%;
+  //margin: 0 37.5%;
+}
+
+// this is the stuff you want.
+
+.registration-ui {
+  background: linear-gradient(to bottom, #f8d038 0%, #f5ca2e 100%);
+  padding: -1px -1px 0px -1px;
+  // margin: 14px;
+  margin: -2px 0px 0px 40px;
+  font-weight: bold;
+  font-size: 2em;
+  border-radius: 5px;
+  border: 1px solid #000;
+  box-shadow: 1px 1px 1px #ddd;
+  position: relative;
+  font-family: helvetica, ariel, sans-serif;
+  font-weight: 600;
+  width: 191px;
+  padding: 10px 5px -7px -3px;
+  padding: 3px 4px 4px 10px;
+}
+
+.registration-ui-gb {
+  content: "GB";
+  display: block;
+  width: 39%;
+  height: 47px;
+  background: #063298;
+  position: relative;
+  top: 45px;
+  border-radius: 5px 0 0 5px;
+  color: #f8d038;
+  font-size: 16px;
+  line-height: 75px;
+  padding-left: 5px;
+  font-weight: 600;
+}
+.registration-ui-gb-single {
+  content: "GB";
+  display: block;
+  width: 10%;
+  height: 47px;
+  background: #063298;
+  position: relative;
+  top: 46px !important;
+  border-radius: 5px 0 0 5px;
+  color: #f8d038;
+  font-size: 16px;
+  line-height: 75px;
+  padding-left: 5px;
+  font-weight: 600;
+}
+
+.registration-ui-logo {
+  content: "";
+  display: block;
+  position: absolute;
+  top: 7px;
+  left: 11px;
+  width: 40%;
+  height: 15px;
+  border-radius: 30px;
+  border: 1px dashed #f8d038;
+}
+
+.dashboard__orders {
+  margin-top: 24px;
+  width: 100%;
+}
+
+.card-table tbody th,
+.card-table tbody td,
+.card-table tfoot th,
+.card-table tfoot td {
+  padding: 12px 40px;
+  border-right: 1px solid gold;
+  border-top: 1px solid white;
+}
+
+::ng-deep .bs-datepicker-body table td span.custom-selected-date,
+::ng-deep .bs-datepicker-body table td span.custom-selected-date.selected {
+  background-color: #063298 !important;
+  color: white !important;
+}
+
+::ng-deep .bs-datepicker-body table td span.selected {
+  background-color: transparent !important;
+  color: #54708b !important;
+}
+
+::ng-deep .bs-datepicker-body table.days span.in-range:before {
+  background-color: transparent !important;
+}
+
+/*==================================================
+  =            Bootstrap 3 Media Queries             =
+  ==================================================*/
+
+/*==========  Mobile First Method  ==========*/
+
+/* Custom, iPhone Retina */
+@media only screen and (min-width: 320px) {
+}
+
+/* Extra Small Devices, Phones */
+@media only screen and (min-width: 480px) {
+}
+
+/* Small Devices, Tablets */
+@media only screen and (min-width: 768px) {
+}
+
+/* Medium Devices, Desktops */
+@media only screen and (min-width: 992px) {
+}
+
+/* Large Devices, Wide Screens */
+@media only screen and (min-width: 1200px) {
+}
+
+/*==========  Non-Mobile First Method  ==========*/
+
+/* Large Devices, Wide Screens */
+@media only screen and (max-width: 1200px) {
+}
+
+/* Medium Devices, Desktops */
+@media only screen and (max-width: 992px) {
+}
+
+/* Small Devices, Tablets */
+@media only screen and (max-width: 768px) {
+  .tenentDetail_cls {
+    padding-right: 0;
+    padding-left: 0;
+    margin-right: 0;
+    margin-left: 0;
+  }
+  .registration-ui-gb {
+    content: "GB";
+    display: block;
+    width: 39%;
+    height: 47px;
+    background: #063298;
+    position: relative;
+    top: 45px;
+    border-radius: 5px 0 0 5px;
+    color: #f8d038;
+    font-size: 16px;
+    line-height: 75px;
+    padding-left: 5px;
+    font-weight: 600;
+  }
+  .registration-ui-gb-single {
+    content: "GB";
+    display: block;
+    width: 12%;
+    height: 47px;
+    background: #063298;
+    position: relative;
+    top: 46px !important;
+    border-radius: 5px 0 0 5px;
+    color: #f8d038;
+    font-size: 16px;
+    line-height: 75px;
+    padding-left: 5px;
+    font-weight: 600;
+  }
+  .img_res {
+    width: 25% !important;
+  }
+}
+
+/* Extra Small Devices, Phones */
+@media only screen and (max-width: 480px) {
+  .registration-ui-gb {
+    content: "GB";
+    display: block;
+    width: 39%;
+    height: 47px;
+    background: #063298;
+    position: relative;
+    top: 45px;
+    border-radius: 5px 0 0 5px;
+    color: #f8d038;
+    font-size: 16px;
+    line-height: 75px;
+    padding-left: 5px;
+    font-weight: 600;
+  }
+  .registration-ui-gb-single {
+    content: "GB";
+    display: block;
+    width: 25%;
+    height: 47px;
+    background: #063298;
+    position: relative;
+    top: 46px !important;
+    border-radius: 5px 0 0 5px;
+    color: #f8d038;
+    font-size: 16px;
+    line-height: 75px;
+    padding-left: 5px;
+    font-weight: 600;
+  }
+  .img_res {
+    width: 25% !important;
+  }
+}
+
+/* Custom, iPhone Retina */
+@media only screen and (max-width: 320px) {
+  .registration-ui-gb {
+    content: "GB";
+    display: block;
+    width: 39%;
+    height: 47px;
+    background: #063298;
+    position: relative;
+    top: 45px;
+    border-radius: 5px 0 0 5px;
+    color: #f8d038;
+    font-size: 16px;
+    line-height: 75px;
+    padding-left: 5px;
+    font-weight: 600;
+  }
+  .registration-ui-gb-single {
+    content: "GB";
+    display: block;
+    width: 32%;
+    height: 47px;
+    background: #063298;
+    position: relative;
+    top: 46px !important;
+    border-radius: 5px 0 0 5px;
+    color: #f8d038;
+    font-size: 16px;
+    line-height: 75px;
+    padding-left: 5px;
+    font-weight: 600;
+  }
+  .img_res {
+    width: 25% !important;
+  }
+}
+
+/*=====================================================
+  =            Bootstrap 2.3.2 Media Queries            =
+  =====================================================*/
+@media only screen and (max-width: 1200px) {
+}
+
+@media only screen and (max-width: 979px) {
+}
+
+@media only screen and (max-width: 767px) {
+}
+
+@media only screen and (max-width: 480px) {
+}
+
+@media only screen and (max-width: 320px) {
+}
+
+/* default styles here for older browsers.
+         I tend to go for a 600px - 960px width max but using percentages
+      */
+@media only screen and (min-width: 960px) {
+  /* styles for browsers larger than 960px; */
+}
+@media only screen and (min-width: 1440px) {
+  /* styles for browsers larger than 1440px; */
+}
+@media only screen and (min-width: 2000px) {
+  /* for sumo sized (mac) screens */
+}
+@media only screen and (max-device-width: 480px) {
+  /* styles for mobile browsers smaller than 480px; (iPhone) */
+}
+@media only screen and (device-width: 768px) {
+  /* default iPad screens */
+}
+/* different techniques for iPad screening */
+@media only screen and (min-device-width: 481px) and (max-device-width: 1024px) and (orientation: portrait) {
+  /* For portrait layouts only */
+}
+
+@media only screen and (min-device-width: 481px) and (max-device-width: 1024px) and (orientation: landscape) {
+  /* For landscape layouts only */
+}
+
+/*******Nuevos mensajes de error******/
+
+.new-message-box {
+  margin: 15px 0;
+  padding-left: 20px;
+  margin-bottom: 25px !important;
+}
+
+.new-message-box p {
+  font-size: 1.15em;
+  font-weight: 600;
+}
+
+.info-tab {
+  width: 40px;
+  height: 40px;
+  display: inline-block;
+  position: relative;
+  top: 8px;
+}
+
+.info-tab {
+  float: left;
+  margin-left: -23px;
+}
+
+.info-tab i::before {
+  width: 24px;
+  height: 24px;
+  box-shadow: inset 12px 0 13px rgba(0, 0, 0, 0.5);
+}
+
+.info-tab i::after {
+  width: 0;
+  height: 0;
+  border: 12px solid transparent;
+  border-bottom-color: #fff;
+  border-left-color: #fff;
+  bottom: -18px;
+}
+
+.info-tab i::before,
+.info-tab i::after {
+  content: "";
+  display: inline-block;
+  position: absolute;
+  left: 0;
+  bottom: -17px;
+  transform: rotateX(60deg);
+}
+
+.note-box,
+.warning-box,
+.tip-box-success,
+.tip-box-danger,
+.tip-box-warning,
+.tip-box-info,
+.tip-box-alert {
+  padding: 12px 8px 3px 26px;
+}
+
+/***Success****/
+
+.new-message-box-success {
+  background: #eeeeee;
+  padding: 3px;
+  margin: 10px 0;
+}
+
+.tip-icon-success {
+  background: #8bc34a; //500
+}
+
+.tip-box-success {
+  color: #33691e; //900
+  background: #dcedc8; //100
+}
+
+.tip-icon-success::before {
+  font-size: 25px;
+  content: "D";
+  top: 8px;
+  left: 11px;
+  font-family: FontAwesome;
+  position: absolute;
+  color: white;
+}
+
+.tip-icon-success i::before {
+  background: #8bc34a; //500
+}
+
+/*******Danger*******/
+.new-message-box-danger {
+  background: #eeeeee;
+  padding: 3px;
+  margin: 10px 0;
+}
+
+.tip-icon-danger {
+  background: #f44336; //500
+}
+
+.tip-box-danger {
+  color: #b71c1c; //900
+  background: #ffccbc; //100
+}
+
+.tip-icon-danger::before {
+  font-size: 25px;
+  content: "\f00d";
+  top: 8px;
+  left: 11px;
+  font-family: FontAwesome;
+  position: absolute;
+  color: white;
+}
+
+.tip-icon-danger i::before {
+  background: #f44336; //500
+}
+
+/*******warning*******/
+.new-message-box-warning {
+  background: #eeeeee;
+  padding: 3px;
+  margin: 10px 0;
+}
+
+.tip-icon-warning {
+  background: #ffeb3b; //500
+}
+
+.tip-box-warning {
+  color: #212121; //900
+  background: #fff9c4; //100
+}
+
+.tip-icon-warning::before {
+  font-size: 25px;
+  content: "\f071";
+  top: 8px;
+  left: 11px;
+  font-family: FontAwesome;
+  position: absolute;
+  color: #212121;
+}
+
+.tip-icon-warning i::before {
+  background: #ffeb3b; //500
+}
+
+/*******info*******/
+.new-message-box-info {
+  background: #eeeeee;
+  padding: 3px;
+  margin: 10px 0;
+}
+
+.tip-box-info {
+  color: #01579b; //900
+  background: #b3e5fc; //100
+}
+
+.tip-icon-info {
+  background: #03a9f4; //500
+}
+
+.tip-icon-info::before {
+  font-size: 25px;
+  content: "I";
+  top: 8px;
+  left: 11px;
+  font-family: FontAwesome;
+  position: absolute;
+  color: white;
+}
+
+.tip-icon-info i::before {
+  background: #03a9f4; //500
+}
+
+/*******info*******/
+.new-message-box-alert {
+  background: #ff6f00;
+  padding: 3px;
+  margin: 10px 0;
+}
+
+.tip-box-alert {
+  color: #212121; //900
+  background: #fff8e1; //100
+}
+
+.tip-icon-alert {
+  background: #ff6f00; //500
+}
+
+.tip-icon-alert::before {
+  font-size: 25px;
+  content: "\f06a";
+  top: 8px;
+  left: 11px;
+  font-family: FontAwesome;
+  position: absolute;
+  color: white;
+}
+
+.tip-icon-alert i::before {
+  background: #ff6f00; //500
+}
+
+/*************************/
+
+body {
+  background-color: #ffffff;
+}

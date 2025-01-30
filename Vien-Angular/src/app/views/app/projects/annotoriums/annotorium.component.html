@@ -1,0 +1,30 @@
+<html>
+
+<head>
+    <style>
+        p {
+            font-family: Lato;
+        }
+
+        image-cropper {
+            height: 50vh;
+        }
+    </style>
+</head>
+
+<body>
+
+    <input type="file" (change)="fileChangeEvent($event)" />
+
+    <image-cropper [imageChangedEvent]="imageChangedEvent" [maintainAspectRatio]="true"
+        [style.display]="showCropper ? null : 'none'" [resizeToWidth]="256" [cropperMinWidth]="128"
+        [onlyScaleDown]="true" [roundCropper]="false"  [aspectRatio]="4 / 3"
+        format="png" (imageCropped)="imageCropped($event)" (imageLoaded)="imageLoaded()" (cropperReady)="cropperReady()"
+        (loadImageFailed)="loadImageFailed()"></image-cropper>
+
+    <img [src]="croppedImage" [style.border]="croppedImage ? '1px solid black' : 'none'"/>
+    <!--      
+        <aia-image-annotator #annotator [image]="myImage" [fontSize]="'20px'" [fontFamily]="'Times'" [color]="'#1218CE'"></aia-image-annotator> -->
+</body>
+
+</html>

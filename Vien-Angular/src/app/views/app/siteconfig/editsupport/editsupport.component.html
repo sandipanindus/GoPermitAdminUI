@@ -1,0 +1,142 @@
+<div class="loading" style="display: none;" id="loading"></div>
+<div class="row" style="display: none;">
+
+    <div class="col-12">
+
+        <div class="card mb-4">
+            <div class="card-body">
+                <h5 class="mb-4">{{ 'support.edit-title' | translate }}</h5>
+
+                <form [formGroup]="supportForm">
+                    <div class="form-group row col-lg-12">
+                        <label class="col-sm-2 col-form-label">{{ 'support.sitename' | translate }}</label>
+                        <div class="col-sm-4">
+                            <input type="text" class="form-control" [ngModelOptions]="{standalone: true}"
+                                placeholder="{{ 'support.sitename' | translate }}" [(ngModel)]="sitename"
+                                required="required" id="txtsitename">
+                        </div>
+                        <label class="col-sm-2 col-form-label">{{ 'support.name' | translate }}</label>
+                        <div class="col-sm-4">
+                            <input type="text" class="form-control" [ngModelOptions]="{standalone: true}"
+                                placeholder="{{ 'support.name' | translate }}" [(ngModel)]="name" required="required"
+                                id="txtname">
+                        </div>
+                    </div>
+                    <div class="form-group row col-lg-12">
+
+                        <label class="col-sm-2 col-form-label">{{ 'support.email' | translate }}</label>
+                        <div class="col-sm-4">
+                            <input type="text" class="form-control" [ngModelOptions]="{standalone: true}"
+                                placeholder="{{ 'support.email' | translate }}" [(ngModel)]="email" required="required"
+                                id="txtemail">
+                        </div>
+                        <label class="col-sm-2 col-form-label">{{ 'support.subject' | translate }}</label>
+                        <div class="col-sm-4">
+                            <input type="text" class="form-control" [ngModelOptions]="{standalone: true}"
+                                placeholder="{{ 'support.subject' | translate }}" [(ngModel)]="subject"
+                                required="required" id="txtsubject">
+                        </div>
+                    </div>
+                    <div class="form-group row col-lg-12">
+
+                        <label class="col-sm-2 col-form-label">{{ 'support.issue' | translate }}</label>
+                        <div class="col-sm-4">
+                            <textarea class="form-control" [ngModelOptions]="{standalone: true}"
+                                placeholder="{{ 'support.issue' | translate }}" [(ngModel)]="issue" required="required"
+                                id="txtissue"></textarea>
+                        </div>
+                        <label class="col-sm-2 col-form-label">{{ 'support.response' | translate }}</label>
+                        <div class="col-sm-4">
+                            <textarea class="form-control" placeholder="{{ 'support.response' | translate }}"
+                                [(ngModel)]="response" required="required" id="txtresponse" formControlName="dresponse"
+                                [ngClass]="{'is-invalid': supportsubmitted && r.dresponse.errors }"></textarea>
+                            <div *ngIf="supportsubmitted && r.dresponse.errors" class="invalid-feedback">
+                                <div *ngIf="r.dresponse.errors.required" class="invalid-tooltip">Response is
+                                    required
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div style="display: flex;">
+                        <button class="btn btn-primary d-block mt-3 currentState" id="txtsubmit" type="submit"
+                            (click)="UpdateSupport()">
+                            {{ 'support.submit'  | translate  }}
+                        </button>
+
+                        <button type="submit" style="margin-left: 15px;" class="btn btn-primary d-block mt-3"
+                            (click)="canceladdsupport()">{{ 'support.cancel' | translate }}</button>
+                    </div>
+                </form>
+
+            </div>
+        </div>
+    </div>
+</div>
+<div class="row">
+    <div class="col-12 chat-app">
+
+
+
+        <ng-container>
+            <perfect-scrollbar class="scroll" [config]="{suppressScrollX: true, wheelPropagation: false}" #scroll style="height: 65vh !important;">
+                <ng-container *ngFor="let m of chats">
+                    <div style="max-width: 85%;"
+                        [ngClass]="{'float-right': m.roleId===1 ,'mw-90': m.roleId===1 ,'float-left': m.roleId!==1 ,'card d-inline-block mb-3' : true }">
+                        <div class="position-absolute pt-1 pr-2 r-0">
+                            <span class="text-extra-small text-muted">{{m.date}}</span>
+                        </div>
+                        <div class="card-body">
+                            <div class="d-flex flex-row pb-2">
+                                <a class="d-flex" href="javascript:;">
+
+
+                                    <div class="profile-card__avatar" style=" background-image: url({{ m.profilePath == null ? 'assets/img/profile-pic-l.jpg' :m.profilePath }}); width: 65px;height: 65px;background-position: center;background-size: cover;border-radius: 50px">
+              
+                                    </div>
+                                    <!-- <img [src]="m.profilePath==null?'assets/img/profile-pic-l.jpg':m.profilePath"  style="width: 60px;height: 60px; background-position: center;
+                                    background-size: contain;
+                                    border-radius: 100%;"
+                                        class="img-thumbnail border-0 rounded-circle mr-3 list-thumbnail align-self-center xsmall"> -->
+                                </a>
+                                <div class=" d-flex flex-grow-1 min-width-zero">
+                                    <div
+                                        class="m-2 pl-0 align-self-center d-flex flex-column flex-lg-row justify-content-between min-width-zero">
+                                        <div class="min-width-zero">
+                                            <p class="mb-0 truncate list-item-heading">{{m.name}}</p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="chat-text-left"
+                                [ngClass]="{'text-right': m.roleId===1 ,'text-left': m.roleId!==1  }">
+                                <p class="mb-0 text-semi-muted">{{m.issue}} </p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="clearfix"></div>
+                </ng-container>
+            </perfect-scrollbar>
+        </ng-container>
+
+    </div>
+</div>
+
+<div id="messagediv">
+<div class="chat-input-container d-flex justify-content-between align-items-center"
+    style="padding-right: 40px !important;display:none;">
+    <input class="form-control flex-grow-1" type="text" placeholder="Say something..." [(ngModel)]="message"
+        (keyup)="messageInputKeyUp($event)">
+    <div>
+
+        <button type="button" class="btn btn-primary icon-button large" (click)="sendMessage()">
+            <i class="simple-icon-arrow-right"></i>
+        </button>
+    </div>
+</div>
+</div>
+
+<simple-notifications></simple-notifications>
+<ngx-spinner bdColor="rgba(0,0,0,0.8)" size="medium" color="#fff" type="ball-clip-rotate-multiple" [fullScreen]="true">
+    <p style="color: white"> Please wait... </p>
+</ngx-spinner>

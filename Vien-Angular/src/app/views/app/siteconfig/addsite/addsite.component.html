@@ -1,0 +1,532 @@
+<div class="row">
+    <div class="col-12">
+        <div class="loading" style="display: none;" id="loading"></div>
+        <div class="card mb-4">
+            <div class="card-body">
+                <h5 class="mb-4">{{ 'site.add-new-title' | translate }}</h5>
+
+                <form [formGroup]="siteForm">
+
+                    <div class="form-group row col-lg-12">
+                        <label for="txtfirstname"
+                            class="col-sm-2 col-form-label">{{ 'site.sitename' | translate }}</label>
+                        <div class="col-sm-4">
+                            <input type="text" class="form-control" id="txtsitename"
+                                placeholder="{{'site.sitename' | translate }}" [(ngModel)]="sitename"
+                                formControlName="rsitename"
+                                [ngClass]="{'is-invalid': sitesubmitted && r.rsitename.errors }">
+                            <div *ngIf="sitesubmitted && r.rsitename.errors" class="invalid-feedback">
+                                <div *ngIf="r.rsitename.errors.required" class="invalid-tooltip">Site name is required
+                                </div>
+                            </div>
+                        </div>
+                        <label class="col-sm-2 col-form-label">{{ 'site.sitecode'  | translate }}</label>
+                        <div class="col-sm-4">
+                            <input class="form-control" id="txtsitecode" [(ngModel)]="sitecode"
+                                placeholder="{{'site.sitecode' | translate }}" formControlName="rsitecode"
+                                [ngClass]="{'is-invalid': sitesubmitted && r.rsitecode.errors }" />
+                            <div *ngIf="sitesubmitted && r.rsitecode.errors" class="invalid-feedback">
+                                <div *ngIf="r.rsitecode.errors.required" class="invalid-tooltip">Zatpark Sitecode is
+                                    required
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+                    <div class="form-group row col-lg-12">
+                        <label class="col-sm-2 col-form-label">{{ 'site.siteaddress'  | translate }}</label>
+                        <div class="col-sm-4">
+                            <input class="form-control" id="txtsiteaddress" [(ngModel)]="siteaddress"
+                                placeholder="{{'site.siteaddress' | translate }}" formControlName="rsiteaddress"
+                                [ngClass]="{'is-invalid': sitesubmitted && r.rsiteaddress.errors }" />
+                            <div *ngIf="sitesubmitted && r.rsiteaddress.errors" class="invalid-feedback">
+                                <div *ngIf="r.rsiteaddress.errors.required" class="invalid-tooltip">Site address is
+                                    required
+                                </div>
+                            </div>
+                        </div>
+                        <label class="col-sm-2 col-form-label">{{ 'site.city' | translate }}</label>
+                        <div class="col-sm-4">
+                            <input type="text" class="form-control" id="txtcity"
+                                placeholder="{{'site.city' | translate }}" [(ngModel)]="city" formControlName="rcity"
+                                [ngClass]="{'is-invalid': sitesubmitted && r.rcity.errors }" />
+                            <div *ngIf="sitesubmitted && r.rcity.errors" class="invalid-feedback">
+                                <div *ngIf="r.rcity.errors.required" class="invalid-tooltip">City is required
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+                    <div class="form-group row col-lg-12">
+                        <label class="col-sm-2 col-form-label">{{ 'site.state' | translate }}</label>
+                        <div class="col-sm-4">
+                            <input type="text" class="form-control" id="txtstate"
+                                placeholder="{{'site.state' | translate }}" [(ngModel)]="state" formControlName="rstate"
+                                [ngClass]="{'is-invalid': sitesubmitted && r.rstate.errors }" />
+                            <div *ngIf="sitesubmitted && r.rstate.errors" class="invalid-feedback">
+                                <div *ngIf="r.rstate.errors.required" class="invalid-tooltip">State address is required
+                                </div>
+                            </div>
+                        </div>
+                        <label class="col-sm-2 col-form-label">{{ 'site.zipcode' | translate }}</label>
+                        <div class="col-sm-4">
+                            <input type="text" class="form-control" id="txtzipcode"
+                                placeholder="{{'site.zipcode' | translate }}" [(ngModel)]="zipcode"
+                                formControlName="rzipcode"
+                                [ngClass]="{'is-invalid': sitesubmitted && r.rzipcode.errors }" />
+                            <div *ngIf="sitesubmitted && r.rzipcode.errors" class="invalid-feedback">
+                                <div *ngIf="r.rzipcode.errors.required" class="invalid-tooltip">Zipcode is required
+                                </div>
+                            </div>
+                        </div>
+
+
+                    </div>
+
+                    <div class="form-group row col-lg-12">
+                        <label class="col-sm-2 col-form-label">{{ 'site.contactperson' | translate }}</label>
+                        <div class="col-sm-4">
+                            <input type="text" class="form-control" id="txtcontactpersonname"
+                                placeholder="{{'site.contactperson' | translate }}" [(ngModel)]="contactpersonname"
+                                formControlName="rcontactpersonname"
+                                [ngClass]="{'is-invalid': sitesubmitted && r.rcontactpersonname.errors }" />
+                            <div *ngIf="sitesubmitted && r.rcontactpersonname.errors" class="invalid-feedback">
+                                <div *ngIf="r.rcontactpersonname.errors.required" class="invalid-tooltip">Contact Person
+                                    Name is required
+                                </div>
+                            </div>
+                        </div>
+                        <label for="txtemail" class="col-sm-2 col-form-label">{{ 'site.email' | translate }}</label>
+                        <div class="col-sm-4">
+                            <input type="text" class="form-control" id="txtemail"
+                                placeholder="{{'site.email' | translate }}" formControlName="remail" [(ngModel)]="email"
+                                [ngClass]="{'is-invalid': sitesubmitted && r.remail.errors }">
+                            <div *ngIf="sitesubmitted && r.remail.errors" class="invalid-feedback">
+                                <div *ngIf="r.remail.errors.required" class="invalid-tooltip">Email is required</div>
+                                <div *ngIf="r.remail.errors.email" class="invalid-tooltip">Email must be a
+                                    valid email address</div>
+                            </div>
+                        </div>
+
+                    </div>
+
+
+                    <div class="form-group row col-lg-12">
+                        <label class="col-sm-2 col-form-label">{{ 'site.contactnumber' | translate }}</label>
+                        <div class="col-sm-4">
+                            <input type="text" id="txtcontactnumber" class="form-control"
+                                placeholder="{{'site.contactnumber' | translate }}" [(ngModel)]="contactnumber"
+                                formControlName="rcontactnumber"
+                                onkeypress="return (event.charCode > 64 && event.charCode < 91)  || (!event.shiftKey && event.charCode  >= 48 && event.charCode  <= 57 || event.charCode==43 || event.charCode==45)"
+                                [ngClass]="{'is-invalid': sitesubmitted && r.rcontactnumber.errors }" />
+                            <div *ngIf="sitesubmitted && r.rcontactnumber.errors" class="invalid-feedback">
+                                <div *ngIf="r.rcontactnumber.errors.required" class="invalid-tooltip">Contact Number is
+                                    required
+                                </div>
+                            </div>
+                        </div>
+                        <label class="col-sm-2 col-form-label">{{ 'site.mobilenumber' | translate }}</label>
+                        <div class="col-sm-4">
+                            <input type="text" id="txtmobilenumber" class="form-control"
+                                placeholder="{{'site.mobilenumber' | translate }}" [(ngModel)]="mobilenumber"
+                                formControlName="rmobilenumber"
+                                onkeypress="return (event.charCode > 64 && event.charCode < 91)  || (!event.shiftKey && event.charCode  >= 48 && event.charCode  <= 57 || event.charCode==43 || event.charCode==45)"
+                                [ngClass]="{'is-invalid': sitesubmitted && r.rmobilenumber.errors }" />
+                            <div *ngIf="sitesubmitted && r.rmobilenumber.errors" class="invalid-feedback">
+                                <div *ngIf="r.rmobilenumber.errors.required" class="invalid-tooltip">Mobile Number is
+                                    required
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+                    <div class="form-group row col-lg-12">
+                    <!-- </div> -->
+                            <label style="float: left; max-width: 90%;" class="col-sm-2 col-form-label">{{ 'site.tenantparkingbay' | translate }}</label>                                                
+                            <!-- <i class="simple-icon-question" style="display: block; margin-top: 10px;" tooltip="Please enter no. of Bays for a Tenant." placement="bottom"></i> -->
+                        <!-- </div>                         -->
+                        <div class="col-sm-4">                            
+                            <input type="text" id="txttenantparkingbay" class="form-control" (change)="BindParkingBay()"
+                                placeholder="{{'site.tenantparkingbay' | translate}}" [(ngModel)]="tenantparkingbay"
+                                formControlName="rtenantparkingbay"
+                                onkeypress="return (event.charCode > 64 && event.charCode < 91)  || (!event.shiftKey && event.charCode  >= 48 && event.charCode  <= 57)"
+                                [ngClass]="{'is-invalid': sitesubmitted && r.rtenantparkingbay.errors }"  />
+                            <div *ngIf="sitesubmitted && r.rtenantparkingbay.errors" class="invalid-feedback">
+                                <div *ngIf="r.rtenantparkingbay.errors.required" class="invalid-tooltip">Tenant Parking
+                                    Bay is required
+                                </div>
+                            </div>
+                        </div>
+                        <label class="col-sm-2 col-form-label">{{ 'site.visitorparkingbay' | translate }}</label>
+                        <div class="col-sm-4">
+                            <input type="text" id="txtvisitorparkingbay" class="form-control"
+                                placeholder="{{'site.visitorparkingbay' | translate}}" [(ngModel)]="visitorparkingbay"
+                                formControlName="rvisitorparkingbay" (change)="BindVisitorBay()"
+                                onkeypress="return (event.charCode > 64 && event.charCode < 91)  || (!event.shiftKey && event.charCode  >= 48 && event.charCode  <= 57)"
+                                [ngClass]="{'is-invalid': sitesubmitted && r.rvisitorparkingbay.errors }" />
+                            <div *ngIf="sitesubmitted && r.rvisitorparkingbay.errors" class="invalid-feedback">
+                                <div *ngIf="r.rvisitorparkingbay.errors.required" class="invalid-tooltip">Visitor
+                                    Parking Bay is required
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="form-group row col-lg-12">
+                        <label class="col-sm-2 col-form-label">{{ 'site.vehiclesperbay' | translate }}</label>
+                        <div class="col-sm-4">
+                            <input type="text" class="form-control" id="txtvehiclesperbay"
+                                placeholder="{{'site.vehiclesperbay' | translate }}" maxlength="1"
+                                [(ngModel)]="vehiclesperbay" formControlName="rvehiclesperbay"
+                                onkeypress="return (event.charCode > 64 && event.charCode < 91)  || (!event.shiftKey && event.charCode  >= 48 && event.charCode  <= 57)"
+                                [ngClass]="{'is-invalid': sitesubmitted && r.rvehiclesperbay.errors }" />
+                            <div *ngIf="sitesubmitted && r.rvehiclesperbay.errors" class="invalid-feedback">
+                                <div *ngIf="r.rvehiclesperbay.errors.required" class="invalid-tooltip">Max. No. Of
+                                    vehicles per bay is required
+                                </div>
+                            </div>
+                        </div>
+                        <label for="active" class="col-sm-2 col-form-label">{{ 'site.active' | translate }}</label>
+                        <div class="col-sm-4" style="margin-top: 6px;">
+                            <input type="checkbox" id="userchkactive">
+                        </div>
+                    </div>
+                    <div class="form-group row col-lg-12">
+                    <label for="manageparkingavailable" class="col-sm-2 col-form-label">{{ 'site.manageparkingavailable' |translate }}</label>
+                                <div class="col-sm-4" style="margin-top: 6px;">
+                                    <div class="custom-control custom-switch" placement="left">
+                                        <input type="checkbox" class="custom-control-input" id="manageparkingactive">
+                                        <label class="custom-control-label" for="manageparkingactive"></label>
+                                      </div>
+                                    <!-- <input type="checkbox" id="Roomchkactive" checked> -->
+                                </div>
+                                <label for="visitorparkingavailable" class="col-sm-2 col-form-label">{{ 'site.visitorparkingavailable' |translate }}</label>
+                                <div class="col-sm-4" style="margin-top: 6px;">
+                                    <div class="custom-control custom-switch" placement="left">
+                                        <input type="checkbox" class="custom-control-input" id="visitorparkingactive">
+                                        <label class="custom-control-label" for="visitorparkingactive"></label>
+                                      </div>
+                                    <!-- <input type="checkbox" id="Roomchkactive" checked> -->
+                                </div>
+                            </div>
+                            <div class="form-group row col-lg-12">
+                                <label for="zatparklogsavailable" class="col-sm-2 col-form-label">{{ 'site.zatparklogsavailable' |translate }}</label>
+                                <div class="col-sm-4" style="margin-top: 6px;">
+                                    <div class="custom-control custom-switch" placement="left">
+                                        <input type="checkbox" [checked]="true" class="custom-control-input" id="zatparklogsactive">
+                                        <label class="custom-control-label" for="zatparklogsactive"></label>
+                                      </div>
+                                </div>
+
+                            </div>
+
+                </form>
+
+            </div>
+        </div>
+
+        <div class="card mb-4">
+            <div class="card-body">
+                <h5 class="mb-4">{{ 'site.parkingbay' | translate }}</h5>
+                <form [formGroup]="parkingbayForm">
+                    <div class="row">
+                        <div class="col-md-12" style="margin-top: 20px;">
+                            <div class="form-group row col-lg-12">
+                                <label class="col-sm-2 col-form-label">{{ 'site.sections' | translate }}</label>
+                                <div class="col-sm-4">
+                                    <input type="text" id="txtsection" class="form-control" (change)="BindParkingBay()"
+                                        maxlength="1" placeholder="{{'site.sections' | translate}}"
+                                        [(ngModel)]="section" formControlName="psection"
+                                        onkeypress="return (event.charCode > 64 && event.charCode < 91)  || (!event.shiftKey && event.charCode  >= 48 && event.charCode  <= 57)"
+                                        [ngClass]="{'is-invalid': parkingbaysubmitted && p.psection.errors }" />
+                                    <div *ngIf="parkingbaysubmitted && p.psection.errors" class="invalid-feedback">
+                                        <div *ngIf="p.psection.errors.required" class="invalid-tooltip">Section is
+                                            required
+                                        </div>
+                                    </div>
+                                </div>
+                                <label class="col-sm-2 col-form-label">{{ 'site.seperator' | translate }}</label>
+                                <div class="col-sm-4">
+                                    <select class="form-control" id="txtseperator" [(ngModel)]="seperatorId"
+                                        required="required" formControlName="pseperatorId"
+                                        [ngClass]="{'is-invalid': parkingbaysubmitted && p.pseperatorId.errors }">
+                                        <option value="">Select</option>
+                                        <option value="None">None</option>
+                                        <option value="-">-</option>
+                                        <option value="/">/</option>
+                                        <option value="EmptySpace">Empty Space</option>
+                                    </select>
+                                    <div *ngIf="parkingbaysubmitted && p.pseperatorId.errors" class="invalid-feedback">
+                                        <div *ngIf="p.pseperatorId.errors.required" class="invalid-tooltip">Seperator is
+                                            required
+                                        </div>
+                                    </div>
+
+
+                                </div>
+                            </div>
+                            <div class="row" [ngStyle]="{'display':parkingbaydiv}">
+                                <div class="col-md-12" style="margin-top: 20px;">
+                                    <table class="table table-hover">
+                                        <thead>
+                                            <tr>
+                                                <th scope="col">SNO</th>
+                                                <th scope="col">{{'site.prefix' | translate }}</th>
+                                                <th scope="col">{{'site.from' | translate }}</th>
+                                                <th scope="col">{{'site.to' | translate }}</th>
+                                                <th scope="col">{{'site.count' | translate }}</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr *ngFor="let bay of bays">
+                                                <td>{{bay.id}}</td>
+                                                <td><input type="text" class="form-control"
+                                                        [ngModelOptions]="{standalone: true}" id="txtprefix_{{bay.id}}"
+                                                        placeholder="{{'site.prefix' | translate }}"
+                                                        [(ngModel)]="bay.prefix" />
+                                                </td>
+                                                <td><input type="text" class="form-control"
+                                                        [ngModelOptions]="{standalone: true}" id="txtfrom_{{bay.id}}"
+                                                        placeholder="{{'site.from' | translate }}"
+                                                        onkeypress="return (event.charCode > 64 && event.charCode < 91)  || (!event.shiftKey && event.charCode  >= 48 && event.charCode  <= 57)"
+                                                        [(ngModel)]="bay.from" (change)="getcount()" /></td>
+                                                <td><input type="text" class="form-control"
+                                                        onkeypress="return (event.charCode > 64 && event.charCode < 91)  || (!event.shiftKey && event.charCode  >= 48 && event.charCode  <= 57)"
+                                                        [ngModelOptions]="{standalone: true}" id="txtto_{{bay.id}}"
+                                                        placeholder="{{'site.to' | translate }}" [(ngModel)]="bay.to"
+                                                        (change)="getcount()" /></td>
+                                                <td><input type="text" class="form-control"
+                                                        [ngModelOptions]="{standalone: true}" id="txtcount_{{bay.id}}"
+                                                        disabled placeholder="{{'site.count' | translate }}"
+                                                        [(ngModel)]="bay.count" /></td>
+                                            </tr>
+                                        </tbody>
+                                        <tfoot>
+                                            <tr>
+                                                <td></td>
+                                                <td></td>
+                                                <td></td>
+                                                <td>{{'site.total' | translate }}</td>
+                                                <td>{{total}}</td>
+                                            </tr>
+                                        </tfoot>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                </form>
+            </div>
+        </div>
+
+        <div class="card mb-4">
+            <div class="card-body">
+                <h5 class="mb-4">{{ 'site.visitorbay' | translate }}</h5>
+                <form [formGroup]="visitorbayForm">
+                    <div class="row">
+                        <div class="col-md-12" style="margin-top: 20px;">
+                            <div class="form-group row col-lg-12">
+                                <label class="col-sm-2 col-form-label">{{ 'site.sections' | translate }}</label>
+                                <div class="col-sm-4">
+                                    <input type="text" id="txtvsection" class="form-control" (change)="BindVisitorBay()"
+                                        maxlength="1" placeholder="{{'site.sections' | translate}}"
+                                        onkeypress="return (event.charCode > 64 && event.charCode < 91)  || (!event.shiftKey && event.charCode  >= 48 && event.charCode  <= 57)"
+                                        [(ngModel)]="vsection" formControlName="vsection"
+                                        [ngClass]="{'is-invalid': visitorbaysubmitted && v.vsection.errors }" />
+                                    <div *ngIf="visitorbaysubmitted && v.vsection.errors" class="invalid-feedback">
+                                        <div *ngIf="v.vsection.errors.required" class="invalid-tooltip">Section is
+                                            required
+                                        </div>
+                                    </div>
+                                </div>
+                                <label class="col-sm-2 col-form-label">{{ 'site.seperator' | translate }}</label>
+                                <div class="col-sm-4">
+                                    <select class="form-control" id="txtvseperator" [(ngModel)]="vseperatorId"
+                                        required="required" formControlName="vseperatorId"
+                                        [ngClass]="{'is-invalid': visitorbaysubmitted && v.vseperatorId.errors }">
+                                        <option value="">Select</option>
+                                        <option value="None">None</option>
+                                        <option value="-">-</option>
+                                        <option value="/">/</option>
+                                        <option value="EmptySpace">Empty Space</option>
+                                    </select>
+                                    <div *ngIf="visitorbaysubmitted && v.vseperatorId.errors" class="invalid-feedback">
+                                        <div *ngIf="v.vseperatorId.errors.required" class="invalid-tooltip">Seperator is
+                                            required
+                                        </div>
+                                    </div>
+
+
+                                </div>
+                            </div>
+
+
+                            <div class="row" [ngStyle]="{'display':visitorbaydiv}">
+                                <div class="col-md-12" style="margin-top: 20px;">
+                                    <table class="table table-hover">
+                                        <thead>
+                                            <tr>
+                                                <th scope="col">SNO</th>
+                                                <th scope="col">{{'site.prefix' | translate }}</th>
+                                                <th scope="col">{{'site.from' | translate }}</th>
+                                                <th scope="col">{{'site.to' | translate }}</th>
+                                                <th scope="col">{{'site.count' | translate }}</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr *ngFor="let visitorbay of visitorbays">
+                                                <td>{{visitorbay.id}}</td>
+                                                <td><input type="text" class="form-control"
+                                                        [ngModelOptions]="{standalone: true}"
+                                                        id="txtvprefix_{{visitorbay.id}}"
+                                                        placeholder="{{'site.prefix' | translate }}"
+                                                        [(ngModel)]="visitorbay.prefix" />
+                                                </td>
+                                                <td><input type="text" class="form-control"
+                                                        [ngModelOptions]="{standalone: true}"
+                                                        id="txtvfrom_{{visitorbay.id}}"
+                                                        onkeypress="return (event.charCode > 64 && event.charCode < 91)  || (!event.shiftKey && event.charCode  >= 48 && event.charCode  <= 57)"
+                                                        placeholder="{{'site.from' | translate }}"
+                                                        [(ngModel)]="visitorbay.from" (change)="visitorgetcount()" />
+                                                </td>
+                                                <td><input type="text" class="form-control"
+                                                        [ngModelOptions]="{standalone: true}"
+                                                        id="txtvto_{{visitorbay.id}}"
+                                                        onkeypress="return (event.charCode > 64 && event.charCode < 91)  || (!event.shiftKey && event.charCode  >= 48 && event.charCode  <= 57)"
+                                                        placeholder="{{'site.to' | translate }}"
+                                                        [(ngModel)]="visitorbay.to" (change)="visitorgetcount()" /></td>
+                                                <td><input type="text" class="form-control"
+                                                        [ngModelOptions]="{standalone: true}"
+                                                        id="txtvcount_{{visitorbay.id}}" disabled
+                                                        placeholder="{{'site.count' | translate }}"
+                                                        [(ngModel)]="visitorbay.count" /></td>
+                                            </tr>
+                                        </tbody>
+                                        <tfoot>
+                                            <tr>
+                                                <td></td>
+                                                <td></td>
+                                                <td></td>
+                                                <td>{{'site.total' | translate }}</td>
+                                                <td>{{visitortotal}}</td>
+                                            </tr>
+                                        </tfoot>
+                                    </table>
+                                </div>
+                            </div>
+                            <div class="form-group row col-lg-12">
+                                <label
+                                    class="col-sm-2 col-form-label">{{ 'site.maxparkingsession' | translate }}</label>
+                                <div class="col-sm-4">
+                                    <input type="text" id="txtmaxparkingsession" class="form-control" maxlength="2"
+                                        placeholder="{{'site.maxparkingsession' | translate}}"
+                                        [(ngModel)]="maxparkingsession" formControlName="vmaxparkingsession"
+                                        onkeypress="return (event.charCode > 64 && event.charCode < 91)  || (!event.shiftKey && event.charCode  >= 48 && event.charCode  <= 57)"
+                                        [ngClass]="{'is-invalid': visitorbaysubmitted && v.vmaxparkingsession.errors }" />
+                                    <div *ngIf="visitorbaysubmitted && v.vmaxparkingsession.errors"
+                                        class="invalid-feedback">
+                                        <div *ngIf="v.vmaxparkingsession.errors.required" class="invalid-tooltip">Max
+                                            parking session allowed is
+                                            required
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="col-sm-4 mt-1">
+                                    <ul class="list-unstyled mb-5">
+                                        <li class="chkst">
+                                            <div class="custom-control custom-radio">
+                                                <input type="radio" id="customRadio1" name="customRadio"
+                                                    class="custom-control-input" checked>
+                                                <label class="custom-control-label" for="customRadio1">Minutes
+                                                </label>
+                                            </div>
+                                            <div class="custom-control custom-radio rd-st">
+                                                <input type="radio" id="customRadio2" name="customRadio"
+                                                    class="custom-control-input">
+                                                <label class="custom-control-label" for="customRadio2">Hours
+                                                </label>
+                                            </div>
+                                            <div class="custom-control custom-radio rd-st">
+                                                <input type="radio" id="customRadio3" name="customRadio"
+                                                    class="custom-control-input">
+                                                <label class="custom-control-label" for="customRadio3">Days
+                                                    </label>
+                                            </div>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </div>
+
+
+                        </div>
+                    </div>
+
+                </form>
+
+            </div>
+        </div>
+        <div class="card mb-4 width_cls" [ngStyle]="{'display':visitorbaydiv}">
+            <div class="card-body">
+                <div class="row">
+                    <div class="col-md-8">
+                        <h5 class="mb-4">{{ "site.parkingslot" | translate }}</h5>
+                    </div>
+                    <div class="col-md-12">
+                        <div class="col-md-12" style="margin-top: 20px;">
+                            <table class="table table-hover">
+                                <thead>
+                                    <tr>
+                                        <th scope="col">SNO</th>
+                                        <th scope="col">{{'site.duration' | translate }}</th>
+                                        <th scope="col">{{'site.sessionunit' | translate }}</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr *ngFor="let visitorsession of visitorsessions">
+                                        <td>{{visitorsession.id}}</td>
+                                        <td><input type="text" class="col-md-6 form-control"
+                                                [ngModelOptions]="{standalone: true}"
+                                                id="txtseduration_{{visitorsession.id}}" minlength="2"
+                                                onkeypress="return (event.charCode > 64 && event.charCode < 91)  || (!event.shiftKey && event.charCode  >= 48 && event.charCode  <= 57)"
+                                                placeholder="{{'site.duration' | translate }}"
+                                                [(ngModel)]="visitorsession.duration" />
+                                        </td>
+                                        <td>
+                                            <select class="col-md-6 form-control" [ngModelOptions]="{standalone: true}"
+                                                id="txtsessionunit_{{visitorsession.id}}"
+                                                [(ngModel)]="visitorsession.sessionunit">
+                                                <option value="">Select Session</option>
+                                                <option value="Minutes">Minutes</option>
+                                                <option value="Hours">Hours</option>
+                                                <!-- <option value="Days">Days</option> -->
+                                            </select>
+                                        </td>
+
+                                    </tr>
+                                </tbody>
+
+                            </table>
+                        </div>
+                    </div>
+                    <div style="display: flex;float:right;">
+                        <button class="btn btn-primary d-block mt-3 currentState" (click)="SaveSite()" id="txtsubmit"
+                            type="submit">
+                            {{ 'site.submit'  | translate  }}
+                        </button>
+                        <button type="submit" style="margin-left: 15px;" class="btn btn-primary d-block mt-3"
+                            (click)="canceladdsite()">{{ 'site.cancel' | translate }}</button>
+                    </div>
+                </div>
+
+               
+            </div>
+        </div>
+
+    </div>
+</div>
+<simple-notifications></simple-notifications>
+<ngx-spinner bdColor="rgba(0,0,0,0.8)" size="medium" color="#fff" type="ball-clip-rotate-multiple" [fullScreen]="true">
+    <p style="color: white"> Please wait... </p>
+</ngx-spinner>

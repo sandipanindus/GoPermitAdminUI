@@ -1,0 +1,171 @@
+<div class="row">
+    <div class="col-12">
+
+        <div class="card mb-4">
+            <div class="card-body">
+
+
+                <form [formGroup]="vehicleregisterForm">
+                    <div class="form-group row col-lg-12">
+                        <label class="col-sm-2 col-form-label">{{ 'tenants.site' | translate }}</label>
+                        <div class="col-sm-4">
+                            <select class="form-control" [ngModelOptions]="{standalone: true}" id="txtsite"
+                                [(ngModel)]="siteId" required="required" (change)="GetTenants()">
+                                <option value="">Select</option>
+                                <option *ngFor="let site of sites" [value]="site.id">{{site.siteName}}
+                                </option>
+                            </select>
+
+                        </div>
+                        <label class="col-sm-2 col-form-label">{{ 'tenants.tenant' | translate }}</label>
+                        <div class="col-sm-4">
+                            <select class="form-control" [ngModelOptions]="{standalone: true}" id="txttenant"
+                                [(ngModel)]="tenantId" required="required" (change)="BindTenantDetails()">
+                                <option value="">Select</option>
+                                <option *ngFor="let tenant of tenants" [value]="tenant.id">{{tenant.firstName}}
+                                </option>
+                            </select>
+
+                        </div>
+                    </div>
+
+
+                </form>
+
+            </div>
+        </div>
+
+        <div class="card mb-4">
+            <div class="card-body" [ngStyle]="{'display':tenantlabeldiv}">
+                <form>
+                    <div class="form-group row col-lg-12">
+                        <label class="col-sm-2 col-form-label">{{ 'tenants.firstname' | translate }}</label>
+                        <div class="col-sm-4">
+                            <input type="text" class="form-control" [ngModelOptions]="{standalone: true}"
+                                id="txtfirstname" placeholder="{{'tenants.firstname' | translate }}" disabled="true"
+                                [(ngModel)]="firstname" />
+                        </div>
+                        <label class="col-sm-2 col-form-label">{{ 'tenants.lastname' | translate }}</label>
+                        <div class="col-sm-4">
+                            <input type="text" class="form-control" [ngModelOptions]="{standalone: true}"
+                                id="txtlastname" placeholder="{{'tenants.lastname' | translate }}" disabled="true"
+                                [(ngModel)]="lastname" />
+                        </div>
+                    </div>
+                    <div class="form-group row col-lg-12">
+                        <label class="col-sm-2 col-form-label">{{ 'tenants.address1' | translate }}</label>
+                        <div class="col-sm-4">
+                            <input type="text" class="form-control" [ngModelOptions]="{standalone: true}"
+                                id="txtaddress" placeholder="{{'tenants.address1' | translate }}" disabled="true"
+                                [(ngModel)]="address" />
+                        </div>
+                        <label class="col-sm-2 col-form-label">{{ 'tenants.city' | translate }}</label>
+                        <div class="col-sm-4">
+                            <input type="text" class="form-control" [ngModelOptions]="{standalone: true}" id="txtcity"
+                                placeholder="{{'tenants.city' | translate }}" disabled="true" [(ngModel)]="city" />
+                        </div>
+                    </div>
+                    <div class="form-group row col-lg-12">
+                        <label class="col-sm-2 col-form-label">{{ 'tenants.state' | translate }}</label>
+                        <div class="col-sm-4">
+                            <input type="text" class="form-control" [ngModelOptions]="{standalone: true}" id="txtstate"
+                                placeholder="{{'tenants.state' | translate }}" disabled="true" [(ngModel)]="state" />
+                        </div>
+                        <label class="col-sm-2 col-form-label">{{ 'tenants.zipcode' | translate }}</label>
+                        <div class="col-sm-4">
+                            <input type="text" class="form-control" [ngModelOptions]="{standalone: true}"
+                                id="txtzipcode" placeholder="{{'tenants.zipcode' | translate }}" disabled="true"
+                                [(ngModel)]="zipcode" />
+                        </div>
+                    </div>
+                    <div class="form-group row col-lg-12">
+                        <label class="col-sm-2 col-form-label">{{ 'tenants.mobilenumber' | translate }}</label>
+                        <div class="col-sm-4">
+                            <input type="text" class="form-control" [ngModelOptions]="{standalone: true}"
+                                id="txtmobilenumber" placeholder="{{'tenants.mobilenumber' | translate }}"
+                                disabled="true" [(ngModel)]="mobilenumber" />
+                        </div>
+                        <label class="col-sm-2 col-form-label">{{ 'tenants.email' | translate }}</label>
+                        <div class="col-sm-4">
+                            <input type="text" class="form-control" [ngModelOptions]="{standalone: true}" id="txtemail"
+                                placeholder="{{'tenants.email' | translate }}" disabled="true" [(ngModel)]="email" />
+                        </div>
+                    </div>
+                    <div class="form-group row col-lg-12">
+                        <label class="col-sm-2 col-form-label">{{ 'tenants.parkingbay' | translate }}</label>
+                        <div class="col-sm-4">
+                            <input type="text" class="form-control" [ngModelOptions]="{standalone: true}"
+                                id="txtparkingbay" placeholder="{{'tenants.parkingbay' | translate }}" disabled="true"
+                                [(ngModel)]="parkingbayId" />
+                        </div>
+
+                    </div>
+                </form>
+
+                <div class="row" [ngStyle]="{'display':tenantlabeldiv}">
+                    <div class="col-md-12" style="margin-top: 20px;">
+                        <h5 class="mb-4">{{ 'vehicleregistration.add-new-title' | translate }}</h5>
+                        <table class="table table-hover table-responsive">
+                            <thead>
+                                <tr>
+                                    <th scope="col">SNO</th>
+                                    <th scope="col">{{'vehicleregistration.bayno' | translate }}</th>
+                                    <th scope="col">{{'vehicleregistration.make' | translate }}</th>
+                                    <th scope="col">{{'vehicleregistration.model' | translate }}</th>
+                                    <th scope="col">{{'vehicleregistration.vrm' | translate }}</th>
+                                    <th scope="col">{{'vehicleregistration.startdate' | translate }}</th>
+                                    <th scope="col">{{'vehicleregistration.enddate' | translate }}</th>
+
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr *ngFor="let vehiclelist of vehiclelists">
+                                    <td>{{vehiclelist.id}}</td>
+                                    <td><input type="text" class="form-control" [ngModelOptions]="{standalone: true}"
+                                        id="txtbayno_{{vehiclelist.id}}"
+                                        placeholder="{{'vehicleregistration.bayno' | translate }}"
+                                        [(ngModel)]="vehiclelist.bayno" /></td>
+                                    <td><input type="text" class="form-control" [ngModelOptions]="{standalone: true}"
+                                            id="txtmake_{{vehiclelist.id}}"
+                                            placeholder="{{'vehicleregistration.make' | translate }}"
+                                            [(ngModel)]="vehiclelist.make" /></td>
+                                    <td><input type="text" class="form-control" [ngModelOptions]="{standalone: true}"
+                                            id="txtmodel_{{vehiclelist.id}}"
+                                            placeholder="{{'vehicleregistration.model' | translate }}"
+                                            [(ngModel)]="vehiclelist.model" /></td>
+                                    <td><input type="text" class="form-control" [ngModelOptions]="{standalone: true}"
+                                            id="txtvrm_{{vehiclelist.id}}"
+                                            placeholder="{{'vehicleregistration.vrm' | translate }}"
+                                            [(ngModel)]="vehiclelist.vrm" /></td>
+                                    <td><input type="text" class="form-control" id="txtstartdate_{{vehiclelist.id}}"
+                                            placeholder="{{'vehicleregistration.startdate' | translate }}" readonly="true" bsDatepicker
+                                            [container]="'html'"
+                                            [bsConfig]="{ adaptivePosition: true, dateInputFormat: 'DD-MM-YYYY' }"
+                                            [(ngModel)]="vehiclelist.startDate" /></td>
+                                    <td><input type="text" class="form-control" bsDatepicker readonly="true" [container]="'html'"
+                                            [bsConfig]="{ adaptivePosition: true, dateInputFormat: 'DD-MM-YYYY' }"
+                                            id="txtenddate_{{vehiclelist.id}}"
+                                            placeholder="{{'vehicleregistration.enddate' | translate }}"
+                                            [(ngModel)]="vehiclelist.endDate" /></td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+                <div *ngIf="vehiclelists.length>0" style="float: right;display: flex;">
+                    <button class="btn btn-primary d-block mt-3" type="submit" (click)="SaveVehicleData()">
+                        {{ 'tenants.submit'  | translate  }}
+                    </button>
+                    <button type="submit" style="margin-left: 15px;" class="btn btn-primary d-block mt-3"
+                        (click)="canceladdvehicleregistration()">
+                        {{ 'tenants.cancel'  | translate  }}
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<simple-notifications></simple-notifications>
+<ngx-spinner bdColor="rgba(0,0,0,0.8)" size="medium" color="#fff" type="ball-clip-rotate-multiple" [fullScreen]="true">
+    <p style="color: white"> Please wait... </p>
+</ngx-spinner>

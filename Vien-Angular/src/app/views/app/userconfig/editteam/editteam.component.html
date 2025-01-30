@@ -1,0 +1,94 @@
+<div class="row">
+    <div class="col-12">
+
+        <div class="card mb-4">
+            <div class="card-body">
+                <h5 class="mb-4">{{ 'team.edit-title' | translate }}</h5>
+
+                <form [formGroup]="teamForm">
+
+                    <div class="form-group row col-lg-12">
+                        <label class="col-sm-2 col-form-label">{{ 'team.code' | translate }}</label>
+                        <div class="col-sm-4">
+                            <input type="text"  id="txtteamcode" class="form-control" placeholder="{{ 'team.code' | translate }}"
+                                [(ngModel)]="teamcode" required="required" formControlName="rteamcode"
+                                [ngClass]="{'is-invalid': teamsubmitted && r.rteamcode.errors }">
+
+                            <div *ngIf="teamsubmitted && r.rteamcode.errors" class="invalid-feedback">
+                                <div *ngIf="r.rteamcode.errors.required" class="invalid-tooltip">Team code is required
+                                </div>
+                            </div>
+                        </div>
+                        <label class="col-sm-2 col-form-label">{{ 'team.name' | translate }}</label>
+                        <div class="col-sm-4">
+                            <input type="text"  id="txtteamname" class="form-control" placeholder="{{ 'team.code' | translate }}"
+                                [(ngModel)]="teamname" required="required" formControlName="rteamname"
+                                [ngClass]="{'is-invalid': teamsubmitted && r.rteamname.errors }">
+
+                            <div *ngIf="teamsubmitted && r.rteamname.errors" class="invalid-feedback">
+                                <div *ngIf="r.rteamname.errors.required" class="invalid-tooltip">Team name is required
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                   
+                    <div class="form-row">
+                        <div class="form-group col-md-12" style="margin-top: 20px;">
+                            <h3 class="card-title" style="text-align: center;">{{'team.users'|translate}}</h3>
+                            <ul>
+                                <li style="list-style: none;">
+                                    <table class="table table-hover">
+                                        <thead>
+                                            <tr>
+                                                <th scope="col"> 
+                                                    <input type="checkbox" [disabled]="isdisabled" id="Checkboxall"
+                                                    style="vertical-align: middle;"
+                                                    (click)="chkall()"  />
+                                                </th>
+                                                <th scope="col">
+                                                    {{'team.username'|translate}}
+                                                </th>
+                                                <th scope="col">
+                                                    {{'team.email'|translate}}</th>
+                                                <th scope="col">
+                                                    {{'team.rolename'|translate}} </th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr *ngFor="let registeruser of registerusers">
+                                            
+                                                <td>
+                                                    <input type="checkbox" [disabled]="isdisabled" id="CheckboxRU_{{registeruser.userId}}"
+                                                    (click)="checkuser(registeruser.userId)"  [(ngModel)]="registeruser.chkteam" [ngModelOptions]="{standalone: true}" /></td>
+                                               <td>
+                                                   {{registeruser.name}}
+                                                </td>
+                                                <td>
+                                                  {{registeruser.email}}
+                                                </td>
+                                                <td>
+                                                   {{registeruser.roleName}}
+                                                </td>
+    
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div style="display: flex;">
+                        <button class="btn btn-primary d-block mt-3 currentState" id="txtsubmit" type="submit" (click)="UpdateTeam()">
+                            {{ 'team.submit'  | translate  }}
+                        </button>
+                        <button type="submit" style="margin-left: 15px;" class="btn btn-primary d-block mt-3"
+                            (click)="canceladdteam()">{{ 'team.cancel' | translate }}</button>
+                    </div>
+                </form>
+
+            </div>
+        </div>
+    </div>
+</div>
+<simple-notifications></simple-notifications>
+<ngx-spinner bdColor="rgba(0,0,0,0.8)" size="medium" color="#fff" type="ball-clip-rotate-multiple" [fullScreen]="true"><p style="color: white"> Please wait... </p></ngx-spinner>

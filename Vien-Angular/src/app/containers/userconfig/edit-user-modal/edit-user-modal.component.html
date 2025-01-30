@@ -1,0 +1,95 @@
+<ng-template #template>
+    <div class="modal-header">
+        <h4 class="modal-title pull-left">{{'user.edit-title' | translate}}</h4>
+        <button type="button" class="close pull-right" aria-label="Close" (click)="modalRef.hide()">
+            <span aria-hidden="true">&times;</span>
+        </button>
+    </div>
+    <div class="modal-body">
+        <form [formGroup]="userForm">
+            <div class="mt-4">
+                <label>{{ 'user.firstname' | translate }}</label>
+                <input type="text" class="form-control" [(ngModel)]="firstname" placeholder="First Name"
+                    required="required" formControlName="rfirstname"
+                    [ngClass]="{'is-invalid': usersubmitted && r.rfirstname.errors }">
+                <div *ngIf="usersubmitted && r.rfirstname.errors" class="invalid-feedback">
+                    <div *ngIf="r.rfirstname.errors.required" style="color: red;">First name is required
+                    </div>
+                </div>
+            </div>
+            <div class="mt-4">
+                <label>{{ 'user.lastname' | translate }}</label>
+                <input type="text" class="form-control" [(ngModel)]="lastname" placeholder="Last Name"
+                    required="required" formControlName="rlastname"
+                    [ngClass]="{'is-invalid': usersubmitted && r.rlastname.errors }">
+                <div *ngIf="usersubmitted && r.rlastname.errors" class="invalid-feedback">
+                    <div *ngIf="r.rlastname.errors.required" style="color: red;">Last name is required
+                    </div>
+                </div>
+            </div>
+            <div class="mt-4">
+                <label>{{ 'user.email' | translate }}</label>
+                <input type="text" class="form-control" [(ngModel)]="email" placeholder="Email" required="required"
+                    formControlName="remail" [ngClass]="{'is-invalid': usersubmitted && r.remail.errors }">
+                <div *ngIf="usersubmitted && r.remail.errors" class="invalid-feedback">
+                    <div *ngIf="r.remail.errors.required" style="color: red;">Email is required
+                    </div>
+                    <div *ngIf="r.remail.errors.email" style="color: red;">Email must be a
+                        valid email address</div>
+                </div>
+            </div>
+            <div class="mt-4">
+                <label>{{ 'user.contactnumber' | translate }}</label>
+                <input type="text" class="form-control" [ngModelOptions]="{standalone: true}" [(ngModel)]="contactnumber" (keypress)="numberOnly($event)"
+                    placeholder="Contact Number">
+            </div>
+
+            <div class="mt-4">
+                <label>{{ 'user.address1' | translate }}</label>
+                <textarea class="form-control"   [ngModelOptions]="{standalone: true}" [(ngModel)]="address1" placeholder="Address1"></textarea>
+            </div>
+            <div class="mt-4">
+                <label>{{ 'user.address2' | translate }}</label>
+                <textarea class="form-control"  [ngModelOptions]="{standalone: true}" [(ngModel)]="address2" placeholder="Address2"></textarea>
+            </div>
+             <div class="mt-4">
+                <label>{{ 'user.country' | translate }}</label>
+                <label class="w-100">
+                    <ng-select appearance="outline"  [ngModelOptions]="{standalone: true}"  [(ngModel)]="countryId" [searchable]="true">
+                        <ng-option *ngFor="let country of countries" [value]="country.id">{{country.countryName}}
+                        </ng-option>
+                    </ng-select>
+                </label> 
+            </div>
+            <div class="mt-4">
+                <label>{{ 'user.state' | translate }}</label>
+                <input type="text" class="form-control"  [ngModelOptions]="{standalone: true}" [(ngModel)]="state" placeholder="State">
+            </div>
+            <div class="mt-4">
+                <label>{{ 'user.city' | translate }}</label>
+                <input type="text" class="form-control"  [ngModelOptions]="{standalone: true}" [(ngModel)]="city" placeholder="City">
+            </div>
+            <div class="mt-4">
+                <label>{{ 'user.zipcode' | translate }}</label>
+                <input type="text" class="form-control"  [ngModelOptions]="{standalone: true}" [(ngModel)]="zipcode" placeholder="Zipcode">
+            </div>
+            <div class="mt-4">
+                <label>{{ 'user.role' | translate }}</label>
+                <label class="w-100">
+                    <ng-select appearance="outline" [(ngModel)]="roleId"  [ngModelOptions]="{standalone: true}" [searchable]="false">
+                        
+                        <ng-option *ngFor="let role of roles" [value]="role.id">{{role.name}}
+                        </ng-option>
+                    </ng-select>
+                </label> 
+            </div>
+            <simple-notifications></simple-notifications>
+        </form>
+    </div>
+    <div class="modal-footer">
+        <button type="button" class="btn btn-outline-primary"
+            (click)="modalRef.hide()">{{'user.cancel' | translate }}</button>
+        <button type="submit" class="btn btn-primary float-right"
+            (click)="UpdateUser();">{{ 'user.submit' | translate}}</button>
+    </div>
+</ng-template>

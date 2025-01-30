@@ -1,0 +1,125 @@
+<div class="loading" style="display: none;" id="loading"></div>
+<div class="row">
+    <div class="col-12">
+        <app-heading></app-heading>
+    </div>
+</div>
+<div class="row">
+    <div class="col-12">
+        <div class="card mb-4">
+            <div class="card-body">
+                <div class="form-group row col-lg-12">
+                    <label class="col-sm-2 col-form-label">{{ 'permission.role' | translate }}</label>
+                    <div class="col-sm-4">
+                        <select class="form-control" (change)="GetScreensList()" [ngModelOptions]="{standalone: true}"
+                            [(ngModel)]="roleId" required="required">
+                            <option value="">Select</option>
+                            <option *ngFor="let role of roles" [value]="role.id">{{role.name}}
+                            </option>
+                        </select>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+    <div class="col-12 scroll">
+
+        <div class="card-body">
+            <div class="form-row">
+                <div class="form-group col-md-12" style="margin-top: 20px;">
+                    <ul *ngFor="let module of modules">
+                        <h3 class="card-title" style="text-align: center;">{{module.moduleName}}</h3>
+                        <li style="list-style: none;">
+                            <table class="table table-hover" id="myTable_{{module.moduleId}}">
+                                <thead>
+                                    <tr>
+                                        <th scope="col">{{'permission.screenname' | translate}}</th>
+                                        <th scope="col"></th>
+                                        <th scope="col">
+                                            <input type="checkbox" id="CheckboxV_{{module.moduleId}}"
+                                                style="vertical-align: middle;" [checked]="isSelectedView()"
+                                                (click)="chkallview(module.moduleId,modules)" />
+                                            {{'permission.view'|translate}}
+                                        </th>
+                                        <th scope="col">
+                                            <input type="checkbox" id="CheckboxA_{{module.moduleId}}"
+                                                style="vertical-align: middle;" [checked]="isSelectedAdd()"
+                                                (click)="chkalladd(module.moduleId,modules)" />
+                                            {{'permission.add'|translate}}</th>
+                                        <th scope="col">
+                                            <input type="checkbox" id="CheckboxE_{{module.moduleId}}"
+                                                style="vertical-align: middle;" [checked]="isSelectedEdit()"
+                                                (click)="chkalledit(module.moduleId,modules)" />
+                                            {{'permission.edit'|translate}} </th>
+                                        <th scope="col">
+                                            <input type="checkbox" id="CheckboxD_{{module.moduleId}}"
+                                                style="vertical-align: middle;"
+                                                [checked]="isSelectedDelete()"
+                                                (click)="chkalldelete(module.moduleId,modules)" />
+                                            {{'permission.delete'|translate}} </th>
+                                        <th scope="col">
+                                            <input type="checkbox" id="CheckboxAP_{{module.moduleId}}"
+                                                style="vertical-align: middle;"
+                                                [checked]="isSelectedApprove()"
+                                                (click)="chkallapprove(module.moduleId,modules)" />
+                                            {{'permission.approved'|translate}} </th>
+                                        <th scope="col">
+                                            <input type="checkbox" id="CheckboxR_{{module.moduleId}}"
+                                                style="vertical-align: middle;"
+                                                [checked]="isSelectedReject()"
+                                                (click)="chkallreject(module.moduleId,modules)" />
+                                            {{'permission.rejected'|translate}} </th>
+
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr *ngFor="let screen of module.screensModel">
+                                        <td>{{screen.screenName}}
+                                        </td>
+                                        <td>
+                                            <input type="checkbox" id="CheckboxS_{{screen.screenId}}"
+                                                (click)="chkallrow(screen.screenId,modules)" /></td>
+                                        <td>
+                                            <input type="checkbox" id="CheckboxSV_{{screen.screenId}}"
+                                                [(ngModel)]="screen.view" /></td>
+                                        <td>
+                                            <input type="checkbox" id="CheckboxSA_{{screen.screenId}}"
+                                                [(ngModel)]="screen.add" /></td>
+                                        <td>
+                                            <input type="checkbox" id="CheckboxSE_{{screen.screenId}}"
+                                                [(ngModel)]="screen.edit" /></td>
+                                        <td>
+                                            <input type="checkbox" id="CheckboxSD_{{screen.screenId}}"
+                                                [(ngModel)]="screen.delete" />
+                                        </td>
+                                        <td>
+                                            <input type="checkbox" id="CheckboxSAP_{{screen.screenId}}"
+                                                [(ngModel)]="screen.approve" />
+                                        </td>
+                                        <td>
+                                            <input type="checkbox" id="CheckboxSR_{{screen.screenId}}"
+                                                [(ngModel)]="screen.reject" />
+                                        </td>
+
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+            <div *ngIf="modules.length>0" style="float: right;">
+                <button class="btn btn-primary d-block mb-3 currentState" type="submit"
+                    (click)="SaveData()">
+                    {{ 'permission.submit'  | translate  }}
+                </button>
+            </div>
+        </div>
+    </div>
+
+
+<simple-notifications></simple-notifications>
+<ngx-spinner bdColor="rgba(0,0,0,0.8)" size="medium" color="#fff" type="ball-clip-rotate-multiple" [fullScreen]="true">
+    <p style="color: white"> Please wait... </p>
+</ngx-spinner>

@@ -1,0 +1,41 @@
+<div class="row">
+    <div class="col-12">
+
+        <div class="card mb-4">
+            <div class="card-body">
+                <h5 class="mb-4">{{ 'datasource.add-new-title' | translate }}</h5>
+
+                <form [formGroup]="datasourceForm">
+
+                    <div class="form-group row col-lg-12">
+                        <label class="col-sm-2 col-form-label">{{ 'datasource.name' | translate }}</label>
+                        <div class="col-sm-4">
+                            <input type="text" class="form-control"
+                                placeholder="{{ 'datasource.name' | translate }}" [(ngModel)]="datasourcename"
+                                required="required"  id="txtdatasourcename" formControlName="dname"
+                                [ngClass]="{'is-invalid': datasourcesubmitted && r.dname.errors }">
+                            <div *ngIf="datasourcesubmitted && r.dname.errors" class="invalid-feedback">
+                                <div *ngIf="r.dname.errors.required" class="invalid-tooltip">Data source name is
+                                    required
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+
+                    <div style="display: flex;">
+                        <button class="btn btn-primary d-block mt-3 currentState" id="txtsubmit" type="submit"
+                            (click)="SaveDataSource()">
+                            {{ 'datasource.submit'  | translate  }}
+                        </button>
+                        <button type="submit" style="margin-left: 15px;" class="btn btn-primary d-block mt-3"
+                            (click)="canceladddatasource()">{{ 'datasource.cancel' | translate }}</button>
+                    </div>
+                </form>
+
+            </div>
+        </div>
+    </div>
+</div>
+<simple-notifications></simple-notifications>
+<ngx-spinner bdColor="rgba(0,0,0,0.8)" size="medium" color="#fff" type="ball-clip-rotate-multiple" [fullScreen]="true"><p style="color: white"> Please wait... </p></ngx-spinner>

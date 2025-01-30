@@ -1,0 +1,303 @@
+<style>
+    @media (max-width: 992px) {
+        .Tbl-0 {
+            width: 275% ! IMPORTANT;
+        }
+    }
+</style>
+
+<div class="row">
+    <div class="col-12">
+        <div class="loading" style="display: none;" id="loading"></div>
+        <div class="card mb-4">
+            <div class="card-body">
+                <h5 class="mb-4">{{ 'tenants.edit-title' | translate }}</h5>
+
+                <form [formGroup]="tenantForm">
+
+                    <div class="form-group row col-lg-12">
+                        <label class="col-sm-2 col-form-label">{{ 'tenants.site' | translate }}</label>
+                        <div class="col-sm-4">
+                            <select class="form-control" formControlName="rsiteId"
+                                [ngClass]="{'is-invalid': tenantsubmitted && r.rsiteId.errors }" id="txtsite"
+                                [(ngModel)]="siteId" required="required">
+                                <option value="">Select</option>
+                                <option *ngFor="let site of sites" [value]="site.id">{{site.siteName}}
+                                </option>
+                            </select>
+                            <div *ngIf="tenantsubmitted && r.rsiteId.errors" class="invalid-feedback">
+                                <div *ngIf="r.rsiteId.errors.required" class="invalid-tooltip">Site is required
+                                </div>
+                            </div>
+                        </div>
+                        <label for="txtfirstname" class="col-sm-2 col-form-label">{{ 'tenants.firstname' | translate
+                            }}</label>
+                        <div class="col-sm-4">
+                            <input type="text" class="form-control" id="txtfirstname"
+                                placeholder="{{'tenants.firstname' | translate }}" formControlName="rfirstname"
+                                [ngClass]="{'is-invalid': tenantsubmitted && r.rfirstname.errors }"
+                                [(ngModel)]="firstname">
+                            <div *ngIf="tenantsubmitted && r.rfirstname.errors" class="invalid-feedback">
+                                <div *ngIf="r.rfirstname.errors.required" class="invalid-tooltip">First name is required
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+                    <div class="form-group row col-lg-12">
+                        <label class="col-sm-2 col-form-label">{{ 'tenants.lastname' | translate }}</label>
+                        <div class="col-sm-4">
+                            <input class="form-control" id="txtlastname" [(ngModel)]="lastname"
+                                formControlName="rlastname"
+                                [ngClass]="{'is-invalid': tenantsubmitted && r.rlastname.errors }"
+                                placeholder="{{'tenants.lastname' | translate }}" />
+                            <div *ngIf="tenantsubmitted && r.rlastname.errors" class="invalid-feedback">
+                                <div *ngIf="r.rlastname.errors.required" class="invalid-tooltip">Last name is required
+                                </div>
+                            </div>
+                        </div>
+                        <label class="col-sm-2 col-form-label">{{ 'tenants.houseorflatno' | translate }}</label>
+                        <div class="col-sm-4">
+                            <input class="form-control" id="txthouseorflatno" [(ngModel)]="houseorflatno"
+                                formControlName="rhouseorflatno"
+                                [ngClass]="{'is-invalid': tenantsubmitted && r.rhouseorflatno.errors }"
+                                placeholder="{{'tenants.houseorflatno' | translate }}" />
+                            <div *ngIf="tenantsubmitted && r.rhouseorflatno.errors" class="invalid-feedback">
+                                <div *ngIf="r.rhouseorflatno.errors.required" class="invalid-tooltip">House/Flat No is
+                                    required
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+                    <div class="form-group row col-lg-12">
+                        <label class="col-sm-2 col-form-label">{{ 'tenants.address1' | translate }}</label>
+                        <div class="col-sm-4">
+                            <input type="text" formControlName="raddress"
+                                [ngClass]="{'is-invalid': tenantsubmitted && r.raddress.errors }" class="form-control"
+                                id="txtaddress" placeholder="{{'tenants.address1' | translate }}" [(ngModel)]="address">
+                            <div *ngIf="tenantsubmitted && r.raddress.errors" class="invalid-feedback">
+                                <div *ngIf="r.raddress.errors.required" class="invalid-tooltip">Address is required
+                                </div>
+                            </div>
+                        </div>
+                        <label class="col-sm-2 col-form-label">{{ 'tenants.city' | translate }}</label>
+                        <div class="col-sm-4">
+                            <input type="text" formControlName="rcity"
+                                [ngClass]="{'is-invalid': tenantsubmitted && r.rcity.errors }" class="form-control"
+                                id="txtcity" placeholder="{{'tenants.city' | translate }}" [(ngModel)]="city">
+                            <div *ngIf="tenantsubmitted && r.rcity.errors" class="invalid-feedback">
+                                <div *ngIf="r.rcity.errors.required" class="invalid-tooltip">City is required
+                                </div>
+                            </div>
+                        </div>
+
+
+                    </div>
+
+                    <div class="form-group row col-lg-12">
+                        <label class="col-sm-2 col-form-label">{{ 'tenants.state' | translate }}</label>
+                        <div class="col-sm-4">
+                            <input type="text" formControlName="rstate"
+                                [ngClass]="{'is-invalid': tenantsubmitted && r.rstate.errors }" class="form-control"
+                                id="txtstate" placeholder="{{'tenants.state' | translate }}" [(ngModel)]="state">
+                            <div *ngIf="tenantsubmitted && r.rstate.errors" class="invalid-feedback">
+                                <div *ngIf="r.rstate.errors.required" class="invalid-tooltip">State is required
+                                </div>
+                            </div>
+                        </div>
+                        <label for="txtemail" class="col-sm-2 col-form-label">{{ 'tenants.zipcode' | translate
+                            }}</label>
+                        <div class="col-sm-4">
+                            <input type="text" formControlName="rzipcode"
+                                [ngClass]="{'is-invalid': tenantsubmitted && r.rzipcode.errors }" class="form-control"
+                                id="txtzipcode" placeholder="{{'tenants.zipcode' | translate }}" [(ngModel)]="zipcode">
+                            <div *ngIf="tenantsubmitted && r.rzipcode.errors" class="invalid-feedback">
+                                <div *ngIf="r.rzipcode.errors.required" class="invalid-tooltip">Zipcode is required
+                                </div>
+                            </div>
+
+                        </div>
+
+                    </div>
+
+
+                    <div class="form-group row col-lg-12">
+                        <label class="col-sm-2 col-form-label">{{ 'tenants.mobilenumber' | translate }}</label>
+                        <div class="col-sm-4">
+                            <input type="text" id="txtmobilenumber" formControlName="rmobilenumber"
+                                [ngClass]="{'is-invalid': tenantsubmitted && r.rmobilenumber.errors }"
+                                class="form-control" placeholder="{{'tenants.mobilenumber' | translate }}" [(ngModel)]="mobilenumber"
+                                onkeypress="return (event.charCode > 64 && event.charCode < 91)  || (!event.shiftKey && event.charCode  >= 48 && event.charCode  <= 57 || event.charCode==43 || event.charCode==45)">
+                            <div *ngIf="tenantsubmitted && r.rmobilenumber.errors" class="invalid-feedback">
+                                <div *ngIf="r.rmobilenumber.errors.required" class="invalid-tooltip">Mobile Number is
+                                    required
+                                </div>
+                            </div>
+                        </div>
+                        <label class="col-sm-2 col-form-label">{{ 'tenants.email' | translate }}</label>
+                        <div class="col-sm-4">
+                            <input type="text" id="txtemail" class="form-control" formControlName="remail"
+                                [ngClass]="{'is-invalid': tenantsubmitted && r.remail.errors }"
+                                placeholder="{{'tenants.email' | translate }}" [(ngModel)]="email">
+                            <div *ngIf="tenantsubmitted && r.remail.errors" class="invalid-feedback">
+                                <div *ngIf="r.remail.errors.required" class="invalid-tooltip">Email is required</div>
+                                <div *ngIf="r.remail.errors.email" class="invalid-tooltip">Email must be a
+                                    valid email address</div>
+                            </div>
+                        </div>
+
+                    </div>
+                    <div class="form-group row col-lg-12">
+                        <label class="col-sm-2 col-form-label">{{ 'tenants.parkingbay' | translate }}</label>
+                        <div class="col-sm-4">
+                            <select class="form-control" formControlName="rparkingbayId" (change)="BindBayNo()"
+                                [ngClass]="{'is-invalid': tenantsubmitted && r.rparkingbayId.errors }"
+                                id="txtparkingbay" [(ngModel)]="parkingbayId" required="required">
+                                <option value={{number}} *ngFor="let number of numbers">{{number}}</option>
+                                <!-- <option value="0">0</option>
+                                <option value="1">1</option>
+                                <option value="2">2</option>
+                                <option value="3">3</option>
+                                <option value="4">4</option>
+                                <option value="5">5</option>
+                                <option value="6">6</option> -->
+                            </select>
+                            <div *ngIf="tenantsubmitted && r.rparkingbayId.errors" class="invalid-feedback">
+                                <div *ngIf="r.rparkingbayId.errors.required" class="invalid-tooltip">Parking Bay is
+                                    required
+                                </div>
+                            </div>
+
+                        </div>
+                        <label for="isupdateenddate" class="col-sm-2 col-form-label">{{ 'site.isupdateenddate' |translate }}</label>
+                        <div class="col-sm-4" style="margin-top: 6px;">
+                            <div class="custom-control custom-switch" placement="left">
+                                <input type="checkbox" class="custom-control-input" id="isupdateenddate" checked [disabled]="buttonDisabled">
+                                <label class="custom-control-label" for="isupdateenddate"></label>
+                              </div>
+                        </div>
+                    </div>
+
+                    <div class="form-group row col-lg-12">
+                        <label for="txtproofofresidency"
+                            class="col-sm-2 col-form-label">{{ 'tenants.proofofresidency' | translate }}</label>
+                        <div class="col-sm-4">
+                            <input type="file" class="form-control" accept=".jpg, .png, .jpeg " 
+                            id="txtfileupload1" name="fileupload1" #fileNormalInput value=""
+                            (change)="onSelectFile1($event.target.files)" formControlName="Pprofile1">
+
+                        </div>
+                        <label for="txtproofofID"
+                            class="col-sm-2 col-form-label">{{ 'tenants.proofofID' | translate }}</label>
+                        <div class="col-sm-4">
+                            <input type="file" class="form-control" accept=".jpg, .png, .jpeg " 
+                            id="txtfileupload2" name="fileupload2" #fileNormalInput value=""
+                            (change)="onSelectFile2($event.target.files)" formControlName="Pprofile2">
+
+                        </div>
+                    </div>  
+                    <div class="row">
+                        <div class="form-group col-md-4">
+                            <p>ResidencyProof</p>
+                            <img style="width: 50%;  border: 1px solid #555" src="{{residencyproofid}}" alt="ResidencyProof">
+                           
+                        </div>
+                        <div class="form-group col-md-4">
+                            <p>IdentityProof</p>
+                            <img style="width: 50%;  border: 1px solid #555" src="{{identityproofid}}" alt="identityproofid">
+                          
+                        </div>
+                    </div>
+
+                    <h5 [ngStyle]="{'display':bayconfigdiv}" class="mb-4">{{ 'tenants.bayconfig' | translate }}</h5>
+                    <!-- <div class="row" [ngStyle]="{'display':bayconfigdiv}" style="height: 150px;"> -->
+                    <div class="row" [ngStyle]="{'display':bayconfigdiv}" style="height:450px;overflow:auto;">
+                        <div class="col-md-12" style="margin-top: 20px;">
+                        <!-- <div class="col-md-12" style="margin-top: 20px;overflow: auto; min-height:200px; max-height:200px;"> -->
+                            <!-- <h5 class="mb-4">{{ 'tenants.bayconfig' | translate }}</h5> -->
+                            <table class="table table-hover table-responsive-sm Tbl-0">
+                    <!-- <div class="row" [ngStyle]="{'display':bayconfigdiv}"> -->
+                        <!-- <div class="col-md-12 col-xs-12 scroll" style="margin-top: 20px;"> -->
+                            <!-- <h5 class="mb-4">{{ 'tenants.bayconfig' | translate }}</h5> -->
+                            <!-- <table class="table table-hover table-responsive-sm Tbl-0"> -->
+                                <thead>
+                                    <tr>
+                                        <th scope="col">SNO</th>
+
+                                        <th scope="col">{{'tenants.vehiclesperbay'|translate}}</th>
+                                        <th scope="col">{{'tenants.startdate' | translate}}</th>
+                                        <th scope="col">{{'tenants.enddate' | translate}}</th>
+                                        <th scope="col">{{'tenants.vehicleregistrationno' | translate }}</th>
+                                        <th scope="col">{{'tenants.bayno' | translate }}</th>
+                                        <!-- <th scope="col">{{'tenants.delete' | translate }}</th> -->
+
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr *ngFor="let bayconfig of bayconfigs">
+                                        <td class="form-control">{{bayconfig.id}}</td>
+
+                                        <td><input type="text" class="form-control"
+                                                [ngModelOptions]="{standalone: true}"
+                                                placeholder="{{'tenants.vehiclesperbay' | translate }}"
+                                                id="txtvehiclesperbay_{{bayconfig.id}}"
+                                                [(ngModel)]="bayconfig.vehiclesperbay" maxlength="1"></td>
+                                        <td><input type="text" class="form-control" id="txtstartdate_{{bayconfig.id}}"
+                                                placeholder="{{'tenants.startdate' | translate }}" [minDate]="mindate"
+                                                readonly="true" bsDatepicker [container]="'html'"
+                                                [ngModelOptions]="{standalone: true}"
+                                                [bsConfig]="{ adaptivePosition: true, dateInputFormat: 'DD-MM-YYYY' }"
+                                                [(ngModel)]="bayconfig.startdate" /></td>
+                                        <td><input type="text" class="form-control" bsDatepicker readonly="true"
+                                                [container]="'html'" [minDate]="mindate"
+                                                [ngModelOptions]="{standalone: true}"
+                                                [bsConfig]="{ adaptivePosition: true, dateInputFormat: 'DD-MM-YYYY' }"
+                                                id="txtenddate_{{bayconfig.id}}"
+                                                (bsValueChange)="BindBaynos(bayconfig.id)"
+                                                placeholder="{{'tenants.enddate' | translate }}"
+                                                [(ngModel)]="bayconfig.enddate" /></td>
+                                        <td><input type="text" class="form-control" 
+                                                [ngModelOptions]="{standalone: true}"
+                                                placeholder="{{'tenants.vehiclereg' | translate }}"
+                                                id="txtvehiclereg_{{bayconfig.id}}"
+                                                [(ngModel)]="bayconfig.vehiclereg"></td>          
+                                        <td><select class="form-control" [ngModelOptions]="{standalone: true}"
+                                                id="txtbayno_{{bayconfig.id}}" [(ngModel)]="bayconfig.bayid"
+                                                (change)="AvoidDuplicate(bayconfig.bayid,bayconfig.id)"
+                                                required="required">
+                                                <option value="">Select</option>
+                                                <option *ngFor="let bayno of bayconfig.baynos"
+                                                    id="txtoptionbay_{{bayno.id}}{{bayconfig.id}}" [value]="bayno.id">
+                                                    {{bayno.bayName}}</option>
+                                            </select></td>
+                                            <!-- <td>
+                                                <a style="font-size: 20px;" (click)="openModal(template,bayno.id)">
+                                                <div class=" glyph-icon simple-icon-trash"></div>
+                                            </a></td> -->
+
+                                    </tr>
+                                </tbody>
+
+                            </table>
+                        </div>
+                    </div>
+
+                    <div style="display: flex;">
+                        <button class="btn btn-primary d-block mt-3 currentState" (click)="UpdateTenant()"
+                            id="txtsubmit" type="submit" [disabled]="buttonDisabled">
+                            {{ 'tenants.submit' | translate }}
+                        </button>
+                        <button type="submit" style="margin-left: 15px;" class="btn btn-primary d-block mt-3"
+                            (click)="canceladdtenant()">{{ 'tenants.cancel' | translate }}</button>
+                    </div>
+                </form>
+
+            </div>
+        </div>
+    </div>
+</div>
+<simple-notifications></simple-notifications>
+<ngx-spinner bdColor="rgba(0,0,0,0.8)" size="medium" color="#fff" type="ball-clip-rotate-multiple" [fullScreen]="true">
+    <p style="color: white"> Please wait... </p>
+</ngx-spinner>

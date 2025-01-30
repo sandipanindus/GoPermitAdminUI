@@ -1,0 +1,17 @@
+.domain-name{
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    right: 1px;
+    background: #fff;
+    padding-left: 12px;
+}
+.domain-name span{
+    font-size: 16px;
+    line-height: 24px;
+    font-weight: 400;
+    color: var(--hex__home_common_text_color);
+    padding: 6px 15px;
+    border-left: 1px solid;
+    border-color: var(--hex_border_form_ele);
+}

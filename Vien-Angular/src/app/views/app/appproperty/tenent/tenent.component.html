@@ -1,0 +1,122 @@
+<div class="row">
+    <div class="col-12">
+
+        <div class="card mb-4">
+            <div class="card-body">
+                <h5 class="mb-4">{{ 'tenants.add-new-title' | translate }}</h5>
+
+                <form [formGroup]="tenentForm">
+
+                    <div class="form-group row col-lg-12">
+                        <label for="txtfirstname"
+                            class="col-sm-2 col-form-label">{{ 'tenants.firstname' | translate }}</label>
+                        <div class="col-sm-4">
+                            <input type="text" class="form-control" id="txtfirstname"
+                                placeholder="{{  'tenents.firstname' | translate }}" [(ngModel)]="firstname"
+                                required="required" formControlName="rfirstname"
+                                [ngClass]="{'is-invalid': usersubmitted && r.rfirstname.errors }">
+                            <div *ngIf="usersubmitted && r.rfirstname.errors" class="invalid-feedback">
+                                <div *ngIf="r.rfirstname.errors.required" class="invalid-tooltip">First name is required
+                                </div>
+                            </div>
+                        </div>
+                        <label class="col-sm-2 col-form-label">{{ 'tenants.firstname'  | translate }}</label>
+                        <div class="col-sm-4">
+                            <input class="form-control" id="txtTenantFirstName" [(ngModel)]="TenantFirstName"
+                                [ngModelOptions]="{standalone: true}"
+                                placeholder="{{ 'tenents.tenantfirstname' | translate }}" />
+                        </div>
+                    </div>
+                    <div class="form-group row col-lg-12">
+                        <label class="col-sm-2 col-form-label">{{ 'tenants.lastname' | translate }}</label>
+                        <div class="col-sm-4">
+                            <input type="text" class="form-control" id="txtLastName"
+                                [ngModelOptions]="{standalone: true}"
+                                placeholder="{{  'tenents.lastname' | translate }}" [(ngModel)]="lastname">
+                        </div>
+                        <label class="col-sm-2 col-form-label">{{ 'tenants.address1' | translate }}</label>
+                        <div class="col-sm-4">
+                            <input type="text" class="form-control" id="txtaddress1"
+                                [ngModelOptions]="{standalone: true}"
+                                placeholder="{{  'tenents.address1' | translate }}" [(ngModel)]="address1">
+                        </div>
+                    </div>
+                    <div class="form-group row col-lg-12">
+                        <label class="col-sm-2 col-form-label">{{ 'tenants.city' | translate }}</label>
+                        <div class="col-sm-4">
+                            <input type="text" class="form-control" id="txtcity" [ngModelOptions]="{standalone: true}"
+                                placeholder="{{  'tenents.city' | translate }}" [(ngModel)]="city">
+                        </div>
+                        <label class="col-sm-2 col-form-label">{{ 'tenants.state' | translate }}</label>
+                        <div class="col-sm-4">
+                            <input type="text" class="form-control" id="txtstate" [ngModelOptions]="{standalone: true}"
+                                placeholder="{{  'tenents.state' | translate }}" [(ngModel)]="state">
+                        </div>
+                    </div>
+                    <div class="form-group row col-lg-12">
+                        <label class="col-sm-2 col-form-label">{{ 'tenants.zipcode' | translate }}</label>
+                        <div class="col-sm-4">
+                            <input type="text" class="form-control" id="txtzipcode"
+                                [ngModelOptions]="{standalone: true}" placeholder="{{'tenents.zipcode' | translate }}"
+                                [(ngModel)]="zipcode">
+                        </div>
+                        <label for="txtemail" class="col-sm-2 col-form-label">{{ 'tenants.email' | translate }}</label>
+                        <div class="col-sm-4">
+                            <input type="text" class="form-control" id="txtemail"
+                                placeholder="{{'tenents.email' | translate }}" [(ngModel)]="email" required="required"
+                                formControlName="remail" [ngClass]="{'is-invalid': usersubmitted && r.remail.errors }">
+                            <div *ngIf="usersubmitted && r.remail.errors" class="invalid-feedback">
+                                <div *ngIf="r.remail.errors.required" class="invalid-tooltip">Email is required</div>
+                                <div *ngIf="r.remail.errors.email" class="invalid-tooltip">Email must be a
+                                    valid email address</div>
+                            </div>
+                        </div>
+
+                    </div>
+
+
+                    <div class="form-group row col-lg-12">
+                        <label class="col-sm-2 col-form-label">{{ 'tenents.mobilenumber' | translate }}</label>
+                        <div class="col-sm-4">
+                            <input type="text" id="txtmobilenumber" class="form-control"
+                                [ngModelOptions]="{standalone: true}"
+                                placeholder="{{  'tenents.mobilenumber' | translate }}" [(ngModel)]="mobilenumber">
+                        </div>
+                        <label for="active" class="col-sm-2 col-form-label">{{ 'tenents.active' | translate }}</label>
+                        <div class="col-sm-4" style="margin-top: 6px;">
+                            <input type="checkbox" id="userchkactive">
+                        </div>
+                    </div>
+                    <div class="form-group row col-lg-12">
+                        <label class="col-sm-2 col-form-label">{{ 'tenents.parkingbay' | translate }}</label>
+                        <div class="col-sm-4">
+                            <input type="text" id="txtparkingbay" class="form-control"
+                                [ngModelOptions]="{standalone: true}"
+                                placeholder="{{  'tenents.parkingbay' | translate }}" [(ngModel)]="parkingbay">
+                        </div>
+                        <label class="col-sm-2 col-form-label">{{ 'tenents.bayno' | translate }}</label>
+                        <div class="col-sm-4">
+                            <input type="text" id="txtbayno" class="form-control" [ngModelOptions]="{standalone: true}"
+                                placeholder="{{  'tenents.bayno' | translate }}" [(ngModel)]="bayno">
+                        </div>
+
+                    </div>
+
+                    <div style="display: flex;">
+                        <button class="btn btn-primary d-block mt-3 currentState" id="txtsubmit" type="submit">
+                            {{ 'user.submit'  | translate  }}
+                        </button>
+                        <!-- <button type="submit" class="btn btn-primary d-block mt-3">{{ 'role.submit' | translate }}</button> -->
+                        <button type="submit" style="margin-left: 15px;" class="btn btn-primary d-block mt-3"
+                            (click)="canceladdtenet()">{{ 'user.cancel' | translate }}</button>
+                    </div>
+                </form>
+
+            </div>
+        </div>
+    </div>
+</div>
+<simple-notifications></simple-notifications>
+<ngx-spinner bdColor="rgba(0,0,0,0.8)" size="medium" color="#fff" type="ball-clip-rotate-multiple" [fullScreen]="true">
+    <p style="color: white"> Please wait... </p>
+</ngx-spinner>

@@ -1,0 +1,124 @@
+<div class="row">
+    <div class="col-12">
+
+        <div class="card mb-4">
+            <div class="card-body">
+                <h5 class="mb-4">{{ 'project.edit-title' | translate }}</h5>
+
+                <form [formGroup]="projectForm">
+
+                    <div class="form-group row col-lg-12">
+                        <label class="col-sm-2 col-form-label">{{ 'project.code' | translate }}</label>
+                        <div class="col-sm-4">
+                            <input type="text" id="txtprojectcode" class="form-control"
+                                placeholder="{{ 'project.code' | translate }}" [(ngModel)]="projectcode"
+                                required="required" formControlName="rprojectcode"
+                                [ngClass]="{'is-invalid': projectsubmitted && r.rprojectcode.errors }">
+                            <div *ngIf="projectsubmitted && r.rprojectcode.errors" class="invalid-feedback">
+                                <div *ngIf="r.rprojectcode.errors.required" class="invalid-tooltip">Project code is
+                                    required
+                                </div>
+                            </div>
+                        </div>
+                        <label class="col-sm-2 col-form-label">{{ 'project.name'  | translate }}</label>
+                        <div class="col-sm-4">
+                            <input type="text" class=" form-control" id="txtprojectname" [(ngModel)]="projectname"
+                                required="required" placeholder="{{ 'project.name' | translate }}"
+                                formControlName="rprojectname"
+                                [ngClass]="{'is-invalid': projectsubmitted && r.rprojectname.errors }">
+                            <div *ngIf="projectsubmitted && r.rprojectname.errors" class="invalid-feedback">
+                                <div *ngIf="r.rprojectname.errors.required" class="invalid-tooltip">Project name is
+                                    required
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-group row col-lg-12" style="margin-top: 45px;">
+                        <label class="col-sm-2 col-form-label">{{ 'project.datasource' | translate }}</label>
+                        <ul class="col-lg-10 list-unstyled mb-5">
+                            <li class="chkst" *ngFor="let datasource of datasources">
+                                <div class="custom-control custom-radio mb-2">
+                                    <input [disabled]="isdisabled" name="customRadio" type="radio"
+                                        class="custom-control-input" [ngModelOptions]="{standalone: true}" [(ngModel)]="datasourceSelected" value="{{datasource.id}}"  id="radio_{{datasource.id}}">
+                                    <label class="custom-control-label"
+                                        for="radio_{{datasource.id}}">{{datasource.name}}</label>
+                                </div>
+                            </li>
+
+                        </ul>
+                    </div>
+                    <div class="form-group row col-lg-12">
+                        <label class="col-sm-2 col-form-label">{{ 'project.datatype' | translate }}</label>
+                        <ul class="col-lg-10 list-unstyled mb-5">
+                            <li class="chkst" *ngFor="let datatype of datatypes">
+                                <div class="custom-control custom-radio mb-2">
+                                    <input type="radio" name="chkradio" (click)="BindAnnotationTypes(datatype.id)"
+                                        class="custom-control-input" [ngModelOptions]="{standalone: true}" [disabled]="isdisabled" [(ngModel)]="datatypeSelected" value="{{datatype.id}}" id="chk_{{datatype.id}}">
+                                    <label class="custom-control-label"
+                                        for="chk_{{datatype.id}}">{{datatype.name}}</label>
+                                </div>
+                            </li>
+                        </ul>
+                    </div>
+                   
+                    <div class="form-group row col-lg-12" [ngStyle]="{'display':annotationdiv}">
+                        <label class="col-sm-2 col-form-label">{{ 'project.annotationtype' | translate }}</label>
+                        <ul class="col-lg-10 list-unstyled mb-5">
+                            <li class="chkst" *ngFor="let annotationtype of annotationtypes">
+                                <div class="custom-control custom-checkbox mb-2">
+                                    
+                                    <input type="checkbox"  class="custom-control-input"
+                                        id="annotation_{{annotationtype.id}}"  [disabled]="isdisabled">
+                                    <label class="custom-control-label"
+                                        for="annotation_{{annotationtype.id}}">{{annotationtype.name}}</label>
+                                </div>
+                            </li>
+
+                        </ul>
+                    </div>
+                    <div class="form-group row col-lg-12">
+                        <label  class="col-sm-2 col-form-label">{{ 'project.status' | translate }}</label>
+                        <div class="col-sm-4">
+                            <select id="txtstatusId"  class="form-control" [(ngModel)]="statusId"
+                                required="required" formControlName="rstatusId"
+                                [ngClass]="{'is-invalid': projectsubmitted && r.rstatusId.errors }">
+                                <option value="">Select</option>
+                                <option *ngFor="let status of statuses" [value]="status.id">{{status.name}}
+                                </option>
+                            </select>
+                            <div *ngIf="projectsubmitted && r.rstatusId.errors" class="invalid-feedback">
+                                <div *ngIf="r.rstatusId.errors.required" class="invalid-tooltip">Status is required
+                                </div>
+                            </div>
+                        </div>
+                        <label  class="col-sm-2 col-form-label">{{ 'project.team' | translate }}</label>
+                        <div class="col-sm-4">
+                            <select id="txtteamId" class="form-control" [(ngModel)]="teamId"
+                                required="required" formControlName="rteamId"
+                                [ngClass]="{'is-invalid': projectsubmitted && r.rteamId.errors }">
+                                <option value="">Select</option>
+                                <option *ngFor="let team of teams" [value]="team.id">{{team.name}}
+                                </option>
+                            </select>
+                            <div *ngIf="projectsubmitted && r.rteamId.errors" class="invalid-feedback">
+                                <div *ngIf="r.rteamId.errors.required" class="invalid-tooltip">Team is required
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div style="display: flex;">
+                        <button class="btn btn-primary d-block mt-3 currentState" id="txtsubmit" type="submit"
+                            (click)="UpdateProject()">
+                            {{ 'project.submit'  | translate  }}
+                        </button>
+                        <button type="submit" style="margin-left: 15px;" class="btn btn-primary d-block mt-3"
+                            (click)="canceladdproject()">{{ 'project.cancel' | translate }}</button>
+                    </div>
+                </form>
+
+            </div>
+        </div>
+    </div>
+</div>
+<simple-notifications></simple-notifications>
+<ngx-spinner bdColor="rgba(0,0,0,0.8)" size="medium" color="#fff" type="ball-clip-rotate-multiple" [fullScreen]="true"><p style="color: white"> Please wait... </p></ngx-spinner>

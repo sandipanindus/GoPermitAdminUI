@@ -1,0 +1,38 @@
+@media (max-width: 767px){
+    .authcardst{
+        width: 100% !important;
+    }
+    .logo_st{
+        height: 65px;
+        width:270px !important
+    }
+    .email_st{
+        margin-top: -36px !important;
+        margin-left: 50px !important;
+    }
+    .maindivcls{
+        margin-top: 50px !important;
+    }
+}
+
+.login-card {
+    margin: auto;
+    width: 60%;
+    background: rgb(245 242 242 / 60%);
+    color: #333 !important;
+    box-shadow: 0 0px 56px rgba(0, 0, 0, 0.3);
+}
+
+@media screen and (max-width: 991px) {
+    .login-card {
+        width: 80%;
+    }
+}
+
+@media screen and (max-width: 1025px) {
+    .login-card {
+        width: 80%;
+    }
+}
+
+

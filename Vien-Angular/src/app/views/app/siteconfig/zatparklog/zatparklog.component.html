@@ -1,0 +1,121 @@
+<div class="row">
+  <div class="col-12">
+    <div class="loading" style="display: none;" id="loading"></div>
+    <app-heading></app-heading>
+    <div class="top-right-button-container text-zero" style="display: flex;">
+      <div class="mr-2 mt-2">
+        <span class="text-muted text-small">Per Page </span>
+        <span dropdown class="d-inline-block position-relative">
+          <button class="btn btn-outline-dark btn-xs dropdown-toggle" type="button" data-toggle="dropdown"
+            aria-haspopup="true" aria-expanded="false" dropdownToggle>
+            {{itemsPerPage}}
+          </button>
+          <div class="dropdown-menu dropdown-menu-right dropdown-menu-sm text-right" *dropdownMenu>
+            <li role="menuitem" *ngFor="let item of itemOptionsPerPage"><a
+                [ngClass]="item === itemsPerPage ? 'dropdown-item active' : 'dropdown-item'"
+                (click)="onChangeItemsPerPage(item)">{{item}}</a></li>
+          </div>
+        </span>
+      </div>
+      <div *ngIf="add==true">
+        
+        <button class="btn btn-primary btn-lg my-1 ml-1" (click)="Clear()">Clear</button>
+        <button class="btn btn-primary btn-lg my-1 ml-1" (click)="SearchZatpark()">Search</button>
+      </div>
+
+
+    </div>
+
+    <form>
+      <div class="row justify-content-center mb-3 ml-3 input_cls form-group">
+        <div class="col-md-2 pl-0">
+          <input type="text" class="form-control my-3" [(ngModel)]="sitename" [ngModelOptions]="{standalone: true}"
+            placeholder="Site Name" style="border: none;border-bottom: 1px solid;" />
+        </div>
+        <div class="col-md-2 pl-0">
+          <input type="text" class="form-control my-3" [(ngModel)]="tenant" [ngModelOptions]="{standalone: true}"
+            placeholder="Tenant" style="border: none;border-bottom: 1px solid;" />
+        </div>
+        <div class="col-md-2 pl-0">
+          <input type="text" class="form-control my-3" placeholder="Bay Name" [(ngModel)]="bayname"
+            [ngModelOptions]="{standalone: true}" style="border: none;border-bottom: 1px solid;" />
+        </div>
+        <div class="col-md-2 pl-0">
+          <input type="text" style="margin-top: 15px;" class="form-control" placeholder="From Date" readonly="true"
+            bsDatepicker [container]="'html'" [ngModelOptions]="{standalone: true}"
+            [bsConfig]="{ adaptivePosition: true, dateInputFormat: 'DD-MM-YYYY' }" [(ngModel)]="fromdate" />
+        </div>
+        <div class="col-md-2 pl-0">
+          <input type="text" style="margin-top: 15px;" class="form-control" placeholder="To Date" readonly="true"
+            bsDatepicker [container]="'html'" [ngModelOptions]="{standalone: true}"
+            [bsConfig]="{ adaptivePosition: true, dateInputFormat: 'DD-MM-YYYY' }" [(ngModel)]="todate" />
+        </div>
+      </div>
+    </form>
+  </div>
+</div>
+
+<div class="row">
+  <div class="col-md-12 mb-4">
+    <div class="card scroll">
+      <div class="card-body">
+
+
+        <table class="table table-striped">
+          <thead>
+            <tr>
+              <th>Sno</th>
+              <th scope="col" (click)="onSortClick($event,'siteName')" class="up">{{ 'zatpark.sitename' | translate}}</th>
+              <th scope="col" (click)="onSortClick($event,'vrm')" class="up">{{ 'zatpark.vrm' | translate}}</th>
+              <th scope="col" (click)="onSortClick($event,'tenant')" class="up">{{ 'zatpark.tenant' | translate}}</th>
+              <th scope="col" (click)="onSortClick($event,'bayName')" class="up">{{ 'zatpark.bayname' | translate}}</th>
+              <th scope="col" (click)="onSortClick($event,'request')" class="up">{{ 'zatpark.request' | translate}}</th>
+              <th scope="col" (click)="onSortClick($event,'fromDate')" class="up">{{ 'zatpark.fromdate' | translate}}</th>
+              <th scope="col" (click)="onSortClick($event,'toDate')" class="up">{{ 'zatpark.todate' | translate}}</th>
+              <th scope="col" (click)="onSortClick($event,'zatparkResponse')" class="up">{{ 'zatpark.response' | translate}}</th>
+            
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let zatparklog of zatparklogs let i=index">
+
+              <th>{{i+1}}</th>
+              <td>{{zatparklog.siteName}}</td>
+              <td>{{zatparklog.vrm}}</td>
+              <td>{{zatparklog.tenant}}</td>
+              <td>{{zatparklog.bayName}}</td>
+              <td>{{zatparklog.request}}</td>
+              <td>{{zatparklog.fromDate}}</td>
+              <td>{{zatparklog.toDate}}</td>
+              <td>{{zatparklog.zatparkResponse}}</td>
+            
+            </tr>
+
+          </tbody>
+        </table>
+        <div class="w-100 d-flex justify-content-center" *ngIf="showpage">
+          <pagination [rotate]="true" [(ngModel)]="currentPage" (pageChanged)="pageChanged($event)"
+            class="justify-content-center" [totalItems]="totalItems" [itemsPerPage]="itemsPerPage" [maxSize]="10"
+            [customNextTemplate]="nextTemplate" [customPreviousTemplate]="prevTemplate">
+          </pagination>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</div>
+<ng-template #nextTemplate let-disabled="disabled" let-currentPage="currentPage">
+  <i class='simple-icon-arrow-right'></i>
+</ng-template>
+<ng-template #prevTemplate let-disabled="disabled" let-currentPage="currentPage">
+  <i class='simple-icon-arrow-left'></i>
+</ng-template>
+
+
+<ng-template #loading>
+  <div class="loading"></div>
+</ng-template>
+
+<simple-notifications></simple-notifications>
+
+<br>

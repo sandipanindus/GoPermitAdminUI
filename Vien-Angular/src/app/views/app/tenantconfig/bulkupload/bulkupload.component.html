@@ -1,0 +1,70 @@
+<div class="row">
+    <div class="col-12">
+
+        <div class="card mb-4">
+            <div class="card-body">
+                <h5 class="mb-4">{{ 'bulkupload.add-new-title' | translate }}</h5>
+
+
+                    <div class="form-group row col-lg-12">
+                        <label for="txtfirstname"
+                            class="col-sm-2 col-form-label">{{ 'bulkupload.file' | translate }}</label>
+                        <div class="col-sm-4">
+                            <input type="file" class="form-control" id="txtbulkupload"
+                                placeholder="{{'bulkupload.file' | translate }}" (change)="addfile($event)"
+                                accept=".csv,application/vnd.openxmlformats-officedocument.spreadsheetml.sheet, application/vnd.ms-excel">
+
+                        </div>
+                       <div class="m-2">
+                           <a href="assets/img/sampletenant.xlsx" download>Samplefile Download</a>
+                       </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-md-12" style="margin-top: 20px;">
+                            <table class="table table-hover table-responsive" [ngStyle]="{'display':filerecordsdiv}">
+                                <thead>
+                                    <tr>
+                                        <th scope="col">First Name</th>
+                                        <th scope="col">Last Name</th>
+                                        <th scope="col">Site Name</th>
+                                        <th scope="col">Address</th>
+                                        <th scope="col">City</th>
+                                        <th scope="col">State</th>
+                                        <th scope="col">Zipcode</th>
+                                        <th scope="col">Mobile Number</th>
+                                        <th scope="col">Email</th>
+                                        <th scope="col">ParkingBay</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr *ngFor="let filelist of filelists">
+                                        <td>{{filelist.FirstName}}</td>
+                                        <td>{{filelist.LastName}}</td>
+                                        <td>{{filelist.SiteName}}</td>
+                                        <td>{{filelist.Address}}</td>
+                                        <td>{{filelist.City}}</td>
+                                        <td>{{filelist.State}}</td>
+                                        <td>{{filelist.Zipcode}}</td>
+                                        <td>{{filelist.MobileNumber}}</td>
+                                        <td>{{filelist.Email}}</td>
+                                        <td>{{filelist.ParkingBayNo}}</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                    <div *ngIf="filelists.length>0" style="float: right;">
+                        <button class="btn btn-primary d-block mt-3 currentState" type="submit" (click)="SaveData()">
+                            {{ 'bulkupload.submit'  | translate  }}
+                        </button>
+                    </div>
+
+            </div>
+        </div>
+    </div>
+</div>
+<simple-notifications></simple-notifications>
+<ngx-spinner bdColor="rgba(0,0,0,0.8)" size="medium" color="#fff" type="ball-clip-rotate-multiple" [fullScreen]="true">
+    <p style="color: white"> Please wait... </p>
+</ngx-spinner>

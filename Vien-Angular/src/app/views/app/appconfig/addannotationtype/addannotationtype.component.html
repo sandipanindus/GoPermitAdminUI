@@ -1,0 +1,56 @@
+<div class="row">
+    <div class="col-12">
+
+        <div class="card mb-4">
+            <div class="card-body">
+                <h5 class="mb-4">{{ 'annotationtype.add-new-title' | translate }}</h5>
+
+                <form [formGroup]="annotationtypeForm">
+
+                    <div class="form-group row col-lg-12">
+                        <label class="col-sm-2 col-form-label">{{ 'annotationtype.name' | translate }}</label>
+                        <div class="col-sm-4">
+                            <input id="txtannotationtype" type="text" class="form-control"
+                                placeholder="{{ 'annotationtype.name' | translate }}" [(ngModel)]="annotationtypename"
+                                required="required" formControlName="dname"
+                                [ngClass]="{'is-invalid': annotationtypesubmitted && r.dname.errors }">
+
+                            <div *ngIf="annotationtypesubmitted && r.dname.errors" class="invalid-feedback">
+                                <div *ngIf="r.dname.errors.required" class="invalid-tooltip">Annotation type name is
+                                    required
+                                </div>
+                            </div>
+                        </div>
+                        <label class="col-sm-2 col-form-label">{{ 'annotationtype.datatypename' | translate }}</label>
+                        <div class="col-sm-4">
+                            <select id="txtdatatypename" class="form-control" [(ngModel)]="datatypeId"
+                                required="required" formControlName="ddatatypeid"
+                                [ngClass]="{'is-invalid': annotationtypesubmitted && r.ddatatypeid.errors }">
+                                <option value="">Select</option>
+                                <option *ngFor="let datatype of datatypes" [value]="datatype.id">{{datatype.name}}
+                                </option>
+                            </select>
+                            <div *ngIf="annotationtypesubmitted && r.ddatatypeid.errors" class="invalid-feedback">
+                                <div *ngIf="r.ddatatypeid.errors.required" class="invalid-tooltip">Datatype is required
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                  
+
+                    <div style="display: flex;">
+                        <button class="btn btn-primary d-block mt-3 currentState" id="txtsubmit" type="submit"
+                            (click)="SaveAnnotationType()">
+                            {{ 'annotationtype.submit'  | translate  }}
+                        </button>
+                        <button type="submit" style="margin-left: 15px;" class="btn btn-primary d-block mt-3"
+                            (click)="canceladdannotationtype()">{{ 'annotationtype.cancel' | translate }}</button>
+                    </div>
+                </form>
+
+            </div>
+        </div>
+    </div>
+</div>
+<simple-notifications></simple-notifications>
+<ngx-spinner bdColor="rgba(0,0,0,0.8)" size="medium" color="#fff" type="ball-clip-rotate-multiple" [fullScreen]="true"><p style="color: white"> Please wait... </p></ngx-spinner>

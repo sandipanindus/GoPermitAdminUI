@@ -1,0 +1,365 @@
+<div class="row">
+  <div class="col-12">
+
+    <div class="card mb-4">
+      <div class="card-body">
+        <h5 class="mb-4">{{ 'importdata.edit-title' | translate }}</h5>
+
+        <form [formGroup]="importdataForm">
+
+          <div class="form-group row col-lg-12">
+
+            <label class="col-sm-2 col-form-label">{{ 'importdata.project' | translate }}</label>
+            <div class="col-sm-4">
+              <select id="txtprojectId" class="form-control" [(ngModel)]="projectId" required="required"
+                formControlName="dprojectId" (change)="BindDataSource()"
+                [ngClass]="{'is-invalid': importdatasubmitted && r.dprojectId.errors }">
+                <option value="">Select</option>
+                <option *ngFor="let project of projects" [value]="project.id">{{project.name}}
+                </option>
+              </select>
+              <div *ngIf="importdatasubmitted && r.dprojectId.errors" class="invalid-feedback">
+                <div *ngIf="r.dprojectId.errors.required" class="invalid-tooltip">Project is required
+                </div>
+              </div>
+            </div>
+            <label class="col-sm-2 col-form-label">{{ 'importdata.datasetname' | translate }}</label>
+            <div class="col-sm-4">
+              <input type="text" class="form-control" placeholder="{{ 'importdata.datasetname' | translate }}"
+                [(ngModel)]="datasetname" required="required" id="txtdatasetname" formControlName="ddatasetname"
+                [ngClass]="{'is-invalid': importdatasubmitted && r.ddatasetname.errors }">
+              <div *ngIf="importdatasubmitted && r.ddatasetname.errors" class="invalid-feedback">
+                <div *ngIf="r.ddatasetname.errors.required" class="invalid-tooltip">Dataset name is
+                  required
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="form-group row col-lg-12" [ngStyle]="{'display':datasourcediv}">
+            <label class="col-sm-2 col-form-label">{{ 'importdata.datasource' | translate }}</label>
+            <div class="col-sm-4">
+              <label><span class="form-control">{{datasourcename}}</span></label>
+            </div>
+            <label class="col-sm-2 col-form-label">{{ 'importdata.datatype' | translate }}</label>
+            <div class="col-sm-4">
+              <label><span class="form-control">{{datatypename}}</span></label>
+            </div>
+          </div>
+          <div class="form-group row col-lg-12 rdst" [ngStyle]="{'display':imageuploaddiv}">
+            <ul class="col-lg-10 list-unstyled mb-5">
+              <li class="chkst">
+                <div class="custom-control custom-radio">
+                  <input type="radio" id="customRadio1" name="customRadio" class="custom-control-input"
+                    [disabled]="disabled" (click)="OpenZipFileControl()">
+                  <label class="custom-control-label" for="customRadio1">Upload Images through Zip
+                    file</label>
+                </div>
+                <div class="custom-control custom-radio rd-st">
+                  <input type="radio" id="customRadio2" name="customRadio" class="custom-control-input"
+                    [disabled]="disabled" (click)="OpenNormalFileControl()" checked="true">
+                  <label class="custom-control-label" for="customRadio2">Upload Images through single
+                    or multiple</label>
+                </div>
+              </li>
+            </ul>
+          </div>
+          <div class="form-group row col-lg-12" [ngStyle]="{'display':fileuploadzipdiv}">
+            <label class="col-sm-2 col-form-label">{{ 'importdata.filezipupload' | translate }}</label>
+            <div class="col-sm-4">
+              <input type="file" id="txtfilezip" [disabled]="disabled" class="form-control" accept=".zip"
+                placeholder="{{ 'importdata.fileupload' | translate }}" id="txtfileuploadzip" name="uploadedZipFile"
+                #fileZipInput value="" (change)="onSelectZipFile($event.target.files)">
+            </div>
+          </div>
+          <div class="form-group row col-lg-12" [ngStyle]="{'display':fileuploadnormaldiv}">
+            <label class="col-sm-2 col-form-label">{{ 'importdata.filenormalupload' | translate }}</label>
+            <div class="col-sm-4">
+              <input type="file" id="txtnormalfile" [disabled]="disabled" multiple class="form-control"
+                [accept]="acceptfiles" placeholder="{{ 'importdata.fileupload' | translate }}" id="txtfileuploadnormal"
+                name="uploadedNormalFile" #fileNormalInput value="" (change)="onSelectNormalFile($event.target.files)">
+            </div>
+          </div>
+          <form [formGroup]="importdataFtpForm">
+            <div class="form-group row col-lg-12" [ngStyle]="{'display':importdataftpdiv}">
+              <label class="col-sm-2 col-form-label">{{ 'importdata.ftpurl' | translate }}</label>
+              <div class="col-sm-4">
+                <input type="text" class="form-control" id="txtftpurl"
+                  placeholder="{{ 'importdata.ftpurl' | translate }}" [(ngModel)]="ftpurl" required="required"
+                  id="txtftpurl" formControlName="dftpurl"
+                  [ngClass]="{'is-invalid': importdataftpsubmitted && f.dftpurl.errors }">
+                <div *ngIf="importdataftpsubmitted && f.dftpurl.errors" class="invalid-feedback">
+                  <div *ngIf="f.dftpurl.errors.required" class="invalid-tooltip">Ftp Url is
+                    required
+                  </div>
+                </div>
+              </div>
+              <label class="col-sm-2 col-form-label">{{ 'importdata.ftpportno' | translate }}</label>
+              <div class="col-sm-4">
+                <input type="text" class="form-control" id="txtftpportno"
+                  placeholder="{{ 'importdata.ftpportno' | translate }}" [(ngModel)]="ftpportno" required="required"
+                  id="txtftpportno" formControlName="dftpportno"
+                  [ngClass]="{'is-invalid': importdataftpsubmitted && f.dftpportno.errors }">
+                <div *ngIf="importdataftpsubmitted && f.dftpportno.errors" class="invalid-feedback">
+                  <div *ngIf="f.dftpportno.errors.required" class="invalid-tooltip">Ftp PortNo is
+                    required
+                  </div>
+                </div>
+              </div>
+
+            </div>
+            <div class="form-group row col-lg-12" [ngStyle]="{'display':importdataftpdiv}">
+              <label class="col-sm-2 col-form-label">{{ 'importdata.ftpusername' | translate }}</label>
+              <div class="col-sm-4">
+                <input type="text" class="form-control" id="txtftpusername"
+                  placeholder="{{ 'importdata.ftpusername' | translate }}" [(ngModel)]="ftpusername" required="required"
+                  id="txtftpusername" formControlName="dftpusername"
+                  [ngClass]="{'is-invalid': importdataftpsubmitted && f.dftpusername.errors }">
+                <div *ngIf="importdataftpsubmitted && f.dftpusername.errors" class="invalid-feedback">
+                  <div *ngIf="f.dftpusername.errors.required" class="invalid-tooltip">Ftp Username is
+                    required
+                  </div>
+                </div>
+              </div>
+              <label class="col-sm-2 col-form-label">{{ 'importdata.ftppassword' | translate }}</label>
+              <div class="col-sm-4">
+                <input type="password" class="form-control" id="txtftppassword"
+                  placeholder="{{ 'importdata.ftppassword' | translate }}" [(ngModel)]="ftppassword" required="required"
+                  id="txtftppassword" formControlName="dftppassword"
+                  [ngClass]="{'is-invalid': importdataftpsubmitted && f.dftppassword.errors }">
+                <div *ngIf="importdataftpsubmitted && f.dftppassword.errors" class="invalid-feedback">
+                  <div *ngIf="f.dftppassword.errors.required" class="invalid-tooltip">Ftp Password is
+                    required
+                  </div>
+                </div>
+              </div>
+
+            </div>
+          </form>
+          <div style="display: flex;">
+            <button class="btn btn-primary d-block mt-3 currentState" id="txtsubmit" type="submit"
+              (click)="SaveImportData()">
+              {{ 'importdata.submit'  | translate  }}
+            </button>
+            <button type="submit" style="margin-left: 15px;" class="btn btn-primary d-block mt-3"
+              (click)="canceladdimportdata()">{{ 'importdata.cancel' | translate }}</button>
+          </div>
+        </form>
+
+      </div>
+    </div>
+  </div>
+</div>
+<simple-notifications></simple-notifications>
+<ngx-spinner bdColor="rgba(0,0,0,0.8)" size="medium" color="#fff" type="ball-clip-rotate-multiple" [fullScreen]="true">
+  <p style="color: white"> Please wait... </p>
+</ngx-spinner>
+
+<div [ngStyle]="{'display':griddiv}">
+  <div class="row">
+    <div class="col-12">
+
+      <div class="top-right-button-container text-zero" style="margin-left: 10px; margin-top: -10px;">
+        <div class="btn-group" dropdown>
+          <div class="btn btn-primary btn-lg pl-4 pr-0 check-button">
+            <label class="custom-control custom-checkbox mb-0 d-inline-block">
+              <input type="checkbox" class="custom-control-input" [checked]="selectAllState==='checked'"
+                [indeterminate]="selectAllState === 'indeterminate'" (change)="selectAll($event)">
+              <span class="custom-control-label">&nbsp;</span>
+            </label>
+          </div>
+          <button id="button-split" type="button" dropdownToggle
+            class="btn btn-primary dropdown-toggle dropdown-toggle-split" aria-controls="dropdown-split">
+            <span class="caret"></span>
+          </button>
+          <ul id="dropdown-split" *dropdownMenu class="dropdown-menu dropdown-menu-right" role="menu"
+            aria-labelledby="button-split">
+            <li role="menuitem"><a class="dropdown-item" href="javascript:;"
+                (click)="deletemultiplefile()">{{ 'pages.delete' | translate }}</a></li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="display-options-container">
+        <a class="btn pt-0 pl-0 d-inline-block d-md-none c-pointer" data-toggle="collapse"
+          (click)="displayOptionsCollapsed = !displayOptionsCollapsed" role="button" aria-expanded="true"
+          aria-controls="displayOptions">
+          {{ 'pages.display-options' | translate}} {{' '}}
+          <i class="simple-icon-arrow-down align-middle"></i>
+        </a>
+        <div id="displayOptions" [collapse]="displayOptionsCollapsed" class="collapse dont-collapse-sm">
+          <span *ngIf="showDisplayMode" class="mr-3 mb-2 d-inline-block float-md-left">
+            <a href="javascript:;" [ngClass]="{'mr-2 view-icon':true , 'active' : displayMode==='list'}"
+              (click)="onSelectDisplayMode('list')">
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 19 19">
+                <path class="view-icon-svg" d="M17.5,3H.5a.5.5,0,0,1,0-1h17a.5.5,0,0,1,0,1Z" />
+                <path class="view-icon-svg" d="M17.5,10H.5a.5.5,0,0,1,0-1h17a.5.5,0,0,1,0,1Z" />
+                <path class="view-icon-svg" d="M17.5,17H.5a.5.5,0,0,1,0-1h17a.5.5,0,0,1,0,1Z" />
+              </svg>
+            </a>
+            <a href="javascript:;" [ngClass]="{'mr-2 view-icon':true , 'active' : displayMode==='thumb'}"
+              (click)="onSelectDisplayMode('thumb')">
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 19 19">
+                <path class="view-icon-svg" d="M17.5,3H6.5a.5.5,0,0,1,0-1h11a.5.5,0,0,1,0,1Z" />
+                <path class="view-icon-svg"
+                  d="M3,2V3H1V2H3m.12-1H.88A.87.87,0,0,0,0,1.88V3.12A.87.87,0,0,0,.88,4H3.12A.87.87,0,0,0,4,3.12V1.88A.87.87,0,0,0,3.12,1Z" />
+                <path class="view-icon-svg"
+                  d="M3,9v1H1V9H3m.12-1H.88A.87.87,0,0,0,0,8.88v1.24A.87.87,0,0,0,.88,11H3.12A.87.87,0,0,0,4,10.12V8.88A.87.87,0,0,0,3.12,8Z" />
+                <path class="view-icon-svg"
+                  d="M3,16v1H1V16H3m.12-1H.88a.87.87,0,0,0-.88.88v1.24A.87.87,0,0,0,.88,18H3.12A.87.87,0,0,0,4,17.12V15.88A.87.87,0,0,0,3.12,15Z" />
+                <path class="view-icon-svg" d="M17.5,10H6.5a.5.5,0,0,1,0-1h11a.5.5,0,0,1,0,1Z" />
+                <path class="view-icon-svg" d="M17.5,17H6.5a.5.5,0,0,1,0-1h11a.5.5,0,0,1,0,1Z" /></svg>
+            </a>
+            <a href="javascript:;" [ngClass]="{'mr-2 view-icon':true , 'active' : displayMode==='image'}"
+              (click)="onSelectDisplayMode('image')">
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 19 19">
+                <path class="view-icon-svg"
+                  d="M7,2V8H1V2H7m.12-1H.88A.87.87,0,0,0,0,1.88V8.12A.87.87,0,0,0,.88,9H7.12A.87.87,0,0,0,8,8.12V1.88A.87.87,0,0,0,7.12,1Z" />
+                <path class="view-icon-svg"
+                  d="M17,2V8H11V2h6m.12-1H10.88a.87.87,0,0,0-.88.88V8.12a.87.87,0,0,0,.88.88h6.24A.87.87,0,0,0,18,8.12V1.88A.87.87,0,0,0,17.12,1Z" />
+                <path class="view-icon-svg"
+                  d="M7,12v6H1V12H7m.12-1H.88a.87.87,0,0,0-.88.88v6.24A.87.87,0,0,0,.88,19H7.12A.87.87,0,0,0,8,18.12V11.88A.87.87,0,0,0,7.12,11Z" />
+                <path class="view-icon-svg"
+                  d="M17,12v6H11V12h6m.12-1H10.88a.87.87,0,0,0-.88.88v6.24a.87.87,0,0,0,.88.88h6.24a.87.87,0,0,0,.88-.88V11.88a.87.87,0,0,0-.88-.88Z" />
+              </svg>
+            </a>
+          </span>
+
+
+          <div class="d-inline-block" *ngIf="showSearch">
+            <div class="search-sm d-inline-block float-md-left mr-1 mb-1 align-top">
+              <input class="form-control" placeholder="Search" [disabled]="disabled" (keyup)="onSearchKeyUp($event)">
+            </div>
+          </div>
+          <div class="float-right" *ngIf="showItemsPerPage">
+            <span class="text-muted text-small">Per Page </span>
+            <span dropdown class="d-inline-block position-relative">
+              <button class="btn btn-outline-dark btn-xs dropdown-toggle" type="button" data-toggle="dropdown"
+                aria-haspopup="true" aria-expanded="false" dropdownToggle [disabled]="disabled">
+                {{itemsPerPage}}
+              </button>
+              <div class="dropdown-menu dropdown-menu-right dropdown-menu-sm text-right" *dropdownMenu>
+                <li role="menuitem" *ngFor="let item of itemOptionsPerPage"><a
+                    [ngClass]="item === itemsPerPage ? 'dropdown-item active' : 'dropdown-item'"
+                    (click)="onChangeItemsPerPage(item)">{{item}}</a></li>
+              </div>
+            </span>
+          </div>
+        </div>
+        <div class="separator mb-4"></div>
+      </div>
+    </div>
+  </div>
+
+
+
+  <context-menu #basicMenu>
+
+    <ng-template contextMenuItem let-item (execute)="onContextMenuClick('delete',$event.item)">
+      <i class="simple-icon-trash mr-1"></i><span>Delete</span>
+    </ng-template>
+  </context-menu>
+
+  <div class="row">
+    <div class="col-12 list" *ngIf="displayMode==='list'">
+      <div [ngClass]="{'card d-flex flex-row mb-3': true, 'active':isSelected(p)}" *ngFor="let p of data; let i=index"
+        [contextMenu]="basicMenu" [contextMenuSubject]="p">
+        <div class="d-flex flex-grow-1 min-width-zero">
+          <div
+            class="card-body align-self-center d-flex flex-column flex-md-row justify-content-between min-width-zero align-items-md-center">
+            <a class="list-item-heading mb-0 truncate w-40 w-xs-100" href="javascript:;">
+              {{p.title}}
+            </a>
+            <p class="mb-0 text-muted text-small w-15 w-xs-100">{{p.datasetname}}</p>
+            <p class="mb-0 text-muted text-small w-15 w-xs-100">{{p.date}}</p>
+            <div class="w-15 w-xs-100">
+              <span [class]="'badge badge-pill badge-'+ p.statusColor">{{p.status}}</span>
+            </div>
+          </div>
+          <label class="custom-control custom-checkbox mb-1 align-self-center pr-4">
+            <input type="checkbox" class="custom-control-input" [id]="'customCheck'+i" [checked]="isSelected(p)"
+              (change)="onSelect(p)" [disabled]="disabled">
+            <label class="custom-control-label" [for]="'customCheck'+i"></label>
+          </label>
+        </div>
+      </div>
+    </div>
+
+    <div class="col-12 list" *ngIf="displayMode==='thumb'">
+      <div [ngClass]="{'card d-flex flex-row mb-3': true, 'active':isSelected(p)}" *ngFor="let p of data; let i=index"
+        [contextMenu]="basicMenu" [contextMenuSubject]="p">
+        <a class="d-flex" href="javascript:;">
+          <img [src]="p.img" [alt]="p.title" class="list-thumbnail responsive border-0 card-img-left" />
+        </a>
+        <div class="pl-2 d-flex flex-grow-1 min-width-zero">
+          <div
+            class="card-body align-self-center d-flex flex-column flex-lg-row justify-content-between min-width-zero align-items-lg-center">
+            <a href="javascript:;" class="w-40 w-sm-100">
+              <p class="list-item-heading mb-0 truncate">{{p.title}}</p>
+            </a>
+            <p class="mb-0 text-muted text-small w-15 w-sm-100">{{p.datasetname}}</p>
+            <p class="mb-0 text-muted text-small w-15 w-sm-100">{{p.date}}</p>
+            <div class="w-15 w-sm-100">
+              <span [class]="'badge badge-pill badge-'+ p.statusColor">{{p.status}}</span>
+            </div>
+          </div>
+          <label class="custom-control custom-checkbox mb-1 align-self-center pr-4">
+            <input type="checkbox" class="custom-control-input" [id]="'customCheck'+i" [checked]="isSelected(p)"
+              (change)="onSelect(p)" [disabled]="disabled">
+            <label class="custom-control-label" [for]="'customCheck'+i"></label>
+          </label>
+        </div>
+      </div>
+    </div>
+
+    <div class="col-12 list" *ngIf="displayMode==='image'">
+      <div class="row">
+        <div class="col-xl-3 col-lg-4 col-12 col-sm-6 mb-4" *ngFor="let p of data; let i=index"
+          [contextMenu]="basicMenu" [contextMenuSubject]="p">
+          <div [ngClass]="{'card': true, 'active':isSelected(p)}">
+            <div class="position-relative">
+              <a href="javascript:;"><img class="card-img-top" [src]="p.img" [alt]="p.title"></a>
+              <span
+                [class]="'badge badge-pill position-absolute badge-top-left badge-'+ p.statusColor">{{p.status}}</span>
+            </div>
+            <div class="card-body">
+              <div class="row">
+                <div class="col-2">
+                  <div class="custom-control custom-checkbox pl-1">
+                    <label class="custom-control custom-checkbox  mb-0">
+                      <input type="checkbox" class="custom-control-input" [id]="'customCheck'+i"
+                        [checked]="isSelected(p)" (change)="onSelect(p)" [disabled]="disabled">
+                      <label class="custom-control-label" [for]="'customCheck'+i"></label>
+                    </label>
+                  </div>
+                </div>
+                <div class="col-10">
+                  <a href="javascript:;">
+                    <p class="list-item-heading mb-4 pt-1">{{p.title}}</p>
+                  </a>
+                  <footer>
+                    <p class="text-muted text-small mb-0 font-weight-light">{{p.date}}</p>
+                  </footer>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="col-12">
+      <pagination [totalItems]="totalItem" [itemsPerPage]="itemsPerPage" [rotate]="true" [maxSize]="5"
+        [(ngModel)]="currentPage" (pageChanged)="pageChanged($event)" class="justify-content-center"
+        [customNextTemplate]="nextTemplate" [customPreviousTemplate]="prevTemplate" [disabled]="disabled">
+      </pagination>
+    </div>
+  </div>
+
+  <ng-template #nextTemplate let-disabled="disabled" let-currentPage="currentPage">
+    <i class='simple-icon-arrow-right'></i>
+  </ng-template>
+  <ng-template #prevTemplate let-disabled="disabled" let-currentPage="currentPage">
+    <i class='simple-icon-arrow-left'></i>
+  </ng-template>
+</div>
