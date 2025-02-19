@@ -105,7 +105,7 @@
         <div dropdown>
           <button id="button-basic" dropdownToggle type="button" id="notificationButton"
             class="header-icon btn btn-empty" >
-            <i class="simple-icon-bell" (click)="Notification()"></i>
+            <i class="simple-icon-bell" style="font-size: 1.5em;" (click)="Notification()"></i>
             <span class="count">{{totalcount}}</span>
           </button>
 
@@ -171,7 +171,67 @@
         </div>
 
       </div>
+
+   
+<!-- 
+      <i class="simple-icon-user" style="font-size: 1.2em; "></i>
       <span style="text-transform: capitalize;" class="name">{{displayName}}</span>
+ -->
+
+
+
+ <!-- <div style="display: inline-flex; align-items: center; padding: 4px 10px; border: 2px solid #5a638f; border-radius: 999px; background-color: #f9f9f9;">
+  <i class="simple-icon-user" style="font-size: 1.2em; margin-right: 6px;"></i>
+  <span style="text-transform: capitalize; font-size: 0.9em; color: #333;" class="name">{{ displayName }}</span>
+</div> -->
+
+
+
+
+
+<div style="position: relative; display: inline-flex; align-items: center;">
+ 
+  <div
+    (click)="toggleDropdown()"
+    style="display: inline-flex; align-items: center; padding: 5px ; border: 2px solid #5a638f; border-radius: 999px; background-color: #f9f9f9; cursor: pointer;"
+  >
+  <!-- <span>
+    <i class="simple-icon-user" style="font-size: 1.2em; margin-right: 6px;" ></i>
+    </span> -->
+    <span style="text-transform: capitalize; font-size: 0.9em; color: #333;" class="name">
+      <i class="simple-icon-user" style="font-size: 1.5em" ></i> 
+    </span>
+  </div>
+
+  <div *ngIf="isDropdownOpen" class="dropdown-menu">
+    <p style="margin: 0 0 6px; font-size: 1.1em; cursor: default; color: #555;">
+     Welcome
+     
+      <span style="font-weight: bold; color: #333;">{{ displayName }}</span>
+    </p>
+  
+    <hr style="margin: 8px 0; border: 0; border-top: 1px solid #e0e0e0;" />
+
+    <p style="margin: 0; font-size: 1.2em; cursor: pointer; color: #5a638f;" (click)="changePassword()">
+      <i class="simple-icon-lock" style="font-size: 1.2em; margin-right: 6px;"></i>
+      Change Password
+    </p>
+
+    <hr style="margin: 8px 0; border: 0; border-top: 1px solid #e0e0e0;" />
+
+  
+    <p style="margin: 0 6px 6px 0; font-size: 1.2em; cursor: pointer; color: #d9534f;" (click)="logout()">
+      <i class="simple-icon-logout" style="font-size: 1.2em; margin-right: 6px; transform: scaleX(-1);"></i>
+      Logout
+    </p>
+  
+   
+  </div>
+  
+</div>
+
+      
+    
 
       <!-- <button class="header-icon btn btn-empty d-none d-sm-inline-block" type="button" style="display: none;" id="fullScreenButton"
         (click)="fullScreenClick()">
