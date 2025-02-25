@@ -28,8 +28,8 @@ export class AuthService {
   constructor(private afAuth: AngularFireAuth, private http: HttpClient) {
     // this.baseUrl = 'http://smartpermitapi.eisappserver.net/'
     //this.baseUrl = "http://smartpermitapi.fadelsoft.com/";
-  //   this.baseUrl = 'http://localhost:53846/';
- this.baseUrl = 'http://goapi.fadelsoft.co.in/'
+     this.baseUrl = 'http://localhost:53846/';
+ //this.baseUrl = 'http://goapi.fadelsoft.co.in/'
     // this.baseUrl='http://webapi.enhanceai.ca/'
     //this.baseUrl = 'https://api.gopermit.co.uk/';
   }
@@ -93,6 +93,9 @@ export class AuthService {
   SaveTenantUseruploads(formdata) {
     return this.http.post(this.baseUrl + "api/Admin/AddTenantUseruploads", formdata);
   }
+  SaveOperatorUser(formdata) {
+    return this.http.post(this.baseUrl + "api/Admin/addUser", formdata);
+  }
   public SaveBulkTenants(data): Observable<any> {
     return this.http.post(this.baseUrl + "api/Admin/AddBulkTenants", data, { responseType: 'text' });
   }
@@ -152,6 +155,9 @@ export class AuthService {
   }
   public GetUsers(PageNo, PageSize, Id, RoleId, SiteId): Observable<any> {
     return this.http.get(this.baseUrl + "api/Admin/GetUsers?PageNo=" + PageNo + "&PageSize=" + PageSize + "&LoginId=" + Id + "&RoleId=" + RoleId + "&SiteId=" + SiteId, { responseType: 'text' });
+  }
+  public Getopeartoruser(PageNo, PageSize, Id, RoleId, SiteId): Observable<any> {
+    return this.http.get(this.baseUrl + "api/Admin/Getopeartoruser?PageNo=" + PageNo + "&PageSize=" + PageSize + "&LoginId=" + Id + "&RoleId=" + RoleId + "&SiteId=" + SiteId, { responseType: 'text' });
   }
   public GetSearchUsers(PageNo, PageSize, FirstName, LastName, Email, SiteName, LoginId, RoleId, SiteId): Observable<any> {
     return this.http.get(this.baseUrl + "api/Admin/GetSearchUser?PageNo=" + PageNo + "&PageSize=" + PageSize + "&FirstName=" + FirstName + "&LastName=" + LastName + "&Email=" + Email + "&SiteName=" + SiteName + "&LoginId=" + LoginId + "&RoleId=" + RoleId + "&SiteId=" + SiteId, { responseType: 'text' });
@@ -254,6 +260,12 @@ export class AuthService {
   public GetSites(PageNo, PageSize, Id, RoleId, SiteId): Observable<any> {
     return this.http.get(this.baseUrl + "api/Admin/GetSites?PageNo=" + PageNo + "&PageSize=" + PageSize + "&LoginId=" + Id + "&RoleId=" + RoleId + "&SiteId=" + SiteId, { responseType: 'text' });
   }
+  public GetSiteUser(PageNo, PageSize, Id, RoleId, SiteId): Observable<any> {
+    return this.http.get(this.baseUrl + "api/Admin/GetSiteUser?PageNo=" + PageNo + "&PageSize=" + PageSize + "&LoginId=" + Id + "&RoleId=" + RoleId + "&SiteId=" + SiteId, { responseType: 'text' });
+  }
+  public Getoperators(PageNo, PageSize, Id, RoleId, SiteId): Observable<any> {
+    return this.http.get(this.baseUrl + "api/Operator/GetAllOperators?LoginId=" + Id + "&RoleId=" + RoleId , { responseType: 'text' });
+  }
 
   public Saveauditlog(obj): Observable<any> {
     return this.http.post(this.baseUrl + "api/Admin/auditlog", obj, { responseType: 'text' });
@@ -321,6 +333,9 @@ export class AuthService {
   public GetSiteById(Id): Observable<any> {
     return this.http.get(this.baseUrl + "api/Admin/GetSiteById?Id=" + Id, { responseType: 'text' });
   }
+  public Getoperatorbyid(Id): Observable<any> {
+    return this.http.get(this.baseUrl + "api/Operator/GetOperatorById?Id=" + Id, { responseType: 'text' });
+  }
   public GetLabelClassById(Id): Observable<any> {
     return this.http.get(this.baseUrl + "api/Admin/GetLabelClassById?Id=" + Id, { responseType: 'text' });
   }
@@ -329,6 +344,9 @@ export class AuthService {
   }
   public DeleteSite(Id): Observable<any> {
     return this.http.get(this.baseUrl + "api/Admin/SiteDelete?Id=" + Id, { responseType: 'text' });
+  }
+  public DeleteOperatorid(Id): Observable<any> {
+    return this.http.delete(this.baseUrl + "api/Operator/DeleteOperator?id=" + Id, { responseType: 'text' });
   }
   public DeleteLabelClass(Id): Observable<any> {
     return this.http.get(this.baseUrl + "api/Admin/LabelClassDelete?Id=" + Id, { responseType: 'text' });

@@ -18,6 +18,7 @@ const routes: Routes = [
            // { path: 'blank-page', component: BlankPageComponent },
            { path: 'appconfig', loadChildren: () => import('./appconfig/appconfig.module').then(m => m.AppConfigModule) },
            { path: 'siteconfig', loadChildren: () => import('./siteconfig/siteconfig.module').then(m => m.SiteConfigModule) },
+           { path: 'operatorconfig', loadChildren: () => import('./operatorconfig/operatorconfig.module').then(m => m.OperatorconfigModule) },
            { path: 'vehicleconfig', loadChildren: () => import('./vehicleconfig/vehicleconfig.module').then(m => m.VehicleConfigModule) },
            { path: 'tenantconfig', loadChildren: () => import('./tenantconfig/tenantconfig.module').then(m => m.TenantConfigModule) },
            { path: 'projects', loadChildren: () => import('./projects/projects.module').then(m => m.ProjectsModule) },

@@ -8,6 +8,9 @@ import {SupportComponent} from './support/support.component';
 import {EditSupportComponent} from './editsupport/editsupport.component';
 import { ZatparkComponent } from './zatparklog/zatparklog.component';
 import { AuditComponent } from './auditlog/auditlog.component';
+import { AddsiteuserComponent } from './addsiteuser/addsiteuser.component';
+import { SiteusertableComponent } from './siteusertable/siteusertable.component';
+import { EditsiteuserComponent } from './editsiteuser/editsiteuser.component';
 const routes: Routes = [
     {
         path: '', component: SiteConfigComponent,
@@ -19,8 +22,11 @@ const routes: Routes = [
             { path: 'support', component: SupportComponent },
          //   { path: 'adddatatype', component: AddDatatypeComponent },
             { path: 'editsupport/:id/:value', component: EditSupportComponent },
+            { path: 'editsiteuser/:id/:value', component: EditsiteuserComponent },
             { path: 'zatparklog', component: ZatparkComponent },
-            { path: 'auditlog', component: AuditComponent }
+            { path: 'auditlog', component: AuditComponent },
+            { path: 'siteuser', component: SiteusertableComponent },
+            { path: 'addsiteuser', component: AddsiteuserComponent }
          //   { path: 'annotationtype', component: AnnotationtypeComponent },
          //   { path: 'addannotationtype', component: AddAnnotationtypeComponent },
           //  { path: 'editannotationtype/:id/:value', component: EditAnnotationtypeComponent },

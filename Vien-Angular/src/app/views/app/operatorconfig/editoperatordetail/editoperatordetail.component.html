@@ -1,0 +1,291 @@
+<div class="container">
+    <div class="form-group">
+      <h2>Add New Operator</h2>
+    </div>
+  <form [formGroup]="addNewGeneratorForm" (ngSubmit)="onSubmit()">
+    <!-- First Row -->
+    <div class="form-row">
+       <div class="form-group col-md-6 d-flex align-items-center">
+         <label for="FirstName" class="me-2 w-25 text-end">First Name<span class="text-danger">*</span></label>
+         <input  type="text" id="FirstName" class="form-control w-70" placeholder="First Name"
+             formControlName="FirstName" [(ngModel)]="FirstName">
+             <div *ngIf="addNewGeneratorForm.get('FirstName').invalid && addNewGeneratorForm.get('FirstName').touched" 
+                     class="text-danger"> First Name Required
+             </div>
+       </div>
+      
+      <div class="form-group col-md-6 d-flex align-items-center">
+        <label for="LastName" class="me-2 w-25 text-end">Last Name<span class="text-danger">*</span></label>
+        <input type="text" id="LastName" class="form-control w-70" placeholder="Last Name"
+        formControlName="LastName" [(ngModel)]="LastName">
+        <div *ngIf="addNewGeneratorForm.get('LastName').invalid && addNewGeneratorForm.get('LastName').touched" 
+        class="text-danger"> Last Name Required
+        </div>
+      </div>
+    </div>
+
+    <!-- Second Row -->
+    <div class="form-row">
+        <div class="form-group col-md-6 d-flex align-items-center">
+          <label for="OperatorName" class="me-2 w-25 text-end">Operator Name<span class="text-danger">*</span></label>
+          <input type="text" id="OperatorName" class="form-control w-70" placeholder="Operator Name"
+          formControlName="OperatorName" [(ngModel)]="OperatorName">
+          <div *ngIf="addNewGeneratorForm.get('OperatorName').invalid && addNewGeneratorForm.get('OperatorName').touched" class="text-danger">
+            Operator Name Required
+          </div>
+        </div>
+        <div class="form-group col-md-6 d-flex align-items-center">
+          <label for="ContactctNumber" class="me-2 w-25 text-end">Contact Number<span class="text-danger">*</span></label>
+          <input type="text" id="ContactctNumber" class="form-control w-70" placeholder="Contact Number"
+          formControlName="ContactctNumber" [(ngModel)]="ContactctNumber">
+          <div *ngIf="addNewGeneratorForm.get('ContactctNumber').invalid && addNewGeneratorForm.get('ContactctNumber').touched" class="text-danger">
+            Contact Number Required
+          </div>
+        </div>
+    </div>
+
+    <!-- Third Row -->
+    <div class="form-row">
+        <div class="form-group col-md-6 d-flex align-items-center">
+          <label for="Email" class="me-2 w-25 text-end">Email<span class="text-danger">*</span></label>
+          <input type="Email" id="Email" class="form-control w-70" placeholder="E-mail"
+          formControlName="Email" [(ngModel)]="Email">
+          <div *ngIf="addNewGeneratorForm.get('Email').invalid && addNewGeneratorForm.get('Email').touched" class="text-danger">
+            <span *ngIf="addNewGeneratorForm.get('Email')?.errors?.required">Email Required</span>
+            <span *ngIf="addNewGeneratorForm.get('Email')?.errors?.Email">Enter a valid Email</span>
+          </div>
+        </div>
+    </div>
+    <div class="form-group"></div>
+
+    <!-- Registered & Trading Address -->
+    <div class="form-row">
+      
+      <div class="col-md-6">
+        <div class="form-group d-flex align-items-center">
+        
+          <label for="regsame1" class="me-2 mr-4 text-end">Is Register Addrees is Same as Trading?</label>
+          <div class="custom-control custom-switch">
+            <input   (change)="onCheckboxChange($event)" type="checkbox" id="regsame" class="custom-control-input ml-3 w-70" 
+           >
+            
+            <label class="custom-control-label" for="regsame"></label>
+          </div>
+       </div>
+       <h5 class="section-title">Registered Address</h5>
+       
+       
+         <div class="form-group d-flex align-items-center">
+           <label for="Address" class="me-2 w-25 text-end">Address</label>
+           <input type="text" id="RegisteredAddress" class="form-control w-70" placeholder="Address"  formControlName="RegisteredAddress" [(ngModel)]="RegisteredAddress">
+           <div *ngIf="addNewGeneratorForm.get('RegisteredAddress').invalid && addNewGeneratorForm.get('RegisteredAddress').touched" 
+           class="text-danger"> RegisteredAddress Required
+           </div>
+         </div>
+         <div class="form-group d-flex align-items-center">
+           <label for="City" class="me-2 w-25 text-end">City</label>
+           <input type="text" id="RegisteredCity" class="form-control w-70" placeholder="City"  formControlName="RegisteredCity" [(ngModel)]="RegisteredCity">
+           <div *ngIf="addNewGeneratorForm.get('RegisteredCity').invalid && addNewGeneratorForm.get('RegisteredCity').touched" 
+           class="text-danger"> RegisteredCity Required
+           </div>
+         </div>
+         <div class="form-group d-flex align-items-center">
+           <label for="County" class="me-2 w-25 text-end">County</label>
+           <input type="text" id="RegisteredCounty" class="form-control w-70" placeholder="County"  formControlName="RegisteredCounty" [(ngModel)]="RegisteredCounty">
+           <div *ngIf="addNewGeneratorForm.get('RegisteredCounty').invalid && addNewGeneratorForm.get('RegisteredCounty').touched" 
+           class="text-danger"> County Required
+           </div> 
+         </div>
+         <div class="form-group d-flex align-items-center">
+           <label for="Country" class="me-2 w-25 text-end">Country<span class="text-danger">*</span></label>
+           <select [(ngModel)]="RegisteredCountryId"  formControlName="RegisteredCountryId" id="Country" class="form-control w-70">
+             <option value="">Select Country</option>
+             <option *ngFor="let countrys of countries" [value]="countrys.id">{{ countrys.countryName }}</option>
+           </select>
+           
+           <div *ngIf="addNewGeneratorForm.get('RegisteredCountryId').invalid && addNewGeneratorForm.get('RegisteredCounty').touched" 
+           class="text-danger"> County Required
+           </div>
+         </div>
+         <div class="form-group d-flex align-items-center">
+           <label for="postcode" class="me-2 w-25 text-end">Post Code</label>
+           <input [(ngModel)]="RegisteredZipCode" type="text" id="RegisteredZipCode" class="form-control w-70" placeholder="Post Code"  formControlName="RegisteredZipCode">
+           <div *ngIf="addNewGeneratorForm.get('RegisteredZipCode').invalid && addNewGeneratorForm.get('RegisteredZipCode').touched" 
+           class="text-danger"> RegisteredZipCode Required
+           </div>
+         </div>
+         <h5 class="section-title"></h5>
+      </div>
+  
+
+    <div class="col-md-6" style="margin-top: auto;">
+     
+        <h5 class="section-title ">Trading Address</h5>
+      <div class="form-group d-flex align-items-center">
+        <label for="Address" class="me-2 w-25 text-end">Address</label>
+        <input [(ngModel)]="TradingAddress" type="text" id="TradingAddress" class="form-control w-70" placeholder="Address"  formControlName="TradingAddress">
+        <div *ngIf="addNewGeneratorForm.get('TradingAddress').invalid && addNewGeneratorForm.get('TradingAddress').touched" 
+        class="text-danger"> Address Required
+        </div>
+      </div>
+      <div class="form-group d-flex align-items-center">
+        <label for="City" class="me-2 w-25 text-end">City</label>
+        <input [(ngModel)]="TradingCity" type="text" id="TradingCity" class="form-control w-70" placeholder="City"  formControlName="TradingCity">
+        <div *ngIf="addNewGeneratorForm.get('TradingCity').invalid && addNewGeneratorForm.get('TradingCity').touched" 
+        class="text-danger"> TradingCity Required
+        </div>
+      </div>
+      <div class="form-group d-flex align-items-center">
+        <label for="County" class="me-2 w-25 text-end">County</label>
+        <input [(ngModel)]="TradingCounty" type="text" id="TradingCounty" class="form-control w-70" placeholder="County"  formControlName="TradingCounty">
+        <div *ngIf="addNewGeneratorForm.get('TradingCounty').invalid && addNewGeneratorForm.get('TradingCounty').touched" 
+        class="text-danger"> County Required
+        </div>
+      </div>
+      <div class="form-group d-flex align-items-center">
+        <label for="Country" class="me-2 w-25 text-end">Country</label>
+        
+        <select [(ngModel)]="TradingCountryId" id="Country" class="form-control w-70" formControlName="TradingCountryId">
+          <option>Select Country</option>
+          <option *ngFor="let countrys of countries" [value]="countrys.id">{{ countrys.countryName }}</option>
+
+        </select>
+      </div>
+      <div class="form-group d-flex align-items-center">
+        <label for="postCode" class="me-2 w-25 text-end">Post Code</label>
+        <input [(ngModel)]="TradingZipCode" type="text" id="TradingZipCode" class="form-control w-70" placeholder="Post Code"  formControlName="TradingZipCode">
+        <div *ngIf="addNewGeneratorForm.get('TradingZipCode').invalid && addNewGeneratorForm.get('TradingZipCode').touched" 
+        class="text-danger"> Post Code Required
+        </div>
+      </div>
+        <h5 class="section-title"></h5>
+      </div>
+    </div>
+    
+
+    <!-- Additional Fields -->
+    <div class="form-row">
+        <div class="form-group col-md-6 d-flex align-items-center">
+           <label for="VatRegistered" class="me-2 w-25 text-end">VAT Registered</label><br>
+           <div class="radio-group" formControlName="VatRegistered">
+             <input [(ngModel)]="VatRegistered" type="radio" id="vatyes" name="vat" formControlName="VatRegistered" [value]="true"> Yes
+             <input [(ngModel)]="VatRegistered" type="radio"id="vatyno" name="vat" formControlName="VatRegistered"  [value]="false"> No
+           </div>
+           <div *ngIf="addNewGeneratorForm.get('VatRegistered').invalid && addNewGeneratorForm.get('VatRegistered').touched" 
+           class="text-danger"> vat Registered Required
+           </div>
+        </div>
+        <div class="form-group col-md-6 d-flex align-items-center">
+          <label for="Date" class="me-2 w-25 text-end">SetUp Date</label>
+          <input [(ngModel)]="Date" type="date" id="Date" class="form-control w-70"  formControlName="Date">
+          <div *ngIf="addNewGeneratorForm.get('Date').invalid && addNewGeneratorForm.get('Date').touched" 
+          class="text-danger"> Date Required
+          </div>
+        </div>
+    </div>
+
+    <div class="form-row">
+        <div class="form-group col-md-6 d-flex align-items-center">
+          <label for="VatNumber" class="me-2 w-25 text-end">VAT Number<span class="text-danger">*</span></label>
+          <input [(ngModel)]="VatNumber" type="text" id="VatNumber" class="form-control w-70" placeholder="VAT Number"  formControlName="VatNumber">
+          <div *ngIf="addNewGeneratorForm.get('VatNumber').invalid && addNewGeneratorForm.get('LastName').touched" 
+          class="text-danger"> VAT Number Required
+          </div>
+        </div>
+        <div class="form-group col-md-6 d-flex align-items-center">
+           <label for="RoleId" class="me-2 w-25 text-end">RoleId<span class="text-danger">*</span></label>
+           <select [(ngModel)]="RoleId" id="RoleId" class="form-control w-70" formControlName="RoleId">
+             <option>Select</option>
+           </select>
+           <div *ngIf="addNewGeneratorForm.get('RoleId').invalid && addNewGeneratorForm.get('RoleId').touched" 
+           class="text-danger"> RoleId Required
+           </div>
+       </div>
+     </div>
+
+    <!-- File Uploads -->
+    <div class="form-row">
+        <div class="form-group col-md-6 d-flex align-items-center">
+           <label for="Profile" class="me-2 w-25 text-end">Profile</label>
+           <input  type="file" (change)="onFileSelect($event)" class="form-control" style="width: 40%;">
+           <div class="d-block">
+            {{Profile}}
+           </div>
+
+           <!-- <input type="file" id="Profile" class="form-control w-70"  formControlName="Profile"> -->
+           <div *ngIf="addNewGeneratorForm.get('Profile').invalid && addNewGeneratorForm.get('Profile').touched" 
+           class="text-danger"> Profile Required
+           </div>
+        </div>
+
+
+      <div class="col-md-6 d-flex align-items-center justify-content-start">
+         <label for="active" class="me-2 w-25 text-end">Active</label>
+         <div class="custom-control custom-switch">
+           <input [(ngModel)]="isActive" type="checkbox" id="active" class="custom-control-input w-70" 
+           formControlName="active">
+           <div *ngIf="addNewGeneratorForm.get('active').invalid && addNewGeneratorForm.get('active').touched" 
+           class="text-danger"> Active Required
+           </div>
+           <label class="custom-control-label" for="active"></label>
+         </div>
+      </div>
+      
+      
+    </div>
+
+    <!-- Notes & Email Template -->
+    <div class="form-row">
+      <div class="form-group col-md-6 d-flex align-items-center">
+        <label for="Notes" class="me-2 w-25 text-end">Notes</label>
+        <textarea [(ngModel)]="Notes" id="Notes" class="form-control w-70" formControlName="Notes"></textarea>
+        <div *ngIf="addNewGeneratorForm.get('Notes').invalid && addNewGeneratorForm.get('Notes').touched" 
+        class="text-danger"> Notes Required
+        </div>
+      </div>
+      <div class="col-md-6">
+        <h5 class="section-title">Contents To The Email Template, If Any</h5>
+        <div class="form-group d-flex align-items-center">
+        <label for="Heading" class="me-2 w-25 text-end">Heading</label>
+        <input [(ngModel)]="Heading" type="text" id="Heading" class="form-control w-70" placeholder="Subject"  formControlName="Heading">
+        <div *ngIf="addNewGeneratorForm.get('Heading').invalid && addNewGeneratorForm.get('Heading').touched" 
+        class="text-danger"> Heading Required
+        </div>
+        </div>
+        <div class="form-group d-flex">
+        <label for="Content" class="me-2 w-25 text-end">Content</label>
+        <textarea [(ngModel)]="Content" id="Content" class="form-control w-70" formControlName="Content"></textarea>
+        <div *ngIf="addNewGeneratorForm.get('Content').invalid && addNewGeneratorForm.get('Content').touched" 
+        class="text-danger"> Content Required
+        </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Help Image Upload -->
+    <div class="form-row">
+        <div class="form-group col-md-6 d-flex align-items-center">
+        <label for="Help" class="me-2 w-25 text-end">Help Image Upload</label>
+        
+        <input  type="file" (change)="HelpImageselect($event)" id="Help" class="form-control w-40">
+        {{HelpImages}}
+      </div>
+      <div class="col-md-6">
+        <div class="form-group">
+        <!-- <label>Help Image</label> -->
+        <!-- {{HelpImages}} -->
+      </div>
+      </div>
+    </div>
+
+    <!-- Submit & Cancel Buttons -->
+    <div class="row mt-3">
+      <div class="col-md-6">
+        <div class="form-group d-flex align-items-center">
+        <button type="submit" class="btn btn-primary" (click)="onSubmit()">Submit</button>
+        <button type="reset" class="btn btn-secondary ml-3">Cancel</button>
+      </div>
+      </div>
+    </div>
+  </form>
+</div>

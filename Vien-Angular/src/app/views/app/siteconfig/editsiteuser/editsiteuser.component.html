@@ -1,0 +1,147 @@
+<div class="container">
+    <div class="form-group">
+      <h2>Add New Site User Account</h2>
+    </div>
+  <form [formGroup]="addSiteUserForm" (ngSubmit)="onSubmit()">
+   
+  
+    <!-- First Row -->
+    <div class="form-row">
+        <div class="form-group col-md-6 d-flex align-items-center">
+           <label for="Operator" class="me-2 w-25 text-end">Operator<span class="text-danger">*</span></label>
+           <select id="Operator" class="form-control w-70"  formControlName="operatorid">
+             <option>Select Operator Name</option>
+             <option *ngFor="let oper of operatordata" [value]="oper.id">{{ oper.firstName }}</option>
+
+           </select>
+       </div>
+        <div class="form-group col-md-6 d-flex align-items-center">
+          <label for="username" class="me-2 w-25 text-end">User Name<span class="text-danger">*</span></label>
+          <input type="text" id="username" class="form-control w-70" placeholder="User Name"
+          formControlName="username">
+          <div *ngIf="addSiteUserForm.get('username').invalid && addSiteUserForm.get('username').touched" class="text-danger">
+            User Name Required
+          </div>
+        </div>
+    </div>
+  
+    <!-- Second Row -->
+    <div class="form-row">
+        <div class="form-group col-md-6 d-flex align-items-center">
+          <label for="email" class="me-2 w-25 text-end">Email<span class="text-danger">*</span></label>
+          <input type="email" id="email" class="form-control w-70" placeholder="E-mail"
+          formControlName="email">
+          <div *ngIf="addSiteUserForm.get('email').invalid && addSiteUserForm.get('email').touched" class="text-danger">
+            <span *ngIf="addSiteUserForm.get('email')?.errors?.required">Email Required</span>
+            <span *ngIf="addSiteUserForm.get('email')?.errors?.email">Enter a valid email</span>
+          </div>
+        </div>
+  
+        <div class="form-group col-md-6 d-flex align-items-center">
+          <label for="contactNumber" class="me-2 w-25 text-end">Mobile Number<span class="text-danger">*</span></label>
+          <input type="text" id="contactNumber" class="form-control w-70" placeholder="Contact Number"
+          formControlName="contactNumber">
+          <div *ngIf="addSiteUserForm.get('contactNumber').invalid && addSiteUserForm.get('contactNumber').touched" class="text-danger">
+            Mobile Number Required
+          </div>
+        </div>
+    </div>
+   
+  
+    <div class="form-row">
+      <div class="form-group col-md-6 d-flex align-items-center">
+        <label for="Role" class="me-2 w-25 text-end">Role<span class="text-danger">*</span></label>
+        <select id="Role" class="form-control w-70" formControlName="role">
+          <option>Select</option>
+          <option *ngFor="let oper of Rolesdata" [value]="oper.id">{{ oper.name }}</option>
+
+        </select>
+      </div>
+  
+      <div class="form-group col-md-6 d-flex align-items-center">
+        <label for="sitename" class="me-2 w-25 text-end">Site</label>
+        <select id="sitename" class="form-control w-70" formControlName="site">
+          <option>Select</option>
+          <option *ngFor="let oper of sites" [value]="oper.id">{{ oper.siteName }}</option>
+
+        </select>
+      </div>
+  </div>
+  
+  <div class="form-row">
+  <div class="form-group col-md-6 d-flex align-items-center">
+    <label for="Address1" class="me-2 w-25 text-end">Address1</label>
+    <input type="text" id="Address1" class="form-control w-70" placeholder="Address1"
+    formControlName="Address1">
+    <!-- <div *ngIf="addSiteUserForm.get('Address1').invalid && addSiteUserForm.get('Address1').touched" class="text-danger">
+      Address1 Required
+    </div> -->
+  </div>
+  <div class="form-group col-md-6 d-flex align-items-center">
+    <label for="Address2" class="me-2 w-25 text-end">Address2</label>
+    <input type="text" id="Address2" class="form-control w-70" placeholder="Address2"
+    formControlName="Address2">
+    <!-- <div *ngIf="addSiteUserForm.get('Address2').invalid && addSiteUserForm.get('Address2').touched" class="text-danger">
+      Address2 Required
+    </div> -->
+  </div>
+  </div>
+  <div class="form-row">
+  <div class="form-group col-md-6 d-flex align-items-center">
+    <label for="Country" class="me-2 w-25 text-end">Country</label>
+    <select id="Country" class="form-control w-70" formControlName="Country">
+      <option>Select</option>
+      <option *ngFor="let countrys of countries" [value]="countrys.id">{{ countrys.countryName }}</option>
+
+    </select>
+  </div>
+  <div class="form-group col-md-6 d-flex align-items-center">
+    <label for="State" class="me-2 w-25 text-end">State</label>
+    <input type="text" id="State" class="form-control w-70" placeholder="State"
+    formControlName="State">
+  </div>
+  </div>
+  <div class="form-row">
+  
+  <div class="form-group col-md-6 d-flex align-items-center">
+    <label for="City" class="me-2 w-25 text-end">City</label>
+    <input type="text" id="City" class="form-control w-70" placeholder="City"
+    formControlName="City">
+  </div>
+  <div class="form-group col-md-6 d-flex align-items-center">
+    <label for="postalcode" class="me-2 w-25 text-end">Postal Code</label>
+    <input type="text" id="postalcode" class="form-control w-70" placeholder="postalcode"
+    formControlName="postalcode">
+  </div>
+  </div>
+   
+    <div class="form-row">
+      <div class="col-md-6 d-flex align-items-center justify-content-start">
+        <label for="microsoftAccount" class="me-2 w-25 text-end">Microsoft Account</label>
+        <div class="custom-control custom-switch">
+          <input type="checkbox" id="microsoftAccount" class="custom-control-input w-70" 
+          formControlName="microsoftAccount" />
+          <label class="custom-control-label" for="microsoftAccount"></label>
+        </div>
+      </div>
+       
+      <div class="col-md-6 d-flex align-items-center justify-content-start">
+        <label for="Active" class="me-2 w-25 text-end">Active</label>
+        <div class="form-check">
+            <input type="checkbox" id="Active" class="form-check-input" formControlName="Active" />
+            <label class="form-check-label" for="Active"></label>
+        </div>
+    </div>
+    
+    </div>
+    <!-- Submit & Cancel Buttons -->
+    <div class="row mt-3">
+      <div class="col-md-6">
+        <div class="form-group d-flex align-items-center">
+        <button type="submit" class="btn btn-primary" (click)="onSubmit()">Submit</button>
+        <button type="reset" class="btn btn-secondary ml-3">Cancel</button>
+      </div>
+      </div>
+    </div>
+  </form>
+  </div>

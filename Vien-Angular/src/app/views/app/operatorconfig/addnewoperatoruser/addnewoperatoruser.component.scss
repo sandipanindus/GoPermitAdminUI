@@ -1,0 +1,41 @@
+.container {
+    max-width: 1300px;
+    margin: auto;
+    background: #fff;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+  }
+  
+  .h5 {
+    margin-top: 20px;
+    font-weight: bold;
+  }
+  .section-title {
+    font-weight: lighter;
+    position: relative;
+    display: block;
+    padding-bottom: 5px;
+    margin-bottom: 10px;
+  }
+  
+  .section-title::after {
+    content: "";
+    display: block;
+    width: 100%;
+    border-bottom: 2px solid #979797; /* Adjust color and thickness */
+    margin-top: 3px;
+  }
+  .form-group{
+    margin-bottom: 15px;
+  }
+  
+  .radio-group {
+    display: flex;
+    align-items: center;
+    gap: 20px; /* Adjust gap between radio buttons */
+  }
+  
+  .radio-group input[type="radio"] {
+    margin-right: 5px; /* Space between radio and label */
+  }

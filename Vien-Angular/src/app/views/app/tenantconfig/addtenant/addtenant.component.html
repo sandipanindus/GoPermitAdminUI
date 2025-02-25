@@ -216,12 +216,15 @@
                                                 placeholder="{{'tenants.vehiclesperbay' | translate }}"
                                                 id="txtvehiclesperbay_{{bayconfig.id}}"
                                                 [(ngModel)]="bayconfig.vehiclesperbay"></td>
+                                                
                                         <td><input type="text" class="form-control" id="txtstartdate_{{bayconfig.id}}"
                                                 placeholder="{{'tenants.startdate' | translate }}" [minDate]="mindate"
                                                 readonly="true" bsDatepicker [container]="'html'"
                                                 [ngModelOptions]="{standalone: true}"
                                                 [bsConfig]="{ adaptivePosition: true, dateInputFormat: 'DD-MM-YYYY' }"
                                                 [(ngModel)]="bayconfig.startdate" /></td>
+
+
                                         <td><input type="text" class="form-control" bsDatepicker readonly="true"
                                                 [container]="'html'" [minDate]="mindate"
                                                 [ngModelOptions]="{standalone: true}"
@@ -230,12 +233,15 @@
                                                 id="txtenddate_{{bayconfig.id}}"
                                                 placeholder="{{'tenants.enddate' | translate }}"
                                                 [(ngModel)]="bayconfig.enddate" /></td>
+
                                         <td><input type="text" class="form-control" 
                                                 [ngModelOptions]="{standalone: true}"
                                                 placeholder="{{'tenants.vehiclereg' | translate }}"
                                                     id="txtvehiclereg_{{bayconfig.id}}"
                                                 [(ngModel)]="bayconfig.vehiclereg"></td>        
-                                        <td><select class="form-control" [ngModelOptions]="{standalone: true}"
+                                       
+                                       
+                                                <td><select class="form-control" [ngModelOptions]="{standalone: true}"
                                                 id="txtbayno_{{bayconfig.id}}" [(ngModel)]="bayconfig.bayid"
                                                 (change)="AvoidDuplicate(bayconfig.bayid,bayconfig.id)"
                                                 (click)="AvoidDuplicate(bayconfig.bayid,bayconfig.id)"

@@ -105,6 +105,7 @@ export class SidebarComponent implements OnInit, OnDestroy {
   }
 
   isCurrentMenuHasSubItem() {
+    debugger
     const { containerClassnames } = this.sidebar;
 
     const menuItem = this.menuItems.find(

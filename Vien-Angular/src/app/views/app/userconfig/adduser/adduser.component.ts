@@ -290,6 +290,10 @@ export class AddUserComponent implements OnInit, OnDestroy {
             LoginId: parseInt(localStorage.getItem("LoginId")),
             EmailCode: this.code,
             Active: this.active,
+            IsMicrosoftAccount: false,
+            IsOperator: false,
+            IsSiteUser: false,
+            OperatorId: 0,
             SiteId: parseInt(this.siteId)
         }
         this.authService.AddUser(data).subscribe((data: any) => {

@@ -101,6 +101,10 @@ export class AddNewUserModalComponent implements OnInit {
             CountryId:this.countryId,
             ZipCode:this.zipcode,
             RoleId:this.roleId,
+            IsMicrosoftAccount: false,
+            IsOperator: false,
+            IsSiteUser: false,
+            OperatorId: 0,
             LoginId: parseInt(localStorage.getItem("LoginId")),
             EmailCode:this.code
         }
