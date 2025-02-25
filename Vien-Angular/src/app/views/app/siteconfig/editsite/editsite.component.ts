@@ -65,6 +65,9 @@ export class EditSiteComponent implements OnInit, OnDestroy {
     vehiclesperbay: string;
     maxparkingsession: string;
     timeunit: string;
+    
+    operatordata:any[] = [];
+    OperatorId: any;
     constructor(private translate: TranslateService, private spinner: NgxSpinnerService, private approute: ActivatedRoute, private modalService: BsModalService, private formBuilder: FormBuilder,
         private authService: AuthService, private notifications: NotificationsService, private router: Router) {
         this.siteForm = this.formBuilder.group({
@@ -81,6 +84,7 @@ export class EditSiteComponent implements OnInit, OnDestroy {
             rtenantparkingbay: ['', Validators.required],
             rvisitorparkingbay: ['', Validators.required],
             rvehiclesperbay: ['', Validators.required],
+            OperatorId: ['', Validators.required],
             rcustomRadio1:['']
         });
         this.parkingbayForm = this.formBuilder.group({
@@ -101,6 +105,7 @@ export class EditSiteComponent implements OnInit, OnDestroy {
     get v() { return this.visitorbayForm.controls; }
 
     ngOnInit() {
+        this.Getopertaors()
         this.agent=this.getBrowserName();
 
         var id = this.approute.snapshot.params['id']
@@ -109,7 +114,41 @@ export class EditSiteComponent implements OnInit, OnDestroy {
     }
 
     agent
-
+    Getopertaors(): void {
+        debugger
+        var loginId = localStorage.getItem("LoginId");
+        var RoleId = localStorage.getItem("RoleId");
+        var SiteId = localStorage.getItem("SiteId");
+    
+        this.authService.Getoperators(1, 10, loginId, RoleId, SiteId).subscribe(
+          response => {
+            if (response || Array.isArray(response)) {
+              
+                response=JSON.parse(response);
+    
+    debugger
+              for (var i = 0; i < response.length; i++) {
+    
+              if (response) {
+                this.operatordata.push({
+    
+                    id: response[i].id,
+                    firstName: response[i].firstName
+                })
+              }
+            }
+              //this.operatordata = response; // Store the response in the operatordata array
+            } else {
+              console.error('Invalid response format:', response);
+            }
+            console.log('Form submitted successfully', response);
+          },
+          error => {
+            console.error('Error saving form', error);
+            alert('Error . Please try again.');
+          }
+        );
+      }
   getBrowserName() {
     const agent = window.navigator.userAgent.toLowerCase()
     switch (true) {
@@ -468,6 +507,7 @@ export class EditSiteComponent implements OnInit, OnDestroy {
             this.siteForm.controls['rtenantparkingbay'].disable();
             this.siteForm.controls['rvisitorparkingbay'].disable();
             this.siteForm.controls['rvehiclesperbay'].disable();
+            this.siteForm.controls['OperatorId'].disable();
             this.parkingbayForm.controls['psection'].disable();
             this.parkingbayForm.controls['pseperatorId'].disable();
             this.visitorbayForm.controls['vsection'].disable();
@@ -518,6 +558,7 @@ export class EditSiteComponent implements OnInit, OnDestroy {
             this.siteForm.controls['rmobilenumber'].enable();
             this.siteForm.controls['rtenantparkingbay'].disable();
             this.siteForm.controls['rvisitorparkingbay'].disable();
+            this.siteForm.controls['OperatorId'].disable();
             this.siteForm.controls['rvehiclesperbay'].enable();
             this.parkingbayForm.controls['psection'].disable();
             this.parkingbayForm.controls['pseperatorId'].disable();
@@ -581,6 +622,7 @@ export class EditSiteComponent implements OnInit, OnDestroy {
                 this.vsection = finalresult.result.visitorSectionsOrFloors;
                 this.vseperatorId = finalresult.result.visitorSeperator;
                 this.vehiclesperbay = finalresult.result.maxVehiclesPerBay;
+                this.OperatorId = finalresult.result.operatorId;
                 this.parkingbaydiv = 'block';
                 this.visitorbaydiv = 'block';
                 this.maxparkingsession = finalresult.result.visitorbays[0].maxParkingSession;
@@ -973,7 +1015,8 @@ export class EditSiteComponent implements OnInit, OnDestroy {
             VehiclesPerBay: parseInt(this.vehiclesperbay),
             MaxParkingSession: this.maxparkingsession,
             TimeUnit: this.timeunit,
-            VisitorSessions: this.visitorsessions
+            VisitorSessions: this.visitorsessions,
+            OperatorId: this.OperatorId,
         }
 
 

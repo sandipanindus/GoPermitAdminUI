@@ -40,7 +40,7 @@
   zipcode:string;
   roleId:number;
   
-  
+  editid:any;
   
     ngOnInit() {
       this.operatorUserForm = this.fb.group({
@@ -60,6 +60,7 @@
       var id = this.approute.snapshot.params['id']
       var value = this.approute.snapshot.params['value']
       this.Edit(id, value);
+      this.editid=id;
     
   
   this.Getroles()
@@ -159,8 +160,9 @@
 
       this.authService.Getoperators(1, 10, loginId, RoleId, SiteId).subscribe(
         response => {
-          if (response && Array.isArray(response)) {
-  
+          if (response || Array.isArray(response)) {
+            response=JSON.parse(response);
+    
   debugger
             for (var i = 0; i < response.length; i++) {
   
@@ -193,6 +195,7 @@
           var emailcode = Math.floor(100000 + Math.random() * 900000) + 1;
         
           var data = {
+            Id:parseInt(this.editid) ,
               FirstName: this.operatorUserForm.value?.userName,
               LastName:  this.operatorUserForm.value?.userName,
               Email:this.operatorUserForm.value?.email,
@@ -205,16 +208,18 @@
               ZipCode:"1234",
               Active:true,
               IsOperator:true,
+              IsSiteUser:false,
               OpeartorId:this.operatorUserForm.value?.operators,
+              IsMicrosoftAccount:this.operatorUserForm.value?.microsoftAccount,
               RoleId:String(parseInt(this.operatorUserForm.value?.role)),
               LoginId: parseInt(localStorage.getItem("LoginId")),
               EmailCode:emailcode.toString()
           }
-          this.authService.AddUser(data).subscribe((data: any) => {
+          this.authService.UpdateregisUser(data).subscribe((data: any) => {
               debugger;
               var result = JSON.parse(data);
               if (result.status == "200") {
-                  this.notifications.success('Success',"User added successfully", NotificationType.Success, { theClass: 'outline primary', timeOut: 2000, showProgressBar: false, clickToClose: true });
+                  this.notifications.success('Success',"User Updated successfully", NotificationType.Success, { theClass: 'outline primary', timeOut: 2000, showProgressBar: false, clickToClose: true });
                   setTimeout(() => {
                       this.modalRef.hide();
                   }, 2000);

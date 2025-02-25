@@ -89,7 +89,10 @@ this.Getroles()
 
     this.authService.Getoperators(1, 10, loginId, RoleId, SiteId).subscribe(
       response => {
-        if (response && Array.isArray(response)) {
+        if (response || Array.isArray(response)) {
+
+          
+          response=JSON.parse(response);
 
 debugger
           for (var i = 0; i < response.length; i++) {
@@ -137,6 +140,8 @@ debugger
             IsOperator:true,
             IsSiteUser:false,
             Operatorid:this.operatorUserForm.value?.operators,
+            IsMicrosoftAccount:this.operatorUserForm.value?.microsoftAccount,
+
             RoleId:String(parseInt(this.operatorUserForm.value?.role)),
             LoginId: parseInt(localStorage.getItem("LoginId")),
             EmailCode:emailcode.toString()

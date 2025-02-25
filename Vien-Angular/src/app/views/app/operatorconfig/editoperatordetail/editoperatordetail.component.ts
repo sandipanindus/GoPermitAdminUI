@@ -7,6 +7,7 @@ import { Router, ActivatedRoute } from '@angular/router';
 import { AuthService } from 'src/app/shared/auth.service';
 import { NgxSpinnerService } from 'ngx-spinner';
 import { TranslateService } from '@ngx-translate/core';
+import { HttpClient } from '@angular/common/http';
 
 @Injectable({
     providedIn: 'root'
@@ -65,7 +66,7 @@ export class EditoperatordetailComponent implements OnInit, OnDestroy {
     vehiclesperbay: string;
     maxparkingsession: string;
     timeunit: string;
-    constructor(private translate: TranslateService, private spinner: NgxSpinnerService, private approute: ActivatedRoute, private modalService: BsModalService, private formBuilder: FormBuilder,
+    constructor(private translate: TranslateService, private http: HttpClient, private spinner: NgxSpinnerService, private approute: ActivatedRoute, private modalService: BsModalService, private formBuilder: FormBuilder,
         private authService: AuthService, private notifications: NotificationsService, private router: Router) {
         this.siteForm = this.formBuilder.group({
             rsitename: ['', Validators.required],
@@ -135,7 +136,7 @@ addNewGeneratorForm: FormGroup;
   Content: any;
   IsMicrosoftAccount: any;
 
-
+editid:any;
     ngOnInit() {
 
       this.addNewGeneratorForm = this.formBuilder.group({
@@ -184,6 +185,7 @@ addNewGeneratorForm: FormGroup;
         var id = this.approute.snapshot.params['id']
         var value = this.approute.snapshot.params['value']
         this.Edit(id, value);
+        this.editid=id;
     }
 
     agent
@@ -860,7 +862,9 @@ addNewGeneratorForm: FormGroup;
 
 
 
-  
+    formatDate(dateString: string): string {
+      return dateString.split("T")[0]; // Extract only the YYYY-MM-DD part
+    }
     Edit(id: any, value: any) {
       if (value == "view") {
 
@@ -890,7 +894,7 @@ addNewGeneratorForm: FormGroup;
             this.OperatorName = finalresult.operatorName;
             this.ContactctNumber = finalresult.contactctNumber;
             this.Email = finalresult.email;
-            this.Date = finalresult.date;
+            this.Date =  this.formatDate(finalresult.date)
             this.RegisteredAddress = finalresult.registeredAddress;
             this.RegisteredCity = finalresult.registeredCity;
             this.TradingAddress = finalresult.tradingAddress;
@@ -1106,32 +1110,39 @@ addNewGeneratorForm: FormGroup;
           formData.append('TradingCountryId', String(parseInt (this.addNewGeneratorForm.value?.RegisteredCountryId,10)));
            
          }
+        else if(key === 'Profile'|| key === 'HelpImage' ){
+    
+          formData.append('Profile', this.Profile);
+           
+          formData.append('HelpImage', this.HelpImages);
+           
+         }
         
         else {
           formData.append(key, this.addNewGeneratorForm.get(key)?.value);
         }
       });
      
-    
+      formData.append('Id', this.editid);
+
       // Append file if selected
-      if (this.selectedFile) {
-        formData.append('Profile', this.selectedFile);
+      if (this.selectedFile || this.HelpImage ) {
+        formData.append('Profiles', this.selectedFile);
+        formData.append('HelpImages', this.HelpImage);
       }
-      if (this.selectedFile) {
-        formData.append('HelpImage', this.HelpImage);
-      }
+     
     
       // Send data to API
-      // this.http.post('http://localhost:53846/api/Operator/CreateOperator', formData).subscribe(
-      //   response => {
-      //     console.log('Form submitted successfully', response);
-      //     alert('Form saved successfully!');
-      //   },
-      //   error => {
-      //     console.error('Error saving form', error);
-      //     alert('Error saving form. Please try again.');
-      //   }
-      // );
+      this.http.put('http://localhost:53846/api/Operator/UpdateOperators', formData).subscribe(
+        response => {
+          console.log('Form submitted successfully', response);
+          alert('Form saved successfully!');
+        },
+        error => {
+          console.error('Error saving form', error);
+          alert('Error saving form. Please try again.');
+        }
+      );
     }
 
 

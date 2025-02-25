@@ -51,6 +51,7 @@ export class AddSiteComponent implements OnInit, OnDestroy {
     vehiclesperbay: string;
     maxparkingsession: string;
     timeunit: string;
+    operatordata:any[] = [];
     constructor(private spinner: NgxSpinnerService, private translate: TranslateService, private modalService: BsModalService, private formBuilder: FormBuilder,
         private authService: AuthService, private notifications: NotificationsService, private router: Router) {
         this.siteForm = this.formBuilder.group({
@@ -66,7 +67,9 @@ export class AddSiteComponent implements OnInit, OnDestroy {
             rmobilenumber: ['', Validators.required],
             rtenantparkingbay: ['', Validators.required],
             rvisitorparkingbay: ['', Validators.required],
-            rvehiclesperbay: ['', Validators.required]
+            rvehiclesperbay: ['', Validators.required],
+            OperatorId: ['', Validators.required],
+            IndustryId: ['', Validators.required]
         });
         this.parkingbayForm = this.formBuilder.group({
 
@@ -86,6 +89,8 @@ export class AddSiteComponent implements OnInit, OnDestroy {
     get v() { return this.visitorbayForm.controls; }
     ngOnInit() {
 
+
+        this.Getopertaors()
         this.agent = this.getBrowserName();
         this.seperatorId = '';
         this.vseperatorId = '';
@@ -99,9 +104,49 @@ export class AddSiteComponent implements OnInit, OnDestroy {
                 sessionunit: ''
             })
         }
+
     }
 
     agent
+
+
+
+    Getopertaors(): void {
+        debugger
+        var loginId = localStorage.getItem("LoginId");
+        var RoleId = localStorage.getItem("RoleId");
+        var SiteId = localStorage.getItem("SiteId");
+    
+        this.authService.Getoperators(1, 10, loginId, RoleId, SiteId).subscribe(
+          response => {
+            if (response || Array.isArray(response)) {
+              
+                response=JSON.parse(response);
+    
+    debugger
+              for (var i = 0; i < response.length; i++) {
+    
+              if (response) {
+                this.operatordata.push({
+    
+                    id: response[i].id,
+                    firstName: response[i].firstName
+                })
+              }
+            }
+              //this.operatordata = response; // Store the response in the operatordata array
+            } else {
+              console.error('Invalid response format:', response);
+            }
+            console.log('Form submitted successfully', response);
+          },
+          error => {
+            console.error('Error saving form', error);
+            alert('Error . Please try again.');
+          }
+        );
+      }
+    
 
     getBrowserName() {
         const agent = window.navigator.userAgent.toLowerCase()
@@ -555,7 +600,8 @@ export class AddSiteComponent implements OnInit, OnDestroy {
             VehiclesPerBay: parseInt(this.vehiclesperbay),
             MaxParkingSession: this.maxparkingsession,
             TimeUnit: this.timeunit,
-            VisitorSessions: this.visitorsessions
+            VisitorSessions: this.visitorsessions,
+            OperatorId: this.siteForm.value?.OperatorId,
         }
         debugger
         this.authService.SaveSite(data).subscribe((data: any) => {

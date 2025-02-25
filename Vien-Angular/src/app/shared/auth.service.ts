@@ -114,6 +114,9 @@ export class AuthService {
   public UpdateUser(data): Observable<any> {
     return this.http.post(this.baseUrl + "api/Admin/UpdateUserProfile", data, { responseType: 'text' });
   }
+  public UpdateregisUser(data): Observable<any> {
+    return this.http.post(this.baseUrl + "api/Admin/UpdateUser", data, { responseType: 'text' });
+  }
   public UpdateTenantUser(data): Observable<any> {
     return this.http.post(this.baseUrl + "api/Admin/UpdateTenantUser", data, { responseType: 'text' });
   }

@@ -111,6 +111,7 @@
     "tenantparkingbay": "No Of Bays For Tenant",
     "visitorparkingbay": "No of Bays For Visitor",
     "sitename": "Site Name",
+    "Operator": "Operator",
     "lastname": "Last Name",
     "contactperson": "Contact Person Name",
     "workemail": "Work Email",
