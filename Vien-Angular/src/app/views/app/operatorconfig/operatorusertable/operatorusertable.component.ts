@@ -41,6 +41,10 @@
    
      @Output() itemsPerPageChange: EventEmitter<any> = new EventEmitter();
      sites: any = [];
+     searchoper: any;
+     searchemail: any;
+     searchmob: any;
+     allsites: any=[];
    
      constructor(private translate:TranslateService,private spinner: NgxSpinnerService, private modalService: BsModalService, private router: Router, private renderer: Renderer2, private notifications: NotificationsService, private authService: AuthService,) { }
    
@@ -104,6 +108,9 @@
        this.sitename = '';
        this.email = '';
        this.mobileno = '';
+       this.searchemail = '';
+       this.searchmob = '';
+       this.searchoper = '';
        this.currentPage = 1;
        this.itemsPerPage = 10;
        this.GetSites();
@@ -131,6 +138,25 @@
          return a.localeCompare(b) * this.sortDir;
        });
      }
+     SearchSite1() {
+      debugger;
+      var element = document.getElementById("loading") as HTMLDivElement;
+      element.style.display = 'block';
+ 
+      this.sites = this.allsites.filter((item) => {
+       return (
+         (this.searchoper ? item.firstName.toLowerCase().includes(this.searchoper.toLowerCase()) : true) &&
+         (this.searchemail ? item.email.toLowerCase().includes(this.searchemail.toLowerCase()) : true) &&
+         (this.searchmob ? item.mobileNumber.includes(this.searchmob) : true)
+       );
+     });
+     element.style.display = 'none';
+     //  else {
+     //    element.style.display = 'none';
+     //    window.location.reload();
+     //  }
+  
+    }
      SearchSite() {
        debugger;
        var element = document.getElementById("loading") as HTMLDivElement;
@@ -212,7 +238,7 @@
            const data = finalresult.result;  
            
            this.sites=data.filter((item)=>item.isOperator==true)
-
+this.allsites=data.filter((item)=>item.isOperator==true)
            var element = document.getElementById("loading") as HTMLDivElement;
            element.style.display = 'none';
            if (this.sites.length > 0) {

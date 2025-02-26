@@ -263,6 +263,9 @@ export class AuthService {
   public GetSites(PageNo, PageSize, Id, RoleId, SiteId): Observable<any> {
     return this.http.get(this.baseUrl + "api/Admin/GetSites?PageNo=" + PageNo + "&PageSize=" + PageSize + "&LoginId=" + Id + "&RoleId=" + RoleId + "&SiteId=" + SiteId, { responseType: 'text' });
   }
+  public GetSitesbyoperatorid(PageNo, PageSize, Id, RoleId, SiteId,OperatorId): Observable<any> {
+    return this.http.get(this.baseUrl + "api/Admin/GetSitesbyoperatorid?PageNo=" + PageNo + "&PageSize=" + PageSize + "&LoginId=" + Id + "&RoleId=" + RoleId + "&SiteId=" + SiteId + "&OperatorId=" + OperatorId, { responseType: 'text' });
+  }
   public GetSiteUser(PageNo, PageSize, Id, RoleId, SiteId): Observable<any> {
     return this.http.get(this.baseUrl + "api/Admin/GetSiteUser?PageNo=" + PageNo + "&PageSize=" + PageSize + "&LoginId=" + Id + "&RoleId=" + RoleId + "&SiteId=" + SiteId, { responseType: 'text' });
   }

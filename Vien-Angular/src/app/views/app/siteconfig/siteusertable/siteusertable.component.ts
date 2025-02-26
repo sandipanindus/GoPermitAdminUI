@@ -64,6 +64,10 @@ export class SiteusertableComponent implements OnInit, OnDestroy {
 
   @Output() itemsPerPageChange: EventEmitter<any> = new EventEmitter();
   sites: any = [];
+  searchoper:any;
+  searchemail:any;
+  searchmob:any;
+  allsites:any=[];
 
   constructor(private translate:TranslateService,private spinner: NgxSpinnerService, private modalService: BsModalService, private router: Router, private renderer: Renderer2, private notifications: NotificationsService, private authService: AuthService,) { }
 
@@ -125,6 +129,9 @@ agent
   Clear() {
     this.sitename = '';
     this.email = '';
+    this.searchemail = '';
+     this.searchmob = '';
+     this.searchoper = '';
     this.mobileno = '';
     this.currentPage = 1;
     this.itemsPerPage = 10;
@@ -152,6 +159,25 @@ agent
       b = b[colName].toLowerCase();
       return a.localeCompare(b) * this.sortDir;
     });
+  }
+  SearchSite1() {
+    debugger;
+    var element = document.getElementById("loading") as HTMLDivElement;
+    element.style.display = 'block';
+
+    this.sites = this.allsites.filter((item) => {
+     return (
+       (this.searchoper ? item.siteName.toLowerCase().includes(this.searchoper.toLowerCase()) : true) &&
+       (this.searchemail ? item.email.toLowerCase().includes(this.searchemail.toLowerCase()) : true) &&
+       (this.searchmob ? item.mobileNumber.includes(this.searchmob) : true)
+     );
+   });
+   element.style.display = 'none';
+   //  else {
+   //    element.style.display = 'none';
+   //    window.location.reload();
+   //  }
+
   }
   SearchSite() {
     debugger;
@@ -231,7 +257,8 @@ agent
       var finalresult = JSON.parse(result);
       if (finalresult.status == "200") {
         debugger;
-        this.sites = finalresult.result;       
+        this.sites = finalresult.result;  
+        this.allsites=     finalresult.result; 
         var element = document.getElementById("loading") as HTMLDivElement;
         element.style.display = 'none';
         if (this.sites.length > 0) {

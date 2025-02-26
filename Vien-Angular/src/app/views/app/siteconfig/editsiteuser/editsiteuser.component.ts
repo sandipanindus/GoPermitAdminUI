@@ -14,8 +14,9 @@
   })
   export class EditsiteuserComponent implements OnInit {
     addSiteUserForm!: FormGroup;
+    editid: any;
    // Replace with actual values
-    constructor(private fb: FormBuilder, private approute: ActivatedRoute, private http: HttpClient,private notifications: NotificationsService, private authService: AuthService) {}
+    constructor(private router: Router,private fb: FormBuilder, private approute: ActivatedRoute, private http: HttpClient,private notifications: NotificationsService, private authService: AuthService) {}
   Rolesdata:any[]=[];
   operatordata:any[] = [];
   selectedOperator: string;
@@ -85,6 +86,7 @@
       var id = this.approute.snapshot.params['id']
       var value = this.approute.snapshot.params['value']
       this.Edit(id, value);
+      this.editid=id;
     
 
 
@@ -138,8 +140,8 @@ this.Getroles()
                 contactNumber: finalresult.mobileNumber || '',
                 role: finalresult.roleId || '',
                 site: finalresult.siteId , // Ensures boolean default
-                Address1: finalresult.Address1 , // Ensures boolean default
-                Address2: finalresult.Address2 , // Ensures boolean default
+                Address1: finalresult.address , // Ensures boolean default
+                Address2: finalresult.address2 , // Ensures boolean default
                 Country: finalresult.countryId , // Ensures boolean default
                 State: finalresult.state , // Ensures boolean default
                 City: finalresult.city, // Ensures boolean default
@@ -288,7 +290,8 @@ this.Getroles()
 
       this.authService.Getoperators(1, 10, loginId, RoleId, SiteId).subscribe(
         response => {
-          if (response && Array.isArray(response)) {
+          if (response || Array.isArray(response)) {
+            response=JSON.parse(response);
   
   debugger
             for (var i = 0; i < response.length; i++) {
@@ -322,6 +325,7 @@ this.Getroles()
           var emailcode = Math.floor(100000 + Math.random() * 900000) + 1;
         
           var data = {
+            Id:this.editid,
                FirstName: this.addSiteUserForm.value?.username,
               LastName:  this.addSiteUserForm.value?.username,
               Email:this.addSiteUserForm.value?.email,
@@ -342,7 +346,7 @@ this.Getroles()
               LoginId: parseInt(localStorage.getItem("LoginId")),
               EmailCode:emailcode.toString()
           }
-          this.authService.AddUser(data).subscribe((data: any) => {
+          this.authService.UpdateregisUser(data).subscribe((data: any) => {
               debugger;
               var result = JSON.parse(data);
               if (result.status == "200") {
@@ -401,6 +405,9 @@ this.Getroles()
     // };
     onCancel() {
       this.addSiteUserForm.reset();
+    }
+    cancel() {
+      this.router.navigateByUrl('app/siteconfig/siteuser');
     }
   }
 

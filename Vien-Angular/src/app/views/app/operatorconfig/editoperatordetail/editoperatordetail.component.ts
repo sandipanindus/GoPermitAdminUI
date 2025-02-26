@@ -1146,6 +1146,8 @@ editid:any;
     }
 
 
-
+    cancel() {
+      this.router.navigateByUrl('app/operatorconfig/operatordetail');
+    }
 
 }

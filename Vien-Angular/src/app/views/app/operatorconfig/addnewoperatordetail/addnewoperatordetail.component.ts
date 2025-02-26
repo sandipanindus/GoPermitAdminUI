@@ -6,6 +6,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { HttpClient } from '@angular/common/http';
 import { AuthService } from 'src/app/shared/auth.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-addnewoperatordetail',
@@ -15,7 +16,7 @@ import { AuthService } from 'src/app/shared/auth.service';
 export class AddnewoperatordetailComponent implements OnInit {
 
   addNewGeneratorForm: FormGroup;
-  constructor(private fb: FormBuilder, private http: HttpClient, private authService: AuthService,) {}
+  constructor(private router: Router,private fb: FormBuilder, private http: HttpClient, private authService: AuthService,) {}
 
 countries:any[]=[];
   selectedFile: File | null = null;
@@ -187,5 +188,9 @@ onSubmit(): void {
   onReset(): void {
     this.addNewGeneratorForm.reset();
   }
+  cancel() {
+    this.router.navigateByUrl('app/operatorconfig/operatordetail');
+  }
+  
 }
 

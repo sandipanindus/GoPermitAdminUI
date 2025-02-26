@@ -16,7 +16,7 @@
   export class EditoperatoruserComponent implements OnInit {
     operatorUserForm!: FormGroup;
    // Replace with actual values
-    constructor(private fb: FormBuilder, private approute: ActivatedRoute, private http: HttpClient,private notifications: NotificationsService, private authService: AuthService) {}
+    constructor(private router: Router,private fb: FormBuilder, private approute: ActivatedRoute, private http: HttpClient,private notifications: NotificationsService, private authService: AuthService) {}
   Rolesdata:any[]=[];
   operatordata:any[] = [];
   selectedOperator: string;
@@ -274,5 +274,8 @@
     // };
     onCancel() {
       this.operatorUserForm.reset();
+    }
+    cancel() {
+      this.router.navigateByUrl('app/operatorconfig/operatoruser');
     }
   }

@@ -9,7 +9,7 @@
     <div class="form-row">
         <div class="form-group col-md-6 d-flex align-items-center">
            <label for="Operator" class="me-2 w-25 text-end">Operator<span class="text-danger">*</span></label>
-           <select id="Operator" class="form-control w-70"  formControlName="operatorid">
+           <select id="Operator" class="form-control w-70" (change)="setsites($event)"  formControlName="operatorid">
              <option>Select Operator Name</option>
              <option *ngFor="let oper of operatordata" [value]="oper.id">{{ oper.firstName }}</option>
 
@@ -139,7 +139,7 @@
       <div class="col-md-6">
         <div class="form-group d-flex align-items-center">
         <button type="submit" class="btn btn-primary" (click)="onSubmit()">Submit</button>
-        <button type="reset" class="btn btn-secondary ml-3">Cancel</button>
+        <button type="reset" class="btn btn-secondary ml-3" (click)="cancel()" >Cancel</button>
       </div>
       </div>
     </div>

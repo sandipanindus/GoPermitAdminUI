@@ -13,6 +13,9 @@
   styleUrls: ['./operatordetailstable.component.scss']
 })
  export class OperatordetailstableComponent implements OnInit, OnDestroy {
+  searchoper:any;
+  searchemail:any;
+  searchmob:any;
    sitename = '';
    email = '';
    mobileno = '';
@@ -41,6 +44,7 @@
  
    @Output() itemsPerPageChange: EventEmitter<any> = new EventEmitter();
    sites: any = [];
+   allsites: any=[];
  
    constructor(private translate:TranslateService,private spinner: NgxSpinnerService, private modalService: BsModalService, private router: Router, private renderer: Renderer2, private notifications: NotificationsService, private authService: AuthService,) { }
  
@@ -102,6 +106,9 @@
    Clear() {
      this.sitename = '';
      this.email = '';
+     this.searchemail = '';
+     this.searchmob = '';
+     this.searchoper = '';
      this.mobileno = '';
      this.currentPage = 1;
      this.itemsPerPage = 10;
@@ -129,6 +136,25 @@
        b = b[colName].toLowerCase();
        return a.localeCompare(b) * this.sortDir;
      });
+   }
+   SearchSite1() {
+     debugger;
+     var element = document.getElementById("loading") as HTMLDivElement;
+     element.style.display = 'block';
+
+     this.sites = this.allsites.filter((item) => {
+      return (
+        (this.searchoper ? item.operatorName.toLowerCase().includes(this.searchoper.toLowerCase()) : true) &&
+        (this.searchemail ? item.email.toLowerCase().includes(this.searchemail.toLowerCase()) : true) &&
+        (this.searchmob ? item.contactctNumber.includes(this.searchmob) : true)
+      );
+    });
+    element.style.display = 'none';
+    //  else {
+    //    element.style.display = 'none';
+    //    window.location.reload();
+    //  }
+ 
    }
    SearchSite() {
      debugger;
@@ -208,7 +234,8 @@
        var finalresult = JSON.parse(result);
        if (finalresult) {
          debugger;
-         this.sites = finalresult;       
+         this.sites = finalresult;  
+         this.allsites=finalresult;     
          var element = document.getElementById("loading") as HTMLDivElement;
          element.style.display = 'none';
          if (this.sites.length > 0) {

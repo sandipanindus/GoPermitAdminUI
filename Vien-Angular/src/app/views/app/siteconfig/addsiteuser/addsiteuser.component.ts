@@ -5,6 +5,7 @@
   import { AuthService } from 'src/app/shared/auth.service';
   import { NotificationsService, NotificationType } from 'angular2-notifications';
   import { BsModalService, BsModalRef } from 'ngx-bootstrap/modal';
+import { Router } from '@angular/router';
   
   
   @Component({
@@ -15,7 +16,7 @@
   export class AddsiteuserComponent implements OnInit {
     addSiteUserForm!: FormGroup;
    // Replace with actual values
-    constructor(private fb: FormBuilder, private http: HttpClient,private notifications: NotificationsService, private authService: AuthService) {}
+    constructor( private router: Router,private fb: FormBuilder, private http: HttpClient,private notifications: NotificationsService, private authService: AuthService) {}
   Rolesdata:any[]=[];
   operatordata:any[] = [];
   selectedOperator: string;
@@ -84,15 +85,16 @@
 this.Getcountries();
   this.Getroles()
       this.Getopertaors()
-      this.GetSites()
+     // this.GetSites()
     }
 agent
-    GetSites() {
+    GetSites(id:any) {
       var loginId = localStorage.getItem("LoginId");
       var RoleId = localStorage.getItem("RoleId");
       var SiteId = localStorage.getItem("SiteId");
      
-      this.authService.GetSites(this.currentPage, this.itemsPerPage, loginId, RoleId, SiteId).subscribe((result: any) => {
+      this.authService.GetSitesbyoperatorid(this.currentPage, this.itemsPerPage, loginId, RoleId, SiteId,id).subscribe((result: any) => {
+        debugger
         var finalresult = JSON.parse(result);
         if (finalresult.status == "200") {
           debugger;
@@ -184,6 +186,11 @@ agent
       );
     
     }
+    setsites(event: Event){
+      const selectedValue = (event.target as HTMLSelectElement).value;
+      this.GetSites(selectedValue)
+
+    }
   
     Getopertaors(): void {
       debugger
@@ -193,8 +200,9 @@ agent
 
       this.authService.Getoperators(1, 10, loginId, RoleId, SiteId).subscribe(
         response => {
-          if (response && Array.isArray(response)) {
-  
+          if (response || Array.isArray(response)) {
+            response=JSON.parse(response);
+    
   debugger
             for (var i = 0; i < response.length; i++) {
   
@@ -306,5 +314,8 @@ agent
     // };
     onCancel() {
       this.addSiteUserForm.reset();
+    }
+    cancel() {
+      this.router.navigateByUrl('app/siteconfig/siteuser');
     }
   }

@@ -7,6 +7,7 @@ import { FormGroup,FormBuilder, FormControl, Validators } from '@angular/forms';
 import { AuthService } from 'src/app/shared/auth.service';
 import { NotificationsService, NotificationType } from 'angular2-notifications';
 import { BsModalService, BsModalRef } from 'ngx-bootstrap/modal';
+import { Router } from '@angular/router';
 
 
 @Component({
@@ -17,7 +18,7 @@ import { BsModalService, BsModalRef } from 'ngx-bootstrap/modal';
 export class AddnewoperatoruserComponent implements OnInit {
   operatorUserForm!: FormGroup;
  // Replace with actual values
-  constructor(private fb: FormBuilder, private http: HttpClient,private notifications: NotificationsService, private authService: AuthService) {}
+  constructor(private router: Router,private fb: FormBuilder, private http: HttpClient,private notifications: NotificationsService, private authService: AuthService) {}
 Rolesdata:any[]=[];
 operatordata:any[] = [];
 selectedOperator: string;
@@ -205,5 +206,8 @@ debugger
   // };
   onCancel() {
     this.operatorUserForm.reset();
+  }
+  cancel() {
+    this.router.navigateByUrl('app/operatorconfig/operatoruser');
   }
 }

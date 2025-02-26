@@ -21,7 +21,7 @@
           <button type="button" (click)="showAddNewModal()"
             class="top-right-button btn btn-primary btn-lg mr-1">{{ 'pages.add-new' | translate}}</button>
             <button class="btn btn-primary btn-lg my-1 ml-1" (click)="Clear()">Clear</button>
-            <button class="btn btn-primary btn-lg my-1 ml-1" (click)="SearchSite()">Search</button>
+            <button class="btn btn-primary btn-lg my-1 ml-1" (click)="SearchSite1()">Search</button>
         </div>
   
   
@@ -30,15 +30,15 @@
       <form>
         <div class="row justify-content-center mb-3 ml-3 input_cls form-group">
           <div class="col-md-4 pl-0">
-            <input type="text" class="form-control my-3" [(ngModel)]="sitename" [ngModelOptions]="{standalone: true}"
+            <input type="text" class="form-control my-3" [(ngModel)]="searchoper" [ngModelOptions]="{standalone: true}"
               placeholder="Opeartor Name" style="border: none;border-bottom: 1px solid;" />
           </div>
           <div class="col-md-4 pl-0">
-            <input type="text" class="form-control my-3" [(ngModel)]="email" [ngModelOptions]="{standalone: true}"
+            <input type="text" class="form-control my-3" [(ngModel)]="searchemail" [ngModelOptions]="{standalone: true}"
               placeholder="Email" style="border: none;border-bottom: 1px solid;" />
           </div>
           <div class="col-md-4 pl-0">
-            <input type="text" class="form-control my-3" placeholder="Mobile Number" [(ngModel)]="mobileno"
+            <input type="text" class="form-control my-3" placeholder="Mobile Number" [(ngModel)]="searchmob"
               [ngModelOptions]="{standalone: true}" style="border: none;border-bottom: 1px solid;" />
           </div>
   
