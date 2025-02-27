@@ -7,6 +7,7 @@ import { AuthService } from 'src/app/shared/auth.service';
 import { NgxSpinnerService } from 'ngx-spinner';
 import * as XLSX from 'xlsx';
 import { zip } from 'rxjs';
+import { TranslateService } from '@ngx-translate/core';
 @Injectable({
     providedIn: 'root'
 })
@@ -29,7 +30,7 @@ export class BulkUploadComponent implements OnInit, OnDestroy {
     importdata: any = [];
     Id: any;
     code: any;
-    constructor(private spinner: NgxSpinnerService, private modalService: BsModalService, private formBuilder: FormBuilder,
+    constructor(private spinner: NgxSpinnerService,private translate: TranslateService, private modalService: BsModalService, private formBuilder: FormBuilder,
         private authService: AuthService, private notifications: NotificationsService, private router: Router) {
 
 
@@ -88,11 +89,12 @@ export class BulkUploadComponent implements OnInit, OnDestroy {
                 SiteName: this.filelists[i].SiteName,
                 Address: this.filelists[i].Address,
                 City: this.filelists[i].City,
+                SiteId:this.filelists[i].SiteId,
                 State: this.filelists[i].State,
                 Zipcode: zipcode,
                 MobileNumber: MobileNumber,
                 Email: this.filelists[i].Email,
-                ParkingBay: ParkingBayNo,
+                ParkingBay: String(this.filelists[i].ParkingBay),
                 EmailCode: this.code,
                 ParentId: this.Id
             });
@@ -120,6 +122,21 @@ export class BulkUploadComponent implements OnInit, OnDestroy {
 
         });
     }
+
+    errormsg(msg) {
+        this.notifications.create(this.translate.instant('Error'),
+            this.translate.instant(msg), NotificationType.Error, {
+            timeOut: 3000,
+            showProgressBar: true
+        });
+    }
+
+    onSuccess(msg) {
+        this.notifications.create(this.translate.instant('Success'),
+            this.translate.instant(msg), NotificationType.Success,
+            { timeOut: 3000, showProgressBar: true });
+    }
+
     addfile(event) {
         debugger;
         this.filelists = [];
@@ -139,8 +156,30 @@ export class BulkUploadComponent implements OnInit, OnDestroy {
             var arraylist = XLSX.utils.sheet_to_json(worksheet, { raw: true });
             this.filelists = arraylist;
             this.filerecordsdiv = 'inline-block';
+
+            if (!this.file) {
+                this.errormsg("Please select a file.");
+                return;
+            }
             //  console.log(this.filelist)
+       
 
         }
+    }
+
+    saveBulk(){
+        const formData = new FormData();
+        formData.append("file", this.file);
+
+        this.authService.AddBulkTenantUser(formData).subscribe((data: any) => {
+            if(data){
+                this.onSuccess("Tenants Updated Successfully");
+                setTimeout(() => {
+                    window.location.reload();
+                }, 1000);
+            }
+        },error=>{
+            this.errormsg(error.message)
+        })
     }
 }

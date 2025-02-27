@@ -18,7 +18,7 @@
                     <div class="form-group row col-lg-12">
                         <label class="col-sm-2 col-form-label">{{ 'tenants.site' | translate }}</label>
                         <div class="col-sm-4">
-                            <select class="form-control" formControlName="rsiteId"
+                            <select class="form-control" formControlName="rsiteId" (change)="setBay($event.target.value)"
                                 [ngClass]="{'is-invalid': tenantsubmitted && r.rsiteId.errors }" id="txtsite"
                                 [(ngModel)]="siteId" required="required">
                                 <option value="">Select</option>
@@ -236,13 +236,16 @@
                                 </thead>
                                 <tbody>
                                     <tr *ngFor="let bayconfig of bayconfigs">
-                                        <td class="form-control">{{bayconfig.id}}</td>
+                                        <td class="cls_center">{{bayconfig.id}}</td>
 
-                                        <td><input type="text" class="form-control"
-                                                [ngModelOptions]="{standalone: true}"
-                                                placeholder="{{'tenants.vehiclesperbay' | translate }}"
-                                                id="txtvehiclesperbay_{{bayconfig.id}}"
-                                                [(ngModel)]="bayconfig.vehiclesperbay" maxlength="1"></td>
+                                       <td><select class="form-control" [ngModelOptions]="{standalone: true}"
+                                        id="txtbayno_{{bayconfig.id}}" [(ngModel)]="bayconfig.vehiclesperbay"
+                                         required="required"    (change)="onVehiclesPerBayChange(bayconfig)">
+                                        <option value="">Select</option>
+                                         <option *ngFor="let bayno of maxBays"
+                                         id="txtvehiclesperbay_{{bayconfig.id}}" [value]="bayno">
+                                          {{bayno}}</option>
+                                        </select></td>
                                         <td><input type="text" class="form-control" id="txtstartdate_{{bayconfig.id}}"
                                                 placeholder="{{'tenants.startdate' | translate }}" [minDate]="mindate"
                                                 readonly="true" bsDatepicker [container]="'html'"
@@ -257,12 +260,18 @@
                                                 (bsValueChange)="BindBaynos(bayconfig.id)"
                                                 placeholder="{{'tenants.enddate' | translate }}"
                                                 [(ngModel)]="bayconfig.enddate" /></td>
-                                        <td><input type="text" class="form-control" 
+
+                                        <td><div *ngFor="let item of bayconfig.vehiclereg; let i = index  trackBy: trackByIndex">
+                                            <input type="text" class="form-control" 
                                                 [ngModelOptions]="{standalone: true}"
                                                 placeholder="{{'tenants.vehiclereg' | translate }}"
                                                 id="txtvehiclereg_{{bayconfig.id}}"
-                                                [(ngModel)]="bayconfig.vehiclereg"></td>          
-                                        <td><select class="form-control" [ngModelOptions]="{standalone: true}"
+                                                [(ngModel)]="bayconfig.vehiclereg[i]"
+                                                (input)="bayconfig.vehiclereg[i] = bayconfig.vehiclereg[i].toUpperCase()">
+                                            </div>
+                                        </td>  
+
+                                        <!-- <td><select class="form-control" [ngModelOptions]="{standalone: true}"
                                                 id="txtbayno_{{bayconfig.id}}" [(ngModel)]="bayconfig.bayid"
                                                 (change)="AvoidDuplicate(bayconfig.bayid,bayconfig.id)"
                                                 required="required">
@@ -270,7 +279,23 @@
                                                 <option *ngFor="let bayno of bayconfig.baynos"
                                                     id="txtoptionbay_{{bayno.id}}{{bayconfig.id}}" [value]="bayno.id">
                                                     {{bayno.bayName}}</option>
-                                            </select></td>
+                                            </select></td> -->
+
+                                            <td>
+                                                <select class="form-control" 
+                                                        [ngModelOptions]="{standalone: true}"
+                                                        [(ngModel)]="bayconfig.bayid" 
+                                                        (click)="updateSelectedBays()"
+                                                        required>
+                                                  <option value="">Select</option>
+                                                  <option *ngFor="let bayno of getFilteredBays(bayconfig)" 
+                                                          [value]="bayno.id">
+                                                    {{ bayno.bayName }}
+                                                  </option>
+                                                </select>
+                                            </td>
+                                            
+
                                             <!-- <td>
                                                 <a style="font-size: 20px;" (click)="openModal(template,bayno.id)">
                                                 <div class=" glyph-icon simple-icon-trash"></div>

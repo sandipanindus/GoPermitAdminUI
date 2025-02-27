@@ -69,7 +69,7 @@ export class SupportComponent implements OnInit, OnDestroy {
   totalPage: number;
   showpage = false;
   @Input() itemOptionsPerPage = [10, 20, 50];
-
+  status
   @Output() itemsPerPageChange: EventEmitter<any> = new EventEmitter();
   sortDir = 1;
 

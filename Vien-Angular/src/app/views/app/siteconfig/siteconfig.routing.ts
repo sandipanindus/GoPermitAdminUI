@@ -11,6 +11,9 @@ import { AuditComponent } from './auditlog/auditlog.component';
 import { AddsiteuserComponent } from './addsiteuser/addsiteuser.component';
 import { SiteusertableComponent } from './siteusertable/siteusertable.component';
 import { EditsiteuserComponent } from './editsiteuser/editsiteuser.component';
+import { IndustryComponent } from './industry/industry.component';
+import { AddIndustryComponent } from './add-industry/add-industry.component';
+import { EditIndustryComponent } from './edit-industry/edit-industry.component';
 const routes: Routes = [
     {
         path: '', component: SiteConfigComponent,
@@ -20,6 +23,9 @@ const routes: Routes = [
             { path: 'addsite', component: AddSiteComponent },
             { path: 'editsite/:id/:value', component: EditSiteComponent },
             { path: 'support', component: SupportComponent },
+            { path: 'industry', component: IndustryComponent },
+            {path:'addIndustry', component:AddIndustryComponent},
+            {path:'editIndustry/:id/:value', component:EditIndustryComponent},
          //   { path: 'adddatatype', component: AddDatatypeComponent },
             { path: 'editsupport/:id/:value', component: EditSupportComponent },
             { path: 'editsiteuser/:id/:value', component: EditsiteuserComponent },

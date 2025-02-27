@@ -61,7 +61,8 @@ import { BsDatepickerModule } from 'ngx-bootstrap/datepicker';
         ModalModule.forRoot(),
         SimpleNotificationsModule.forRoot(),
         NgSelectModule,
-        BsDatepickerModule.forRoot()
+        BsDatepickerModule.forRoot(),
+         
 
     ]
 })

@@ -16,7 +16,7 @@
 
                         </div>
                        <div class="m-2">
-                           <a href="assets/img/sampletenant.xlsx" download>Samplefile Download</a>
+                           <a href="assets/img/Sample_Tenant.xlsx" download>Samplefile Download</a>
                        </div>
                     </div>
 
@@ -48,14 +48,14 @@
                                         <td>{{filelist.Zipcode}}</td>
                                         <td>{{filelist.MobileNumber}}</td>
                                         <td>{{filelist.Email}}</td>
-                                        <td>{{filelist.ParkingBayNo}}</td>
+                                        <td>{{filelist.ParkingBay}}</td>
                                     </tr>
                                 </tbody>
                             </table>
                         </div>
                     </div>
                     <div *ngIf="filelists.length>0" style="float: right;">
-                        <button class="btn btn-primary d-block mt-3 currentState" type="submit" (click)="SaveData()">
+                        <button class="btn btn-primary d-block mt-3 currentState" type="submit" (click)="saveBulk()">
                             {{ 'bulkupload.submit'  | translate  }}
                         </button>
                     </div>
