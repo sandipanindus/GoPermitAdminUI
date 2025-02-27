@@ -3,7 +3,7 @@
     <div class="loading" style="display: none" id="loading"></div>
     <div class="card mb-4 width_cls">
       <div class="card-body">
-        <h5 class="mb-4">{{ "site.add-new-title" | translate }}</h5>
+        <h5 class="mb-4">{{ "Edit Site" | translate }}</h5>
 
         <form [formGroup]="siteForm">
           <div class="form-group row col-lg-12">
@@ -41,7 +41,7 @@
                     [ngClass]="{'is-invalid': sitesubmitted && r.rsitename.errors }"> -->
                     <select formControlName="OperatorId" id="OperatorId" class="form-control ">
                         <option value="">Select Operator</option>
-                        <option *ngFor="let operat of operatordata" [value]="operat.id">{{ operat.firstName }}</option>
+                        <option *ngFor="let operat of operatordata" [value]="operat.id">{{ operat.operatorName }}</option>
                       </select>
                 <div *ngIf="sitesubmitted && r.OperatorId.errors" class="invalid-feedback">
                     <div *ngIf="r.OperatorId.errors.required" class="invalid-tooltip">Operator is required

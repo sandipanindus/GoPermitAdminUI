@@ -133,7 +133,7 @@ export class EditSiteComponent implements OnInit, OnDestroy {
                 this.operatordata.push({
     
                     id: response[i].id,
-                    firstName: response[i].firstName
+                    operatorName: response[i].operatorName
                 })
               }
             }
@@ -552,6 +552,7 @@ export class EditSiteComponent implements OnInit, OnDestroy {
             this.siteForm.controls['rcity'].enable();
             this.siteForm.controls['rstate'].enable();
             this.siteForm.controls['rzipcode'].enable();
+            this.siteForm.controls['OperatorId'].enable();
             this.siteForm.controls['rcontactpersonname'].enable();
             this.siteForm.controls['remail'].enable();
             this.siteForm.controls['rcontactnumber'].enable();

@@ -170,7 +170,7 @@
               this.operatordata.push({
   
                   id: response[i].id,
-                  firstName: response[i].firstName
+                  operatorName: response[i].operatorName
               })
             }
           }
