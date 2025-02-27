@@ -37,10 +37,18 @@
           <input type="text" class="form-control my-3" [(ngModel)]="firstname" [ngModelOptions]="{standalone: true}"
             placeholder="First Name" style="border: none;border-bottom: 1px solid;" />
         </div>
+
         <div class="col-md-2 pl-0">
+        <select class="form-control my-3" placeholder="Status" [(ngModel)]="status" style="border: none;border-bottom: 1px solid;"
+          (change)="isActiveChange($event.target.value)" [ngModelOptions]="{standalone: true}">
+        <option *ngFor="let item of Status" placeholder="Status" [value]="item.name">{{item.name}}
+        </option>
+       </select>
+      </div>
+        <!-- <div class="col-md-2 pl-0">
           <input type="text" class="form-control my-3" [(ngModel)]="lastname" [ngModelOptions]="{standalone: true}"
             placeholder="Last Name" style="border: none;border-bottom: 1px solid;" />
-        </div>
+        </div> -->
         <div class="col-md-3 pl-0">
           <input type="text" class="form-control my-3" placeholder="Email" [(ngModel)]="email"
             [ngModelOptions]="{standalone: true}" style="border: none;border-bottom: 1px solid;" />
@@ -89,6 +97,7 @@
               <th scope="col" (click)="onSortClick($event,'email')" class="up">{{ 'tenants.email' | translate}}</th>
               <th scope="col" (click)="onSortClick($event,'email')" class="up">{{ 'tenants.vrm' | translate}}</th>
               <th scope="col" (click)="onSortClick($event,'mobileNumber')" class="up">{{ 'tenants.mobilenumber' | translate}}</th>
+              <th scope="col" (click)="onSortClick($event,'mobileNumber')" class="up">{{ 'IsApproved' | translate}}</th>
               <th scope="col">Action</th>
             </tr>
           </thead>
@@ -102,6 +111,12 @@
               <td>{{tenant.email}}</td>
               <td>{{tenant.vrm}}</td>
               <td>{{tenant.mobileNumber}}</td>
+              <td>
+                <div class="custom-control custom-switch">
+                  <input type="checkbox" [(ngModel)]="tenant.isApproved" class="custom-control-input" id="customSwitch1" >
+                  <label class="custom-control-label" for="customSwitch1"></label>
+                </div>
+              </td>
               <td>
                 <div style="display: flex;" *ngIf="edit==true || delete==true || view==true">
                   <div *ngIf="view==true">

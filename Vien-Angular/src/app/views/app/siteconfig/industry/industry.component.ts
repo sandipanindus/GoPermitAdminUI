@@ -1,0 +1,118 @@
+import { Component, Input, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
+import { AuthService } from 'src/app/shared/auth.service';
+
+@Component({
+  selector: 'app-industry',
+  templateUrl: './industry.component.html',
+  styleUrls: ['./industry.component.scss']
+})
+export class IndustryComponent implements OnInit {
+  label = "menu.industry";
+  view: boolean = false;
+  edit: boolean = false;
+  add: boolean = false;
+  delete: boolean = false;
+  modules: any = [];
+  sortDir = 1;
+  totalItems;
+  itemsPerPage: number = 10;
+
+  sitename = '';
+  email = '';
+  mobileno = '';
+
+  @Input() itemOptionsPerPage = [20, 50, 100];
+  
+  industries=[{name:'abc',email:'abc@gmail.com',mobileNumber:'9090090099'}]
+
+  constructor(private authService: AuthService,private router:Router) { }
+
+  ngOnInit(): void {
+    this.GetScreens();
+  }
+
+
+  GetScreens() {
+    debugger;
+    var RoleId = localStorage.getItem("RoleId");
+    var loginId = localStorage.getItem("LoginId");
+    this.authService.GetScreens(RoleId, loginId, 0).subscribe((result: any) => {
+      var data = JSON.parse(result);
+      if (data.status == "200") {
+        this.modules = data.result;
+        for (var i = 0; i < this.modules.length; i++) {
+          for (var j = 0; j < this.modules[i].screensModel.length; j++) {
+            if (this.label == this.modules[i].screensModel[j].label) {
+              this.edit = this.modules[i].screensModel[j].edit;
+              this.add = this.modules[i].screensModel[j].add;
+              this.delete = this.modules[i].screensModel[j].delete;
+              this.view = this.modules[i].screensModel[j].view;
+            }
+          }
+        }
+      }
+      else {
+       // this.notifications.alert('Alert', result.message, NotificationType.Alert, { theClass: 'outline primary', timeOut: 2000, showProgressBar: false });
+      }
+    })
+  }
+
+  onSortClick(event, val) {
+    let target = event.currentTarget,
+      classList = target.classList;
+
+    if (classList.contains('up')) {
+      classList.remove('up');
+      classList.add('down');
+      this.sortDir = -1;
+    } else {
+      classList.add('up');
+      classList.remove('down');
+      this.sortDir = 1;
+    }
+    this.sortArr(val);
+  }
+
+  sortArr(colName: any) {
+    // this.sites.sort((a, b) => {
+    //   a = a[colName].toLowerCase();
+    //   b = b[colName].toLowerCase();
+    //   return a.localeCompare(b) * this.sortDir;
+    // });
+  }
+
+  showpage
+  currentPage
+  pageChanged(event: any): void {
+    debugger;
+  //   this.page = event.page;
+  //   this.currentPage = this.page;
+  //  this.GetSites();
+  }
+  setPage(pageNo: number): void {
+  //  this.currentPage = pageNo;
+  }
+
+  showAddNewModal(){
+  this.router.navigateByUrl('app/siteconfig/addIndustry');
+  }
+
+  showEditModal(id) {
+    var value = "edit";
+    this.router.navigate(['app/siteconfig/editIndustry/' + id + '/' + value]);
+  }
+
+  showViewModal(id) {
+    var value = "view";
+    this.router.navigate(['app/siteconfig/editIndustry/' + id + '/' + value]);
+  }
+
+  Clear(){
+
+  }
+
+  SearchIndustry(){
+
+  }
+}

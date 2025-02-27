@@ -29,7 +29,8 @@ export class AuthService {
     // this.baseUrl = 'http://smartpermitapi.eisappserver.net/'
     //this.baseUrl = "http://smartpermitapi.fadelsoft.com/";
   //   this.baseUrl = 'http://localhost:53846/';
- this.baseUrl = 'http://goapi.fadelsoft.co.in/'
+  this.baseUrl='https://localhost:5001/'
+// this.baseUrl = 'http://goapi.fadelsoft.co.in/'
     // this.baseUrl='http://webapi.enhanceai.ca/'
     //this.baseUrl = 'https://api.gopermit.co.uk/';
   }
@@ -114,6 +115,10 @@ export class AuthService {
   public UpdateTenantUser(data): Observable<any> {
     return this.http.post(this.baseUrl + "api/Admin/UpdateTenantUser", data, { responseType: 'text' });
   }
+  public AddBulkTenantUser(fileData: FormData): Observable<any> {
+    return this.http.post(this.baseUrl + "api/Admin/BulkUploadTenants", fileData, { responseType: 'text' });
+  }
+
   public UpdateRole(data): Observable<any> {
     return this.http.post(this.baseUrl + "api/Admin/UpdateRole", data, { responseType: 'text' });
   }
@@ -299,6 +304,9 @@ export class AuthService {
     return this.http.get(this.baseUrl + 'api/Admin/GetVisitorParkingBysiteIdanddate?Id=' + Id + '&date=' + date, { responseType: 'text' });
   }
 
+  public GetParkingBayNoBySiteId(Id): Observable<any> {
+    return this.http.get(this.baseUrl + "api/Admin/GetParkingBayNobysiteid?Siteid=" + Id, { responseType: 'text' });
+  }
 
   public GetParkingBayNo(Id, Date, endate): Observable<any> {
     return this.http.get(this.baseUrl + "api/Admin/GetParkingBayNo?Siteid=" + Id + "&Date=" + Date + "&EndDate=" + endate, { responseType: 'text' });

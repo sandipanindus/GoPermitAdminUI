@@ -21,6 +21,19 @@ import * as XLSX from 'xlsx';
             overflow-x: scroll !important;
           }
         }
+
+        .cls_center{
+        display:flex;
+        align-items:center;
+        justify-content: center;
+        height: 40px;
+        }
+
+        .table td {
+    padding: .25rem !important;
+    vertical-align: top;
+    border-top: 1px solid #dee2e6;
+        }   
       `
     ],
     providers: [
@@ -93,7 +106,7 @@ export class EditTenantComponent implements OnInit, OnDestroy {
             Pprofile2:['']
 
         });
-        this.numbers = Array(261).fill(0, 0, 261).map((x, i) => i);
+      //  this.numbers = Array(261).fill(0, 0, 261).map((x, i) => i);
 
     }
     get r() { return this.tenantForm.controls; }
@@ -198,7 +211,8 @@ export class EditTenantComponent implements OnInit, OnDestroy {
                             bayid: '',
                             bayconfigid: 0,
                             status: '',
-                            vehiclesperbay: this.vehiclesperbay,
+                            vehiclesperbay:'',
+                           // vehiclesperbay: this.vehiclesperbay,
                             startdate: '',
                             enddate: '',
                             vehiclereg:'',
@@ -464,10 +478,11 @@ export class EditTenantComponent implements OnInit, OnDestroy {
                     this.sites = finalresult.result;
                 }
             }
-            element.style.display = 'none';
 
         });
     }
+
+
     GetParkingBayNoEdit(Id, UserId) {
         var element = document.getElementById("loading") as HTMLDivElement;
         // element.style.display = 'block';
@@ -584,6 +599,8 @@ export class EditTenantComponent implements OnInit, OnDestroy {
                 this.updateenddate = finalresult.result.updateEnddate;
                 this.residencyproofid=finalresult.result.residencyProofId;
                 this.identityproofid=finalresult.result.identityProofId;
+                this.getTenantBays(this.siteId);
+                this.BindMaxBays(this.siteId)
                 if(this.residencyproofid!=null){
                     this.residencyproofid=baseurl+finalresult.result.residencyProofId;
                 }
@@ -652,15 +669,13 @@ export class EditTenantComponent implements OnInit, OnDestroy {
                                 vehicleperbay = finalresult.result.baysConfig[i].maxVehiclesPerBay;
                                 // this.vehiclesperbay=vehicleperbay;
                             }
-                            if (finalresult.result.baysConfig[i].vehiclereg[i] != undefined ||
-                            finalresult.result.baysConfig[i].vehiclereg[i] != null) {
-                                vrm = finalresult.result.baysConfig[i].vehiclereg[i].vrm;
-                            }
-                            else {
-                                var vrm = "";
-                                
-                                // this.vehiclesperbay=vehicleperbay;
-                            }
+                            // if (finalresult.result.baysConfig[i].vehiclereg[i] != undefined ||
+                            // finalresult.result.baysConfig[i].vehiclereg[i] != null) {
+                            //     vrm = finalresult.result.baysConfig[i].vehiclereg[i].vrm;
+                            // }
+                            // else {
+                            //     var vrm = "";
+                            //     }
                             debugger
                             this.bayconfigs.push({
                                 id: j,
@@ -671,22 +686,23 @@ export class EditTenantComponent implements OnInit, OnDestroy {
                                 startdate: new Date(finalresult.result.baysConfig[i].startDate),
                                 enddate: new Date(finalresult.result.baysConfig[i].endDate),
                                 baynos: finalresult.result.baysConfig[i].baynos,
-                                vehiclereg:vrm,
+                                vehiclereg:finalresult.result.baysConfig[i].vehiclereg,
                                 
                             });
-                            debugger
-                            this.bayconfigobj.push({
-                                id: j,
-                                bayid: finalresult.result.baysConfig[i].bayid,
-                                bayconfigid: finalresult.result.baysConfig[i].bayconfigid,
-                                status: finalresult.result.baysConfig[i].status,
-                                vehiclesperbay: vehicleperbay,
-                                startdate: new Date(finalresult.result.baysConfig[i].startDate),
-                                enddate: new Date(finalresult.result.baysConfig[i].endDate),
-                                baynos: finalresult.result.baysConfig[i].baynos[i].bayName,
-                                vehiclereg:vrm,
-                            });
+                            // debugger
+                            // this.bayconfigobj.push({
+                            //     id: j,
+                            //     bayid: finalresult.result.baysConfig[i].bayid,
+                            //     bayconfigid: finalresult.result.baysConfig[i].bayconfigid,
+                            //     status: finalresult.result.baysConfig[i].status,
+                            //     vehiclesperbay: vehicleperbay,
+                            //     startdate: new Date(finalresult.result.baysConfig[i].startDate),
+                            //     enddate: new Date(finalresult.result.baysConfig[i].endDate),
+                            //     baynos: finalresult.result.baysConfig[i].baynos[i].bayName,
+                            //     vehiclereg:vrm,
+                            // });
                         }
+                        console.log("BayCOnfigs",this.bayconfigs)
                         if (remainparkingbay > 0) {
                             for (var i = 0; i < remainparkingbay; i++) {
                                 j++;
@@ -767,6 +783,46 @@ export class EditTenantComponent implements OnInit, OnDestroy {
         }, 1000);
     }
 
+    availBays
+    unbookedBays
+    getTenantBays(siteId){
+        this.authService.GetParkingBayNoBySiteId(siteId).subscribe((result: any) => {
+            debugger;
+            var finalresult = JSON.parse(result);
+            if (finalresult.status == "200") {
+                this.availBays = finalresult.result;
+                this.availBays = finalresult.result.filter(item => item.registerUserId == "0" || item.registerUserId == this.TenantId);
+                this.unbookedBays = finalresult.result.filter(item => item.registerUserId == "0");
+                this.numbers = Array(this.unbookedBays.length).fill(0).map((_, i) => i + 1);
+                console.log("Avail Bays",this.numbers)
+            }
+        }); 
+    }
+
+
+
+    getFilteredBays(bayconfig): any[] {
+        debugger;
+        const selectedBayIds = this.bayconfigs
+            .map(config => config.bayid) // Extract selected bay IDs (not bayNames)
+            .filter(id => id); // Remove empty selections
+    
+        console.log("Selected Bay IDs:", selectedBayIds);
+    
+        const filteredBays = this.availBays.filter(bay =>
+            !selectedBayIds.includes(bay.id) || bay.id === bayconfig.bayid
+        );
+    
+        console.log("Filtered Bays:", filteredBays);
+        return filteredBays;
+    }
+    
+    
+    // Ensure dropdown updates when editing
+    updateSelectedBays() {
+        this.bayconfigs = [...this.bayconfigs]; // Force re-evaluation
+    }
+
     ngAfterViewInit(): void {
         // this.spinnerload();
     }
@@ -786,7 +842,7 @@ export class EditTenantComponent implements OnInit, OnDestroy {
       }
 
     UpdateTenant() {
-
+        debugger
         var element = document.getElementById("loading") as HTMLDivElement;
         element.style.display = 'block';
         this.tenantsubmitted = true;
@@ -871,7 +927,8 @@ export class EditTenantComponent implements OnInit, OnDestroy {
                 document.getElementById("txtenddate_" + this.bayconfigs[i].id + "").className = "form-control col-sm-6";
             }
             if(this.bayconfigs[i].vehiclereg!=""){
-                this.bayconfigs[i].vehiclereg = this.bayconfigs[i].vehiclereg.toString();
+              //  this.bayconfigs[i].vehiclereg = this.bayconfigs[i].vehiclereg.toString();
+              this.bayconfigs[i].vehiclereg = this.bayconfigs[i].vehiclereg;
                 document.getElementById("txtvehiclereg_" + this.bayconfigs[i].id + "").className = "form-control col-sm-6";
             }
             if (this.bayconfigs[i].enddate != "" && this.bayconfigs[i].startdate != "") {
@@ -899,6 +956,22 @@ export class EditTenantComponent implements OnInit, OnDestroy {
                 else {
                     bayconfigid = this.bayconfigs[i].bayconfigid;
                 }
+                if(this.bayconfigs[i].vehiclereg.length > 1){
+
+                  for (var n = 0; n < this.bayconfigs[i].vehiclereg.length; n++) {
+                        bayconfigsobjnew.push({
+                            id: this.bayconfigs[i].id,
+                            bayid: this.bayconfigs[i].bayid,
+                            bayconfigid: bayconfigid,
+                            vehiclesperbay: this.bayconfigs[i].vehiclesperbay,
+                            startdate: this.bayconfigs[i].startdate,
+                            enddate: this.bayconfigs[i].enddate,
+                            vehiclereg: this.bayconfigs[i].vehiclereg[n],  // Convert array element to string
+                            dates: this.dateSelected.toString(),
+                        });
+                    }
+                }
+                else if(this.bayconfigs[i].vehiclereg.length==1){
                 bayconfigsobjnew.push({
                     id: this.bayconfigs[i].id,
                     bayid: this.bayconfigs[i].bayid,
@@ -906,9 +979,10 @@ export class EditTenantComponent implements OnInit, OnDestroy {
                     vehiclesperbay: this.bayconfigs[i].vehiclesperbay,
                     startdate: this.bayconfigs[i].startdate,
                     enddate: this.bayconfigs[i].enddate,
-                    vehiclereg:this.bayconfigs[i].vehiclereg,
+                    vehiclereg:this.bayconfigs[i].vehiclereg.toString(),
                     dates: this.dateSelected.toString()
                 });
+            }
 
             }
  
@@ -1005,5 +1079,81 @@ export class EditTenantComponent implements OnInit, OnDestroy {
 
         });
     }
+
+    BindMaxBays(siteId){
+        const result=this.sites.filter((item)=>item.id==siteId)
+        const bays=result[0].bays
+        this.totalMaxBays=result[0].vehiclesperbay
+        this.setMaxVehBay();
+    }
+
+
+    totalMaxBays
+    totalBays
+    setBay(id){
+        debugger
+        const result=this.sites.filter((item)=>item.id==id)
+        const bays=result[0].bays
+        this.totalMaxBays=result[0].vehiclesperbay
+        console.log("selectedBay",result)
+      //  this.numbers = Array(bays).fill(0,0,261).map((x,i)=>i);
+        this.totalBays=this.numbers
+        this.setMaxVehBay();
+        this.getTenantBays(id);
+        this.GetTenantBaysBySiteID(id,this.totalBays)
+        this.setMaxVehBay()
+    }
+
+    bookedBays:number=0
+    GetTenantBaysBySiteID(siteId,allBays){
+        debugger
+    this.bookedBays=0;
+    var LogInId = localStorage.getItem("LoginId");  
+    var RoleId = localStorage.getItem("RoleId");  
+    this.authService.GetUsers(1, 100, LogInId, RoleId, siteId).subscribe((result: any) => {
+    if(result){
+        console.log("Tenant Bays", result)
+        var finalresult = JSON.parse(result);
+         this.bookedBays
+        for(var i=0;i<finalresult.result.length;i++){
+            this.bookedBays= this.bookedBays+finalresult.result[i].bayConfigs.length;
+        }
+        this.totalBays = this.totalBays.length-this.bookedBays
+      
+        // this.numbers = Array(this.totalBays).fill(0,0,261).map((x,i)=>i);
+      //  this.numbers = Array(this.totalBays).fill(0).map((_, i) => i + 1);
+
+    }
+    })
+    }
+
+    maxBays
+    setMaxVehBay(){
+        this.maxBays = Array(this.totalMaxBays).fill(0).map((_, i) => i + 1);
+        console.log("Max Bays",this.maxBays)
+    }
+
+    trackByIndex(index: number, item: any): number {
+        return index;
+      }
+
+      onVehiclesPerBayChange(bayconfig: any) {
+        debugger;
+        // if(parseInt(bayconfig.vehiclesperbay, 10) < bayconfig.vehiclereg.length){
+        //   this.bayconfigs[bayconfig.id-1].vehiclesperbay=bayconfig.vehiclereg.length,
+        //     this.errormsg("Cannot reduce the Max no of bays")
+        //     return
+        // }
+        const existingValues = bayconfig.vehiclereg || []; // Preserve existing values
+        bayconfig.vehiclereg = Array.from({ length: bayconfig.vehiclesperbay }, (_, i) => 
+            existingValues[i] 
+        );
+    }
+
+    
+    // onVehiclesPerBayChange(bayconfig: any) {
+    //     debugger;
+    //     bayconfig.vehiclereg = Array.from({ length: bayconfig.vehiclesperbay }, () => '');
+    //   }
 
 }

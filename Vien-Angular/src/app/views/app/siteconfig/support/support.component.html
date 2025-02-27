@@ -46,6 +46,15 @@
           <input type="text" class="form-control my-3" placeholder="Subject" [(ngModel)]="subject"
             [ngModelOptions]="{standalone: true}" style="border: none;border-bottom: 1px solid;" />
         </div>
+        <div class="col-md-3 pl-0">
+          <select class="form-control my-3" [(ngModel)]="status" placeholder="Status" [ngModelOptions]="{standalone: true}" 
+            style="border: none; border-bottom: 1px solid;">
+            <option value="Closed">Closed</option>
+            <option value="Open">Open</option>
+            <option value="InProgress">In Progress</option>
+          </select>
+        </div>
+        
 
       </div>
     </form>
@@ -63,10 +72,11 @@
             <tr>
               <th>Sno</th>
               <th scope="col" *ngIf="showsite" (click)="onSortClick($event,'siteName')" class="up">Site Name</th>
-              <th scope="col"  (click)="onSortClick($event,'name')" class="up">Name</th>
+              <th scope="col"  (click)="onSortClick($event,'name')" class="up">Tenant Name</th>
               <th scope="col" (click)="onSortClick($event,'email')" class="up">Email</th>
               <th scope="col" (click)="onSortClick($event,'mobileNo')" class="up">Mobile Number</th>
               <th scope="col" (click)="onSortClick($event,'subject')" class="up">Subject</th>
+              <th scope="col" (click)="onSortClick($event,'subject')" class="up">Status</th>
               <th scope="col">Action</th>
             </tr>
           </thead>
@@ -79,6 +89,7 @@
               <td>{{support.email}}</td>
               <td>{{support.mobileNo}}</td>
               <td>{{support.subject}}</td>
+              <td>{{support.status}}</td>
               <td>
                 <div style="display: flex;" *ngIf="edit==true || delete==true || view==true">
                   <div *ngIf="view==true" style="display: none;">

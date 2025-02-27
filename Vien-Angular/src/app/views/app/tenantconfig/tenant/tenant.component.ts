@@ -420,4 +420,19 @@ export class TenantComponent implements OnInit, OnDestroy {
     this.GetTenants();
   }
 
+  switch
+  isActive
+  onToggleChange(event){
+
+  }
+
+  Status=[{id:1,name:true},
+    {id:2,name:false},
+  ]
+
+  status
+  isActiveChange(val){
+
+  }
+
 }

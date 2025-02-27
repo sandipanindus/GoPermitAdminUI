@@ -14,6 +14,21 @@ import * as XLSX from 'xlsx';
 @Component({
     selector: 'app-addtenant',
     templateUrl: './addtenant.component.html',
+    styles:[
+        `.cls_center{
+        display:flex;
+        align-items:center;
+        justify-content: center;
+        height: 40px;
+        }
+
+        .table td {
+    padding: .25rem !important;
+    vertical-align: top;
+    border-top: 1px solid #dee2e6;
+        }   
+        `
+    ],
     providers: [
         [DatePipe]
     ]
@@ -46,7 +61,7 @@ export class AddTenantComponent implements OnInit, OnDestroy {
     baynonew: number;
     vehiclesperbay: string;
     mindate = new Date();
-    numbers: number[];
+    numbers: number [];
     filelists: any = [];
     file: File;
     arrayBuffer: any;
@@ -87,6 +102,7 @@ export class AddTenantComponent implements OnInit, OnDestroy {
         var element = document.getElementById("loading") as HTMLDivElement;
         // element.style.display = 'block';
         this.GetSites();
+        
     }
 
     agent
@@ -135,9 +151,10 @@ export class AddTenantComponent implements OnInit, OnDestroy {
             showProgressBar: true
         });
     }
+
+
     BindBayNo() {
         debugger;
-
         if (this.siteId != null || this.siteId != undefined || this.siteId != "") {
             if (this.parkingbayId != "0") {
                 for (var j = 0; j < this.sites.length; j++) {
@@ -156,7 +173,7 @@ export class AddTenantComponent implements OnInit, OnDestroy {
                     this.bayconfigs.push({
                         id: j,
                         bayid: '',
-                        vehiclesperbay: this.vehiclesperbay,
+                        vehiclesperbay: [],
                         startdate: '',
                         enddate: '',
                         baynos: [],
@@ -170,6 +187,8 @@ export class AddTenantComponent implements OnInit, OnDestroy {
                 this.bayconfigdiv = 'none';
             }
         }
+
+        console.log("Bay Configs123",this.bayconfigs)
     }
     // BindBaynos(id) {
     //     debugger;
@@ -230,7 +249,21 @@ export class AddTenantComponent implements OnInit, OnDestroy {
             }
     
         }
-    
+    }
+
+    availBays
+    getTenantBays(siteId){
+        this.authService.GetParkingBayNoBySiteId(siteId).subscribe((result: any) => {
+            debugger;
+            var finalresult = JSON.parse(result);
+            if (finalresult.status == "200") {
+                this.availBays = finalresult.result;
+                this.availBays = finalresult.result.filter(item => item.registerUserId == "0");
+                this.totalBays = this.availBays.length
+                this.numbers = Array(this.totalBays).fill(0).map((_, i) => i + 1);
+
+            }
+        }); 
     }
 
     BindBaynoswithenddate(id) {
@@ -266,13 +299,57 @@ export class AddTenantComponent implements OnInit, OnDestroy {
         }
     }
 
+    totalBays
+    totalMaxBays
     setBay(id){
         debugger
         const result=this.sites.filter((item)=>item.id==id)
         const bays=result[0].bays
-        console.log("selectedBay",bays)
+        this.totalMaxBays=result[0].vehiclesperbay
+        console.log("selectedBay",result)
         this.numbers = Array(bays).fill(0,0,261).map((x,i)=>i);
+        this.totalBays=this.numbers
+        this.getTenantBays(id);
+      //  this.GetTenantBaysBySiteID(id,this.totalBays)
+        this.setMaxVehBay()
     }
+
+    onVehiclesPerBayChange(bayconfig: any) {
+        debugger;
+        bayconfig.vehiclereg = Array.from({ length: bayconfig.vehiclesperbay }, () => '');
+
+      }
+    
+    maxBays
+    setMaxVehBay(){
+        this.maxBays = Array(this.totalMaxBays).fill(0).map((_, i) => i + 1);
+        console.log("Max Bays",this.maxBays)
+    }
+
+    bookedBays:number=0
+    GetTenantBaysBySiteID(siteId,allBays){
+        debugger
+    this.bookedBays=0;
+    var LogInId = localStorage.getItem("LoginId");  
+    var RoleId = localStorage.getItem("RoleId");  
+    this.authService.GetUsers(1, 100, LogInId, RoleId, siteId).subscribe((result: any) => {
+    if(result){
+        console.log("Tenant Bays", result)
+        var finalresult = JSON.parse(result);
+         this.bookedBays
+        for(var i=0;i<finalresult.result.length;i++){
+            this.bookedBays= this.bookedBays+finalresult.result[i].bayConfigs.length;
+        }
+      //  this.totalBays = this.totalBays.length-this.bookedBays
+      
+        // this.numbers = Array(this.totalBays).fill(0,0,261).map((x,i)=>i);
+        // this.numbers = Array(this.totalBays).fill(0).map((_, i) => i + 1);
+
+    }
+    })
+    }
+
+
     GetSites() {
         var element = document.getElementById("loading") as HTMLDivElement;
         // element.style.display = 'block';
@@ -322,6 +399,27 @@ export class AddTenantComponent implements OnInit, OnDestroy {
     //     });
     //     element.style.display = 'none';
     // }
+
+
+    getFilteredBays(bayconfig): any[] {
+        const selectedBayNames = this.bayconfigs
+          .map(config => config.bayid) // Extract selected bayNames
+          .filter(name => name); // Remove empty selections
+    
+        return this.availBays.filter(bay => !selectedBayNames.includes(bay.bayName) || bay.bayName === bayconfig.bayid);
+      }
+    
+      // When a bay is selected, update the list dynamically
+      updateSelectedBays() {
+        // Force re-evaluation of dropdown options
+        this.bayconfigs = [...this.bayconfigs];
+      }
+
+    AvoidDuplicate2(Id){
+    debugger
+    // this.availBays = this.availBays.filter((item) => item.bayName !== Id);
+    // console.log("Avail Bays",this.availBays)
+    }
 
     AvoidDuplicate(Id, indexid) {
 
@@ -387,6 +485,10 @@ export class AddTenantComponent implements OnInit, OnDestroy {
             //  element.style.display = 'none';
         }
     }
+
+    trackByIndex(index: number, item: any): number {
+        return index;
+      }
     
     getDateslist(startDate, stopDate) {
         var dateArray = [];
@@ -487,10 +589,9 @@ export class AddTenantComponent implements OnInit, OnDestroy {
                 // this.bayconfigs[i].enddate=enddate.getFullYear()+"-"+(enddate.getMonth() + 1)+"-"+enddate.getDate();
                 document.getElementById("txtenddate_" + this.bayconfigs[i].id + "").className = "form-control col-sm-6";
             }
-            if(this.bayconfigs[i].vehiclereg!=""){
-                this.bayconfigs[i].vehiclereg = this.bayconfigs[i].vehiclereg.toString();
-                document.getElementById("txtvehiclereg_" + this.bayconfigs[i].id + "").className = "form-control col-sm-6";
-            }
+            if (this.bayconfigs[i].vehiclereg && this.bayconfigs[i].vehiclereg.some(v => v.trim() !== "")) {
+                document.getElementById("txtvehiclereg_" + this.bayconfigs[i].id)?.classList.add("col-sm-6");
+            }     
             
           
             if (this.bayconfigs[i].enddate != "" && this.bayconfigs[i].startdate != "") {
@@ -518,16 +619,32 @@ export class AddTenantComponent implements OnInit, OnDestroy {
                 else {
                     bayconfigid = this.bayconfigs[i].bayconfigid;
                 }
-                bayconfigsobjnew.push({
-                    id: this.bayconfigs[i].id,
-                    bayid: this.bayconfigs[i].bayid,
-                    bayconfigid: bayconfigid,
-                    vehiclesperbay: this.bayconfigs[i].vehiclesperbay,
-                    startdate: this.bayconfigs[i].startdate,
-                    enddate: this.bayconfigs[i].enddate,
-                    vehiclereg:this.bayconfigs[i].vehiclereg,
-                    dates: this.dateSelected.toString(),
-                });
+                if (this.bayconfigs[i].vehiclereg.length == 1) {
+                    bayconfigsobjnew.push({
+                        id: this.bayconfigs[i].id,
+                        bayid: this.bayconfigs[i].bayid,
+                        bayconfigid: bayconfigid,
+                        vehiclesperbay: this.bayconfigs[i].vehiclesperbay,
+                        startdate: this.bayconfigs[i].startdate,
+                        enddate: this.bayconfigs[i].enddate,
+                        vehiclereg: this.bayconfigs[i].vehiclereg[0],  // Convert array to string
+                        dates: this.dateSelected.toString(),
+                    });
+                } else if (this.bayconfigs[i].vehiclereg.length > 1) {
+                    for (var n = 0; n < this.bayconfigs[i].vehiclereg.length; n++) {
+                        bayconfigsobjnew.push({
+                            id: this.bayconfigs[i].id,
+                            bayid: this.bayconfigs[i].bayid,
+                            bayconfigid: bayconfigid,
+                            vehiclesperbay: this.bayconfigs[i].vehiclesperbay,
+                            startdate: this.bayconfigs[i].startdate,
+                            enddate: this.bayconfigs[i].enddate,
+                            vehiclereg: this.bayconfigs[i].vehiclereg[n],  // Convert array element to string
+                            dates: this.dateSelected.toString(),
+                        });
+                    }
+                }
+                
 
             }
 

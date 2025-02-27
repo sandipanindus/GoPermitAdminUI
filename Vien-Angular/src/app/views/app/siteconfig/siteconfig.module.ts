@@ -30,6 +30,9 @@ import {EditSupportComponent} from './editsupport/editsupport.component';
 import { ZatparkComponent } from './zatparklog/zatparklog.component';
 import { BsDatepickerModule } from 'ngx-bootstrap/datepicker';
 import { AuditComponent } from './auditlog/auditlog.component';
+import { IndustryComponent } from './industry/industry.component';
+import { AddIndustryComponent } from './add-industry/add-industry.component';
+import { EditIndustryComponent } from './edit-industry/edit-industry.component';
 @NgModule({
     declarations: [
         AddSiteComponent,
@@ -39,7 +42,10 @@ import { AuditComponent } from './auditlog/auditlog.component';
         SupportComponent,
         EditSupportComponent,
         ZatparkComponent,
-        AuditComponent
+        AuditComponent,
+        IndustryComponent,
+        AddIndustryComponent,
+        EditIndustryComponent
     ],
     imports: [
         NgxSpinnerModule,
