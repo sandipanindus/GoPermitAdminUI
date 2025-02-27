@@ -19,7 +19,7 @@
    sitename = '';
    email = '';
    mobileno = '';
-   label = "menu.site";
+   label = "menu.operatordetail";
    view: boolean = false;
    edit: boolean = false;
    add: boolean = false;

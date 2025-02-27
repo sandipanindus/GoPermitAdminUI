@@ -7,6 +7,8 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { HttpClient } from '@angular/common/http';
 import { AuthService } from 'src/app/shared/auth.service';
 import { Router } from '@angular/router';
+import { NotificationsService, NotificationType } from 'angular2-notifications';
+import { TranslateService } from '@ngx-translate/core';
 
 @Component({
   selector: 'app-addnewoperatordetail',
@@ -16,7 +18,7 @@ import { Router } from '@angular/router';
 export class AddnewoperatordetailComponent implements OnInit {
   
   addNewGeneratorForm: FormGroup;
-  constructor(private router: Router,private fb: FormBuilder, private http: HttpClient, private authService: AuthService,) {}
+  constructor(private router: Router,private translate: TranslateService,private notifications: NotificationsService,private fb: FormBuilder, private http: HttpClient, private authService: AuthService,) {}
 
 countries:any[]=[];
   selectedFile: File | null = null;
@@ -119,7 +121,8 @@ onSubmit(): void {
     alert("Please fill all required fields correctly.");
     return;
   }
-
+  var element = document.getElementById("loading") as HTMLDivElement;
+  element.style.display = 'block';
   const formData = new FormData();
   
   // Append form fields
@@ -161,19 +164,48 @@ onSubmit(): void {
     formData.append('HelpImage', this.HelpImage);
   }
 
-  // Send data to API
-  this.http.post(this.apiUrl+'api/Operator/CreateOperator', formData).subscribe(
-    response => {
-      console.log('Form submitted successfully', response);
-      alert('Form saved successfully!');
-    },
-    error => {
-      console.error('Error saving form', error);
-      alert('Error saving form. Please try again.');
-    }
-  );
-}
+  
+  this.authService.savenewoperatordetails(formData).subscribe((data: any) => {
+            
+    debugger
+    var result = JSON.parse(data);
+    if (result) {
+        element.style.display = 'none';
+        this.onSuccess("Site saved successfully");
 
+        setTimeout(() => {
+            this.router.navigateByUrl('app/operatorconfig/operatordetail');
+        }, 2000);
+
+    }
+    else {
+        element.style.display = 'none';
+        this.alert(result.message);
+    }
+}, (error) => {
+    element.style.display = 'none';
+    this.errormsg(error.message);
+});
+}
+alert(msg) {
+  this.notifications.create(this.translate.instant('Alert'),
+      this.translate.instant(msg), NotificationType.Alert, {
+      timeOut: 3000,
+      showProgressBar: true
+  });
+}
+ onSuccess(msg) {
+        this.notifications.create(this.translate.instant('Success'),
+            this.translate.instant(msg), NotificationType.Success,
+            { timeOut: 3000, showProgressBar: true });
+    }
+    errormsg(msg) {
+        this.notifications.create(this.translate.instant('Error'),
+            this.translate.instant(msg), NotificationType.Error, {
+            timeOut: 3000,
+            showProgressBar: true
+        });
+    }
 // onSubmit(): void {
 //   debugger
 //   if (this.addNewGeneratorForm.valid) {

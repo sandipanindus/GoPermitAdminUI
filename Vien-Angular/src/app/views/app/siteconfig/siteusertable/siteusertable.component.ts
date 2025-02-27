@@ -39,7 +39,7 @@ export class SiteusertableComponent implements OnInit, OnDestroy {
   sitename = '';
   email = '';
   mobileno = '';
-  label = "menu.site";
+  label = "menu.siteuser";
   view: boolean = false;
   edit: boolean = false;
   add: boolean = false;

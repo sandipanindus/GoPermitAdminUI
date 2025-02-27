@@ -209,7 +209,7 @@
               Active:true,
               IsOperator:true,
               IsSiteUser:false,
-              OpeartorId:this.operatorUserForm.value?.operators,
+              OperatorId:this.operatorUserForm.value?.operators,
               IsMicrosoftAccount:this.operatorUserForm.value?.microsoftAccount,
               RoleId:String(parseInt(this.operatorUserForm.value?.role)),
               LoginId: parseInt(localStorage.getItem("LoginId")),
@@ -223,9 +223,7 @@
                   setTimeout(() => {
                       this.modalRef.hide();
                   }, 2000);
-                  setTimeout(() => {
-                     window.location.reload();
-                  }, 1000);
+                 
                   this.firstname='';
                   this.lastname='';
                   this.email='';
@@ -237,6 +235,9 @@
                   this.countryId=0;
                   this.zipcode='';
                   this.roleId=0;
+                  setTimeout(() => {
+                    this.router.navigateByUrl('app/operatorconfig/operatoruser');
+                  }, 1000);
   
               }
               else {

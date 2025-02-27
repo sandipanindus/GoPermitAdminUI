@@ -28,8 +28,8 @@ export class AuthService {
   constructor(private afAuth: AngularFireAuth, private http: HttpClient) {
     // this.baseUrl = 'http://smartpermitapi.eisappserver.net/'
     //this.baseUrl = "http://smartpermitapi.fadelsoft.com/";
-  //   this.baseUrl = 'http://localhost:53846/';
-  this.baseUrl='https://localhost:5001/'
+   this.baseUrl = 'http://localhost:53846/';
+//  this.baseUrl='https://localhost:5001/'
 // this.baseUrl = 'http://goapi.fadelsoft.co.in/'
     // this.baseUrl='http://webapi.enhanceai.ca/'
     //this.baseUrl = 'https://api.gopermit.co.uk/';
@@ -208,6 +208,12 @@ export class AuthService {
   }
   public SaveSite(data): Observable<any> {
     return this.http.post(this.baseUrl + "api/Admin/AddSite", data, { responseType: 'text' });
+  }
+  public savenewoperatordetails(data): Observable<any> {
+    return this.http.post(this.baseUrl + "api/Operator/CreateOperator", data, { responseType: 'text' });
+  }
+  public updatenewoperatordetails(data): Observable<any> {
+    return this.http.put(this.baseUrl + "api/Operator/UpdateOperators", data, { responseType: 'text' });
   }
   public SaveLabelclass(data): Observable<any> {
     return this.http.post(this.baseUrl + "api/Admin/AddLabelClass", data, { responseType: 'text' });

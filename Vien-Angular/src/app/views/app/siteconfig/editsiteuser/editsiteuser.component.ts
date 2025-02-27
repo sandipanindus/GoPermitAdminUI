@@ -354,9 +354,7 @@ this.Getroles()
                   setTimeout(() => {
                       this.modalRef.hide();
                   }, 2000);
-                  setTimeout(() => {
-                     window.location.reload();
-                  }, 1000);
+                
                   this.firstname='';
                   this.lastname='';
                   this.email='';
@@ -368,6 +366,9 @@ this.Getroles()
                   this.countryId=0;
                   this.zipcode='';
                   this.roleId=0;
+                  setTimeout(() => {
+                    this.router.navigateByUrl('app/siteconfig/siteuser');
+                  }, 1000);
   
               }
               else {

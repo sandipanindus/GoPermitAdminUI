@@ -155,9 +155,7 @@ debugger
                 setTimeout(() => {
                     this.modalRef.hide();
                 }, 2000);
-                setTimeout(() => {
-                   window.location.reload();
-                }, 1000);
+               
                 this.firstname='';
                 this.lastname='';
                 this.email='';
@@ -169,6 +167,10 @@ debugger
                 this.countryId=0;
                 this.zipcode='';
                 this.roleId=0;
+                setTimeout(() => {
+                  this.router.navigateByUrl('app/operatorconfig/operatoruser');
+
+               }, 1000);
 
             }
             else {

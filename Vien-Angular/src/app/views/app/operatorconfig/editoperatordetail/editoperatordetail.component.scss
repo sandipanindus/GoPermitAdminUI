@@ -7,7 +7,21 @@
 .rd-st{
     margin-left: 21px;
 }
+.section-title {
+  font-weight: lighter;
+  position: relative;
+  display: block;
+  padding-bottom: 5px;
+  margin-bottom: 10px;
+}
 
+.section-title::after {
+  content: "";
+  display: block;
+  width: 100%;
+  border-bottom: 2px solid #979797; /* Adjust color and thickness */
+  margin-top: 3px;
+}
 @media screen and (max-width: 425px) {
   .width_cls {
     width: 135%;

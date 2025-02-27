@@ -1083,7 +1083,8 @@ editid:any;
         alert("Please fill all required fields correctly.");
         return;
       }
-    
+      var element = document.getElementById("loading") as HTMLDivElement;
+      element.style.display = 'block';
       const formData = new FormData();
       
       // Append form fields
@@ -1132,17 +1133,30 @@ editid:any;
       }
      
     
-      // Send data to API
-      this.http.put('http://localhost:53846/api/Operator/UpdateOperators', formData).subscribe(
-        response => {
-          console.log('Form submitted successfully', response);
-          alert('Form saved successfully!');
-        },
-        error => {
-          console.error('Error saving form', error);
-          alert('Error saving form. Please try again.');
+
+
+
+      this.authService.updatenewoperatordetails(formData).subscribe((data: any) => {
+            
+        debugger
+        var result = JSON.parse(data);
+        if (result) {
+            element.style.display = 'none';
+            this.onSuccess("Site saved successfully");
+    
+            setTimeout(() => {
+                this.router.navigateByUrl('app/operatorconfig/operatordetail');
+            }, 2000);
+    
         }
-      );
+        else {
+            element.style.display = 'none';
+            this.alert(result.message);
+        }
+    }, (error) => {
+        element.style.display = 'none';
+        this.errormsg(error.message);
+    });
     }
 
 
