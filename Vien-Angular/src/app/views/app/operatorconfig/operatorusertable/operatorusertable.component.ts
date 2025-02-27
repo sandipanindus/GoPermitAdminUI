@@ -16,7 +16,7 @@
      sitename = '';
      email = '';
      mobileno = '';
-     label = "menu.site";
+     label = "menu.operatoruser";
      view: boolean = false;
      edit: boolean = false;
      add: boolean = false;

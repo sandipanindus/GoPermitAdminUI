@@ -14,7 +14,7 @@ import { Router } from '@angular/router';
   styleUrls: ['./addnewoperatordetail.component.scss']
 })
 export class AddnewoperatordetailComponent implements OnInit {
-
+  
   addNewGeneratorForm: FormGroup;
   constructor(private router: Router,private fb: FormBuilder, private http: HttpClient, private authService: AuthService,) {}
 
@@ -22,7 +22,7 @@ countries:any[]=[];
   selectedFile: File | null = null;
   HelpImage: File | null = null;
 
-
+  apiUrl= this.authService.baseUrl;
 
   ngOnInit(): void {
     this.addNewGeneratorForm = this.fb.group({
@@ -162,7 +162,7 @@ onSubmit(): void {
   }
 
   // Send data to API
-  this.http.post('http://localhost:53846/api/Operator/CreateOperator', formData).subscribe(
+  this.http.post(this.apiUrl+'api/Operator/CreateOperator', formData).subscribe(
     response => {
       console.log('Form submitted successfully', response);
       alert('Form saved successfully!');

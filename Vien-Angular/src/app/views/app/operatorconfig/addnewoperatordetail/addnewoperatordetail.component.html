@@ -55,6 +55,20 @@
             <span *ngIf="addNewGeneratorForm.get('Email')?.errors?.Email">Enter a valid Email</span>
           </div>
         </div>
+
+        
+      <div class="col-md-6 d-flex align-items-center justify-content-start">
+        <label for="active" class="me-2 w-25 text-end">Active</label>
+        <div class="custom-control custom-switch">
+          <input type="checkbox" id="active" class="custom-control-input w-70" 
+          formControlName="active">
+          <div *ngIf="addNewGeneratorForm.get('active').invalid && addNewGeneratorForm.get('active').touched" 
+          class="text-danger"> Active Required
+          </div>
+          <label class="custom-control-label" for="active"></label>
+        </div>
+     </div>
+
     </div>
     <div class="form-group"></div>
 
@@ -192,7 +206,19 @@
           class="text-danger"> VAT Number Required
           </div>
         </div>
+
+
         <div class="form-group col-md-6 d-flex align-items-center">
+          <label for="Profile" class="me-2 w-25 text-end">Profile</label>
+          <input type="file" (change)="onFileSelect($event)" class="form-control w-70">
+
+          <!-- <input type="file" id="Profile" class="form-control w-70"  formControlName="Profile"> -->
+          <div *ngIf="addNewGeneratorForm.get('Profile').invalid && addNewGeneratorForm.get('Profile').touched" 
+          class="text-danger"> Profile Required
+          </div>
+       </div>
+
+        <!-- <div class="form-group col-md-6 d-flex align-items-center">
            <label for="RoleId" class="me-2 w-25 text-end">RoleId<span class="text-danger">*</span></label>
            <select id="RoleId" class="form-control w-70" formControlName="RoleId">
              <option>Select</option>
@@ -200,33 +226,16 @@
            <div *ngIf="addNewGeneratorForm.get('RoleId').invalid && addNewGeneratorForm.get('RoleId').touched" 
            class="text-danger"> RoleId Required
            </div>
-       </div>
+       </div> -->
+
+
      </div>
 
     <!-- File Uploads -->
     <div class="form-row">
-        <div class="form-group col-md-6 d-flex align-items-center">
-           <label for="Profile" class="me-2 w-25 text-end">Profile</label>
-           <input type="file" (change)="onFileSelect($event)" class="form-control">
-
-           <!-- <input type="file" id="Profile" class="form-control w-70"  formControlName="Profile"> -->
-           <div *ngIf="addNewGeneratorForm.get('Profile').invalid && addNewGeneratorForm.get('Profile').touched" 
-           class="text-danger"> Profile Required
-           </div>
-        </div>
+      
 
 
-      <div class="col-md-6 d-flex align-items-center justify-content-start">
-         <label for="active" class="me-2 w-25 text-end">Active</label>
-         <div class="custom-control custom-switch">
-           <input type="checkbox" id="active" class="custom-control-input w-70" 
-           formControlName="active">
-           <div *ngIf="addNewGeneratorForm.get('active').invalid && addNewGeneratorForm.get('active').touched" 
-           class="text-danger"> Active Required
-           </div>
-           <label class="custom-control-label" for="active"></label>
-         </div>
-      </div>
       
       
     </div>
