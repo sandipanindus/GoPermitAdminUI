@@ -63,8 +63,43 @@ export class AddIndustryComponent implements OnInit, OnDestroy {
       });
   }
 
-  SaveRole() {
+//   SaveRole() {
    
-  }
+//   }
+
+SaveRole() {
+    this.rolesubmitted = true;
+
+    if (this.industryForm.invalid) {
+        return;
+    }
+
+    this.spinner.show();
+
+    const industryData = {
+        id: 0,
+        industryName: this.industryForm.value.industryname,
+        isActive: true,
+        isDelete: false,
+        createdBy: '', // Replace with actual user if available
+        createdDate: new Date().toISOString(),
+        updatedBy: '', // Replace with actual user if available
+        updatedDate: new Date().toISOString()
+    };
+
+    this.authService.insertIndustry(industryData).subscribe(
+        response => {
+            this.spinner.hide();
+            this.onSuccess('Industry added successfully!');
+            this.industryForm.reset();
+            this.rolesubmitted = false;
+        },
+        error => {
+            this.spinner.hide();
+            this.error('Failed to add industry. Please try again.');
+        }
+    );
+}
+
 
 }

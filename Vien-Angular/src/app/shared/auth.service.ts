@@ -469,4 +469,31 @@ export class AuthService {
   }
 
 
+  public insertIndustry(data: any): Observable<any> {
+    return this.http.post(`${this.baseUrl}/api/Admin/InsertIndustry`, data);
+  }
+
+
+  // Fetch all industries
+public GetAllIndustries(): Observable<any> {
+  return this.http.get(this.baseUrl + "api/Admin/GetAllIndustries");
+}
+
+getIndustryById(id: number): Observable<any> {
+  return this.http.get<any>(`${this.baseUrl}/api/Admin/GetIndustryById?id=${id}`);
+}
+
+updateIndustry(industryData: any) {
+  return this.http.post(`${this.baseUrl}/api/Admin/UpdateIndustry`, industryData);
+}
+
+deleteIndustry(id: number) {
+  return this.http.post(`${this.baseUrl}/api/Admin/DeleteIndustry?id=${id}`, {});
+}
+
+
+
+
+
+
 }

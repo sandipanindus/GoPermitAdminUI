@@ -64,26 +64,33 @@
             </thead>
             <tbody>
               <tr *ngFor="let item of industries let i=index">
-                 <td>1</td>
-                 <!-- <td>{{i+1}}</td> -->
-                <td>{{item.name}}</td>
-                <td>
+                 <!-- <td>1</td> -->
+                 <td>{{i+1}}</td>
+                 <td>{{ item.industryName }}</td>  
+                 <td>
                   <div style="display: flex;" *ngIf="edit==true || delete==true || view==true">
-                    <div (click)="showViewModal(1)" *ngIf="view==true">
+                    <div (click)="showViewModal(item.id)" *ngIf="view==true">
                       <a  style="font-size: 20px;">
                         <div class="glyph-icon simple-icon-eye"></div>
                       </a>
                     </div>
-                    <div style="margin-left: 10px;" (click)="showEditModal(1)" *ngIf="edit==true">
+                    <div style="margin-left: 10px;" (click)="showEditModal(item.id)" *ngIf="edit==true">
                       <a  style="font-size: 20px;">
                         <div class="glyph-icon simple-icon-pencil"></div>
                       </a>
                     </div>
-                    <div style="margin-left: 10px;" *ngIf="delete==true">
+                    <!-- <div style="margin-left: 10px;" *ngIf="delete==true">
                       <a style="font-size: 20px;" >
                         <div class=" glyph-icon simple-icon-trash"></div>
                       </a>
+                    </div> -->
+
+                    <div style="margin-left: 10px;" *ngIf="delete">
+                      <a style="font-size: 20px;" (click)="deleteIndustry(item.id)">
+                        <div class="glyph-icon simple-icon-trash"></div>
+                      </a>
                     </div>
+                    
                   </div>
                 </td>
               </tr>

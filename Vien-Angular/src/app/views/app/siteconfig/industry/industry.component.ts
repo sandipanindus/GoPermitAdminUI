@@ -18,19 +18,45 @@ export class IndustryComponent implements OnInit {
   totalItems;
   itemsPerPage: number = 10;
 
+  industries: any[] = []; // Store industries from API
+
+
+
   sitename = '';
   email = '';
   mobileno = '';
 
   @Input() itemOptionsPerPage = [20, 50, 100];
   
-  industries=[{name:'abc',email:'abc@gmail.com',mobileNumber:'9090090099'}]
+  // industries=[{name:'abc',email:'abc@gmail.com',mobileNumber:'9090090099'}]
 
   constructor(private authService: AuthService,private router:Router) { }
 
   ngOnInit(): void {
     this.GetScreens();
+    this.GetIndustries(); // Fetch industries on component load
+
   }
+
+  // Fetch industries from the API
+  GetIndustries() {
+    this.authService.GetAllIndustries().subscribe(
+      (data: any) => {
+        console.log("API Full Response:", data); // Log the entire response
+  
+        if (data) {
+          this.industries = data; // Assign the full response directly
+          console.log("Industries List:", this.industries);
+        } else {
+          console.error("Empty response from API");
+        }
+      },
+      (error) => {
+        console.error("API Error:", error);
+      }
+    );
+  }
+  
 
 
   GetScreens() {
@@ -115,4 +141,18 @@ export class IndustryComponent implements OnInit {
   SearchIndustry(){
 
   }
+
+  deleteIndustry(id: number) {
+    this.authService.deleteIndustry(id).subscribe({
+      next: () => {
+        this.GetIndustries(); // Refresh the list after deletion
+      },
+      error: (error) => {
+        console.error("Error deleting industry:", error);
+      }
+    });
+  }
+  
+  
+  
 }

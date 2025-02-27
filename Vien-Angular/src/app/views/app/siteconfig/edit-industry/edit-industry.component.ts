@@ -18,6 +18,8 @@ export class EditIndustryComponent implements OnInit, OnDestroy {
   industryname: string;
   description: string;
   RoleId: any;
+  industryId: number = 0; // New variable for industry ID
+  industryData: any = {}; // Variable to store API response
   @Input() currentState = '';
   buttonDisabled = false;
   buttonState = '';
@@ -35,8 +37,30 @@ export class EditIndustryComponent implements OnInit, OnDestroy {
      // this.spinner.show();
       var id = this.approute.snapshot.params['id'];
       var value = this.approute.snapshot.params['value'];
+
+      this.industryId = id; // Store industry ID in new variable
+
       this.Edit(id, value);
+      this.fetchIndustryData(id);
+
   }
+
+
+  fetchIndustryData(id: number) {
+    this.authService.getIndustryById(id).subscribe(
+      (response) => {
+        this.industryData = response;
+        console.log('api response' , this.industryData)
+        this.industryForm.patchValue({ industryname: response.industryName });
+      },
+      (error) => {
+        console.error("Error fetching industry data:", error);
+        this.error("Failed to fetch industry details");
+      }
+    );
+  }
+
+
   cancel() {
       this.router.navigateByUrl('app/siteconfig/industry');
   }
@@ -53,33 +77,52 @@ export class EditIndustryComponent implements OnInit, OnDestroy {
   ngOnDestroy() {
 
   }
-  Edit(id: any, value: any) {
-      if (value == "view") {
-          this.buttonDisabled=true;
-          this.industryForm.controls['industryname'].disable();
-      }
-      else {
-          this.buttonDisabled=false;
-          this.industryForm.controls['industryname'].enable();
-          this.industryForm.controls['rdescription'].enable();
+//   Edit(id: any, value: any) {
+//       if (value == "view") {
+//           this.buttonDisabled=true;
+//           this.industryForm.controls['industryname'].disable();
+//       }
+//       else {
+//           this.buttonDisabled=false;
+//           this.industryForm.controls['industryname'].enable();
+//           this.industryForm.controls['rdescription'].enable();
 
-      }
-      this.RoleId = id;
-      // this.authService.GetRolesById(id).subscribe((result: any) => {
-      //     var finalresult = JSON.parse(result);
-      //     if (finalresult.status == "200") {
-      //         this.rolename = finalresult.result.name;
-      //         this.description = finalresult.result.description;
-      //     }
-      //     else {
-      //         this.alert(finalresult.message);
-      //     }
-      // }, (error) => {
-      //     this.error(error.message);
+//       }
+//       this.RoleId = id;
+//       // this.authService.GetRolesById(id).subscribe((result: any) => {
+//       //     var finalresult = JSON.parse(result);
+//       //     if (finalresult.status == "200") {
+//       //         this.rolename = finalresult.result.name;
+//       //         this.description = finalresult.result.description;
+//       //     }
+//       //     else {
+//       //         this.alert(finalresult.message);
+//       //     }
+//       // }, (error) => {
+//       //     this.error(error.message);
 
-      // });
+//       // });
       
+//   }
+
+
+Edit(id: any, value: any) {
+    if (!this.industryForm) {
+      console.error("industryForm is not initialized yet!");
+      return;
+    }
+  
+    if (value == "view") {
+      this.buttonDisabled = true;
+      this.industryForm.controls['industryname'].disable();
+    } else {
+      this.buttonDisabled = false;
+      this.industryForm.controls['industryname'].enable();
+    }
+  
+    this.RoleId = id;
   }
+  
   onSuccess(msg) {
       this.notifications.create(this.translate.instant('Success'),
           this.translate.instant(msg), NotificationType.Success,
@@ -100,9 +143,39 @@ export class EditIndustryComponent implements OnInit, OnDestroy {
       });
   }
 
-  UpdateRole() {
-      var element = document.getElementById("loading") as HTMLDivElement;
+//   UpdateRole() {
+//       var element = document.getElementById("loading") as HTMLDivElement;
 
+//   }
+
+UpdateRole() {
+    if (this.industryForm.invalid) {
+      console.error("Please fill all required fields");
+      return;
+    }
+
+    const updatedIndustry = {
+      id: this.industryId, // Use industryId instead of RoleId
+      industryName: this.industryForm.value.industryname,
+      isActive: true,
+      isDelete: false,
+      createdBy: "",
+      createdDate: new Date().toISOString(),
+      updatedBy: "",
+      updatedDate: new Date().toISOString()
+    };
+
+    this.authService.updateIndustry(updatedIndustry).subscribe(
+      () => {
+        this.onSuccess('Industry updated successfully!');
+        console.log("Industry updated successfully");
+        this.router.navigateByUrl('/app/siteconfig/industry');
+      },
+      (error) => {
+        console.error("Failed to update industry:", error);
+      }
+    );
   }
+  
 
 }
