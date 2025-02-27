@@ -451,4 +451,16 @@ export class AuthService {
     return this.http.get(this.baseUrl + "api/Tenant/getvehcilecountsbydates?tenantid=" + id + "&bayno=" + bayno + "&date=" + date)
 
   }
+
+
+
+
+
+  // Service method to call the ChangePassword API
+  public changePassword(password: string, loginId: number): Observable<any> {
+    const url = `${this.baseUrl}api/Tenant/ChangePassword?password=${encodeURIComponent(password)}&LoginId=${loginId}`;
+    return this.http.get(url, { responseType: 'text' });
+  }
+
+
 }

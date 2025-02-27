@@ -7,7 +7,9 @@ import { AuthService } from 'src/app/shared/auth.service';
 import { environment } from 'src/environments/environment';
 @Component({
   selector: 'app-topnav',
-  templateUrl: './topnav.component.html'
+  templateUrl: './topnav.component.html',
+  styleUrls: ['./topnav.component.scss'],
+
 })
 export class TopnavComponent implements OnInit, OnDestroy {
   sidebar: ISidebar;
@@ -228,5 +230,46 @@ export class TopnavComponent implements OnInit, OnDestroy {
     const input = document.querySelector('.mobile-view');
     if (input && input.classList) { input.classList.remove('mobile-view'); }
     this.searchKey = '';
+  }
+
+
+  isDropdownOpen: boolean = false;
+
+  // Toggle dropdown visibility
+  toggleDropdown(): void {
+    this.isDropdownOpen = !this.isDropdownOpen;
+  }
+
+  // Handle option selection
+  selectOption(option: string): void {
+    console.log(`Selected: ${option}`);
+    this.isDropdownOpen = false; // Close dropdown after selection
+  }
+
+  logout(): void {
+    localStorage.setItem("LoginId", null);
+    localStorage.setItem("firstname", null);
+    localStorage.setItem("lastname", null);
+    localStorage.setItem("organisationame", null);
+    localStorage.setItem("email", null);
+    localStorage.setItem("subdomain", null);
+    localStorage.setItem("SiteId", null);
+    localStorage.setItem("RoleId", null);
+    localStorage.setItem("ProfilePath", null);
+    this.router.navigateByUrl('user/login');
+  }
+
+  changePassword(): void {
+  this.router.navigateByUrl('app/forgotpassword');
+  }
+
+  // Close dropdown when clicking outside
+  @HostListener('document:click', ['$event'])
+  onOutsideClick(event: MouseEvent): void {
+    const target = event.target as HTMLElement;
+    const clickedInside = target.closest('.dropdown-menu') || target.closest('.name');
+    if (!clickedInside && this.isDropdownOpen) {
+      this.isDropdownOpen = false;
+    }
   }
 }
