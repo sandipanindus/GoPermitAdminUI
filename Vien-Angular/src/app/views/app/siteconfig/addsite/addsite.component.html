@@ -43,7 +43,7 @@
                                 [ngClass]="{'is-invalid': sitesubmitted && r.rsitename.errors }"> -->
                                 <select formControlName="OperatorId" id="OperatorId" class="form-control ">
                                     <option value="">Select Operator</option>
-                                    <option *ngFor="let operat of operatordata" [value]="operat.id">{{ operat.firstName }}</option>
+                                    <option *ngFor="let operat of operatordata" [value]="operat.id">{{ operat.operatorName }}</option>
                                   </select>
                             <div *ngIf="sitesubmitted && r.OperatorId.errors" class="invalid-feedback">
                                 <div *ngIf="r.OperatorId.errors.required" class="invalid-tooltip">Operator is required

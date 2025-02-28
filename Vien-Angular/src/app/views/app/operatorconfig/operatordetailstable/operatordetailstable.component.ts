@@ -359,7 +359,7 @@
        var data = JSON.parse(result);
        if (data.status == "200") {
          element.style.display = 'none';
-         this.onSuccess("Site deleted successfully");
+         this.onSuccess("Operator deleted successfully");
        //  this.notifications.success('Success', "Site deleted successfully", NotificationType.Success, { theClass: 'outline primary', timeOut: 1000, showProgressBar: false });
          setTimeout(() => {
            window.location.reload();

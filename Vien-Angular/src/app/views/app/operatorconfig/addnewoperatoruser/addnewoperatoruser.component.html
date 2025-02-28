@@ -10,7 +10,7 @@
           <label for="Operator" class="me-2 w-25 text-end">Operator<span class="text-danger">*</span></label>
           <select id="Operatorss" class="form-control w-70" name="test1"  formControlName="operators">
             
-            <option *ngFor="let oper of operatordata" [value]="oper.id">{{ oper.firstName }}</option>
+            <option *ngFor="let oper of operatordata" [value]="oper.id">{{ oper.operatorName }}</option>
           </select>
           
           

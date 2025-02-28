@@ -69,12 +69,12 @@
         contactNumber: ['', Validators.required],
         role: ['', Validators.required],
         site: ['', Validators.required],
-        Address1: ['', Validators.required],
-        Address2: ['', Validators.required],
-        Country: ['', Validators.required],
-        State: ['', Validators.required],
-        City: ['', Validators.required],
-        postalcode: ['', Validators.required],
+        Address1: [''],
+        Address2: [''],
+        Country: [0],
+        State: [''],
+        City: [''],
+        postalcode: [''],
         microsoftAccount: [false],
         Active: [false],
   
@@ -300,7 +300,7 @@ this.Getroles()
               this.operatordata.push({
   
                   id: response[i].id,
-                  firstName: response[i].firstName
+                  operatorName: response[i].operatorName
               })
             }
           }

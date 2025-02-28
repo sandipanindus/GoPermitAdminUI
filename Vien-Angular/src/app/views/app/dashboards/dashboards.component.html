@@ -4,6 +4,21 @@
         <app-heading></app-heading>
         <app-breadcrumb></app-breadcrumb>
         <div class="separator mb-5"></div>
+
+        <div class="container mt-4">
+            <div class="row justify-content-center">
+              <div class="col-lg-3 col-md-4 col-sm-6 mb-3" *ngFor="let card of cards">
+                <div class="card shadow text-center p-2">
+                  <div class="card-body">
+                    <h6 class="card-title">{{ card.title }}</h6>
+                    <div class="count-circle" [ngStyle]="{'color':card.color}" >{{ card.count }}</div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          
+          
     </div>
 </div>
 <router-outlet></router-outlet>

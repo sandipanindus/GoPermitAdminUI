@@ -815,11 +815,11 @@ editid:any;
             var result = JSON.parse(data);
             if (result.status == "200") {
                 element.style.display = 'none';
-                this.onSuccess("Site Updated Successfully");
+                this.onSuccess("Operator Updated Successfully");
                 //  this.notifications.success('Success', "Site Updated Successfully", NotificationType.Success, { theClass: 'outline primary', timeOut: 3000, showProgressBar: false, clickToClose: true });
 
                 setTimeout(() => {
-                    this.router.navigateByUrl('app/siteconfig/site');
+                    this.router.navigateByUrl('app/operatorconfig/operatordetail');
                 }, 1000);
             }
             else {
