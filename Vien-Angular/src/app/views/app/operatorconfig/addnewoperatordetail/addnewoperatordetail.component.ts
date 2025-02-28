@@ -171,7 +171,7 @@ onSubmit(): void {
     var result = JSON.parse(data);
     if (result) {
         element.style.display = 'none';
-        this.onSuccess("Site saved successfully");
+        this.onSuccess("Operator details saved successfully");
 
         setTimeout(() => {
             this.router.navigateByUrl('app/operatorconfig/operatordetail');

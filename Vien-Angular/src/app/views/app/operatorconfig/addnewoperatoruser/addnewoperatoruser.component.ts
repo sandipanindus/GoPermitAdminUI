@@ -151,7 +151,7 @@ debugger
             debugger;
             var result = JSON.parse(data);
             if (result.status == "200") {
-                this.notifications.success('Success',"User added successfully", NotificationType.Success, { theClass: 'outline primary', timeOut: 2000, showProgressBar: false, clickToClose: true });
+                this.notifications.success('Success',"Operator added successfully", NotificationType.Success, { theClass: 'outline primary', timeOut: 2000, showProgressBar: false, clickToClose: true });
                 setTimeout(() => {
                     this.modalRef.hide();
                 }, 2000);

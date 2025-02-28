@@ -70,7 +70,8 @@ export class TopnavComponent implements OnInit, OnDestroy {
     var firstname = localStorage.getItem("firstname");
     var lastname = localStorage.getItem('lastname');
     if (id != null) {
-      this.displayName = firstname + " " + lastname;
+     // this.displayName = firstname + " " + lastname;
+     this.displayName = firstname
     }
     if (this.authService.user) {
 
