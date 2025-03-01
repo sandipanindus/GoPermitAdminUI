@@ -67,7 +67,9 @@ export class EditSiteComponent implements OnInit, OnDestroy {
     timeunit: string;
     
     operatordata:any[] = [];
+    industrydata:any[] = [];
     OperatorId: any;
+    industryId: any;
     constructor(private translate: TranslateService, private spinner: NgxSpinnerService, private approute: ActivatedRoute, private modalService: BsModalService, private formBuilder: FormBuilder,
         private authService: AuthService, private notifications: NotificationsService, private router: Router) {
         this.siteForm = this.formBuilder.group({
@@ -85,6 +87,7 @@ export class EditSiteComponent implements OnInit, OnDestroy {
             rvisitorparkingbay: ['', Validators.required],
             rvehiclesperbay: ['', Validators.required],
             OperatorId: ['', Validators.required],
+            industryId: ['', Validators.required],
             rcustomRadio1:['']
         });
         this.parkingbayForm = this.formBuilder.group({
@@ -106,6 +109,8 @@ export class EditSiteComponent implements OnInit, OnDestroy {
 
     ngOnInit() {
         this.Getopertaors()
+        this.GetIndustries()
+
         this.agent=this.getBrowserName();
 
         var id = this.approute.snapshot.params['id']
@@ -113,6 +118,25 @@ export class EditSiteComponent implements OnInit, OnDestroy {
         this.Edit(id, value);
     }
 
+
+    GetIndustries() {
+        this.authService.GetAllIndustries().subscribe(
+          (data: any) => {
+            console.log("API Full Response:", data); // Log the entire response
+      
+            if (data) {
+              this.industrydata = data; // Assign the full response directly
+              console.log("Industries List:", this.industrydata);
+            } else {
+                
+              console.error("Empty response from API");
+            }
+          },
+          (error) => {
+            console.error("API Error:", error);
+          }
+        );
+      }
     agent
     Getopertaors(): void {
         debugger
@@ -508,6 +532,7 @@ export class EditSiteComponent implements OnInit, OnDestroy {
             this.siteForm.controls['rvisitorparkingbay'].disable();
             this.siteForm.controls['rvehiclesperbay'].disable();
             this.siteForm.controls['OperatorId'].disable();
+            this.siteForm.controls['industryId'].disable();
             this.parkingbayForm.controls['psection'].disable();
             this.parkingbayForm.controls['pseperatorId'].disable();
             this.visitorbayForm.controls['vsection'].disable();
@@ -553,6 +578,7 @@ export class EditSiteComponent implements OnInit, OnDestroy {
             this.siteForm.controls['rstate'].enable();
             this.siteForm.controls['rzipcode'].enable();
             this.siteForm.controls['OperatorId'].enable();
+            this.siteForm.controls['industryId'].enable();
             this.siteForm.controls['rcontactpersonname'].enable();
             this.siteForm.controls['remail'].enable();
             this.siteForm.controls['rcontactnumber'].enable();
@@ -624,6 +650,7 @@ export class EditSiteComponent implements OnInit, OnDestroy {
                 this.vseperatorId = finalresult.result.visitorSeperator;
                 this.vehiclesperbay = finalresult.result.maxVehiclesPerBay;
                 this.OperatorId = finalresult.result.operatorId;
+                this.industryId = finalresult.result.industryId;
                 this.parkingbaydiv = 'block';
                 this.visitorbaydiv = 'block';
                 this.maxparkingsession = finalresult.result.visitorbays[0].maxParkingSession;
@@ -1018,9 +1045,10 @@ export class EditSiteComponent implements OnInit, OnDestroy {
             TimeUnit: this.timeunit,
             VisitorSessions: this.visitorsessions,
             OperatorId: this.OperatorId,
+            industryId: this.industryId,
         }
 
-
+debugger
         this.authService.UpdateSite(data).subscribe((data: any) => {
 
             var result = JSON.parse(data);

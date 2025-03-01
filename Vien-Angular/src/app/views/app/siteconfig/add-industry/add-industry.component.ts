@@ -77,13 +77,13 @@ SaveRole() {
     this.spinner.show();
 
     const industryData = {
-        id: 0,
+        // id: 0,
         industryName: this.industryForm.value.industryname,
-        isActive: true,
-        isDelete: false,
-        createdBy: '', // Replace with actual user if available
+        // isActive: true,
+        // isDelete: false,
+        // createdBy: '', // Replace with actual user if available
         createdDate: new Date().toISOString(),
-        updatedBy: '', // Replace with actual user if available
+        // updatedBy: '', // Replace with actual user if available
         updatedDate: new Date().toISOString()
     };
 
@@ -93,6 +93,8 @@ SaveRole() {
             this.onSuccess('Industry added successfully!');
             this.industryForm.reset();
             this.rolesubmitted = false;
+            this.router.navigateByUrl('app/siteconfig/industry');
+
         },
         error => {
             this.spinner.hide();

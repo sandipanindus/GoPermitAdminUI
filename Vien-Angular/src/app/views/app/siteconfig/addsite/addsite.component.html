@@ -56,12 +56,12 @@
                                 placeholder="{{'site.Operator' | translate }}" [(ngModel)]="OperatorId"
                                 formControlName="OperatorId"
                                 [ngClass]="{'is-invalid': sitesubmitted && r.rsitename.errors }"> -->
-                                <select formControlName="OperatorId" id="OperatorId" class="form-control ">
+                                <select formControlName="industryId" id="industryId" class="form-control ">
                                     <option value="">Select Industry</option>
-                                    <option *ngFor="let operat of operatordata" [value]="operat.id">{{ operat }}</option>
+                                    <option *ngFor="let operat of industrydata" [value]="operat.id">{{ operat.industryName }}</option>
                                   </select>
-                            <div *ngIf="sitesubmitted && r.OperatorId.errors" class="invalid-feedback">
-                                <div *ngIf="r.OperatorId.errors.required" class="invalid-tooltip">Industry is required
+                            <div *ngIf="sitesubmitted && r.industryId.errors" class="invalid-feedback">
+                                <div *ngIf="r.industryId.errors.required" class="invalid-tooltip">Industry is required
                                 </div>
                             </div>
                         </div>

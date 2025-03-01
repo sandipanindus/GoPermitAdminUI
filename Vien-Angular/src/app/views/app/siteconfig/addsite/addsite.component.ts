@@ -52,6 +52,7 @@ export class AddSiteComponent implements OnInit, OnDestroy {
     maxparkingsession: string;
     timeunit: string;
     operatordata:any[] = [];
+    industrydata:any[] = [];
     constructor(private spinner: NgxSpinnerService, private translate: TranslateService, private modalService: BsModalService, private formBuilder: FormBuilder,
         private authService: AuthService, private notifications: NotificationsService, private router: Router) {
         this.siteForm = this.formBuilder.group({
@@ -68,7 +69,8 @@ export class AddSiteComponent implements OnInit, OnDestroy {
             rtenantparkingbay: ['', Validators.required],
             rvisitorparkingbay: ['', Validators.required],
             rvehiclesperbay: ['', Validators.required],
-            OperatorId: ['', Validators.required]
+            OperatorId: ['', Validators.required],
+            industryId: ['', Validators.required]
         });
         this.parkingbayForm = this.formBuilder.group({
 
@@ -90,6 +92,7 @@ export class AddSiteComponent implements OnInit, OnDestroy {
 
 
         this.Getopertaors()
+        this.GetIndustries()
         this.agent = this.getBrowserName();
         this.seperatorId = '';
         this.vseperatorId = '';
@@ -142,6 +145,25 @@ export class AddSiteComponent implements OnInit, OnDestroy {
           error => {
             console.error('Error saving form', error);
             alert('Error . Please try again.');
+          }
+        );
+      }
+
+      GetIndustries() {
+        this.authService.GetAllIndustries().subscribe(
+          (data: any) => {
+            console.log("API Full Response:", data); // Log the entire response
+      
+            if (data) {
+              this.industrydata = data; // Assign the full response directly
+              console.log("Industries List:", this.industrydata);
+            } else {
+                
+              console.error("Empty response from API");
+            }
+          },
+          (error) => {
+            console.error("API Error:", error);
           }
         );
       }
@@ -601,6 +623,7 @@ export class AddSiteComponent implements OnInit, OnDestroy {
             TimeUnit: this.timeunit,
             VisitorSessions: this.visitorsessions,
             OperatorId: this.siteForm.value?.OperatorId,
+            industryId: this.siteForm.value?.industryId,
         }
         debugger
         this.authService.SaveSite(data).subscribe((data: any) => {
