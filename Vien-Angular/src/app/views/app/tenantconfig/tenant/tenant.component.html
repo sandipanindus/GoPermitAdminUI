@@ -111,12 +111,27 @@
               <td>{{tenant.email}}</td>
               <td>{{tenant.vrm}}</td>
               <td>{{tenant.mobileNumber}}</td>
-              <td>
+              <!-- <td>
                 <div class="custom-control custom-switch">
                   <input type="checkbox" [(ngModel)]="tenant.isApproved" class="custom-control-input" id="customSwitch1" >
                   <label class="custom-control-label" for="customSwitch1"></label>
                 </div>
+              </td> -->
+
+              <td>
+                <div class="custom-control custom-switch">
+                  <input 
+                    type="checkbox" 
+                    [checked]="tenant.isApproved" 
+                    class="custom-control-input" 
+                    [id]="'customSwitch' + i"
+                    (click)="openApprovalModal(tenant.id, $event)">
+                  <label class="custom-control-label" [for]="'customSwitch' + i"></label>
+                </div>
               </td>
+              
+              
+              
               <td>
                 <div style="display: flex;" *ngIf="edit==true || delete==true || view==true">
                   <div *ngIf="view==true">
@@ -181,3 +196,74 @@
 <ngx-spinner bdColor="rgba(0,0,0,0.8)" size="medium" color="#fff" type="ball-clip-rotate-multiple" [fullScreen]="true">
   <p style="color: white"> Please wait... </p>
 </ngx-spinner>
+
+
+
+
+
+<!-- <div 
+  *ngIf="isDialogOpen" 
+  style="position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(75, 71, 71, 0.5); display: flex; justify-content: center; align-items: center; z-index: 1000;">
+  
+  <div style="background: #fff; padding: 20px; border-radius: 8px; text-align: center; max-width: 400px; width: 100%; box-shadow: 0px 4px 6px rgba(0,0,0,0.1);">
+    
+    <h3 style="margin-bottom: 10px; font-size: 20px;">Approve Tenant</h3>
+    <p style="margin-bottom: 20px; font-size: 14px;">Do you want to approve this tenant?</p>
+
+    <div style="display: flex; justify-content: space-evenly;">
+      <button 
+        (click)="closeApprovalModal()" 
+        style="background: gray; color: white; border: none; padding: 8px 16px; border-radius: 4px; cursor: pointer;">
+        Cancel
+      </button>
+
+      <button 
+        (click)="approveTenant()" 
+        style="background: #007bff; color: white; border: none; padding: 8px 16px; border-radius: 4px; cursor: pointer;">
+        Yes, Approve
+      </button>
+    </div>
+
+  </div>
+</div> -->
+
+
+
+
+<div 
+  *ngIf="isDialogOpen" 
+  style="position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(75, 71, 71, 0.5); display: flex; justify-content: center; align-items: center; z-index: 1000;">
+  
+  <div style="background: #fff; padding: 20px; border-radius: 8px; text-align: center; max-width: 400px; width: 100%; box-shadow: 0px 4px 6px rgba(0,0,0,0.1);">
+    
+    <h3 style="margin-bottom: 10px; font-size: 20px;">
+      {{ selectedTenantApprovalStatus ? 'Approve Tenant' : 'Disapprove Tenant' }}
+    </h3>
+    <p style="margin-bottom: 20px; font-size: 14px;">
+      Do you want to {{ selectedTenantApprovalStatus ? 'approve' : 'disapprove' }} this tenant?
+    </p>
+
+    <div style="display: flex; justify-content: space-evenly;">
+      <button 
+        (click)="closeApprovalModal()" 
+        style="background: gray; color: white; border: none; padding: 8px 16px; border-radius: 4px; cursor: pointer;">
+        Cancel
+      </button>
+
+      <!-- <button 
+      (click)="approveTenant()" 
+      [ngStyle]="{ 'background-color': selectedTenantApprovalStatus ? '#007bff' : 'red' }"
+      style="color: white; border: none; padding: 8px 16px; border-radius: 4px; cursor: pointer;">
+      Yes {{ selectedTenantApprovalStatus ? 'Approve' : 'Disapprove' }}
+    </button> -->
+
+    <button 
+    (click)="approveTenant()" 
+    [ngStyle]="{ 'background-color': selectedTenantApprovalStatus ? '#007bff' : 'red' }"
+    style="color: white; border: none; padding: 8px 16px; border-radius: 4px; cursor: pointer;">
+    Yes 
+  </button>
+    </div>
+
+  </div>
+</div>

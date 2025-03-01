@@ -493,6 +493,13 @@ deleteIndustry(id: number) {
 
 
 
+approveTenant(id: number, isApproved: boolean): Observable<any> {
+  const payload = { id, isApproved };
+  return this.http.post<any>(`${this.baseUrl}/api/Admin/ApproveTenant`, payload);
+}
+
+
+
 
 
 

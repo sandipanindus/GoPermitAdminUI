@@ -435,4 +435,55 @@ export class TenantComponent implements OnInit, OnDestroy {
 
   }
 
+
+  isDialogOpen = false;
+  selectedTenantId: number | null = null;
+
+  openApprovalModal(tenantId: number, event: Event) {
+    event.preventDefault(); // Prevents immediate toggle
+  
+    const tenant = this.tenants.find(t => t.id === tenantId);
+    if (tenant) {
+      this.selectedTenantId = tenantId;
+      this.selectedTenantApprovalStatus = !tenant.isApproved; // Correctly toggles value
+      this.isDialogOpen = true;
+    }
+  }
+  
+
+  closeApprovalModal() {
+    this.isDialogOpen = false;
+    this.selectedTenantId = null;
+  }
+
+
+  selectedTenantApprovalStatus: boolean = false;
+
+
+  approveTenant() {
+    if (this.selectedTenantId !== null) {
+      console.log("Approving Tenant:", this.selectedTenantId, "Status:", this.selectedTenantApprovalStatus);
+  
+      this.authService.approveTenant(this.selectedTenantId, this.selectedTenantApprovalStatus).subscribe({
+        next: (response) => {
+          console.log("Tenant approval updated:", response);
+  
+          // Update local state
+          const tenant = this.tenants.find(t => t.id === this.selectedTenantId);
+          if (tenant) {
+            tenant.isApproved = this.selectedTenantApprovalStatus;
+          }
+  
+          this.GetTenants();
+          this.closeApprovalModal();
+        },
+        error: (error) => {
+          console.error("Error updating tenant approval:", error);
+          alert("Failed to update tenant approval. Please try again.");
+        }
+      });
+    }
+  }
+  
+
 }
