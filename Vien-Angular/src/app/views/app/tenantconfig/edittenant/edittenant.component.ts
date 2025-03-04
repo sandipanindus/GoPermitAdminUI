@@ -597,18 +597,19 @@ export class EditTenantComponent implements OnInit, OnDestroy {
                 this.parkingbayidobj = finalresult.result.parkingBay;
                 this.email = finalresult.result.email;
                 this.updateenddate = finalresult.result.updateEnddate;
-                this.residencyproofid=finalresult.result.residencyProofId;
-                this.identityproofid=finalresult.result.identityProofId;
+                this.residencyproofid=this.authService.imageBindUrl+finalresult.result.residencyProofId;
+                this.identityproofid=this.authService.imageBindUrl+finalresult.result.identityProofId;
                 this.getTenantBays(this.siteId);
                 this.BindMaxBays(this.siteId)
+                console.log("789",this.residencyproofid)
                 if(this.residencyproofid!=null){
-                    this.residencyproofid=baseurl+finalresult.result.residencyProofId;
+                    this.residencyproofid=this.authService.imageBindUrl+finalresult.result.residencyProofId;
                 }
                 else{
                     this.residencyproofid = finalresult.result.residencyProofId;
                 }
                 if(this.identityproofid!=null){
-                    this.identityproofid=baseurl+finalresult.result.identityProofId;
+                    this.identityproofid=this.authService.imageBindUrl+finalresult.result.identityProofId;
                 }
                 else{
                     this.identityproofid = finalresult.result.identityProofId;
@@ -791,10 +792,10 @@ export class EditTenantComponent implements OnInit, OnDestroy {
             var finalresult = JSON.parse(result);
             if (finalresult.status == "200") {
                 this.availBays = finalresult.result;
-                this.availBays = finalresult.result.filter(item => item.registerUserId == "0" || item.registerUserId == this.TenantId);
+                this.availBays = finalresult.result.filter(item => item.updatedBy == "" || item.updatedBy == this.TenantId);
                 this.unbookedBays = finalresult.result.filter(item => item.registerUserId == "0");
                 this.numbers = Array(this.unbookedBays.length).fill(0).map((_, i) => i + 1);
-                console.log("Avail Bays",this.numbers)
+                console.log("Avail Bays",this.availBays)
             }
         }); 
     }

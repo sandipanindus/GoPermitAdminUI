@@ -93,7 +93,9 @@ SaveRole() {
             this.onSuccess('Industry added successfully!');
             this.industryForm.reset();
             this.rolesubmitted = false;
-            this.router.navigateByUrl('app/siteconfig/industry');
+            setTimeout(()=>{
+                this.router.navigateByUrl('app/siteconfig/industry');
+            },2000)
 
         },
         error => {

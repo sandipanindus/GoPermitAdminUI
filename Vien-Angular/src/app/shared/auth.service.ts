@@ -24,14 +24,15 @@ export interface IPasswordReset {
 @Injectable({ providedIn: 'root' })
 export class AuthService {
   baseUrl: any
-
+  imageBindUrl
   constructor(private afAuth: AngularFireAuth, private http: HttpClient) {
     // this.baseUrl = 'http://smartpermitapi.eisappserver.net/'
     //this.baseUrl = "http://smartpermitapi.fadelsoft.com/";
-   this.baseUrl = 'http://localhost:53846/';
-//  this.baseUrl='https://localhost:5001/'
-// this.baseUrl = 'http://goapi.fadelsoft.co.in/'
-    // this.baseUrl='http://webapi.enhanceai.ca/'
+ //  this.baseUrl = 'http://localhost:5001/';
+// this.baseUrl='http://goapi.fadelsoft.co.in/'
+// this.imageBindUrl='http://goapi.fadelsoft.co.in'
+ this.baseUrl = 'https://localhost:5001/';
+this.imageBindUrl = 'https://localhost:5001'
     //this.baseUrl = 'https://api.gopermit.co.uk/';
   }
 
@@ -171,7 +172,7 @@ export class AuthService {
     return this.http.get(this.baseUrl + "api/Admin/GetSearchUser?PageNo=" + PageNo + "&PageSize=" + PageSize + "&FirstName=" + FirstName + "&LastName=" + LastName + "&Email=" + Email + "&SiteName=" + SiteName + "&LoginId=" + LoginId + "&RoleId=" + RoleId + "&SiteId=" + SiteId, { responseType: 'text' });
   }
   public GetSearchTenants(PageNo, PageSize, FirstName, LastName, Email, MobileNumber, SiteName, SiteId,vrm): Observable<any> {
-    return this.http.get(this.baseUrl + "api/Admin/GetSearchTenant?PageNo=" + PageNo + "&PageSize=" + PageSize + "&FirstName=" + FirstName + "&LastName=" + LastName + "&Email=" + Email + "&MobileNumber=" + MobileNumber + "&SiteName=" + SiteName + "&SiteId=" + SiteId+ "&VRM=" + vrm, { responseType: 'text' });
+    return this.http.get(this.baseUrl + "api/Admin/GetSearchTenant?PageNo=" + PageNo + "&PageSize=" + PageSize + "&FirstName=" + FirstName + "&LastName=" + LastName + "&Email=" + Email + "&MobileNumber=" + MobileNumber + "&SiteName=" + SiteName +  "&SiteId=" + SiteId+ "&VRM=" + vrm, { responseType: 'text' });
   }
   public GetTenantUsers(PageNo, PageSize, Id, RoleId, SiteId): Observable<any> {
     return this.http.get(this.baseUrl + "api/Admin/GetTenantUsers?PageNo=" + PageNo + "&PageSize=" + PageSize + "&LoginId=" + Id + "&RoleId=" + RoleId + "&SiteId=" + SiteId, { responseType: 'text' });
@@ -470,7 +471,7 @@ export class AuthService {
 
 
   public insertIndustry(data: any): Observable<any> {
-    return this.http.post(`${this.baseUrl}/api/Admin/InsertIndustry`, data);
+    return this.http.post(`${this.baseUrl}api/Admin/InsertIndustry`, data);
   }
 
 
@@ -480,22 +481,22 @@ public GetAllIndustries(): Observable<any> {
 }
 
 getIndustryById(id: number): Observable<any> {
-  return this.http.get<any>(`${this.baseUrl}/api/Admin/GetIndustryById?id=${id}`);
+  return this.http.get<any>(`${this.baseUrl}api/Admin/GetIndustryById?id=${id}`);
 }
 
 updateIndustry(industryData: any) {
-  return this.http.post(`${this.baseUrl}/api/Admin/UpdateIndustry`, industryData);
+  return this.http.post(`${this.baseUrl}api/Admin/UpdateIndustry`, industryData);
 }
 
 deleteIndustry(id: number) {
-  return this.http.post(`${this.baseUrl}/api/Admin/DeleteIndustry?id=${id}`, {});
+  return this.http.post(`${this.baseUrl}api/Admin/DeleteIndustry?id=${id}`, {});
 }
 
 
 
 approveTenant(id: number, isApproved: boolean): Observable<any> {
   const payload = { id, isApproved };
-  return this.http.post<any>(`${this.baseUrl}/api/Admin/ApproveTenant`, payload);
+  return this.http.post<any>(`${this.baseUrl}api/Admin/ApproveTenant`, payload);
 }
 
 

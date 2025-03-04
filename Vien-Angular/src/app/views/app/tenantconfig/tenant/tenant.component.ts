@@ -430,7 +430,7 @@ export class TenantComponent implements OnInit, OnDestroy {
     {id:2,name:false},
   ]
 
-  status
+  status=''
   isActiveChange(val){
 
   }

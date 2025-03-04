@@ -147,10 +147,8 @@ export class EditSiteComponent implements OnInit, OnDestroy {
         this.authService.Getoperators(1, 10, loginId, RoleId, SiteId).subscribe(
           response => {
             if (response || Array.isArray(response)) {
-              
                 response=JSON.parse(response);
-    
-    debugger
+                 debugger
               for (var i = 0; i < response.length; i++) {
     
               if (response) {
@@ -161,6 +159,7 @@ export class EditSiteComponent implements OnInit, OnDestroy {
                 })
               }
             }
+            console.log("Operators Data",this.operatordata)
               //this.operatordata = response; // Store the response in the operatordata array
             } else {
               console.error('Invalid response format:', response);

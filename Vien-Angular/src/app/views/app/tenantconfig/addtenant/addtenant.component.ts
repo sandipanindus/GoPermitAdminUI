@@ -258,7 +258,7 @@ export class AddTenantComponent implements OnInit, OnDestroy {
             var finalresult = JSON.parse(result);
             if (finalresult.status == "200") {
                 this.availBays = finalresult.result;
-                this.availBays = finalresult.result.filter(item => item.registerUserId == "0");
+                this.availBays = finalresult.result.filter(item => item.updatedBy == "");
                 this.totalBays = this.availBays.length
                 this.numbers = Array(this.totalBays).fill(0).map((_, i) => i + 1);
 

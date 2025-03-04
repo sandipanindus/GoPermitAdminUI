@@ -1,5 +1,8 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, Input, OnInit, TemplateRef } from '@angular/core';
 import { Router } from '@angular/router';
+import { TranslateService } from '@ngx-translate/core';
+import { NotificationsService, NotificationType } from 'angular2-notifications';
+import { BsModalRef, BsModalService } from 'ngx-bootstrap/modal';
 import { AuthService } from 'src/app/shared/auth.service';
 
 @Component({
@@ -30,7 +33,8 @@ export class IndustryComponent implements OnInit {
   
   // industries=[{name:'abc',email:'abc@gmail.com',mobileNumber:'9090090099'}]
 
-  constructor(private authService: AuthService,private router:Router) { }
+  constructor(private authService: AuthService,private translate:TranslateService,
+    private router:Router,private notifications: NotificationsService,private modalService: BsModalService,) { }
 
   ngOnInit(): void {
     this.GetScreens();
@@ -108,6 +112,19 @@ export class IndustryComponent implements OnInit {
     // });
   }
 
+    onSuccess(msg) {
+        this.notifications.create(this.translate.instant('Success'),
+            this.translate.instant(msg), NotificationType.Success,
+            { timeOut: 3000, showProgressBar: true });
+    }
+    error(msg) {
+        this.notifications.create(this.translate.instant('Error'),
+            this.translate.instant(msg), NotificationType.Error, {
+            timeOut: 3000,
+            showProgressBar: true
+        });
+    }
+
   showpage
   currentPage
   pageChanged(event: any): void {
@@ -142,12 +159,31 @@ export class IndustryComponent implements OnInit {
 
   }
 
+  modalRef: BsModalRef;
+  IndustryId
+   openModal(template: TemplateRef<any>, id) {
+       this.IndustryId = id;
+      this.modalRef = this.modalService.show(template, { class: 'modal-sm' });
+    }
+
+    
+  decline(): void {
+
+    this.modalRef.hide();
+  }
+
+    confirm(): void {
+      this.deleteIndustry(parseInt(this.IndustryId))
+      this.modalRef.hide();
+    }
+
   deleteIndustry(id: number) {
-    this.authService.deleteIndustry(id).subscribe({
-      next: () => {
+    this.authService.deleteIndustry(id).subscribe((result:any)=>{
+    {
         this.GetIndustries(); // Refresh the list after deletion
-      },
-      error: (error) => {
+        this.onSuccess('Industry deleted successfully!');
+      }
+     (error) => {
         console.error("Error deleting industry:", error);
       }
     });

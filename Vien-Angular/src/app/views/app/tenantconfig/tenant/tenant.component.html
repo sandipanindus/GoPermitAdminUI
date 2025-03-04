@@ -38,13 +38,20 @@
             placeholder="First Name" style="border: none;border-bottom: 1px solid;" />
         </div>
 
-        <div class="col-md-2 pl-0">
-        <select class="form-control my-3" placeholder="Status" [(ngModel)]="status" style="border: none;border-bottom: 1px solid;"
-          (change)="isActiveChange($event.target.value)" [ngModelOptions]="{standalone: true}">
-        <option *ngFor="let item of Status" placeholder="Status" [value]="item.name">{{item.name}}
-        </option>
-       </select>
-      </div>
+        <!-- <div class="col-md-2 pl-0">
+          <select 
+            class="form-control my-3" 
+            [(ngModel)]="status" 
+            style="border: none; border-bottom: 1px solid;" 
+            (change)="isActiveChange($event.target.value)" 
+            [ngModelOptions]="{standalone: true}">
+            
+            <option value="" disabled selected hidden>Is Approved</option>
+        
+            <option *ngFor="let item of Status" [value]="item.name">{{ item.name }}</option>
+          </select>
+        </div> -->
+        
         <!-- <div class="col-md-2 pl-0">
           <input type="text" class="form-control my-3" [(ngModel)]="lastname" [ngModelOptions]="{standalone: true}"
             placeholder="Last Name" style="border: none;border-bottom: 1px solid;" />

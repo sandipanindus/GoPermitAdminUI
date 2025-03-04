@@ -169,7 +169,10 @@ UpdateRole() {
       () => {
         this.onSuccess('Industry updated successfully!');
         console.log("Industry updated successfully");
-        this.router.navigateByUrl('/app/siteconfig/industry');
+        setTimeout(()=>{
+          this.router.navigateByUrl('/app/siteconfig/industry');
+        },2000)
+        
       },
       (error) => {
         console.error("Failed to update industry:", error);
