@@ -70,7 +70,7 @@ export class AddSiteComponent implements OnInit, OnDestroy {
             rvisitorparkingbay: ['', Validators.required],
             rvehiclesperbay: ['', Validators.required],
             OperatorId: ['', Validators.required],
-            industryId: ['', Validators.required]
+            industryId: ['']
         });
         this.parkingbayForm = this.formBuilder.group({
 

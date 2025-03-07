@@ -803,7 +803,7 @@ export class EditTenantComponent implements OnInit, OnDestroy {
 
 
     getFilteredBays(bayconfig): any[] {
-        debugger;
+      
         const selectedBayIds = this.bayconfigs
             .map(config => config.bayid) // Extract selected bay IDs (not bayNames)
             .filter(id => id); // Remove empty selections

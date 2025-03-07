@@ -124,6 +124,7 @@ export class SidebarComponent implements OnInit, OnDestroy {
   }
 
   changeSelectedParentHasNoSubmenu(parentMenu: string) {
+    debugger
     const { containerClassnames } = this.sidebar;
     this.selectedParentMenu = parentMenu;
     this.viewingParentMenu = parentMenu;
@@ -132,6 +133,13 @@ export class SidebarComponent implements OnInit, OnDestroy {
   }
 
   openSubMenu(event: { stopPropagation: () => void; }, menuItem: IMenuItem) {
+    debugger
+if(menuItem.id=="dashboard"){
+  this.router.navigateByUrl('app/dashboards/default');
+
+  return
+}
+
     if (event) { event.stopPropagation(); }
     const { containerClassnames, menuClickCount } = this.sidebar;
 
@@ -242,7 +250,10 @@ export class SidebarComponent implements OnInit, OnDestroy {
     this.isCurrentMenuHasSubItem();
   }
 
-  menuClicked(e: MouseEvent) {
-    e.stopPropagation();
+  menuClicked(event: MouseEvent) {
+    debugger
+    event.stopPropagation();
+
+   
   }
 }

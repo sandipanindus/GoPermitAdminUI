@@ -31,8 +31,8 @@ export class AuthService {
  //  this.baseUrl = 'http://localhost:5001/';
 // this.baseUrl='http://goapi.fadelsoft.co.in/'
 // this.imageBindUrl='http://goapi.fadelsoft.co.in'
- this.baseUrl = 'https://localhost:5001/';
-this.imageBindUrl = 'https://localhost:5001'
+ this.baseUrl = 'http://localhost:53846/';
+this.imageBindUrl = 'https://localhost:53846'
     //this.baseUrl = 'https://api.gopermit.co.uk/';
   }
 

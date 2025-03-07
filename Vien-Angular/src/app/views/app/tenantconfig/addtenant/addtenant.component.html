@@ -146,6 +146,7 @@
                             <select class="form-control" formControlName="rparkingbayId" (change)="BindBayNo()"
                                 [ngClass]="{'is-invalid': tenantsubmitted && r.rparkingbayId.errors }"
                                 id="txtparkingbay" [(ngModel)]="parkingbayId" required="required">
+                                <option value="0">Select</option>
                                 <option value={{number}} *ngFor="let number of numbers">{{number}}</option>
                                 <!-- <option value="1">1</option>
                                 <option value="2">2</option>
