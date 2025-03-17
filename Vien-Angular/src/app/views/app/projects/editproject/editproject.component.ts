@@ -183,7 +183,7 @@ export class EditProjectComponent implements OnInit {
         this.ProjectId = id;
         this.authService.GetProjectById(id).subscribe((result: any) => {
             var finalresult = JSON.parse(result);
-            debugger;
+             ;
             if (finalresult.status == "200") {
                 this.objresult = finalresult.result.annotationtypes;
                 this.projectname = finalresult.result.name;

@@ -178,7 +178,7 @@
 
     <!-- Additional Fields -->
     <div class="form-row">
-        <div class="form-group col-md-6 d-flex align-items-center">
+        <!-- <div class="form-group col-md-6 d-flex align-items-center">
            <label for="VatRegistered" class="me-2 w-25 text-end">VAT Registered</label><br>
            <div class="radio-group" formControlName="VatRegistered">
              <input [(ngModel)]="VatRegistered" type="radio" id="vatyes" name="vat" formControlName="VatRegistered" [value]="true"> Yes
@@ -187,24 +187,22 @@
            <div *ngIf="addNewGeneratorForm.get('VatRegistered').invalid && addNewGeneratorForm.get('VatRegistered').touched" 
            class="text-danger"> vat Registered Required
            </div>
-        </div>
+        </div> -->
         <div class="form-group col-md-6 d-flex align-items-center">
-          <label for="Date" class="me-2 w-25 text-end">SetUp Date</label>
+          <label for="Date" class="me-2 w-25 text-end">SetUp Date<span class="text-danger">*</span></label>
           <input [(ngModel)]="Date" type="date" id="Date" class="form-control w-70"  formControlName="Date">
           <div *ngIf="addNewGeneratorForm.get('Date').invalid && addNewGeneratorForm.get('Date').touched" 
           class="text-danger"> Date Required
           </div>
         </div>
-    </div>
 
-    <div class="form-row">
-        <div class="form-group col-md-6 d-flex align-items-center">
+        <!-- <div class="form-group col-md-6 d-flex align-items-center">
           <label for="VatNumber" class="me-2 w-25 text-end">VAT Number<span class="text-danger">*</span></label>
           <input [(ngModel)]="VatNumber" type="text" id="VatNumber" class="form-control w-70" placeholder="VAT Number"  formControlName="VatNumber">
           <div *ngIf="addNewGeneratorForm.get('VatNumber').invalid && addNewGeneratorForm.get('LastName').touched" 
           class="text-danger"> VAT Number Required
           </div>
-        </div>
+        </div> -->
         <div class="form-group col-md-6 d-flex align-items-center">
           <label for="Profile" class="me-2 w-25 text-end">Profile</label>
           <input  type="file" (change)="onFileSelect($event)" class="form-control" style="width: 40%;">

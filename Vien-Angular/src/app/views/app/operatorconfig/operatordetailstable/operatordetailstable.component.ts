@@ -54,7 +54,7 @@
      element.style.display = 'block';
      this.renderer.addClass(document.body, 'right-menu');
      this.GetScreens();
-     this.GetSites();
+     this.GetOperators();
  
      
    }
@@ -80,7 +80,7 @@
      }
    }
    GetScreens() {
-     debugger;
+      ;
      var RoleId = localStorage.getItem("RoleId");
      var loginId = localStorage.getItem("LoginId");
      this.authService.GetScreens(RoleId, loginId, 0).subscribe((result: any) => {
@@ -112,7 +112,7 @@
      this.mobileno = '';
      this.currentPage = 1;
      this.itemsPerPage = 10;
-     this.GetSites();
+     this.GetOperators();
    }
    onSortClick(event, val) {
      let target = event.currentTarget,
@@ -138,7 +138,7 @@
      });
    }
    SearchSite1() {
-     debugger;
+      ;
      var element = document.getElementById("loading") as HTMLDivElement;
      element.style.display = 'block';
 
@@ -157,7 +157,7 @@
  
    }
    SearchSite() {
-     debugger;
+      ;
      var element = document.getElementById("loading") as HTMLDivElement;
      element.style.display = 'block';
      var loginId = localStorage.getItem("LoginId");
@@ -225,7 +225,7 @@
        showProgressBar: true
      });
    }
-   GetSites() {
+   GetOperators() {
      var loginId = localStorage.getItem("LoginId");
      var RoleId = localStorage.getItem("RoleId");
      var SiteId = localStorage.getItem("SiteId");
@@ -233,7 +233,7 @@
      this.authService.Getoperators(this.currentPage, this.itemsPerPage, loginId, RoleId, SiteId).subscribe((result: any) => {
        var finalresult = JSON.parse(result);
        if (finalresult) {
-         debugger;
+          ;
          this.sites = finalresult;  
          this.allsites=finalresult;     
          var element = document.getElementById("loading") as HTMLDivElement;
@@ -293,7 +293,7 @@
     // this.spinnerload();
    }
    openModal(template: TemplateRef<any>, id) {
-    debugger
+     
      this.SiteId = id;
      this.modalRef = this.modalService.show(template, { class: 'modal-sm' });
    }
@@ -301,6 +301,7 @@
    confirm(): void {
      this.deleteSite(parseInt(this.SiteId))
      this.modalRef.hide();
+    this.GetOperators();
    }
  
    decline(): void {
@@ -377,14 +378,14 @@
      this.itemsPerPageChange.emit(item);
      this.itemsPerPage = item;
      this.currentPage = 1;
-     this.GetSites();
+     this.GetOperators();
    }
  
    pageChanged(event: any): void {
-     debugger;
+      ;
      this.page = event.page;
      this.currentPage = this.page;
-     this.GetSites();
+     this.GetOperators();
    }
    setPage(pageNo: number): void {
      this.currentPage = pageNo;

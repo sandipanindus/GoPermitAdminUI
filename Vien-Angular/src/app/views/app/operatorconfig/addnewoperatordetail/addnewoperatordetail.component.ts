@@ -44,8 +44,6 @@ countries:any[]=[];
       TradingCountryId: [1],
       RegisteredZipCode: [''],
       TradingZipCode: [''],
-      VatRegistered: [''],
-      VatNumber: ['', Validators.required],
       Profile: [''],
       Notes: [''],
      
@@ -64,7 +62,7 @@ this.Getcountries();
 Getcountries(){
   this.authService.GetCountries().subscribe(
     response => {
-      debugger
+       
       if (JSON.parse(response) ) {
 const data=JSON.parse(response);
         this.countries = data.result;
@@ -116,7 +114,7 @@ onCheckboxChange(event: Event): void {
 
 }
 onSubmit(): void {
-  debugger
+   
   if (this.addNewGeneratorForm.invalid) {
     alert("Please fill all required fields correctly.");
     return;
@@ -167,7 +165,7 @@ onSubmit(): void {
   
   this.authService.savenewoperatordetails(formData).subscribe((data: any) => {
             
-    debugger
+     
     var result = JSON.parse(data);
     if (result) {
         element.style.display = 'none';
@@ -207,7 +205,7 @@ alert(msg) {
         });
     }
 // onSubmit(): void {
-//   debugger
+//    
 //   if (this.addNewGeneratorForm.valid) {
 //     console.log('Form Data:', this.addNewGeneratorForm.value);
 //   } else {

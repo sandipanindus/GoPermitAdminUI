@@ -60,7 +60,7 @@ export class SetPasswordComponent implements OnInit {
     });
   }
   onSubmit() {
-    debugger;
+     ;
     var re = new RegExp('(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[$@$!%*?&])[A-Za-z\d$@$!%*?&].{5,}');
     var element = document.getElementById("loading") as HTMLDivElement;
     element.style.display = 'block';

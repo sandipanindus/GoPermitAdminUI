@@ -120,7 +120,7 @@ export class AddImportDataComponent implements OnInit, OnDestroy {
         this.authService.GetDataSourceName(this.projectId).subscribe((result: any) => {
             var finalresult = JSON.parse(result);
 
-            debugger;
+             ;
             if (finalresult.status == "200") {
                 this.datasourcediv = "flex";
                 this.datasourcename = finalresult.result.dataSourceName;
@@ -226,7 +226,7 @@ export class AddImportDataComponent implements OnInit, OnDestroy {
 
     }
     SaveImportData() {
-        debugger;
+         ;
         var loginId = localStorage.getItem("LoginId");
         this.spinner.show();
         if (this.datasourcename.trim().toLowerCase() == "Image Upload".toLowerCase()) {
@@ -255,10 +255,10 @@ export class AddImportDataComponent implements OnInit, OnDestroy {
                 }
 
                 this.authService.SaveImportDataImage(formData, this.projectId, this.datasetname, loginId).subscribe((data: any) => {
-                    debugger;
+                     ;
                     var result = JSON.parse(data);
                     if (result.status == "200") {
-                        debugger;
+                         ;
                         localStorage.setItem("DatasetId", result.result.result.id);
                         this.spinner.hide();
                         this.notifications.success('Success', "Files added successfully", NotificationType.Success, { theClass: 'outline primary', timeOut: 3000, showProgressBar: false, clickToClose: true });
@@ -327,7 +327,7 @@ export class AddImportDataComponent implements OnInit, OnDestroy {
                 LoginId: parseInt(loginId)
             }
             this.authService.SaveFtpData(data).subscribe((data: any) => {
-                debugger;
+                 ;
                 var result = JSON.parse(data);
                 if (result.status == "200") {
                     this.spinner.hide();
@@ -419,7 +419,7 @@ export class AddImportDataComponent implements OnInit, OnDestroy {
 
         this.authService.GetDatasetResponse(Id, pagesize, currentpage, search)
             .subscribe((data: any) => {
-                debugger;
+                 ;
                 var result = JSON.parse(data);
                 if (result.status == "200") {
                     if (result.result.data.length > 0) {
@@ -469,7 +469,7 @@ export class AddImportDataComponent implements OnInit, OnDestroy {
     deletemultiplefile(){
         var Id = localStorage.getItem("DatasetId");
         this.authService.DeleteMutipleDatasetFile(Id).subscribe((data: any) => {
-            debugger;
+             ;
             var result = JSON.parse(data);
             if (result.status == "200") {
                 this.notifications.success('Success', "files deleted successfully", NotificationType.Success, { theClass: 'outline primary', timeOut: 3000, showProgressBar: false, clickToClose: true });
@@ -479,11 +479,11 @@ export class AddImportDataComponent implements OnInit, OnDestroy {
         }) 
     }
     onContextMenuClick(action: string, item: any) {
-        debugger;
+         ;
         var Id = localStorage.getItem("DatasetId");
         var datasetfileid = item.id;
         this.authService.DeleteDatasetFile(datasetfileid).subscribe((data: any) => {
-            debugger;
+             ;
             var result = JSON.parse(data);
             if (result.status == "200") {
                 this.notifications.success('Success', "Image file deleted successfully", NotificationType.Success, { theClass: 'outline primary', timeOut: 3000, showProgressBar: false, clickToClose: true });               

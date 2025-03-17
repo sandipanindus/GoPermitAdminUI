@@ -20,6 +20,26 @@
                                 </div>
                             </div>
                         </div>
+
+                        <label class="col-sm-2 col-form-label">{{ 'Enforcement Service'  | translate }}</label>
+                        <div class="col-sm-4">
+                            <!-- <input type="text" class="form-control" id="txtsitename"
+                                placeholder="{{'site.Operator' | translate }}" [(ngModel)]="OperatorId"
+                                formControlName="OperatorId"
+                                [ngClass]="{'is-invalid': sitesubmitted && r.rsitename.errors }"> -->
+                                <select formControlName="enfService" id="enfService" class="form-control ">
+                                    <option value="">Select</option>
+                                    <option *ngFor="let item of Services" [value]="item">{{ item }}</option>
+                                  </select>
+                            <div *ngIf="sitesubmitted && r.enfService.errors" class="invalid-feedback">
+                                <div *ngIf="r.enfService.errors.required" class="invalid-tooltip">Enforcement Service is required
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+                    <div class="form-group row col-lg-12">
+
                         <label class="col-sm-2 col-form-label">{{ 'site.sitecode'  | translate }}</label>
                         <div class="col-sm-4">
                             <input class="form-control" id="txtsitecode" [(ngModel)]="sitecode"
@@ -32,8 +52,6 @@
                             </div>
                         </div>
 
-                    </div>
-                    <div class="form-group row col-lg-12">
                         <label for="txtfirstname"
                             class="col-sm-2 col-form-label">{{ 'site.Operator' | translate }}</label>
                         <div class="col-sm-4">
@@ -50,6 +68,12 @@
                                 </div>
                             </div>
                         </div>
+
+                    
+
+                    </div>
+                    <div class="form-group row col-lg-12">
+
                         <label class="col-sm-2 col-form-label">{{ 'Industry'  | translate }}</label>
                         <div class="col-sm-4">
                             <!-- <input type="text" class="form-control" id="txtsitename"
@@ -66,8 +90,6 @@
                             </div>
                         </div>
 
-                    </div>
-                    <div class="form-group row col-lg-12">
                         <label class="col-sm-2 col-form-label">{{ 'site.siteaddress'  | translate }}</label>
                         <div class="col-sm-4">
                             <input class="form-control" id="txtsiteaddress" [(ngModel)]="siteaddress"
@@ -79,6 +101,11 @@
                                 </div>
                             </div>
                         </div>
+                    
+
+                    </div>
+                    <div class="form-group row col-lg-12">
+
                         <label class="col-sm-2 col-form-label">{{ 'site.city' | translate }}</label>
                         <div class="col-sm-4">
                             <input type="text" class="form-control" id="txtcity"
@@ -90,8 +117,7 @@
                             </div>
                         </div>
 
-                    </div>
-                    <div class="form-group row col-lg-12">
+
                         <label class="col-sm-2 col-form-label">{{ 'site.state' | translate }}</label>
                         <div class="col-sm-4">
                             <input type="text" class="form-control" id="txtstate"
@@ -102,6 +128,14 @@
                                 </div>
                             </div>
                         </div>
+
+                    
+
+
+                    </div>
+
+                    <div class="form-group row col-lg-12">
+
                         <label class="col-sm-2 col-form-label">{{ 'site.zipcode' | translate }}</label>
                         <div class="col-sm-4">
                             <input type="text" class="form-control" id="txtzipcode"
@@ -115,9 +149,6 @@
                         </div>
 
 
-                    </div>
-
-                    <div class="form-group row col-lg-12">
                         <label class="col-sm-2 col-form-label">{{ 'site.contactperson' | translate }}</label>
                         <div class="col-sm-4">
                             <input type="text" class="form-control" id="txtcontactpersonname"
@@ -130,6 +161,11 @@
                                 </div>
                             </div>
                         </div>
+                    </div>
+
+
+                    <div class="form-group row col-lg-12">
+
                         <label for="txtemail" class="col-sm-2 col-form-label">{{ 'site.email' | translate }}</label>
                         <div class="col-sm-4">
                             <input type="text" class="form-control" id="txtemail"
@@ -142,10 +178,7 @@
                             </div>
                         </div>
 
-                    </div>
 
-
-                    <div class="form-group row col-lg-12">
                         <label class="col-sm-2 col-form-label">{{ 'site.contactnumber' | translate }}</label>
                         <div class="col-sm-4">
                             <input type="text" id="txtcontactnumber" class="form-control"
@@ -159,23 +192,27 @@
                                 </div>
                             </div>
                         </div>
-                        <label class="col-sm-2 col-form-label">{{ 'site.mobilenumber' | translate }}</label>
-                        <div class="col-sm-4">
-                            <input type="text" id="txtmobilenumber" class="form-control"
-                                placeholder="{{'site.mobilenumber' | translate }}" [(ngModel)]="mobilenumber"
-                                formControlName="rmobilenumber"
-                                onkeypress="return (event.charCode > 64 && event.charCode < 91)  || (!event.shiftKey && event.charCode  >= 48 && event.charCode  <= 57 || event.charCode==43 || event.charCode==45)"
-                                [ngClass]="{'is-invalid': sitesubmitted && r.rmobilenumber.errors }" />
-                            <div *ngIf="sitesubmitted && r.rmobilenumber.errors" class="invalid-feedback">
-                                <div *ngIf="r.rmobilenumber.errors.required" class="invalid-tooltip">Mobile Number is
-                                    required
-                                </div>
-                            </div>
-                        </div>
+
+                   
 
                     </div>
                     <div class="form-group row col-lg-12">
                     <!-- </div> -->
+
+                    <label class="col-sm-2 col-form-label">{{ 'site.mobilenumber' | translate }}</label>
+                    <div class="col-sm-4">
+                        <input type="text" id="txtmobilenumber" class="form-control"
+                            placeholder="{{'site.mobilenumber' | translate }}" [(ngModel)]="mobilenumber"
+                            formControlName="rmobilenumber"
+                            onkeypress="return (event.charCode > 64 && event.charCode < 91)  || (!event.shiftKey && event.charCode  >= 48 && event.charCode  <= 57 || event.charCode==43 || event.charCode==45)"
+                            [ngClass]="{'is-invalid': sitesubmitted && r.rmobilenumber.errors }" />
+                        <div *ngIf="sitesubmitted && r.rmobilenumber.errors" class="invalid-feedback">
+                            <div *ngIf="r.rmobilenumber.errors.required" class="invalid-tooltip">Mobile Number is
+                                required
+                            </div>
+                        </div>
+                    </div>
+
                             <label style="float: left; max-width: 90%;" class="col-sm-2 col-form-label">{{ 'site.tenantparkingbay' | translate }}</label>                                                
                             <!-- <i class="simple-icon-question" style="display: block; margin-top: 10px;" tooltip="Please enter no. of Bays for a Tenant." placement="bottom"></i> -->
                         <!-- </div>                         -->
@@ -191,6 +228,12 @@
                                 </div>
                             </div>
                         </div>
+
+                   
+                    </div>
+
+                    <div class="form-group row col-lg-12">
+
                         <label class="col-sm-2 col-form-label">{{ 'site.visitorparkingbay' | translate }}</label>
                         <div class="col-sm-4">
                             <input type="text" id="txtvisitorparkingbay" class="form-control"
@@ -204,9 +247,7 @@
                                 </div>
                             </div>
                         </div>
-                    </div>
 
-                    <div class="form-group row col-lg-12">
                         <label class="col-sm-2 col-form-label">{{ 'site.vehiclesperbay' | translate }}</label>
                         <div class="col-sm-4">
                             <input type="text" class="form-control" id="txtvehiclesperbay"
@@ -220,13 +261,17 @@
                                 </div>
                             </div>
                         </div>
+
+                   
+                    </div>
+                    <div class="form-group row col-lg-12">
+
                         <label for="active" class="col-sm-2 col-form-label">{{ 'site.active' | translate }}</label>
                         <div class="col-sm-4" style="margin-top: 6px;">
                             <input type="checkbox" id="userchkactive">
                         </div>
-                    </div>
-                    <div class="form-group row col-lg-12">
-                    <label for="manageparkingavailable" class="col-sm-2 col-form-label">{{ 'site.manageparkingavailable' |translate }}</label>
+
+                        <label for="manageparkingavailable" class="col-sm-2 col-form-label">{{ 'site.manageparkingavailable' |translate }}</label>
                                 <div class="col-sm-4" style="margin-top: 6px;">
                                     <div class="custom-control custom-switch" placement="left">
                                         <input type="checkbox" class="custom-control-input" id="manageparkingactive">
@@ -234,6 +279,7 @@
                                       </div>
                                     <!-- <input type="checkbox" id="Roomchkactive" checked> -->
                                 </div>
+                                
                                 <label for="visitorparkingavailable" class="col-sm-2 col-form-label">{{ 'site.visitorparkingavailable' |translate }}</label>
                                 <div class="col-sm-4" style="margin-top: 6px;">
                                     <div class="custom-control custom-switch" placement="left">
@@ -242,8 +288,7 @@
                                       </div>
                                     <!-- <input type="checkbox" id="Roomchkactive" checked> -->
                                 </div>
-                            </div>
-                            <div class="form-group row col-lg-12">
+
                                 <label for="zatparklogsavailable" class="col-sm-2 col-form-label">{{ 'site.zatparklogsavailable' |translate }}</label>
                                 <div class="col-sm-4" style="margin-top: 6px;">
                                     <div class="custom-control custom-switch" placement="left">
@@ -251,6 +296,11 @@
                                         <label class="custom-control-label" for="zatparklogsactive"></label>
                                       </div>
                                 </div>
+
+                            </div>
+
+                            <div class="form-group row col-lg-12">
+                           
 
                             </div>
 

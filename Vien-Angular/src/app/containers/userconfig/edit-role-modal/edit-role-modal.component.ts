@@ -38,7 +38,7 @@ export class EditRoleModalComponent implements OnInit {
     show(id: any) {
         this.RoleId = id;
         this.authService.GetRolesById(this.RoleId).subscribe((result: any) => {
-            debugger;
+             ;
            // var data = JSON.stringify(result);
             var finalresult = JSON.parse(result);
             if (finalresult.status == "200") {
@@ -64,7 +64,7 @@ export class EditRoleModalComponent implements OnInit {
             Id: this.RoleId
         }
         this.authService.UpdateRole(data).subscribe((data: any) => {
-            debugger;
+             ;
             var result = JSON.parse(data);
             if (result.status == "200") {
                 this.notifications.success('Success', "Role Updated Successfully", NotificationType.Success, { theClass: 'outline primary', timeOut: 2000, showProgressBar: false, clickToClose: true });

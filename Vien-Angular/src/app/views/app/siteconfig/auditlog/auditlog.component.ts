@@ -80,7 +80,7 @@ export class AuditComponent implements OnInit, OnDestroy {
     this.GetAuditLogs();
   }
   GetScreens() {
-    debugger;
+     ;
     var RoleId = localStorage.getItem("RoleId");
     var loginId = localStorage.getItem("LoginId");
     this.authService.GetScreens(RoleId, loginId, 0).subscribe((result: any) => {
@@ -135,7 +135,7 @@ export class AuditComponent implements OnInit, OnDestroy {
     });
   }
   SearchAuditLog() {
-    debugger;
+     ;
     var element = document.getElementById("loading") as HTMLDivElement;
     element.style.display = 'block';
     var loginId = localStorage.getItem("LoginId");
@@ -161,7 +161,7 @@ export class AuditComponent implements OnInit, OnDestroy {
         console.log(finalresult);
         if (finalresult.status == "200") {
           this.auditlogs = finalresult.result;
-          debugger
+           
 console.log(finalresult)
           element.style.display = 'none';
           if (this.auditlogs.length > 0) {
@@ -217,7 +217,7 @@ console.log(finalresult)
     });
   }
   GetAuditLogs() {
-    debugger
+     
     var loginId = localStorage.getItem("LoginId");
     var RoleId = localStorage.getItem("RoleId");
     var SiteId = localStorage.getItem("SiteId");
@@ -225,7 +225,7 @@ console.log(finalresult)
       var finalresult = JSON.parse(result);
 
       if (finalresult.status == "200") {
-        debugger;
+         ;
         this.auditlogs = finalresult.result;
         console.log(this.auditlogs)
         var element = document.getElementById("loading") as HTMLDivElement;
@@ -297,7 +297,7 @@ console.log(finalresult)
   }
 
   pageChanged(event: any): void {
-    debugger;
+     ;
     this.page = event.page;
     this.currentPage = this.page;
     this.SearchAuditLog();

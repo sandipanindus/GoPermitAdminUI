@@ -154,7 +154,7 @@ export class AddTenantComponent implements OnInit, OnDestroy {
 
 
     BindBayNo() {
-        debugger;
+         ;
         if (this.siteId != null || this.siteId != undefined || this.siteId != "") {
             if (this.parkingbayId != "0") {
                 for (var j = 0; j < this.sites.length; j++) {
@@ -191,7 +191,7 @@ export class AddTenantComponent implements OnInit, OnDestroy {
         console.log("Bay Configs123",this.bayconfigs)
     }
     // BindBaynos(id) {
-    //     debugger;
+    //      ;
     //     let newid = id - 1;
     //     if (this.bayconfigs[newid].startdate == '') {
 
@@ -204,7 +204,7 @@ export class AddTenantComponent implements OnInit, OnDestroy {
     //         var newdate = this.datePipe.transform(date, "yyyy-MM-dd");
 
     //         this.authService.GetParkingBayNo(this.siteId, newdate).subscribe((result: any) => {
-    //             debugger;
+    //              ;
     //             var finalresult = JSON.parse(result);
     //             if (finalresult.status == "200") {
     //                 element.style.display = 'none';
@@ -254,7 +254,7 @@ export class AddTenantComponent implements OnInit, OnDestroy {
     availBays
     getTenantBays(siteId){
         this.authService.GetParkingBayNoBySiteId(siteId).subscribe((result: any) => {
-            debugger;
+             ;
             var finalresult = JSON.parse(result);
             if (finalresult.status == "200") {
                 this.availBays = finalresult.result;
@@ -267,7 +267,7 @@ export class AddTenantComponent implements OnInit, OnDestroy {
     }
 
     BindBaynoswithenddate(id) {
-        debugger;
+         ;
         let newid = id - 1;
         if (this.bayconfigs[newid].startdate == '' && this.bayconfigs[newid].enddate == '') {
 
@@ -282,7 +282,7 @@ export class AddTenantComponent implements OnInit, OnDestroy {
             var enddate1 = this.datePipe.transform(enddate, "yyyy-MM-dd");
 
             this.authService.GetParkingBayNo(this.siteId, newdate, enddate1).subscribe((result: any) => {
-                debugger;
+                 ;
                 var finalresult = JSON.parse(result);
                 if (finalresult.status == "200") {
                     element.style.display = 'none';
@@ -302,7 +302,7 @@ export class AddTenantComponent implements OnInit, OnDestroy {
     totalBays
     totalMaxBays
     setBay(id){
-        debugger
+         
         const result=this.sites.filter((item)=>item.id==id)
         const bays=result[0].bays
         this.totalMaxBays=result[0].vehiclesperbay
@@ -315,7 +315,7 @@ export class AddTenantComponent implements OnInit, OnDestroy {
     }
 
     onVehiclesPerBayChange(bayconfig: any) {
-        debugger;
+         ;
         bayconfig.vehiclereg = Array.from({ length: bayconfig.vehiclesperbay }, () => '');
 
       }
@@ -328,7 +328,7 @@ export class AddTenantComponent implements OnInit, OnDestroy {
 
     bookedBays:number=0
     GetTenantBaysBySiteID(siteId,allBays){
-        debugger
+         
     this.bookedBays=0;
     var LogInId = localStorage.getItem("LoginId");  
     var RoleId = localStorage.getItem("RoleId");  
@@ -356,7 +356,7 @@ export class AddTenantComponent implements OnInit, OnDestroy {
         var SiteId = localStorage.getItem("SiteId");
         var RoleId = localStorage.getItem("RoleId");
         this.authService.GetSites(1, 0, 1, RoleId, SiteId).subscribe((result: any) => {
-            debugger;
+             ;
             var finalresult = JSON.parse(result);
             console.log("forbay",finalresult)
             if (finalresult.status == "200") {
@@ -388,7 +388,7 @@ export class AddTenantComponent implements OnInit, OnDestroy {
     //     var element = document.getElementById("loading") as HTMLDivElement;
     //     element.style.display = 'block';
     //     this.authService.GetParkingBayNo(Id).subscribe((result: any) => {
-    //         debugger;
+    //          ;
     //         var finalresult = JSON.parse(result);
     //         if (finalresult.status == "200") {
     //             element.style.display = 'none';
@@ -416,7 +416,7 @@ export class AddTenantComponent implements OnInit, OnDestroy {
       }
 
     AvoidDuplicate2(Id){
-    debugger
+     
     // this.availBays = this.availBays.filter((item) => item.bayName !== Id);
     // console.log("Avail Bays",this.availBays)
     }
@@ -426,7 +426,7 @@ export class AddTenantComponent implements OnInit, OnDestroy {
         var element = document.getElementById("loading") as HTMLDivElement;
         //element.style.display = 'block';
         var newid = indexid - 1;
-        debugger;
+         ;
         var bayno = '';
         if (Id != "") {
             for (var i = 0; i < this.bayconfigs.length; i++) {
@@ -504,7 +504,7 @@ export class AddTenantComponent implements OnInit, OnDestroy {
       }
 
     SaveTenant() {
-        debugger;
+         ;
         var element = document.getElementById("loading") as HTMLDivElement;
         element.style.display = 'block';
 
@@ -540,13 +540,20 @@ export class AddTenantComponent implements OnInit, OnDestroy {
             if (this.email == undefined || this.email == null || this.email == "") {
                 document.getElementById("txtemail").className = "invalid-color";
             }
-            if (this.parkingbayId == undefined || this.parkingbayId == null || this.parkingbayId == "") {
+            if (this.parkingbayId == undefined || this.parkingbayId == null || this.parkingbayId == "" || this.parkingbayId == 0) {
                 document.getElementById("txtparkingbay").className = "invalid-color";
             }
             element.style.display = 'none';
             return;
         }
-        debugger;
+        if(this.parkingbayId == 0){
+            
+            document.getElementById("txtparkingbay").className = "invalid-color";
+            var element = document.getElementById("loading") as HTMLDivElement;
+            element.style.display = 'none';
+            return
+        }
+         ;
         var bayconfigsobjnew = [];
         for (var i = 0; i < this.bayconfigs.length; i++) {
             if (this.bayconfigs[i].bayid == "") {
@@ -572,7 +579,7 @@ export class AddTenantComponent implements OnInit, OnDestroy {
                 return;
             }
             else {
-                debugger;
+                 ;
                 var startdate = this.bayconfigs[i].startdate;
                 this.bayconfigs[i].startdate = this.datePipe.transform(startdate, "yyyy-MM-dd");
                 // this.bayconfigs[i].startdate=startdate.getFullYear()+"-"+(startdate.getMonth() + 1)+"-"+startdate.getDate();
@@ -666,7 +673,7 @@ export class AddTenantComponent implements OnInit, OnDestroy {
         else {
             _chk1= false;
         }
-        debugger;
+         ;
 
         // const formData: FormData = new FormData();
        

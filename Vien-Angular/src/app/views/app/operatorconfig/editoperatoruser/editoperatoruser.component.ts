@@ -91,7 +91,7 @@
     }
    
     this.authService.GetUsersById(id).subscribe((result: any) => {
-        debugger;
+         ;
         var finalresult = JSON.parse(result);
         finalresult=finalresult.result;
         console.log("editdata",result);
@@ -135,7 +135,7 @@
       var LoginId= parseInt(localStorage.getItem("LoginId"));
       this.authService.GetRoles(1,0,LoginId,1).subscribe(
         response => {
-          debugger
+           
           console.log("role,",response)
           if (JSON.parse(response) ) {
     const data=JSON.parse(response);
@@ -153,7 +153,7 @@
     }
   
     Getopertaors(): void {
-      debugger
+       
       var loginId = localStorage.getItem("LoginId");
       var RoleId = localStorage.getItem("RoleId");
       var SiteId = localStorage.getItem("SiteId");
@@ -163,7 +163,7 @@
           if (response || Array.isArray(response)) {
             response=JSON.parse(response);
     
-  debugger
+   
             for (var i = 0; i < response.length; i++) {
   
             if (response) {
@@ -188,7 +188,7 @@
     }
   
     onSubmit() {
-          debugger;
+           ;
           if (this.operatorUserForm.invalid) {
               return;
           }
@@ -216,7 +216,7 @@
               EmailCode:emailcode.toString()
           }
           this.authService.UpdateregisUser(data).subscribe((data: any) => {
-              debugger;
+               ;
               var result = JSON.parse(data);
               if (result.status == "200") {
                   this.notifications.success('Success',"User Updated successfully", NotificationType.Success, { theClass: 'outline primary', timeOut: 2000, showProgressBar: false, clickToClose: true });
@@ -251,7 +251,7 @@
       }
   
     // onSubmit() {
-    //   debugger
+    //    
     //   if (this.operatorUserForm.valid) {
   
        

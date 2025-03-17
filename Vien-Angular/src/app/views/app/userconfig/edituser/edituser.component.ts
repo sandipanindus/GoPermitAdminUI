@@ -130,7 +130,7 @@ export class EditUserComponent implements OnInit, OnDestroy {
         var RoleId = localStorage.getItem("RoleId");
         var SiteId = localStorage.getItem("SiteId");
         this.authService.GetSites(1, 0, LoginId, RoleId, SiteId).subscribe((result: any) => {
-            debugger;
+             ;
             var finalresult = JSON.parse(result);
             if (finalresult.status == "200") {
                 element.style.display = 'none';
@@ -276,7 +276,7 @@ export class EditUserComponent implements OnInit, OnDestroy {
         this.authService.GetUsersById(this.UserId).subscribe((result: any) => {
             var finalresult = JSON.parse(result);
             console.log(finalresult)
-            debugger;
+             ;
             if (finalresult.status == "200") {
                 this.firstname = finalresult.result.firstName;
                 this.lastname = finalresult.result.lastName;

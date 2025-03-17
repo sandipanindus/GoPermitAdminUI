@@ -49,7 +49,7 @@ export class LoginComponent implements OnInit {
       Password: 'labelpad'
     }
     this.authService.Gettoken(data).subscribe((result: any) => {
-      debugger;
+       ;
       var finalresult = JSON.stringify(result);
 
     })
@@ -69,9 +69,9 @@ export class LoginComponent implements OnInit {
     }
     this.buttonDisabled = true;
     this.buttonState = 'show-spinner';
-    debugger;
+     ;
     this.authService.UserLogin(this.loginForm.value.name, this.loginForm.value.password).subscribe((data: any) => {
-      debugger;
+       ;
       var result = JSON.stringify(data);
       var finalresult = JSON.parse(result);
       if (finalresult.status == "200") {
@@ -92,7 +92,7 @@ export class LoginComponent implements OnInit {
         //  const toast= this.notifications.success('Success', finalresult.message, NotificationType.Success, { theClass: 'outline primary', timeOut: 6000, showProgressBar: false, clickToClose: true  });
 
         //   toast.click.subscribe((event) => {
-        //     debugger;
+        //      ;
 
         // }); 
       }

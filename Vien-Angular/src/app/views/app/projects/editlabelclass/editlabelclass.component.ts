@@ -51,7 +51,7 @@ export class EditLabelClassComponent implements OnInit, OnDestroy {
     GetProjects() {
         var loginId = localStorage.getItem("LoginId");
         this.authService.GetProjects(loginId).subscribe((result: any) => {
-            debugger;
+             ;
             var finalresult = JSON.parse(result);
             if (finalresult.status == "200") {
                 this.projects = finalresult.result;
@@ -73,7 +73,7 @@ export class EditLabelClassComponent implements OnInit, OnDestroy {
         }
         this.LabelclassId = id;
         this.authService.GetLabelClassById(id).subscribe((result: any) => {
-            debugger;
+             ;
             var finalresult = JSON.parse(result);
             if (finalresult.status == "200") {
                 this.classname = finalresult.result.name;

@@ -76,7 +76,7 @@ export class AddUserComponent implements OnInit, OnDestroy {
         var LoginId = localStorage.getItem('LoginId');
         var RoleId = localStorage.getItem("RoleId");
         this.authService.GetSites(1, 0, LoginId, RoleId, 0).subscribe((result: any) => {
-            debugger;
+             ;
             var finalresult = JSON.parse(result);
             console.log(finalresult)
             if (finalresult.status == "200") {
@@ -136,7 +136,7 @@ export class AddUserComponent implements OnInit, OnDestroy {
         }, 1000);
     }
     // onItemSelect(item: any) {
-    //     //debugger
+    //     // 
     //     //console.log('onItemSelect', item);
     //     this.selecteditemsarray.push({
     //         id: item.id,

@@ -52,7 +52,7 @@ export class EditVehicleRegistrationComponent implements OnInit, OnDestroy {
     }
     GetSites() {
         this.authService.GetSites(1,0,1,1,0).subscribe((result: any) => {
-            debugger;
+             ;
             //  var data = JSON.stringify(result);
             var finalresult = JSON.parse(result);
             if (finalresult.status == "200") {

@@ -76,7 +76,7 @@ export class TopnavComponent implements OnInit, OnDestroy {
     if (this.authService.user) {
 
     }
-    debugger;
+     ;
     var profile = localStorage.getItem("ProfilePath");
     if (profile == "null") {
       this.profilepath = "/assets/img/profile-pic-l.jpg";
@@ -126,14 +126,14 @@ export class TopnavComponent implements OnInit, OnDestroy {
     );
   }
   GetNotificationsList() {
-    debugger;
+     ;
     var SiteId = localStorage.getItem("SiteId");
     var RoleId = localStorage.getItem("RoleId");
     var LoginId = localStorage.getItem("LoginId");
 
     this.authService.GetisReadNotifications(RoleId, LoginId, SiteId).subscribe((result: any) => {
       var finalresult = JSON.parse(result);
-      debugger
+       
       if (finalresult.status == "200") {
         this.supports = finalresult.result;
         this.supports.ProfilePath=this.baseurl+this.supports[0].profilePath
@@ -151,7 +151,7 @@ export class TopnavComponent implements OnInit, OnDestroy {
     this.sidebarService.clickOnMobileMenu(containerClassnames);
   }
   EditProfile() {
-    debugger;
+     ;
     var value = "edit";
     var id = localStorage.getItem("LoginId");
 
@@ -176,7 +176,7 @@ export class TopnavComponent implements OnInit, OnDestroy {
     this.router.navigateByUrl('app/siteconfig/editsupport/' + id + '/' + value);
   }
   Notification() {
-    debugger
+     
     // var value = "edit";
     // localStorage.setItem("ticketid", ticketId);
     this.router.navigateByUrl('app/siteconfig/support');

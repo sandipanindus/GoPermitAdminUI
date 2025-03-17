@@ -88,6 +88,7 @@ export class EditSiteComponent implements OnInit, OnDestroy {
             rvehiclesperbay: ['', Validators.required],
             OperatorId: ['', Validators.required],
             industryId: ['', Validators.required],
+            enfService: ['', Validators.required],
             rcustomRadio1:['']
         });
         this.parkingbayForm = this.formBuilder.group({
@@ -118,6 +119,10 @@ export class EditSiteComponent implements OnInit, OnDestroy {
         this.Edit(id, value);
     }
 
+    enfService
+    Services=[
+        'Zatpark'
+     ]
 
     GetIndustries() {
         this.authService.GetAllIndustries().subscribe(
@@ -139,7 +144,7 @@ export class EditSiteComponent implements OnInit, OnDestroy {
       }
     agent
     Getopertaors(): void {
-        debugger
+         
         var loginId = localStorage.getItem("LoginId");
         var RoleId = localStorage.getItem("RoleId");
         var SiteId = localStorage.getItem("SiteId");
@@ -148,7 +153,7 @@ export class EditSiteComponent implements OnInit, OnDestroy {
           response => {
             if (response || Array.isArray(response)) {
                 response=JSON.parse(response);
-                 debugger
+                  
               for (var i = 0; i < response.length; i++) {
     
               if (response) {
@@ -357,7 +362,7 @@ export class EditSiteComponent implements OnInit, OnDestroy {
         this.modalRef2.hide();
     }
     visitorgetcount() {
-        debugger;
+         ;
         var from = '';
         var to = '';
         var count = '';
@@ -398,7 +403,7 @@ export class EditSiteComponent implements OnInit, OnDestroy {
 
     }
     getcount() {
-        debugger;
+         ;
         var from = '';
         var to = '';
         var count = '';
@@ -439,7 +444,7 @@ export class EditSiteComponent implements OnInit, OnDestroy {
 
     }
     BindParkingBay() {
-        debugger;
+         ;
         this.bays = [];
         this.total = 0;
         var j = 0;
@@ -467,7 +472,7 @@ export class EditSiteComponent implements OnInit, OnDestroy {
         }
     }
     BindVisitorBay() {
-        debugger;
+         ;
         this.visitortotal = 0;
         this.visitorbays = [];
         var j = 0;
@@ -532,11 +537,13 @@ export class EditSiteComponent implements OnInit, OnDestroy {
             this.siteForm.controls['rvehiclesperbay'].disable();
             this.siteForm.controls['OperatorId'].disable();
             this.siteForm.controls['industryId'].disable();
+            this.siteForm.controls['enfService'].disable();
             this.parkingbayForm.controls['psection'].disable();
             this.parkingbayForm.controls['pseperatorId'].disable();
             this.visitorbayForm.controls['vsection'].disable();
             this.visitorbayForm.controls['vseperatorId'].disable();
             this.visitorbayForm.controls['vmaxparkingsession'].disable();
+
            
 
             // (document.getElementById("txtsitename") as HTMLInputElement).disabled = true;
@@ -585,6 +592,7 @@ export class EditSiteComponent implements OnInit, OnDestroy {
             this.siteForm.controls['rtenantparkingbay'].disable();
             this.siteForm.controls['rvisitorparkingbay'].disable();
             this.siteForm.controls['OperatorId'].disable();
+            this.siteForm.controls['enfService'].enable();
             this.siteForm.controls['rvehiclesperbay'].enable();
             this.parkingbayForm.controls['psection'].disable();
             this.parkingbayForm.controls['pseperatorId'].disable();
@@ -622,7 +630,7 @@ export class EditSiteComponent implements OnInit, OnDestroy {
         }
         this.SiteId = id;
         this.authService.GetSiteById(id).subscribe((result: any) => {
-            debugger;
+             ;
             var finalresult = JSON.parse(result);
             console.log("editdata",result);
             if (finalresult.status == "200") {
@@ -650,6 +658,7 @@ export class EditSiteComponent implements OnInit, OnDestroy {
                 this.vehiclesperbay = finalresult.result.maxVehiclesPerBay;
                 this.OperatorId = finalresult.result.operatorId;
                 this.industryId = finalresult.result.industryId;
+                this.enfService = finalresult.result.enforcementService;
                 this.parkingbaydiv = 'block';
                 this.visitorbaydiv = 'block';
                 this.maxparkingsession = finalresult.result.visitorbays[0].maxParkingSession;
@@ -785,7 +794,7 @@ export class EditSiteComponent implements OnInit, OnDestroy {
         var element = document.getElementById("loading") as HTMLDivElement;
         element.style.display = 'block';
         this.sitesubmitted = true;
-        debugger;
+         ;
         if (this.siteForm.invalid) {
             if (this.sitename == undefined || this.sitename == null || this.sitename == "") {
                 document.getElementById("txtsitename").className = "form-control invalid-color";
@@ -862,7 +871,7 @@ export class EditSiteComponent implements OnInit, OnDestroy {
                 return;
             }
         }
-        debugger;
+         ;
         if (this.tenantedit == true) {
             if (this.section != "" && this.section != undefined) {
                 for (var i = 0; i < this.bays.length; i++) {
@@ -938,7 +947,7 @@ export class EditSiteComponent implements OnInit, OnDestroy {
                 return;
             }
         }
-        debugger;
+         ;
         var check = document.getElementById("userchkactive") as HTMLInputElement;
         if (check.checked == true) {
             this.active = true;
@@ -1047,7 +1056,7 @@ export class EditSiteComponent implements OnInit, OnDestroy {
             industryId: this.industryId,
         }
 
-debugger
+ 
         this.authService.UpdateSite(data).subscribe((data: any) => {
 
             var result = JSON.parse(data);

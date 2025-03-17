@@ -181,33 +181,16 @@
 
     <!-- Additional Fields -->
     <div class="form-row">
+      
         <div class="form-group col-md-6 d-flex align-items-center">
-           <label for="VatRegistered" class="me-2 w-25 text-end">VAT Registered</label><br>
-           <div class="radio-group" formControlName="VatRegistered">
-             <input type="radio" id="vatyes" name="vat" formControlName="VatRegistered"  value="yes"> Yes
-             <input type="radio"id="vatyno" name="vat" formControlName="VatRegistered"  value="no"> No
-           </div>
-           <div *ngIf="addNewGeneratorForm.get('VatRegistered').invalid && addNewGeneratorForm.get('VatRegistered').touched" 
-           class="text-danger"> vat Registered Required
-           </div>
-        </div>
-        <div class="form-group col-md-6 d-flex align-items-center">
-          <label for="Date" class="me-2 w-25 text-end">SetUp Date</label>
+          <label for="Date" class="me-2 w-25 text-end">SetUp Date <span class="text-danger">*</span></label>
           <input type="date" id="Date" class="form-control w-70"  formControlName="Date">
           <div *ngIf="addNewGeneratorForm.get('Date').invalid && addNewGeneratorForm.get('Date').touched" 
           class="text-danger"> Date Required
           </div>
         </div>
-    </div>
-
-    <div class="form-row">
-        <div class="form-group col-md-6 d-flex align-items-center">
-          <label for="VatNumber" class="me-2 w-25 text-end">VAT Number<span class="text-danger">*</span></label>
-          <input type="text" id="VatNumber" class="form-control w-70" placeholder="VAT Number"  formControlName="VatNumber">
-          <div *ngIf="addNewGeneratorForm.get('VatNumber').invalid && addNewGeneratorForm.get('LastName').touched" 
-          class="text-danger"> VAT Number Required
-          </div>
-        </div>
+  
+      
 
 
         <div class="form-group col-md-6 d-flex align-items-center">
@@ -220,25 +203,10 @@
           </div>
        </div>
 
-        <!-- <div class="form-group col-md-6 d-flex align-items-center">
-           <label for="RoleId" class="me-2 w-25 text-end">RoleId<span class="text-danger">*</span></label>
-           <select id="RoleId" class="form-control w-70" formControlName="RoleId">
-             <option>Select</option>
-           </select>
-           <div *ngIf="addNewGeneratorForm.get('RoleId').invalid && addNewGeneratorForm.get('RoleId').touched" 
-           class="text-danger"> RoleId Required
-           </div>
-       </div> -->
-
-
      </div>
 
-    <!-- File Uploads -->
+    
     <div class="form-row">
-      
-
-
-      
       
     </div>
 

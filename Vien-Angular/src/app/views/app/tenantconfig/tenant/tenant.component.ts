@@ -157,7 +157,7 @@ export class TenantComponent implements OnInit, OnDestroy {
     });
   }
   pageChanged(event: any): void {
-    debugger;
+     ;
     this.page = event.page;
     this.currentPage = this.page;
     this.GetTenants();
@@ -177,7 +177,7 @@ export class TenantComponent implements OnInit, OnDestroy {
     this.GetTenants();
   }
   SearchTenant() {
-    debugger;
+     ;
     var element = document.getElementById("loading") as HTMLDivElement;
     element.style.display = 'block';
     var loginId = localStorage.getItem("LoginId");
@@ -191,7 +191,7 @@ export class TenantComponent implements OnInit, OnDestroy {
     console.log(sitename);
     if (this.firstname != '' || this.lastname != '' || this.email != '' || this.vrm != '' || this.mobilenumber || sitename) {
       this.authService.GetSearchTenants(this.currentPage, this.itemsPerPage,firstname,lastname,email, this.mobilenumber, sitename, SiteId,vrm).subscribe((result: any) => {
-        debugger;
+         ;
         var finalresult = JSON.parse(result);
         if (finalresult.status == "200") {
           this.tenants = finalresult.result;
@@ -257,7 +257,7 @@ export class TenantComponent implements OnInit, OnDestroy {
     this.authService.GetTenantUsers(this.currentPage, this.itemsPerPage, loginId, RoleId, SiteId).subscribe((result: any) => {
       var finalresult = JSON.parse(result);
       if (finalresult.status == "200") {
-        debugger;
+         ;
         this.tenants = finalresult.result;
 
         element.style.display = 'none';

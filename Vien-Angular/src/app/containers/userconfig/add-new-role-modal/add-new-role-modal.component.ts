@@ -39,7 +39,7 @@ export class AddNewRoleModalComponent implements OnInit {
     }
 
     SaveRole() {
-        debugger;
+         ;
         this.rolesubmitted = true;
         if (this.roleForm.invalid) {
             return;
@@ -50,7 +50,7 @@ export class AddNewRoleModalComponent implements OnInit {
             LoginId: parseInt(localStorage.getItem("LoginId"))
         }
         this.authService.SaveRole(data).subscribe((data: any) => {
-            debugger;
+             ;
             var result = JSON.parse(data);
             if (result.status == "200") {
                 this.notifications.success('Success',"Role added successfully", NotificationType.Success, { theClass: 'outline primary', timeOut: 2000, showProgressBar: false, clickToClose: true });

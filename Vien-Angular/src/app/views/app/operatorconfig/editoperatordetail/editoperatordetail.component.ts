@@ -156,8 +156,6 @@ editid:any;
         TradingCountryId: [1],
         RegisteredZipCode: [''],
         TradingZipCode: [''],
-        VatRegistered: [''],
-        VatNumber: ['', Validators.required],
         Profile: [''],
         Notes: [''],
        
@@ -375,7 +373,7 @@ editid:any;
         this.modalRef2.hide();
     }
     visitorgetcount() {
-        debugger;
+         ;
         var from = '';
         var to = '';
         var count = '';
@@ -416,7 +414,7 @@ editid:any;
 
     }
     getcount() {
-        debugger;
+         ;
         var from = '';
         var to = '';
         var count = '';
@@ -457,7 +455,7 @@ editid:any;
 
     }
     BindParkingBay() {
-        debugger;
+         ;
         this.bays = [];
         this.total = 0;
         var j = 0;
@@ -485,7 +483,7 @@ editid:any;
         }
     }
     BindVisitorBay() {
-        debugger;
+         ;
         this.visitortotal = 0;
         this.visitorbays = [];
         var j = 0;
@@ -549,7 +547,7 @@ editid:any;
         var element = document.getElementById("loading") as HTMLDivElement;
         element.style.display = 'block';
         this.sitesubmitted = true;
-        debugger;
+         ;
         if (this.siteForm.invalid) {
             if (this.sitename == undefined || this.sitename == null || this.sitename == "") {
                 document.getElementById("txtsitename").className = "form-control invalid-color";
@@ -626,7 +624,7 @@ editid:any;
                 return;
             }
         }
-        debugger;
+         ;
         if (this.tenantedit == true) {
             if (this.section != "" && this.section != undefined) {
                 for (var i = 0; i < this.bays.length; i++) {
@@ -702,7 +700,7 @@ editid:any;
                 return;
             }
         }
-        debugger;
+         ;
         var check = document.getElementById("userchkactive") as HTMLInputElement;
         if (check.checked == true) {
             this.active = true;
@@ -885,7 +883,7 @@ editid:any;
       }
       this.SiteId = id;
       this.authService.Getoperatorbyid(id).subscribe((result: any) => {
-          debugger;
+           ;
           var finalresult = JSON.parse(result);
           console.log("editdata",result);
           if (finalresult) {
@@ -1026,7 +1024,7 @@ editid:any;
     Getcountries(){
       this.authService.GetCountries().subscribe(
         response => {
-          debugger
+           
           if (JSON.parse(response) ) {
     const data=JSON.parse(response);
             this.countries = data.result;
@@ -1078,7 +1076,7 @@ editid:any;
     
     }
     onSubmit(): void {
-      debugger
+       
       if (this.addNewGeneratorForm.invalid) {
         alert("Please fill all required fields correctly.");
         return;
@@ -1138,7 +1136,7 @@ editid:any;
 
       this.authService.updatenewoperatordetails(formData).subscribe((data: any) => {
             
-        debugger
+         
         var result = JSON.parse(data);
         if (result) {
             element.style.display = 'none';

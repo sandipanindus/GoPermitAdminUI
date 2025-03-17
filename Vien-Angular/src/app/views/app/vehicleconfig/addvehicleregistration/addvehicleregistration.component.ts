@@ -68,7 +68,7 @@ export class AddVehicleRegistrationComponent implements OnInit, OnDestroy {
         if (this.tenantId != "") {
             var loginId = localStorage.getItem("LoginId");
             this.authService.GetTenantUserById(parseInt(this.tenantId)).subscribe((result: any) => {
-                debugger;
+                 ;
                 var finalresult = JSON.parse(result);
                 if (finalresult.status == "200") {
                     this.firstname = finalresult.result.firstName;
@@ -124,7 +124,7 @@ export class AddVehicleRegistrationComponent implements OnInit, OnDestroy {
     }
     GetSites() {
         this.authService.GetSites(1,0,1,1,0).subscribe((result: any) => {
-            debugger;
+             ;
             //  var data = JSON.stringify(result);
             var finalresult = JSON.parse(result);
             if (finalresult.status == "200") {
@@ -137,7 +137,7 @@ export class AddVehicleRegistrationComponent implements OnInit, OnDestroy {
     GetTenants() {
         this.tenants = [];
         this.authService.GetTenantsBySite(parseInt(this.siteId)).subscribe((result: any) => {
-            debugger;
+             ;
             //  var data = JSON.stringify(result);
             var finalresult = JSON.parse(result);
             if (finalresult.status == "200") {
@@ -157,7 +157,7 @@ export class AddVehicleRegistrationComponent implements OnInit, OnDestroy {
         //   this.spinner.hide();
         //    return;
         //  }
-        debugger;
+         ;
         if (this.vehiclelists.length > 0) {
             for (var i = 0; i < this.vehiclelists.length; i++) {
                  if (this.vehiclelists[i].bayno == '') {
@@ -234,7 +234,7 @@ export class AddVehicleRegistrationComponent implements OnInit, OnDestroy {
             this.notifications.alert('Alert', "Required atleast one row", NotificationType.Alert, { theClass: 'outline primary', timeOut: 2000, showProgressBar: false });
         }
         this.authService.SaveVehicleData(this.vehiclelists).subscribe((data: any) => {
-            debugger;
+             ;
             var result = JSON.parse(data);
             if (result.status == "200") {
                 this.spinner.hide();

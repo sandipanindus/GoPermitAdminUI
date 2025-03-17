@@ -13,7 +13,7 @@ export class UserComponent implements OnInit, OnDestroy {
   ngOnInit() {
     this.renderer.addClass(document.body, 'background');
     this.renderer.addClass(document.body, 'no-footer');
-    debugger;
+     ;
     var data={
       UserName:"admin",
       Password:"labelpad"
@@ -22,7 +22,7 @@ export class UserComponent implements OnInit, OnDestroy {
       localStorage.setItem("token",result);
       
       this.authService.GetValue().subscribe((result:any)=>{
-        debugger;
+         ;
       })
 
     //   this.notifications.success('Success',"Success",NotificationType.Success,{ theClass: 'outline primary', timeOut: 6000, showProgressBar: false });

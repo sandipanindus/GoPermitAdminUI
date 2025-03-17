@@ -44,7 +44,7 @@ export class BulkUploadComponent implements OnInit, OnDestroy {
 
     }
     SaveData() {
-        debugger;
+         ;
         this.spinner.show();
         var loginId = localStorage.getItem("LoginId");
         if (loginId == "null" || loginId == undefined || loginId == null) {
@@ -138,7 +138,7 @@ export class BulkUploadComponent implements OnInit, OnDestroy {
     }
 
     addfile(event) {
-        debugger;
+         ;
         this.filelists = [];
         this.file = event.target.files[0];
         let fileReader = new FileReader();

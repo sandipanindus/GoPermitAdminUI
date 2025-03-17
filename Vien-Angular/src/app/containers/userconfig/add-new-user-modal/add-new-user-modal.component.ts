@@ -47,7 +47,7 @@ export class AddNewUserModalComponent implements OnInit {
     ngOnInit() {
         var loginId=localStorage.getItem("LoginId");
         this.authService.GetRoles(1,0,loginId,1).subscribe((result:any)=>{
-          debugger;
+           ;
          // var data=JSON.stringify(result);
           var finalresult=JSON.parse(result);
           if(finalresult.status=="200"){
@@ -58,7 +58,7 @@ export class AddNewUserModalComponent implements OnInit {
           }
         });
         this.authService.GetCountries().subscribe((result:any)=>{
-            debugger;
+             ;
            // var data=JSON.stringify(result);
             var finalresult=JSON.parse(result);
             if(finalresult.status=="200"){
@@ -82,7 +82,7 @@ export class AddNewUserModalComponent implements OnInit {
     
       }
     SaveUser() {
-        debugger;
+         ;
         this.usersubmitted = true;
         if (this.userForm.invalid) {
             return;
@@ -109,7 +109,7 @@ export class AddNewUserModalComponent implements OnInit {
             EmailCode:this.code
         }
         this.authService.AddUser(data).subscribe((data: any) => {
-            debugger;
+             ;
             var result = JSON.parse(data);
             if (result.status == "200") {
                 this.notifications.success('Success',"User added successfully", NotificationType.Success, { theClass: 'outline primary', timeOut: 2000, showProgressBar: false, clickToClose: true });

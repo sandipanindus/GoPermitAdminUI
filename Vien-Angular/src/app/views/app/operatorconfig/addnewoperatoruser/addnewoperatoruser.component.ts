@@ -63,7 +63,7 @@ this.Getroles()
     var LoginId= parseInt(localStorage.getItem("LoginId"));
     this.authService.GetRoles(1,0,LoginId,1).subscribe(
       response => {
-        debugger
+         
         console.log("role,",response)
         if (JSON.parse(response) ) {
   const data=JSON.parse(response);
@@ -83,7 +83,7 @@ this.Getroles()
   }
 
   Getopertaors(): void {
-    debugger
+     
     var loginId = localStorage.getItem("LoginId");
     var RoleId = localStorage.getItem("RoleId");
     var SiteId = localStorage.getItem("SiteId");
@@ -95,7 +95,7 @@ this.Getroles()
           
           response=JSON.parse(response);
 
-debugger
+ 
           for (var i = 0; i < response.length; i++) {
 
           if (response) {
@@ -120,7 +120,7 @@ debugger
   }
 
   onSubmit() {
-        debugger;
+         ;
         if (this.operatorUserForm.invalid) {
             return;
         }
@@ -148,7 +148,7 @@ debugger
             EmailCode:emailcode.toString()
         }
         this.authService.AddUser(data).subscribe((data: any) => {
-            debugger;
+             ;
             var result = JSON.parse(data);
             if (result.status == "200") {
                 this.notifications.success('Success',"Operator added successfully", NotificationType.Success, { theClass: 'outline primary', timeOut: 2000, showProgressBar: false, clickToClose: true });
@@ -184,7 +184,7 @@ debugger
     }
 
   // onSubmit() {
-  //   debugger
+  //    
   //   if (this.operatorUserForm.valid) {
 
      

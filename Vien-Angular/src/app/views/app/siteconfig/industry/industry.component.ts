@@ -64,7 +64,7 @@ export class IndustryComponent implements OnInit {
 
 
   GetScreens() {
-    debugger;
+     ;
     var RoleId = localStorage.getItem("RoleId");
     var loginId = localStorage.getItem("LoginId");
     this.authService.GetScreens(RoleId, loginId, 0).subscribe((result: any) => {
@@ -128,7 +128,7 @@ export class IndustryComponent implements OnInit {
   showpage
   currentPage
   pageChanged(event: any): void {
-    debugger;
+     ;
   //   this.page = event.page;
   //   this.currentPage = this.page;
   //  this.GetSites();

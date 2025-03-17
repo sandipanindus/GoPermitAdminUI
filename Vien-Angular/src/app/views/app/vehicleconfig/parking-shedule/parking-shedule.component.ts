@@ -111,7 +111,7 @@ selecteddate;
 eventClicked(data)
 {
   this.showalert=true
-  debugger
+   
   this.spinner.show();
   setTimeout(() => {
     this.spinner.hide();
@@ -134,7 +134,7 @@ eventClicked(data)
 
   GetSites() {
     this.authService.GetSitesbylogin(this.loginid).subscribe((result: any) => {
-        debugger;
+         ;
         //  var data = JSON.stringify(result);
         var finalresult = JSON.parse(result);
         if (finalresult.status == "200") {
@@ -152,14 +152,14 @@ eventClicked(data)
 }
 
 Getbaybysite() {
-  debugger
+   
   this.showdatepicker=false;
   this.Single=false;
   this.multiple=false;
   this.showalert=false
   this.baylist=null
   this.authService.GetParkingBayNobysite(this.siteId).subscribe((result: any) => {
-      debugger;
+       ;
       //  var data = JSON.stringify(result);
       var finalresult = JSON.parse(result);
       if (finalresult.status == "200") {
@@ -177,7 +177,7 @@ getDateItem(date: Date): string {
   return `${date.getFullYear()}-${date.getMonth() + 1}-${date.getDate()}`;
 }
 onbaynoset(event) {
-  debugger
+   
   this.spinner.show();
   setTimeout(() => {
     this.spinner.hide();
@@ -241,7 +241,7 @@ this.multiple = true
 
 
   configurebasedonNo() {
-    debugger
+     
 
     this.iterations = [];
     var no = +this.confignumber;
@@ -256,7 +256,7 @@ this.multiple = true
 
 
   bindingmultiplevehicles(data) {
-    debugger
+     
 
     var no = +this.confignumber;
 
@@ -286,7 +286,7 @@ this.multiple = true
 
 
   selectingcolors(iiteration, id) {
-    debugger
+     
     var no = +this.confignumber;
 
     for (let i = 1; i <= no; i++) {
@@ -339,14 +339,14 @@ this.multiple = true
   enddate
 
   GetProfile(){
-    debugger
+     
     this.showdatepicker=false;
     this.Single=false;
     this.multiple=false;
     //var element = document.getElementById("loader") as HTMLDivElement;
   //  element.style.display = 'block';
     this.authService.GetProfileById(this.bayid.registerUserId).subscribe((data: any) => {
-        debugger;
+         ;
         if (data.status == "200") {
 
           if(data.result!=null)

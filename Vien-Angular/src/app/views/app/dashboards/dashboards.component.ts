@@ -101,7 +101,7 @@ export class DashboardsComponent implements OnInit {
 
   }
   Getopertaors(): void {
-    debugger
+     
     var loginId = localStorage.getItem("LoginId");
     var RoleId = localStorage.getItem("RoleId");
     var SiteId = localStorage.getItem("SiteId");

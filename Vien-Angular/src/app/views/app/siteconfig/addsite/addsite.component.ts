@@ -58,6 +58,7 @@ export class AddSiteComponent implements OnInit, OnDestroy {
         this.siteForm = this.formBuilder.group({
             rsitename: ['', Validators.required],
             rsitecode: ['', Validators.required],
+            enfService: ['', Validators.required],
             rsiteaddress: ['', Validators.required],
             rcity: ['', Validators.required],
             rstate: ['', Validators.required],
@@ -114,7 +115,7 @@ export class AddSiteComponent implements OnInit, OnDestroy {
 
 
     Getopertaors(): void {
-        debugger
+         
         var loginId = localStorage.getItem("LoginId");
         var RoleId = localStorage.getItem("RoleId");
         var SiteId = localStorage.getItem("SiteId");
@@ -125,7 +126,7 @@ export class AddSiteComponent implements OnInit, OnDestroy {
               
                 response=JSON.parse(response);
     
-    debugger
+     
               for (var i = 0; i < response.length; i++) {
     
               if (response) {
@@ -203,7 +204,7 @@ export class AddSiteComponent implements OnInit, OnDestroy {
         });
     }
     visitorgetcount() {
-        debugger;
+         ;
         var from = '';
         var to = '';
         var count = '';
@@ -245,7 +246,7 @@ export class AddSiteComponent implements OnInit, OnDestroy {
 
     }
     getcount() {
-        debugger;
+         ;
         var tenantparkingbay = this.tenantparkingbay;
         var from = '';
         var to = '';
@@ -288,7 +289,7 @@ export class AddSiteComponent implements OnInit, OnDestroy {
 
     }
     BindParkingBay() {
-        debugger;
+         ;
         this.bays = [];
         var j = 0;
         if ((this.section != "" || this.section != undefined) && (this.tenantparkingbay != "" && this.tenantparkingbay != undefined)) {
@@ -314,8 +315,12 @@ export class AddSiteComponent implements OnInit, OnDestroy {
             this.parkingbaydiv = "none";
         }
     }
+
+    Services=[
+        'Zatpark'
+    ]
     BindVisitorBay() {
-        debugger;
+         ;
         this.visitorbays = [];
         var j = 0;
         if ((this.vsection != "" || this.vsection != undefined) && (this.visitorparkingbay != "" && this.visitorparkingbay != undefined)) {
@@ -361,11 +366,11 @@ export class AddSiteComponent implements OnInit, OnDestroy {
         });
     }
     SaveSite() {
-        debugger
+         
         var element = document.getElementById("loading") as HTMLDivElement;
         element.style.display = 'block';
         this.sitesubmitted = true;
-        debugger;
+         ;
         if (this.siteForm.invalid) {
             if (this.sitename == undefined || this.sitename == null || this.sitename == "") {
                 document.getElementById("txtsitename").className = "form-control invalid-color";
@@ -438,7 +443,7 @@ export class AddSiteComponent implements OnInit, OnDestroy {
             element.style.display = 'none';
             return;
         }
-        debugger;
+         ;
         if (this.section != "" && this.section != undefined) {
             for (var i = 0; i < this.bays.length; i++) {
 
@@ -536,7 +541,7 @@ export class AddSiteComponent implements OnInit, OnDestroy {
             // this.notifications.alert('Alert', "No of total visitor bay not be exceeded", NotificationType.Alert, { theClass: 'outline primary', timeOut: 2000, showProgressBar: false });
             return;
         }
-        debugger;
+         ;
 
         if ((document.getElementById("customRadio1") as HTMLInputElement).checked == true) {
             this.timeunit = "Minutes";
@@ -624,11 +629,12 @@ export class AddSiteComponent implements OnInit, OnDestroy {
             VisitorSessions: this.visitorsessions,
             OperatorId: this.siteForm.value?.OperatorId,
             industryId: this.siteForm.value?.industryId,
+            enforcementService:this.siteForm.value?.enfService
         }
-        debugger
+         
         this.authService.SaveSite(data).subscribe((data: any) => {
             
-            debugger
+             
             var result = JSON.parse(data);
             if (result.status == "200") {
                 element.style.display = 'none';

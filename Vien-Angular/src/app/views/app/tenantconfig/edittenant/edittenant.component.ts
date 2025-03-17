@@ -119,7 +119,7 @@ export class EditTenantComponent implements OnInit, OnDestroy {
         this.GetSites();
         this.Edit(id, value);
         // this.show=false;
-        debugger
+         
     }
 
     agent
@@ -197,7 +197,7 @@ export class EditTenantComponent implements OnInit, OnDestroy {
 //     this.modalRef.hide();
 //   }
     BindBayNo() {
-        debugger;
+         ;
         if (this.siteId != null || this.siteId != undefined || this.siteId != "") {
             if (this.parkingbayId != "0") {
                 var j = this.bayconfigs.length;
@@ -224,7 +224,7 @@ export class EditTenantComponent implements OnInit, OnDestroy {
                     this.bayconfigdiv = 'block';
                     setTimeout(() => {
                         for (var j = 0; j < this.bayconfigs.length; j++) {
-                            debugger;
+                             ;
                             this.baynonew = parseInt(this.bayconfigs[j].bayid);
                             if (this.bayconfigs[j].status != 0) {
                                 (document.getElementById("txtbayno_" + this.bayconfigs[j].id + "") as HTMLInputElement).disabled = true;
@@ -266,7 +266,7 @@ export class EditTenantComponent implements OnInit, OnDestroy {
         var element = document.getElementById("loading") as HTMLDivElement;
         //element.style.display = 'block';
         this.authService.GetParkingBayNo(Id, '', '').subscribe((result: any) => {
-            debugger;
+             ;
             var finalresult = JSON.parse(result);
             if (finalresult.status == "200") {
                 element.style.display = 'none';
@@ -277,7 +277,7 @@ export class EditTenantComponent implements OnInit, OnDestroy {
     }
 
     BindBaynos(id) {
-        debugger;
+         ;
         let newid = id - 1;
         if (this.bayconfigs[newid].startdate == '' && this.bayconfigs[newid].enddate == '') {
 
@@ -296,7 +296,7 @@ export class EditTenantComponent implements OnInit, OnDestroy {
                 var enddate1 = this.datePipe.transform(enddate, "yyyy-MM-dd");
 
                 this.authService.GetParkingBayNo(this.siteId, newdate, enddate1).subscribe((result: any) => {
-                    debugger;
+                     ;
                     var finalresult = JSON.parse(result);
                     if (finalresult.status == "200") {
                         element.style.display = 'none';
@@ -320,7 +320,7 @@ export class EditTenantComponent implements OnInit, OnDestroy {
             var enddate1 = this.datePipe.transform(enddate, "yyyy-MM-dd");
 
             this.authService.GetParkingBayNo(this.siteId, newdate, enddate1).subscribe((result: any) => {
-                debugger;
+                 ;
                 var finalresult = JSON.parse(result);
                 if (finalresult.status == "200") {
                     element.style.display = 'none';
@@ -366,10 +366,10 @@ export class EditTenantComponent implements OnInit, OnDestroy {
     }
 
     AvoidDuplicate(Id, indexid) {
-        debugger
+         
         var element = document.getElementById("loading") as HTMLDivElement;
         //element.style.display = 'block';
-        debugger;
+         ;
         var bayno = '';
         var newid = indexid - 1;
         if (Id != "") {
@@ -456,7 +456,7 @@ export class EditTenantComponent implements OnInit, OnDestroy {
         var SiteId = localStorage.getItem("SiteId");
         var RoleId = localStorage.getItem("RoleId");
         this.authService.GetSites(1, 0, 1, RoleId, SiteId).subscribe((result: any) => {
-            debugger;
+             ;
             //  var data = JSON.stringify(result);
             var finalresult = JSON.parse(result);
             if (finalresult.status == "200") {
@@ -487,7 +487,7 @@ export class EditTenantComponent implements OnInit, OnDestroy {
         var element = document.getElementById("loading") as HTMLDivElement;
         // element.style.display = 'block';
         this.authService.GetParkingBayNoEdit(Id, parseInt(UserId)).subscribe((result: any) => {
-            debugger;
+             ;
             var finalresult = JSON.parse(result);
             if (finalresult.status == "200") {
                 element.style.display = 'none';
@@ -498,7 +498,7 @@ export class EditTenantComponent implements OnInit, OnDestroy {
         });
     }
     Edit(id: any, value: any) {
-        debugger
+         
         var element = document.getElementById("loading") as HTMLDivElement;
         element.style.display = 'block';
         var baseurl=this.authService.baseUrl;
@@ -576,7 +576,7 @@ export class EditTenantComponent implements OnInit, OnDestroy {
         }
         this.TenantId = id;
         this.authService.GetTenantUserById(id).subscribe((result: any) => {
-            debugger;
+             ;
             
             var finalresult = JSON.parse(result);
             console.log(finalresult);
@@ -640,7 +640,7 @@ export class EditTenantComponent implements OnInit, OnDestroy {
                 }
                 var remainparkingbay = parseInt(this.parkingbayId) - parseInt(finalresult.result.baysConfig.length);
                 setTimeout(() => {
-                    debugger;
+                     ;
                     var j = 0;
                     if (finalresult.result.baysConfig.length == 0) {
                         for (var i = 0; i < this.parkingbayId; i++) {
@@ -677,7 +677,7 @@ export class EditTenantComponent implements OnInit, OnDestroy {
                             // else {
                             //     var vrm = "";
                             //     }
-                            debugger
+                             
                             this.bayconfigs.push({
                                 id: j,
                                 bayid: finalresult.result.baysConfig[i].bayid,
@@ -690,7 +690,7 @@ export class EditTenantComponent implements OnInit, OnDestroy {
                                 vehiclereg:finalresult.result.baysConfig[i].vehiclereg,
                                 
                             });
-                            // debugger
+                            //  
                             // this.bayconfigobj.push({
                             //     id: j,
                             //     bayid: finalresult.result.baysConfig[i].bayid,
@@ -737,7 +737,7 @@ export class EditTenantComponent implements OnInit, OnDestroy {
                 setTimeout(() => {
                     if (finalresult.result.baysConfig.length != 0) {
                         for (var j = 0; j < this.bayconfigs.length; j++) {
-                            debugger;
+                             ;
                             this.baynonew = parseInt(this.bayconfigs[j].bayid);
                             if (this.bayconfigs[j].status != 0) {
                                 (document.getElementById("txtbayno_" + this.bayconfigs[j].id + "") as HTMLInputElement).disabled = true;
@@ -788,7 +788,7 @@ export class EditTenantComponent implements OnInit, OnDestroy {
     unbookedBays
     getTenantBays(siteId){
         this.authService.GetParkingBayNoBySiteId(siteId).subscribe((result: any) => {
-            debugger;
+             ;
             var finalresult = JSON.parse(result);
             if (finalresult.status == "200") {
                 this.availBays = finalresult.result;
@@ -843,7 +843,7 @@ export class EditTenantComponent implements OnInit, OnDestroy {
       }
 
     UpdateTenant() {
-        debugger
+         
         var element = document.getElementById("loading") as HTMLDivElement;
         element.style.display = 'block';
         this.tenantsubmitted = true;
@@ -902,7 +902,7 @@ export class EditTenantComponent implements OnInit, OnDestroy {
                 //return;
             }
             else {
-                debugger;
+                 ;
                 this.bayconfigs[i].vehiclesperbay = this.bayconfigs[i].vehiclesperbay.toString();
                 document.getElementById("txtvehiclesperbay_" + this.bayconfigs[i].id + "").className = "form-control col-sm-6";
             }
@@ -1003,10 +1003,10 @@ export class EditTenantComponent implements OnInit, OnDestroy {
         else {
             _chk1= false;
         }
-        debugger
+         
         
 
-        debugger;
+         ;
         var data = {
             FirstName: this.firstname,
             LastName: this.lastname,
@@ -1039,7 +1039,7 @@ export class EditTenantComponent implements OnInit, OnDestroy {
                     formData.append("fileupload2", this.fileToUpload2, this.fileToUpload2.name);
                 }
                 var id= result.result.id;
-                debugger
+                 
                  formData.append("Id",id);
                  this.authService.SaveTenantUseruploads(formData).subscribe((finalresult: any) => {
                     if (finalresult.status == "200") {
@@ -1092,7 +1092,7 @@ export class EditTenantComponent implements OnInit, OnDestroy {
     totalMaxBays
     totalBays
     setBay(id){
-        debugger
+         
         const result=this.sites.filter((item)=>item.id==id)
         const bays=result[0].bays
         this.totalMaxBays=result[0].vehiclesperbay
@@ -1107,7 +1107,7 @@ export class EditTenantComponent implements OnInit, OnDestroy {
 
     bookedBays:number=0
     GetTenantBaysBySiteID(siteId,allBays){
-        debugger
+         
     this.bookedBays=0;
     var LogInId = localStorage.getItem("LoginId");  
     var RoleId = localStorage.getItem("RoleId");  
@@ -1139,7 +1139,7 @@ export class EditTenantComponent implements OnInit, OnDestroy {
       }
 
       onVehiclesPerBayChange(bayconfig: any) {
-        debugger;
+         ;
         // if(parseInt(bayconfig.vehiclesperbay, 10) < bayconfig.vehiclereg.length){
         //   this.bayconfigs[bayconfig.id-1].vehiclesperbay=bayconfig.vehiclereg.length,
         //     this.errormsg("Cannot reduce the Max no of bays")
@@ -1153,7 +1153,7 @@ export class EditTenantComponent implements OnInit, OnDestroy {
 
     
     // onVehiclesPerBayChange(bayconfig: any) {
-    //     debugger;
+    //      ;
     //     bayconfig.vehiclereg = Array.from({ length: bayconfig.vehiclesperbay }, () => '');
     //   }
 

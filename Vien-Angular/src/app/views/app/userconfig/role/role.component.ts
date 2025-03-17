@@ -163,13 +163,13 @@ export class RoleComponent implements OnInit, OnDestroy {
     this.GetRoles();
   }
   pageChanged(event: any): void {
-    debugger;
+     ;
     this.page = event.page;
   }
 
 
   SearchRole() {
-    debugger;
+     ;
     if (this.rolename != '') {
       var roles = this.filtermode.filter(x => x.name.toLowerCase().includes(this.rolename.toLowerCase()));
       this.roles = roles;
@@ -193,7 +193,7 @@ export class RoleComponent implements OnInit, OnDestroy {
     this.authService.GetRoles(this.currentPage, this.itemsPerPage, loginId, RoleId).subscribe((result: any) => {
       var finalresult = JSON.parse(result);
       if (finalresult.status == "200") {
-        debugger;
+         ;
         element.style.display = 'none';
         this.roles = finalresult.result;
         if (this.roles.length > 0) {

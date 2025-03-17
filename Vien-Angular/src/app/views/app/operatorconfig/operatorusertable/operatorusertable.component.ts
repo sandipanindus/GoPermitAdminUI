@@ -81,7 +81,7 @@
        }
      }
      GetScreens() {
-       debugger;
+        ;
        var RoleId = localStorage.getItem("RoleId");
        var loginId = localStorage.getItem("LoginId");
        this.authService.GetScreens(RoleId, loginId, 0).subscribe((result: any) => {
@@ -139,7 +139,7 @@
        });
      }
      SearchSite1() {
-      debugger;
+       ;
       var element = document.getElementById("loading") as HTMLDivElement;
       element.style.display = 'block';
  
@@ -158,7 +158,7 @@
   
     }
      SearchSite() {
-       debugger;
+        ;
        var element = document.getElementById("loading") as HTMLDivElement;
        element.style.display = 'block';
        var loginId = localStorage.getItem("LoginId");
@@ -234,7 +234,7 @@
 
          var finalresult = JSON.parse(result);
          if (finalresult) {
-           debugger;
+            ;
            const data = finalresult.result;  
            
            this.sites=data.filter((item)=>item.isOperator==true)
@@ -383,7 +383,7 @@ this.allsites=data.filter((item)=>item.isOperator==true)
      }
    
      pageChanged(event: any): void {
-       debugger;
+        ;
        this.page = event.page;
        this.currentPage = this.page;
        this.GetSites();

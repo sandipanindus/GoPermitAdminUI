@@ -104,12 +104,12 @@ this.GetSites();
  Visitordetails:any
 eventClicked(data)
 {
-  debugger
+   
   this.spinner.show();
 this.showtable=false;
 
   this.authService.Getvistorbysitedate(this.siteId, this.getDateItem(data.date)).subscribe((result: any) => {
-    debugger;
+     ;
     const finalresult = JSON.parse(result);
     if(finalresult.message === 'Success') {
       this.Visitordetails = finalresult.result;
@@ -145,7 +145,7 @@ this.showtable=false;
 
  assigntoTable() {
    
-  debugger 
+    
 
     for ( let i = 0 ; i < this.Visitordetails.length ; i++ ) {
 
@@ -184,14 +184,14 @@ this.showtable=false;
 details:any;
 count=1;
  testing(id){
-  debugger;
+   ;
   var length=this.Visitordetails.length ; 
 if(this.count==length)
 {
   this.showdetails=false;
   
   this.authService.Getvistordeatilsbyid(id.toElement.id).subscribe((result: any) => {
-    debugger;
+     ;
     var finalresult = JSON.parse(result);
     if (finalresult.status == "200") {
       console.log(finalresult);
@@ -223,7 +223,7 @@ else
 
   GetSites() {
     this.authService.GetSitesbylogin(this.loginid).subscribe((result: any) => {
-        debugger;
+         ;
         //  var data = JSON.stringify(result)
         this.spinner.show();
         var finalresult = JSON.parse(result);
@@ -241,12 +241,12 @@ else
 }
 
 Getbaybysite() {
-  debugger
+   
   for (let i = 0; i < this.events.length; i++) {
     this.events.splice(i, this.events.length);
   }
   this.authService.Getvistordeatilsbysite(this.siteId).subscribe((result: any) => {
-    debugger;
+     ;
     const responce = JSON.parse(result);
     console.log(responce);
     if (responce.status === "200") {
@@ -291,7 +291,7 @@ addEvent(date): void {
 }
 
 filtergriddata(serachstring: Date) {
-  debugger
+   
   return this.events.filter(X =>
     this.getDateItem(X.start)  == this.getDateItem(new Date(serachstring)));
 

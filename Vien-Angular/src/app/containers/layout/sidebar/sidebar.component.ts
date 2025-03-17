@@ -32,7 +32,7 @@ export class SidebarComponent implements OnInit, OnDestroy {
     );
     var RoleId = localStorage.getItem("RoleId");
     this.authService.GetModulesScreens(parseInt(RoleId)).subscribe((result: any) => {
-       debugger
+        
         // var data=JSON.stringify(result);
         var finalresult = JSON.parse(result);
         if (finalresult.status == "200") {
@@ -124,7 +124,7 @@ export class SidebarComponent implements OnInit, OnDestroy {
   }
 
   changeSelectedParentHasNoSubmenu(parentMenu: string) {
-    debugger
+     
     const { containerClassnames } = this.sidebar;
     this.selectedParentMenu = parentMenu;
     this.viewingParentMenu = parentMenu;
@@ -133,7 +133,7 @@ export class SidebarComponent implements OnInit, OnDestroy {
   }
 
   openSubMenu(event: { stopPropagation: () => void; }, menuItem: IMenuItem) {
-    debugger
+     
 if(menuItem.id=="dashboard"){
   this.router.navigateByUrl('app/dashboards/default');
 
@@ -251,7 +251,7 @@ if(menuItem.id=="dashboard"){
   }
 
   menuClicked(event: MouseEvent) {
-    debugger
+     
     event.stopPropagation();
 
    

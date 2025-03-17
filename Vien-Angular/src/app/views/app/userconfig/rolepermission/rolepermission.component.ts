@@ -255,7 +255,7 @@ export class RolePermissionComponent implements OnInit {
     }
   }
   chkallrow(Id, modules) {
-    debugger;
+     ;
     var check = document.getElementById("CheckboxS_" + Id) as HTMLInputElement;
     if (check.checked == true) {
       for (var i = 0; i < modules.length; i++) {

@@ -94,10 +94,10 @@ agent
       var SiteId = localStorage.getItem("SiteId");
      
       this.authService.GetSitesbyoperatorid(this.currentPage, this.itemsPerPage, loginId, RoleId, SiteId,id).subscribe((result: any) => {
-        debugger
+         
         var finalresult = JSON.parse(result);
         if (finalresult.status == "200") {
-          debugger;
+           ;
           this.sites = finalresult.result;       
           var element = document.getElementById("loading") as HTMLDivElement;
           element.style.display = 'none';
@@ -147,7 +147,7 @@ agent
     Getcountries(){
       this.authService.GetCountries().subscribe(
         response => {
-          debugger
+           
           if (JSON.parse(response) ) {
     const data=JSON.parse(response);
             this.countries = data.result;
@@ -166,7 +166,7 @@ agent
       var LoginId= parseInt(localStorage.getItem("LoginId"));
       this.authService.GetRoles(1,0,LoginId,1).subscribe(
         response => {
-          debugger
+           
           console.log("role,",response)
           if (JSON.parse(response) ) {
     const data=JSON.parse(response);
@@ -193,7 +193,7 @@ agent
     }
   
     Getopertaors(): void {
-      debugger
+       
       var loginId = localStorage.getItem("LoginId");
       var RoleId = localStorage.getItem("RoleId");
       var SiteId = localStorage.getItem("SiteId");
@@ -203,7 +203,7 @@ agent
           if (response || Array.isArray(response)) {
             response=JSON.parse(response);
     
-  debugger
+   
             for (var i = 0; i < response.length; i++) {
   
             if (response) {
@@ -228,7 +228,7 @@ agent
     }
   
     onSubmit() {
-          debugger;
+           ;
           if (this.addSiteUserForm.invalid) {
               return;
           }
@@ -256,7 +256,7 @@ agent
               EmailCode:emailcode.toString()
           }
           this.authService.AddUser(data).subscribe((data: any) => {
-              debugger;
+               ;
               var result = JSON.parse(data);
               if (result.status == "200") {
                   this.notifications.success('Success',"User added successfully", NotificationType.Success, { theClass: 'outline primary', timeOut: 2000, showProgressBar: false, clickToClose: true });
@@ -291,7 +291,7 @@ agent
       }
   
     // onSubmit() {
-    //   debugger
+    //    
     //   if (this.operatorUserForm.valid) {
   
        

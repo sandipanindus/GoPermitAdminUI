@@ -85,7 +85,7 @@ export class LabelClassComponent implements OnInit, OnDestroy {
   GetLabelClasses() {
     var loginId = localStorage.getItem("LoginId");
     this.authService.GetLabelClasses(loginId).subscribe((result: any) => {
-        debugger;
+         ;
       var finalresult = JSON.parse(result);
       if (finalresult.status == "200") {
         this.labelclasses = finalresult.result;
@@ -211,7 +211,7 @@ export class LabelClassComponent implements OnInit, OnDestroy {
   }
 
   onSearchKeyUp($event) {
-    debugger;
+     ;
     this.searchKeyUp.emit($event);
     this.updateFilter($event)
   }

@@ -78,7 +78,7 @@ export class SupportComponent implements OnInit, OnDestroy {
   constructor(private spinner: NgxSpinnerService, private translate: TranslateService, private modalService: BsModalService, private router: Router, private renderer: Renderer2, private notifications: NotificationsService, private authService: AuthService,) { }
 
   ngOnInit() {
-    debugger;
+     ;
     this.agent=this.getBrowserName();
 
     this.renderer.addClass(document.body, 'right-menu');
@@ -155,7 +155,7 @@ export class SupportComponent implements OnInit, OnDestroy {
   }
   
   SearchSupport() {
-    debugger;
+     ;
     var SiteId = localStorage.getItem("SiteId");
     if (this.sitename != '' || this.name != '' || this.email != '' || this.mobilenumber != '' || this.subject != '') {
       this.authService.GetSearchSupportList(this.currentPage, this.itemsPerPage, SiteId,this.sitename,this.name,this.email,this.mobilenumber,this.subject).subscribe((result: any) => {
@@ -215,7 +215,7 @@ export class SupportComponent implements OnInit, OnDestroy {
     this.authService.GetSupportList(this.currentPage, this.itemsPerPage, SiteId).subscribe((result: any) => {
       var finalresult = JSON.parse(result);
       if (finalresult.status == "200") {
-        debugger;
+         ;
         this.supports = finalresult.result;
         if (this.supports.length > 0) {
           this.totalItems = this.supports[0].totalItem;
@@ -243,7 +243,7 @@ export class SupportComponent implements OnInit, OnDestroy {
     });
   }
   pageChanged(event: any): void {
-    debugger;
+     ;
     this.page = event.page;
     this.currentPage = this.page;
     this.GetSupportList();

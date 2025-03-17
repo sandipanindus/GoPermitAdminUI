@@ -34,7 +34,7 @@ export class ApiService {
   constructor(private http: HttpClient) { }
   
   getProducts(pageSize: number = 10, currentPage: number = 1, search: string = '', orderBy: string = '') {
-    debugger;
+     ;
     const url = environment.apiUrl + '/cakes/paging';
     let params = new HttpParams();
     params = params.append('pageSize', pageSize + '');

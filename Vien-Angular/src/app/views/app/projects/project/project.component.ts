@@ -92,7 +92,7 @@ export class ProjectComponent implements OnInit, OnDestroy {
   GetProjects() {
     var loginId = localStorage.getItem("LoginId");
     this.authService.GetProjects(loginId).subscribe((result: any) => {
-      debugger;
+       ;
       var finalresult = JSON.parse(result);
       if (finalresult.status == "200") {
         this.projects = finalresult.result;

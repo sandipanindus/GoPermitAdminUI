@@ -45,7 +45,7 @@ export class RegisterComponent implements OnInit {
   }
   GetSites() {
     this.authService.GetSites(1,0,1,0,0).subscribe((result: any) => {
-      debugger;
+       ;
     //  var data = JSON.stringify(result);
       var finalresult = JSON.parse(result);
       if (finalresult.status == "200") {
@@ -106,7 +106,7 @@ export class RegisterComponent implements OnInit {
     else {
       this.Id = parseInt(loginId);
     }
-    debugger;
+     ;
     var siteid=(document.getElementById("txtsite") as HTMLInputElement).value;
     var parkingbay=(document.getElementById("txtparkingbay") as HTMLInputElement).value;
     var data = {

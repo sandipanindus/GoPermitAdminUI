@@ -59,7 +59,7 @@ export class EditSupportComponent implements OnInit, OnDestroy {
 
 
     ngOnInit() {
-        debugger;
+         ;
     this.agent=this.getBrowserName();
 
         var id = this.approute.snapshot.params['id']
@@ -109,7 +109,7 @@ export class EditSupportComponent implements OnInit, OnDestroy {
     getchats(id) {
         this.authService.GetSupportMessages(id).subscribe((result: any) => {
             var finalresult = JSON.parse(result);
-            debugger;
+             ;
             if (finalresult.status == "200") {
                 
 
@@ -209,7 +209,7 @@ export class EditSupportComponent implements OnInit, OnDestroy {
              
             //   return;
             // }
-            debugger
+             
            
             var data=({
               tenantId:localStorage.getItem("LoginId"),
@@ -294,7 +294,7 @@ export class EditSupportComponent implements OnInit, OnDestroy {
         this.SupportId = id;
         this.authService.GetSupportById(id).subscribe((result: any) => {
             var finalresult = JSON.parse(result);
-            debugger;
+             ;
             if (finalresult.status == "200") {
                 this.name = finalresult.result.name;
                 this.email = finalresult.result.email;
@@ -365,7 +365,7 @@ export class EditSupportComponent implements OnInit, OnDestroy {
         this.authService.UpdateSupport(data).subscribe((data: any) => {
 
             var result = JSON.parse(data);
-            debugger;
+             ;
             if (result.status == "200") {
                 element.style.display = 'none';
                 this.notifications.success('Success', "Suppport response created Successfully", NotificationType.Success, { theClass: 'outline primary', timeOut: 3000, showProgressBar: false, clickToClose: true });

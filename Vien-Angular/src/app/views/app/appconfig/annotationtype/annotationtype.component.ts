@@ -212,7 +212,7 @@ export class AnnotationtypeComponent implements OnInit, OnDestroy {
   }
 
   onSearchKeyUp($event) {
-    debugger;
+     ;
     this.searchKeyUp.emit($event);
     this.updateFilter($event)
   }

@@ -127,7 +127,7 @@ this.Getroles()
         }
        
         this.authService.GetUsersById(id).subscribe((result: any) => {
-            debugger;
+             ;
             var finalresult = JSON.parse(result);
             finalresult=finalresult.result;
             console.log("editdata",result);
@@ -196,7 +196,7 @@ this.Getroles()
       this.authService.GetSites(this.currentPage, this.itemsPerPage, loginId, RoleId, SiteId).subscribe((result: any) => {
         var finalresult = JSON.parse(result);
         if (finalresult.status == "200") {
-          debugger;
+           ;
           this.sites = finalresult.result;       
           var element = document.getElementById("loading") as HTMLDivElement;
           element.style.display = 'none';
@@ -246,7 +246,7 @@ this.Getroles()
     Getcountries(){
       this.authService.GetCountries().subscribe(
         response => {
-          debugger
+           
           if (JSON.parse(response) ) {
     const data=JSON.parse(response);
             this.countries = data.result;
@@ -265,7 +265,7 @@ this.Getroles()
       var LoginId= parseInt(localStorage.getItem("LoginId"));
       this.authService.GetRoles(1,0,LoginId,1).subscribe(
         response => {
-          debugger
+           
           console.log("role,",response)
           if (JSON.parse(response) ) {
     const data=JSON.parse(response);
@@ -283,7 +283,7 @@ this.Getroles()
     }
   
     Getopertaors(): void {
-      debugger
+       
       var loginId = localStorage.getItem("LoginId");
       var RoleId = localStorage.getItem("RoleId");
       var SiteId = localStorage.getItem("SiteId");
@@ -293,7 +293,7 @@ this.Getroles()
           if (response || Array.isArray(response)) {
             response=JSON.parse(response);
   
-  debugger
+   
             for (var i = 0; i < response.length; i++) {
   
             if (response) {
@@ -318,7 +318,7 @@ this.Getroles()
     }
   
     onSubmit() {
-          debugger;
+           ;
           if (this.addSiteUserForm.invalid) {
               return;
           }
@@ -347,7 +347,7 @@ this.Getroles()
               EmailCode:emailcode.toString()
           }
           this.authService.UpdateregisUser(data).subscribe((data: any) => {
-              debugger;
+               ;
               var result = JSON.parse(data);
               if (result.status == "200") {
                   this.notifications.success('Success',"User added successfully", NotificationType.Success, { theClass: 'outline primary', timeOut: 2000, showProgressBar: false, clickToClose: true });
@@ -382,7 +382,7 @@ this.Getroles()
       }
   
     // onSubmit() {
-    //   debugger
+    //    
     //   if (this.operatorUserForm.valid) {
   
        

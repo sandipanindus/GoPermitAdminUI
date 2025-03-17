@@ -128,7 +128,7 @@ export class UserComponent implements OnInit, OnDestroy {
   }
 
   pageChanged(event: any): void {
-    debugger;
+     ;
     this.page = event.page;
     this.currentPage = this.page;
     this.GetUsers();
@@ -171,7 +171,7 @@ export class UserComponent implements OnInit, OnDestroy {
     }
     this.authService.GetUsers(this.currentPage, this.itemsPerPage, loginId, RoleId, SiteId).subscribe((result: any) => {
       var finalresult = JSON.parse(result);
-      debugger;
+       ;
       if (finalresult.status == "200") {
         element.style.display = 'none';
         this.users = finalresult.result;
@@ -222,7 +222,7 @@ export class UserComponent implements OnInit, OnDestroy {
     this.GetUsers();
   }
   SearchUser() {
-    debugger;
+     ;
     var element = document.getElementById("loading") as HTMLDivElement;
     element.style.display = 'block';
     var loginId = localStorage.getItem("LoginId");
