@@ -30,9 +30,14 @@ export class ThankyouComponent implements OnInit {
       this.success2 = "Please login here";
       this.success3 = "to continue";
     }
+    // else if (status == "set") {
+    //   this.success1 = "Password generated successfully";
+    //   this.success2 = "Please login here";
+    //   this.success3 = "to continue";
+    // }
     else if (status == "set") {
-      this.success1 = "Password generated successfully";
-      this.success2 = "Please login here";
+      this.success1 = "Your password has been successfully created.";
+      this.success2 = "You can now log in";
       this.success3 = "to continue";
     }
     element.style.display='none';
