@@ -1,17 +1,22 @@
-import { Component, OnInit, OnDestroy, HostListener } from '@angular/core';
+import { Component, OnInit, OnDestroy, HostListener, ViewChild, ElementRef } from '@angular/core';
 import { Subscription } from 'rxjs';
 import { SidebarService, ISidebar } from '../sidebar/sidebar.service';
 import { Router } from '@angular/router';
 import { LangService, Language } from 'src/app/shared/lang.service';
 import { AuthService } from 'src/app/shared/auth.service';
 import { environment } from 'src/environments/environment';
+import { BsDropdownDirective } from 'ngx-bootstrap/dropdown';
+
+
 @Component({
   selector: 'app-topnav',
   templateUrl: './topnav.component.html',
   styleUrls: ['./topnav.component.scss'],
+  
 
 })
 export class TopnavComponent implements OnInit, OnDestroy {
+
   sidebar: ISidebar;
   subscription: Subscription;
   displayName = 'Sarah Cortney';
@@ -25,12 +30,19 @@ export class TopnavComponent implements OnInit, OnDestroy {
   profilepath: string;
   supports: any = [];
   baseurl: any;
+  notificationDropDown: boolean;
   constructor(private sidebarService: SidebarService, private authService: AuthService, private router: Router, private langService: LangService) {
     this.languages = this.langService.supportedLanguages;
     this.currentLanguage = this.langService.languageShorthand;
     this.isSingleLang = this.langService.isSingleLang;
     this.isDarkModeActive = this.getColor().indexOf('dark') > -1 ? true : false;
   }
+
+  // isOpen = false;
+
+  // toggleDropdown() {
+  //   this.isOpen = !this.isOpen;
+  // }
 
   onDarkModeChange(event) {
     let color = this.getColor();
@@ -110,6 +122,14 @@ export class TopnavComponent implements OnInit, OnDestroy {
     this.subscription.unsubscribe();
   }
 
+//   @HostListener('document:click', ['$event'])
+// onClickOutside(event: Event) {
+//   const button = document.getElementById('notificationButton');
+//   if (button && !button.contains(event.target as Node)) {
+//     this.isDropdownOpen = false;
+//   }
+// }
+
   menuButtonClick = (e: { stopPropagation: () => void; }, menuClickCount: number, containerClassnames: string) => {
     if (e) { e.stopPropagation(); }
 
@@ -175,12 +195,90 @@ export class TopnavComponent implements OnInit, OnDestroy {
     localStorage.setItem("ticketid", ticketId);
     this.router.navigateByUrl('app/siteconfig/editsupport/' + id + '/' + value);
   }
+
   Notification() {
      
     // var value = "edit";
     // localStorage.setItem("ticketid", ticketId);
     this.router.navigateByUrl('app/siteconfig/support');
   }
+
+  // notificationDropDown: boolean = false;
+
+
+  // Notification() {
+  //   debugger
+  //   if (this.notificationDropDown == false) {
+  //     this.router.navigateByUrl('app/siteconfig/support');
+  //     this.notificationDropDown = !this.notificationDropDown;
+  //   }
+  //   // var value = "edit";
+  //   // localStorage.setItem("ticketid", ticketId);
+  // }
+
+
+
+
+  // Notification() {
+  //   debugger
+  //   // var value = "edit";
+  //   // localStorage.setItem("ticketid", ticketId);
+  //   this.router.navigateByUrl('app/siteconfig/support');
+  // }
+
+  // Notification() {
+  //   debugger
+  //   // var value = "edit";
+  //   // localStorage.setItem("ticketid", ticketId);
+  //   this.router.navigateByUrl('app/siteconfig/support');
+  //   this.notificationDropDown = !this.notificationDropDown;
+
+  // }
+
+  // @ViewChild(BsDropdownDirective) dropdown!: BsDropdownDirective;
+
+  // Notification() {
+  //   debugger;
+  //       // Toggle dropdown manually
+  //       if (this.dropdown) {
+  //         this.notificationDropDown = !this.notificationDropDown;
+  //         if (this.notificationDropDown) {
+  //           this.dropdown.show();
+  //           this.router.navigateByUrl('app/siteconfig/support');
+  //         }
+  //         else {
+  //           this.dropdown.hide();
+  //         } 
+  //       }
+  // }
+
+
+  // Notification(event: Event) {
+  //   debugger
+  //   event.stopPropagation(); // Prevent immediate closing
+
+  //   if (this.dropdown) {
+  //     if (this.dropdown.isOpen) {
+  //       this.dropdown.hide()
+  //     }
+  //     else {
+  //       this.router.navigateByUrl('app/siteconfig/support');
+  //       this.dropdown.show();
+        
+  //     }
+  //   }
+
+  //   // Navigate to the support page (only if needed)
+  // }
+
+  // isDropdownOpen = false;
+
+  // Notification(dropdown: BsDropdownDirective) {
+  //   this.isDropdownOpen = !this.isDropdownOpen;
+  //   dropdown.isOpen = this.isDropdownOpen;
+  //       this.router.navigateByUrl('app/siteconfig/support');
+
+  // }
   searchKeyUp(event: KeyboardEvent) {
     if (event.key === 'Enter') {
       this.search();
@@ -238,7 +336,15 @@ export class TopnavComponent implements OnInit, OnDestroy {
 
   // Toggle dropdown visibility
   toggleDropdown(): void {
+    debugger
     this.isDropdownOpen = !this.isDropdownOpen;
+  }
+
+
+  // Toggle dropdown when button is clicked
+  toggledown(event: Event) {
+    event.stopPropagation(); // Prevents click from closing immediately
+    this.notificationDropDown = !this.notificationDropDown;
   }
 
   // Handle option selection

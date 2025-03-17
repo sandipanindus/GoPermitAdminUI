@@ -102,14 +102,115 @@
 
       <div class="position-relative d-inline-block">
 
-        <div dropdown>
+        <!-- <div dropdown>
           <button id="button-basic" dropdownToggle type="button" id="notificationButton"
             class="header-icon btn btn-empty" >
             <i class="simple-icon-bell" style="font-size: 1.5em;" (click)="Notification()"></i>
             <span class="count">{{totalcount}}</span>
-          </button>
+          </button> -->
 
-          <div id="dropdown-basic" *dropdownMenu class="dropdown-menu dropdown-menu-right mt-3"
+
+          <div dropdown>
+            <button id="button-basic" dropdownToggle type="button" id="notificationButton"
+              class="header-icon btn btn-empty" >
+              <i class="simple-icon-bell" style="font-size: 1.5em;" (click)="toggledown($event)"></i>
+              <span class="count">{{totalcount}}</span>
+            </button>
+
+          <!-- <div dropdown>
+            <button id="button-basic" dropdownToggle type="button" id="notificationButton"
+              class="header-icon btn btn-empty" >
+              <i class="simple-icon-bell" style="font-size: 1.5em;" (click)="Notification($event)"></i>
+              <span class="count">{{totalcount}}</span>
+            </button> -->
+
+          <!-- <div dropdown [autoClose]="'outside'">
+            <button id="button-basic" dropdownToggle type="button" id="notificationButton"
+              class="header-icon btn btn-empty" >
+              <i class="simple-icon-bell" style="font-size: 1.5em;" (click)="Notification()"></i>
+              <span class="count">{{totalcount}}</span>
+            </button> -->
+
+
+            <!-- <div dropdown #notificationDropdown="bs-dropdown" [autoClose]="'outside'">
+              <button 
+                id="notificationButton"
+                dropdownToggle 
+                type="button"
+                class="header-icon btn btn-empty position-relative"
+                (click)="Notification(notificationDropdown)"
+
+              >
+                <i class="simple-icon-bell" style="font-size: 1.5em;"></i>
+                <span class="count">{{ totalcount }}</span>
+              </button> -->
+            
+              <!-- <div *dropdownMenu class="dropdown-menu dropdown-menu-end mt-2">
+                <div class="dropdown-item">Notification 1</div>
+                <div class="dropdown-item">Notification 2</div>
+              </div> -->
+            <!-- </div> -->
+            
+          
+
+          <!-- <div dropdown container="body" [autoClose]="'outside'">
+            <button 
+              id="button-basic"
+              dropdownToggle 
+              type="button"
+              class="header-icon btn btn-empty"
+            >
+              <i class="simple-icon-bell" style="font-size: 1.5em;" (click)="Notification()"></i>
+              <span class="count">{{ totalcount }}</span>
+            </button> -->
+          
+            <!-- <div *dropdownMenu class="dropdown-menu dropdown-menu-end mt-2">
+              <div class="dropdown-item">Notification 1</div>
+              <div class="dropdown-item">Notification 2</div>
+            </div> -->
+
+
+          <!-- <div dropdown container="body" [autoClose]="'outside'">
+            <button 
+              id="notificationButton"
+              dropdownToggle 
+              type="button"
+              class="header-icon btn btn-empty position-relative"
+            >
+              <i class="simple-icon-bell" style="font-size: 1.5em;"></i>
+              <span class="count">{{ totalcount }}</span>
+            </button>
+          
+            <div *dropdownMenu class="dropdown-menu dropdown-menu-end mt-2">
+              <div class="dropdown-item">Notification 1</div>
+              <div class="dropdown-item">Notification 2</div>
+            </div> -->
+          <!-- </div> -->
+          
+          
+          
+
+          <!-- <div id="dropdown-basic" *dropdownMenu class="dropdown-menu dropdown-menu-right mt-3"
+            id="notificationDropdown"
+            style="width: 464px !important; height: 187px!important;">
+            <perfect-scrollbar>
+              <div class="d-flex flex-row mb-3 pb-3 border-bottom" *ngFor="let support of supports">
+                <a href="javascript:;">
+                    <img [src]="support.profilePath==null?'/assets/img/profile-pic-l.jpg':support.profilePath" alt="Notification Image"
+                    class="img-thumbnail list-thumbnail xsmall border-0 rounded-circle" />
+                </a> 
+                <div class="pl-3">
+                  <a href="javascript:;" (click)="OpenNotification(support.id,support.ticketId)">
+                    <p class="font-weight-medium mb-1">{{support.subject}}</p>
+                    <p class="text-muted mb-0 text-small">{{support.date}} - {{support.time}}</p>
+                  </a>
+                </div>
+              </div>
+              </perfect-scrollbar>
+          </div> -->
+
+
+          <div id="dropdown-basic" *ngIf="notificationDropDown"  class="dropdown-menu dropdown-menu-right mt-3"
             id="notificationDropdown"
             style="width: 464px !important; height: 187px!important;">
             <perfect-scrollbar>
@@ -169,6 +270,7 @@
           </div>
 
         </div>
+
 
       </div>
 
