@@ -7,21 +7,31 @@
 
                 <form [formGroup]="siteForm">
 
+
+                    <!-- <select class="form-control" formControlName="rsiteId"  (change)="setBay($event.target.value)" 
+                    [ngClass]="{'is-invalid': tenantsubmitted && r.rsiteId.errors }" id="txtsite"
+                    [(ngModel)]="siteId" required="required">
+                    <option value="">Select</option>
+                    <option *ngFor="let site of sites" [value]="site.id">{{site.siteName}}
+                    </option>
+                </select> -->
+
+
                     <div class="form-group row col-lg-12">
                         <label for="txtfirstname"
-                            class="col-sm-2 col-form-label">{{ 'site.sitename' | translate }}</label>
+                            class="col-sm-2 col-form-label">{{ 'site.sitename' | translate }}<span class="text-danger">*</span></label>
                         <div class="col-sm-4">
                             <input type="text" class="form-control" id="txtsitename"
                                 placeholder="{{'site.sitename' | translate }}" [(ngModel)]="sitename"
                                 formControlName="rsitename"
-                                [ngClass]="{'is-invalid': sitesubmitted && r.rsitename.errors }">
+                                [ngClass]="{'is-invalid': sitesubmitted && r.rsitename.errors }" required="required">
                             <div *ngIf="sitesubmitted && r.rsitename.errors" class="invalid-feedback">
                                 <div *ngIf="r.rsitename.errors.required" class="invalid-tooltip">Site name is required
                                 </div>
                             </div>
                         </div>
 
-                        <label class="col-sm-2 col-form-label">{{ 'Enforcement Service'  | translate }}</label>
+                        <label class="col-sm-2 col-form-label">{{ 'Enforcement Service'  | translate }}<span class="text-danger">*</span></label>
                         <div class="col-sm-4">
                             <!-- <input type="text" class="form-control" id="txtsitename"
                                 placeholder="{{'site.Operator' | translate }}" [(ngModel)]="OperatorId"
@@ -40,7 +50,7 @@
                     </div>
                     <div class="form-group row col-lg-12">
 
-                        <label class="col-sm-2 col-form-label">{{ 'site.sitecode'  | translate }}</label>
+                        <label class="col-sm-2 col-form-label">{{ 'site.sitecode'  | translate }}<span class="text-danger">*</span></label>
                         <div class="col-sm-4">
                             <input class="form-control" id="txtsitecode" [(ngModel)]="sitecode"
                                 placeholder="{{'site.sitecode' | translate }}" formControlName="rsitecode"
@@ -53,7 +63,7 @@
                         </div>
 
                         <label for="txtfirstname"
-                            class="col-sm-2 col-form-label">{{ 'site.Operator' | translate }}</label>
+                            class="col-sm-2 col-form-label">{{ 'site.Operator' | translate }}<span class="text-danger">*</span></label>
                         <div class="col-sm-4">
                             <!-- <input type="text" class="form-control" id="txtsitename"
                                 placeholder="{{'site.Operator' | translate }}" [(ngModel)]="OperatorId"
@@ -74,7 +84,7 @@
                     </div>
                     <div class="form-group row col-lg-12">
 
-                        <label class="col-sm-2 col-form-label">{{ 'Industry'  | translate }}</label>
+                        <label class="col-sm-2 col-form-label">{{ 'Industry'  | translate }}<span class="text-danger">*</span></label>
                         <div class="col-sm-4">
                             <!-- <input type="text" class="form-control" id="txtsitename"
                                 placeholder="{{'site.Operator' | translate }}" [(ngModel)]="OperatorId"
@@ -90,7 +100,7 @@
                             </div>
                         </div>
 
-                        <label class="col-sm-2 col-form-label">{{ 'site.siteaddress'  | translate }}</label>
+                        <label class="col-sm-2 col-form-label">{{ 'site.siteaddress'  | translate }}<span class="text-danger">*</span></label>
                         <div class="col-sm-4">
                             <input class="form-control" id="txtsiteaddress" [(ngModel)]="siteaddress"
                                 placeholder="{{'site.siteaddress' | translate }}" formControlName="rsiteaddress"
@@ -106,7 +116,7 @@
                     </div>
                     <div class="form-group row col-lg-12">
 
-                        <label class="col-sm-2 col-form-label">{{ 'site.city' | translate }}</label>
+                        <label class="col-sm-2 col-form-label">{{ 'site.city' | translate }}<span class="text-danger">*</span></label>
                         <div class="col-sm-4">
                             <input type="text" class="form-control" id="txtcity"
                                 placeholder="{{'site.city' | translate }}" [(ngModel)]="city" formControlName="rcity"
@@ -118,7 +128,7 @@
                         </div>
 
 
-                        <label class="col-sm-2 col-form-label">{{ 'site.state' | translate }}</label>
+                        <label class="col-sm-2 col-form-label">{{ 'site.state' | translate }}<span class="text-danger">*</span></label>
                         <div class="col-sm-4">
                             <input type="text" class="form-control" id="txtstate"
                                 placeholder="{{'site.state' | translate }}" [(ngModel)]="state" formControlName="rstate"
@@ -136,7 +146,7 @@
 
                     <div class="form-group row col-lg-12">
 
-                        <label class="col-sm-2 col-form-label">{{ 'site.zipcode' | translate }}</label>
+                        <label class="col-sm-2 col-form-label">{{ 'site.zipcode' | translate }}<span class="text-danger">*</span></label>
                         <div class="col-sm-4">
                             <input type="text" class="form-control" id="txtzipcode"
                                 placeholder="{{'site.zipcode' | translate }}" [(ngModel)]="zipcode"
@@ -149,7 +159,7 @@
                         </div>
 
 
-                        <label class="col-sm-2 col-form-label">{{ 'site.contactperson' | translate }}</label>
+                        <label class="col-sm-2 col-form-label">{{ 'site.contactperson' | translate }}<span class="text-danger">*</span></label>
                         <div class="col-sm-4">
                             <input type="text" class="form-control" id="txtcontactpersonname"
                                 placeholder="{{'site.contactperson' | translate }}" [(ngModel)]="contactpersonname"
@@ -166,7 +176,7 @@
 
                     <div class="form-group row col-lg-12">
 
-                        <label for="txtemail" class="col-sm-2 col-form-label">{{ 'site.email' | translate }}</label>
+                        <label for="txtemail" class="col-sm-2 col-form-label">{{ 'site.email' | translate }}<span class="text-danger">*</span></label>
                         <div class="col-sm-4">
                             <input type="text" class="form-control" id="txtemail"
                                 placeholder="{{'site.email' | translate }}" formControlName="remail" [(ngModel)]="email"
@@ -179,7 +189,7 @@
                         </div>
 
 
-                        <label class="col-sm-2 col-form-label">{{ 'site.contactnumber' | translate }}</label>
+                        <label class="col-sm-2 col-form-label">{{ 'site.contactnumber' | translate }}<span class="text-danger">*</span></label>
                         <div class="col-sm-4">
                             <input type="text" id="txtcontactnumber" class="form-control"
                                 placeholder="{{'site.contactnumber' | translate }}" [(ngModel)]="contactnumber"
@@ -199,7 +209,7 @@
                     <div class="form-group row col-lg-12">
                     <!-- </div> -->
 
-                    <label class="col-sm-2 col-form-label">{{ 'site.mobilenumber' | translate }}</label>
+                    <label class="col-sm-2 col-form-label">{{ 'site.mobilenumber' | translate }}<span class="text-danger">*</span></label>
                     <div class="col-sm-4">
                         <input type="text" id="txtmobilenumber" class="form-control"
                             placeholder="{{'site.mobilenumber' | translate }}" [(ngModel)]="mobilenumber"
@@ -213,7 +223,7 @@
                         </div>
                     </div>
 
-                            <label style="float: left; max-width: 90%;" class="col-sm-2 col-form-label">{{ 'site.tenantparkingbay' | translate }}</label>                                                
+                            <label style="float: left; max-width: 90%;" class="col-sm-2 col-form-label">{{ 'site.tenantparkingbay' | translate }}<span class="text-danger">*</span></label>                                                
                             <!-- <i class="simple-icon-question" style="display: block; margin-top: 10px;" tooltip="Please enter no. of Bays for a Tenant." placement="bottom"></i> -->
                         <!-- </div>                         -->
                         <div class="col-sm-4">                            
@@ -234,7 +244,7 @@
 
                     <div class="form-group row col-lg-12">
 
-                        <label class="col-sm-2 col-form-label">{{ 'site.visitorparkingbay' | translate }}</label>
+                        <label class="col-sm-2 col-form-label">{{ 'site.visitorparkingbay' | translate }}<span class="text-danger">*</span></label>
                         <div class="col-sm-4">
                             <input type="text" id="txtvisitorparkingbay" class="form-control"
                                 placeholder="{{'site.visitorparkingbay' | translate}}" [(ngModel)]="visitorparkingbay"
@@ -248,7 +258,7 @@
                             </div>
                         </div>
 
-                        <label class="col-sm-2 col-form-label">{{ 'site.vehiclesperbay' | translate }}</label>
+                        <label class="col-sm-2 col-form-label">{{ 'site.vehiclesperbay' | translate }}<span class="text-danger">*</span></label>
                         <div class="col-sm-4">
                             <input type="text" class="form-control" id="txtvehiclesperbay"
                                 placeholder="{{'site.vehiclesperbay' | translate }}" maxlength="1"
@@ -316,7 +326,7 @@
                     <div class="row">
                         <div class="col-md-12" style="margin-top: 20px;">
                             <div class="form-group row col-lg-12">
-                                <label class="col-sm-2 col-form-label">{{ 'site.sections' | translate }}</label>
+                                <label class="col-sm-2 col-form-label">{{ 'site.sections' | translate }}<span class="text-danger">*</span></label>
                                 <div class="col-sm-4">
                                     <input type="text" id="txtsection" class="form-control" (change)="BindParkingBay()"
                                         maxlength="1" placeholder="{{'site.sections' | translate}}"
@@ -329,7 +339,7 @@
                                         </div>
                                     </div>
                                 </div>
-                                <label class="col-sm-2 col-form-label">{{ 'site.seperator' | translate }}</label>
+                                <label class="col-sm-2 col-form-label">{{ 'site.seperator' | translate }}<span class="text-danger">*</span></label>
                                 <div class="col-sm-4">
                                     <select class="form-control" id="txtseperator" [(ngModel)]="seperatorId"
                                         required="required" formControlName="pseperatorId"
