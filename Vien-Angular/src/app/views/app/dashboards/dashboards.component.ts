@@ -16,7 +16,8 @@ export class DashboardsComponent implements OnInit {
     { title: 'Operators', count: 0,color:'blue' },
     { title: 'Operator Users', count: 0,color:'green' },
     { title: 'Sites', count: 0 ,color:'red'},
-    { title: 'Site Users', count: 0,color:'orange' }
+    { title: 'Site Users', count: 0,color:'orange' },
+    { title: 'Tenant Users', count: 0,color:'orange' }
   ];
   operatordata: any;
   sites: any;
@@ -31,9 +32,12 @@ export class DashboardsComponent implements OnInit {
     this.GetSites()
     this.Getopeartoruser()
     this.getsiteusers()
+    this.getTenantusers()
 
    
   }
+
+
   getsiteusers() {
     var loginId = localStorage.getItem("LoginId");
     var RoleId = localStorage.getItem("RoleId");
@@ -57,6 +61,8 @@ export class DashboardsComponent implements OnInit {
     });
 
   }
+
+
   Getopeartoruser() {
     var loginId = localStorage.getItem("LoginId");
     var RoleId = localStorage.getItem("RoleId");
@@ -112,7 +118,7 @@ export class DashboardsComponent implements OnInit {
           response=JSON.parse(response);
   
 
-this.operatordata=response.length;
+        this.operatordata=response.length;
 
           //this.operatordata = response; // Store the response in the operatordata array
         } else {
@@ -124,6 +130,25 @@ this.operatordata=response.length;
         }
       }
     );
+  }
+
+  tenants
+  getTenantusers(){
+    var loginId = localStorage.getItem("LoginId");
+    var RoleId = localStorage.getItem("RoleId");
+    var SiteId = localStorage.getItem("SiteId");
+
+    this.authService.GetTenantUsers(1, 1000, loginId, RoleId, SiteId).subscribe((result: any) => {
+      var finalresult = JSON.parse(result);
+      if (finalresult.status == "200") {
+        this.tenants = finalresult?.result?.length; 
+
+      }
+      const cardToUpdate = this.cards.find(card => card.title === 'Tenant Users');
+      if (cardToUpdate) {
+        cardToUpdate.count = this.tenants;
+      }
+    })
   }
 
 }
