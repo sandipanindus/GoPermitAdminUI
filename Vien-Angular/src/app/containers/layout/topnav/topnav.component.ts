@@ -370,6 +370,10 @@ export class TopnavComponent implements OnInit, OnDestroy {
   this.router.navigateByUrl('app/forgotpassword');
   }
 
+  uploadLogo(): void {
+    this.router.navigateByUrl('app/uploadlogo')
+  }
+
   // Close dropdown when clicking outside
   @HostListener('document:click', ['$event'])
   onOutsideClick(event: MouseEvent): void {

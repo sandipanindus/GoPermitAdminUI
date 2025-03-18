@@ -219,8 +219,8 @@
                   <!-- <div class="profile-card__avatar" style=" background-image: url({{ support.profilePath == null ? 'assets/img/profile-pic-l.jpg' :support.profilePath }}); width: 65px;height: 65px;background-position: center;background-size: cover;border-radius: 50px">
               
                   </div> -->
-                  <img [src]="support.profilePath==null?'/assets/img/profile-pic-l.jpg':support.profilePath" alt="Notification Image"
-                    class="img-thumbnail list-thumbnail xsmall border-0 rounded-circle" />
+                  <!-- <img [src]="support.profilePath==null?'/assets/img/profile-pic-l.jpg':support.profilePath" alt="Notification Image"
+                    class="img-thumbnail list-thumbnail xsmall border-0 rounded-circle" /> -->
                 </a> 
                 <div class="pl-3">
                   <a href="javascript:;" (click)="OpenNotification(support.id,support.ticketId)">
@@ -317,6 +317,13 @@
     <p style="margin: 0; font-size: 1.2em; cursor: pointer; color: #5a638f;" (click)="changePassword()">
       <i class="simple-icon-lock" style="font-size: 1.2em; margin-right: 6px;"></i>
       Change Password
+    </p>
+
+    <hr style="margin: 8px 0; border: 0; border-top: 1px solid #e0e0e0;" />
+
+    <p style="margin: 0; font-size: 1.2em; cursor: pointer; color: #5a638f;" (click)="uploadLogo()">
+      <i class="simple-icon-arrow-up-circle" style="font-size: 1.2em; margin-right: 6px;"></i>
+      Upload Logo
     </p>
 
     <hr style="margin: 8px 0; border: 0; border-top: 1px solid #e0e0e0;" />

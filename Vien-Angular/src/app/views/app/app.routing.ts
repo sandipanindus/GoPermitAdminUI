@@ -3,6 +3,7 @@ import { Routes, RouterModule } from '@angular/router';
 import { AppComponent } from './app.component';
 import { BlankPageComponent } from './blank-page/blank-page.component';
 import { PagePasswordComponent } from './page-password/page-password.component';
+import { UploadlogoComponent } from './uploadlogo/uploadlogo.component';
 
 const routes: Routes = [
     {
@@ -24,7 +25,9 @@ const routes: Routes = [
            { path: 'tenantconfig', loadChildren: () => import('./tenantconfig/tenantconfig.module').then(m => m.TenantConfigModule) },
            { path: 'projects', loadChildren: () => import('./projects/projects.module').then(m => m.ProjectsModule) },
            {path:'reportconfig',loadChildren:()=>import('./reportconfig/reportconfig.module').then(m=>m.ReportConfigModule)},
-           {path:'forgotpassword', component :PagePasswordComponent}
+           {path:'forgotpassword', component :PagePasswordComponent},
+           { path: 'uploadlogo', component: UploadlogoComponent}
+
         ]
     }
 ];
