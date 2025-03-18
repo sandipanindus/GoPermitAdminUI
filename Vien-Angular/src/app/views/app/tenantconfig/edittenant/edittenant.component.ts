@@ -337,7 +337,13 @@ export class EditTenantComponent implements OnInit, OnDestroy {
         }
     }
 
+        
+    imageUrl: string | null = null;
+    imageFile: File | null = null;
+
     onSelectFile1(files: FileList) {
+        debugger
+        const input = event.target as HTMLInputElement;
         if (files.length === 0)
             return;
         if (files.length > 0) {
@@ -347,11 +353,17 @@ export class EditTenantComponent implements OnInit, OnDestroy {
                 const fileReader: FileReader = new FileReader();
                 fileReader.readAsDataURL(this.fileToUpload1);
                 this.files.push({ data: this.fileToUpload1, fileName: this.fileToUpload1.name });
+                this.imageFile = input.files[0];
+                const reader = new FileReader();
+                reader.onload = (e) => (this.imageUrl = e.target?.result as string);
+                reader.readAsDataURL(this.imageFile);
             }
         }
     }
 
     onSelectFile2(files: FileList) {
+        debugger
+        const input = event.target as HTMLInputElement;
         if (files.length === 0)
             return;
         if (files.length > 0) {
@@ -361,9 +373,30 @@ export class EditTenantComponent implements OnInit, OnDestroy {
                 const fileReader: FileReader = new FileReader();
                 fileReader.readAsDataURL(this.fileToUpload2);
                 this.files.push({ data: this.fileToUpload2, fileName: this.fileToUpload2.name });
+                this.imageFile = input.files[0];
+                const reader = new FileReader();
+                reader.onload = (e) => (this.imageUrl = e.target?.result as string);
+                reader.readAsDataURL(this.imageFile);
+
             }
         }
     }
+
+
+
+    downloadImage() {
+        debugger
+        if (this.imageFile) {
+          const url = URL.createObjectURL(this.imageFile);
+          const a = document.createElement('a');
+          a.href = url;
+          a.download = this.imageFile.name;
+          document.body.appendChild(a);
+          a.click();
+          document.body.removeChild(a);
+          URL.revokeObjectURL(url);
+        }
+      }
 
     AvoidDuplicate(Id, indexid) {
          
@@ -497,6 +530,10 @@ export class EditTenantComponent implements OnInit, OnDestroy {
             element.style.display = 'none';
         });
     }
+
+
+
+
     Edit(id: any, value: any) {
          
         var element = document.getElementById("loading") as HTMLDivElement;
