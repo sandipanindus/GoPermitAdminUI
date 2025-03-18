@@ -7,12 +7,13 @@ import { SharedModule } from 'src/app/shared/shared.module';
 import { LayoutContainersModule } from 'src/app/containers/layout/layout.containers.module';
 import { PagePasswordComponent } from './page-password/page-password.component';
 import { FormsModule } from '@angular/forms'; // ✅ Import FormsModule
-import { SimpleNotificationsModule } from 'angular2-notifications'; // Import this
+import { SimpleNotificationsModule } from 'angular2-notifications';
+import { UploadlogoComponent } from './uploadlogo/uploadlogo.component'; // Import this
 
 
 
 @NgModule({
-  declarations: [BlankPageComponent, AppComponent, PagePasswordComponent],
+  declarations: [BlankPageComponent, AppComponent, PagePasswordComponent, UploadlogoComponent],
   imports: [
     CommonModule,
     AppRoutingModule,

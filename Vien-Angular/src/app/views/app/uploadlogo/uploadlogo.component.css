@@ -51,3 +51,10 @@
     .card-title {
        margin-bottom: 20px;
     }
+
+    .card {
+        border-radius: 10px;
+        background-color: #f8f9fa;
+        width: 190px;
+        margin-bottom: 20px;
+      }

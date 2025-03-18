@@ -24,11 +24,12 @@
             <!-- <span (click)="logoInput.click()">
               <i class="simple-icon-arrow-up-circle" style="font-size: 1.2em;"></i>
             </span> -->
-            <h6 class="card-title">
+            <div class="card-title">
                 <span (click)="logoInput.click()">
                     <i class="simple-icon-arrow-up-circle" style="font-size: 1.2em;"></i>
-                  </span>
-                Upload</h6>
+                </span>
+                <h6>Upload</h6>
+            </div>
               <div *ngIf="fileUrls['logo']">
                 <a [href]="fileUrls['logo']" target="_blank" class="view-file" style="margin-top: 6px; font-size: small;">View Uploaded File</a>
               </div>
