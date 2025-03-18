@@ -20,16 +20,31 @@
               </div> -->
             </div>
 
-            <input type="file" [(ngModel)]="logo" #logoInput hidden (change)="onFileSelected($event, 'logo')" />
+            <input type="file" [(ngModel)]="logo" #logoInput hidden (change)="onFileSelected($event)" />
             <!-- <span (click)="logoInput.click()">
               <i class="simple-icon-arrow-up-circle" style="font-size: 1.2em;"></i>
             </span> -->
-            <div class="card-title">
+            <!-- <div class="card-title">
                 <span (click)="logoInput.click()">
-                    <i class="simple-icon-arrow-up-circle" style="font-size: 1.2em;"></i>
+                    <i class="iconsminds-upload" style="font-size: 2em;"></i>
                 </span>
-                <h6>Upload</h6>
+                <h6 style="margin-top: 10px;">Upload Logo</h6>
             </div>
+            <div *ngIf="imageUrl" class="preview">
+                <img [src]="imageUrl" alt="Image preview" />
+              </div> -->
+              <div class="card-title">
+                <span *ngIf="!imageUrl" (click)="logoInput.click()">
+                  <i class="iconsminds-upload" style="font-size: 2em;"></i>
+                </span>
+                <img *ngIf="imageUrl" [src]="imageUrl" alt="Logo Preview" class="logo-preview" (click)="logoInput.click()"/>
+              
+                <h6 style="margin-top: 10px;">Upload Logo</h6>
+              </div>
+              
+              <!-- Hidden file input -->
+              <input #logoInput type="file" (change)="onFileSelected($event)" accept="image/*" hidden />
+              
               <div *ngIf="fileUrls['logo']">
                 <a [href]="fileUrls['logo']" target="_blank" class="view-file" style="margin-top: 6px; font-size: small;">View Uploaded File</a>
               </div>
