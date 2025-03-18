@@ -1,0 +1,71 @@
+<div class="container mt-4">
+    <div class="row justify-content-center g-3">
+      <div class="col-auto">
+        <div class="card shadow text-center p-2">
+          <div class="card-body">
+
+            <!-- <div class="mt-2 mb-2 mr-0 ml-2">
+                <i class="simple-icon-user" style="font-size: 1.2em;"></i>
+            </div> -->
+    
+            <div>
+              <!-- <input type="file" [(ngModel)]="logo" #logoInput hidden (change)="onFileSelected($event, 'logo')" />
+              <span (click)="logoInput.click()">
+                <i class="simple-icon-arrow-up-circle" style="font-size: 1.2em;"></i>
+              </span> -->
+              <!-- <p style="margin-bottom: 0px; font-size: small;">Upload</p>
+              <p class="drag-text">or drag and drop here</p>
+              <div *ngIf="fileUrls['logo']">
+                <a [href]="fileUrls['logo']" target="_blank" class="view-file" style="margin-top: 6px; font-size: small;">View Uploaded File</a>
+              </div> -->
+            </div>
+
+            <input type="file" [(ngModel)]="logo" #logoInput hidden (change)="onFileSelected($event, 'logo')" />
+            <!-- <span (click)="logoInput.click()">
+              <i class="simple-icon-arrow-up-circle" style="font-size: 1.2em;"></i>
+            </span> -->
+            <h6 class="card-title">
+                <span (click)="logoInput.click()">
+                    <i class="simple-icon-arrow-up-circle" style="font-size: 1.2em;"></i>
+                  </span>
+                Upload</h6>
+              <div *ngIf="fileUrls['logo']">
+                <a [href]="fileUrls['logo']" target="_blank" class="view-file" style="margin-top: 6px; font-size: small;">View Uploaded File</a>
+              </div>
+
+
+            <!-- <div class="count-circle" [ngStyle]="{'color':card.color}">{{ card.count }}</div> -->
+            </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- <div class="ml-2 mb-0 mt-4">
+    <p class="text">Passport Front Page</p>
+    <div 
+      class="upload-container"
+      (dragover)="onDragOver($event, 'passportFront')"
+      (dragleave)="onDragLeave($event, 'passportFront')"
+      (drop)="onDrop($event, 'passportFront')"
+      [class.dragging]="isDragging['passportFront']"
+    >
+
+      <div class="flex flex-cols">
+        <div class="mt-2 mb-2 mr-0 ml-2">
+          <img class="w-10 h-15" src="images/logo/Passport.png">
+        </div>
+
+        <div class="text1">
+          <input type="file" formControlName="passportFront" #passportFrontInput hidden (change)="onFileSelected($event, 'passportFront')" />
+          <span (click)="passportFrontInput.click()">
+          </span>
+          <p style="margin-bottom: 0px; font-size: small;">Upload</p>
+          <p class="drag-text">or drag and drop files here</p>
+          <div *ngIf="fileUrls['passportFront']">
+            <a [href]="fileUrls['passportFront']" target="_blank" class="view-file" style="margin-top: 6px; font-size: small;">View Uploaded File</a>
+          </div>
+        </div>
+      </div>
+</div>
+  </div> -->

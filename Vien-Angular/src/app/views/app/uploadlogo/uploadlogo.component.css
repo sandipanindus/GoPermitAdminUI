@@ -1,0 +1,53 @@
+.card-body.dragging {
+    background: #ffe082;
+}
+
+.upload-container {
+    /* border: 2px dashed #ffb300; */
+    border: 2px dashed #424242;
+    padding: 2px;
+    width: 201px;
+    height: 120px;
+    /* height: 180px; */
+    text-align: center;
+    cursor: pointer;
+    border-radius: 8px;
+    transition: background 0.3s;
+  }
+  
+  /* .upload-container.dragging {
+    background: #ffe082;
+  } */
+  
+  .upload-button {
+    background-color: #ffb300;
+    color: white;
+  }
+  
+  .drag-text {
+    color: #666;
+    /* margin-top: 8px; */
+    margin-bottom: 2px;
+    font-size: 15px;
+    /* margin-left: 6px; */
+  }
+  .text1 {
+    margin-left: 15px;
+  }
+  .view-file {
+    display: block;
+    margin-top: 0px;
+    color: #ffb300;
+    text-decoration: none;
+    text-align: center;
+    margin-bottom: 4px;
+  }
+  
+  .view-file:hover {
+    text-decoration: underline;
+  }
+
+
+    .card-title {
+       margin-bottom: 20px;
+    }
