@@ -384,19 +384,19 @@ export class EditTenantComponent implements OnInit, OnDestroy {
 
 
 
-    downloadImage() {
-        debugger
-        if (this.imageFile) {
-          const url = URL.createObjectURL(this.imageFile);
-          const a = document.createElement('a');
-          a.href = url;
-          a.download = this.imageFile.name;
-          document.body.appendChild(a);
-          a.click();
-          document.body.removeChild(a);
-          URL.revokeObjectURL(url);
-        }
-      }
+    // downloadImage() {
+    //     debugger
+    //     if (this.imageFile) {
+    //       const url = URL.createObjectURL(this.imageFile);
+    //       const a = document.createElement('a');
+    //       a.href = url;
+    //       a.download = this.imageFile.name;
+    //       document.body.appendChild(a);
+    //       a.click();
+    //       document.body.removeChild(a);
+    //       URL.revokeObjectURL(url);
+    //     }
+    //   }
 
     AvoidDuplicate(Id, indexid) {
          
@@ -535,6 +535,7 @@ export class EditTenantComponent implements OnInit, OnDestroy {
 
 
     Edit(id: any, value: any) {
+        debugger
          
         var element = document.getElementById("loading") as HTMLDivElement;
         element.style.display = 'block';
@@ -618,6 +619,7 @@ export class EditTenantComponent implements OnInit, OnDestroy {
             var finalresult = JSON.parse(result);
             console.log(finalresult);
             if (finalresult.status == "200") {
+                debugger
                 this.TenantId = finalresult.result.id;
                 this.firstname = finalresult.result.firstName;
                 this.lastname = finalresult.result.lastName;
@@ -813,6 +815,110 @@ export class EditTenantComponent implements OnInit, OnDestroy {
             }
         });
     }
+
+    // downloadImage() {
+    //     debugger
+    //     const fileName = this.residencyproofid.split('/').pop();
+    
+    //     const a = document.createElement('a');
+    //     a.href = this.residencyproofid;
+    //     a.download = fileName;
+    //     document.body.appendChild(a);
+    //     a.click();
+    //     document.body.removeChild(a);
+    //   }
+
+    // downloadImage() {
+    //     debugger
+    //     const imageUrl = this.residencyproofid;
+    //     const fileName = imageUrl.split('/').pop();
+      
+    //     const a = document.createElement('a');
+    //     a.href = imageUrl;
+    //     a.download = fileName;
+    //     document.body.appendChild(a);
+    //     a.click();
+    //     document.body.removeChild(a);
+    //   }
+
+
+
+
+    async downloadResidencyProofImage() {
+        debugger
+        const imageUrl = new URL(this.residencyproofid).pathname;
+        const fileName = imageUrl.split('/').pop();
+      
+        try {
+          const response = await fetch(imageUrl);
+          const blob = await response.blob();
+          const url = URL.createObjectURL(blob);
+      
+          const a = document.createElement('a');
+          a.href = url;
+          a.download = fileName;
+          document.body.appendChild(a);
+          a.click();
+          document.body.removeChild(a);
+      
+          URL.revokeObjectURL(url);
+        } catch (error) {
+          console.error('Error downloading image:', error);
+        }
+      }
+
+    async downloadIdentityProofImage() {
+        debugger
+        const imageUrl = new URL(this.identityproofid).pathname;
+        const fileName = imageUrl.split('/').pop();
+      
+        try {
+          const response = await fetch(imageUrl);
+          const blob = await response.blob();
+          const url = URL.createObjectURL(blob);
+      
+          const a = document.createElement('a');
+          a.href = url;
+          a.download = fileName;
+          document.body.appendChild(a);
+          a.click();
+          document.body.removeChild(a);
+      
+          URL.revokeObjectURL(url);
+        } catch (error) {
+          console.error('Error downloading image:', error);
+        }
+      }
+
+    // async downloadImage() {
+      
+    //     try {
+    //       const response = await fetch(this.residencyproofid);
+      
+    //       if (!response.ok) {
+    //         throw new Error(`HTTP error! Status: ${response.status} - ${response.statusText}`);
+    //       }
+      
+    //       const blob = await response.blob();
+    //       const url = URL.createObjectURL(blob);
+    //       const fileName = this.residencyproofid.split('/').pop();
+      
+    //       const a = document.createElement('a');
+    //       a.href = url;
+    //       a.download = fileName;
+    //       document.body.appendChild(a);
+    //       a.click();
+    //       document.body.removeChild(a);
+      
+    //       URL.revokeObjectURL(url);
+    //     } catch (error) {
+    //       console.error("Error downloading image:", error);
+    //     }
+    //   }
+      
+      
+      
+
     spinnerload() {
         var element = document.getElementById("loading") as HTMLDivElement;
         element.style.display = 'block';
