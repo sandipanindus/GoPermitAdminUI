@@ -44,10 +44,14 @@
       target="_blank">&nbsp;BUY&nbsp;</a> -->
   </div>
 
-  <a class="navbar-logo" routerLink="/app/dashboards/default" >
+  <a *ngIf="!imageUrl" class="navbar-logo" routerLink="/app/dashboards/default" >
     <span class="logo d-none d-xs-block"></span>
     <span class="logo-mobile d-block d-xs-none"></span>
   </a>
+
+  <div *ngIf="imageUrl"  class="navbar-logo" >
+    <img class="logo"  src="{{imageUrl}}" alt="identityproofid" routerLink="/app/dashboards/default">
+  </div>
 
   <div class="navbar-right">
     <div class="header-icons d-inline-block align-middle">
@@ -319,9 +323,9 @@
       Change Password
     </p>
 
-    <hr style="margin: 8px 0; border: 0; border-top: 1px solid #e0e0e0;" />
+    <hr *ngIf="isOperatorUser" style="margin: 8px 0; border: 0; border-top: 1px solid #e0e0e0;" />
 
-    <p style="margin: 0; font-size: 1.2em; cursor: pointer; color: #5a638f;" (click)="uploadLogo()">
+    <p *ngIf="isOperatorUser" style="margin: 0; font-size: 1.2em; cursor: pointer; color: #5a638f;" (click)="uploadLogo()">
       <i class="simple-icon-arrow-up-circle" style="font-size: 1.2em; margin-right: 6px;"></i>
       Upload Logo
     </p>

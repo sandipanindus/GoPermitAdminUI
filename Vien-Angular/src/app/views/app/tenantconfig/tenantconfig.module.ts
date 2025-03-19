@@ -28,13 +28,15 @@ import { AddTenantComponent } from './addtenant/addtenant.component';
 import { TenantComponent } from './tenant/tenant.component';
 import{BulkUploadComponent} from './bulkupload/bulkupload.component';
 import { BsDatepickerModule } from 'ngx-bootstrap/datepicker';
+import { UploadlogoComponent } from '../uploadlogo/uploadlogo.component';
 @NgModule({
     declarations: [
         TenantConfigComponent,
         TenantComponent,
         AddTenantComponent,
         EditTenantComponent,
-        BulkUploadComponent
+        BulkUploadComponent,
+        UploadlogoComponent
     ],
     imports: [
         NgxSpinnerModule,

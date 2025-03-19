@@ -13,7 +13,7 @@ import { UploadlogoComponent } from './uploadlogo/uploadlogo.component'; // Impo
 
 
 @NgModule({
-  declarations: [BlankPageComponent, AppComponent, PagePasswordComponent, UploadlogoComponent],
+  declarations: [BlankPageComponent, AppComponent, PagePasswordComponent],
   imports: [
     CommonModule,
     AppRoutingModule,

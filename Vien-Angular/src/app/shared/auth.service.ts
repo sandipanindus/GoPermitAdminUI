@@ -23,6 +23,8 @@ export interface IPasswordReset {
 
 @Injectable({ providedIn: 'root' })
 export class AuthService {
+
+  proxyConf
   baseUrl: any
   imageBindUrl
   constructor(private afAuth: AngularFireAuth, private http: HttpClient) {
@@ -38,6 +40,31 @@ export class AuthService {
  this.baseUrl = 'https://localhost:5001/';
   this.imageBindUrl = 'https://localhost:5001'
     //this.baseUrl = 'https://api.gopermit.co.uk/';
+
+    this.proxyConf = {
+      "/TenantResidencyFiles": {
+        "target": this.imageBindUrl,
+        "secure": false,
+        "changeOrigin": true
+      },
+      "/TenantIdentityProofFiles": {
+          "target": this.imageBindUrl,
+          "secure": false,
+          "changeOrigin": true
+        }
+  };
+  this.writeProxyConfig();
+
+  }
+
+  writeProxyConfig() {
+    debugger
+    const fileContent = JSON.stringify(this.proxyConf, null, 2);
+    fetch('/assets/proxy.conf.json', {
+      method: 'PUT',
+      headers: { 'Content-Type': 'application/json' },
+      body: fileContent
+    }).then(response => console.log('Proxy config written', response));
   }
 
   signIn(credentials: ISignInCredentials): Observable<auth.UserCredential> {
@@ -102,6 +129,10 @@ export class AuthService {
   SaveOperatorUser(formdata) {
     return this.http.post(this.baseUrl + "api/Admin/addUser", formdata);
   }
+  SaveOperatorUserLogo(formdata) {
+    return this.http.post(this.baseUrl + "api/Admin/AddOperatorLogo", formdata);
+  }
+
   public SaveBulkTenants(data): Observable<any> {
     return this.http.post(this.baseUrl + "api/Admin/AddBulkTenants", data, { responseType: 'text' });
   }

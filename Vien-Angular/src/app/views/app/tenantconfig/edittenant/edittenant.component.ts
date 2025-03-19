@@ -935,7 +935,7 @@ export class EditTenantComponent implements OnInit, OnDestroy {
             var finalresult = JSON.parse(result);
             if (finalresult.status == "200") {
                 this.availBays = finalresult.result;
-                this.availBays = finalresult.result.filter(item => item.updatedBy == "" || item.updatedBy == this.TenantId);
+                this.availBays = finalresult.result.filter(item => item.updatedBy == "" || item.updatedBy == this.TenantId || item.updatedBy == "0");
                 this.unbookedBays = finalresult.result.filter(item => item.registerUserId == "0");
                 this.numbers = Array(this.unbookedBays.length).fill(0).map((_, i) => i + 1);
                 console.log("Avail Bays",this.availBays)
