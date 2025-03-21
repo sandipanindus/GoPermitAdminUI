@@ -176,8 +176,9 @@ Getbaybysite() {
 getDateItem(date: Date): string {
   return `${date.getFullYear()}-${date.getMonth() + 1}-${date.getDate()}`;
 }
+
 onbaynoset(event) {
-   
+   debugger
   this.spinner.show();
   setTimeout(() => {
     this.spinner.hide();
@@ -189,7 +190,7 @@ onbaynoset(event) {
    * 
    */
   Bindbasedondate(date) {
-    // this.ismultivehicel=true
+    debugger
     this.authService.getvehiclestimedetailsbydate(this.bayid.registerUserId.toString(), this.bayid.id.toString(), date).subscribe((data: any) => {
       if (data.status === '200') {
         this.showalert = true;
@@ -206,8 +207,8 @@ onbaynoset(event) {
         }
         else if (data.result.length > 0) {
           console.log(data);
-this.Single = false;
-this.multiple = true
+          this.Single = false;
+          this.multiple = true
           this.bindingmultiplecustomdates(data.result);
         }
         else{
@@ -228,11 +229,12 @@ this.multiple = true
   confignumber:any;
 
   bindingmultiplecustomdates(data) {
+    debugger
     var res = Math.max.apply(Math, data.map(function (a) { return a.bayconfig; }))
 
     //alert('Max y = ' + res);
-    this.confignumber = res;
-    this.configurebasedonNo();
+    this.confignumber = data.length;
+    this.configurebasedonNo(data);
     setTimeout(() => {
       this.bindingmultiplevehicles(data)
     }, 2000);
@@ -240,17 +242,25 @@ this.multiple = true
   }
 
 
-  configurebasedonNo() {
-     
-
+  configurebasedonNo(data) {
+     debugger
     this.iterations = [];
     var no = +this.confignumber;
 
-    for (let i = 1; i <= no; i++) {
-      this.iterations.push(
-        { iterrations: i }
-      )
+    for (let i = 0; i < this.confignumber; i++) {
+      this.iterations.push({
+        iterrations: i + 1,
+        vrm: data[i]?.vrm || '',
+        startDate: data[i]?.startDate,
+        endDate: data[i]?.endDate
+      });
     }
+
+    // for (let i = 1; i <= no; i++) {
+    //   this.iterations.push(
+    //     { iterrations: i }
+    //   )
+    // }
   }
 
 

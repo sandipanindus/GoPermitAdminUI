@@ -6,6 +6,7 @@ import { LangService, Language } from 'src/app/shared/lang.service';
 import { AuthService } from 'src/app/shared/auth.service';
 import { environment } from 'src/environments/environment';
 import { BsDropdownDirective } from 'ngx-bootstrap/dropdown';
+import { toInt } from 'ngx-bootstrap/chronos/utils/type-checks';
 
 
 @Component({
@@ -76,19 +77,29 @@ export class TopnavComponent implements OnInit, OnDestroy {
     this.langService.language = lang.code;
     this.currentLanguage = this.langService.languageShorthand;
   }
+  
+  isOperatorUser:boolean=false
 
   ngOnInit() {
     var id = localStorage.getItem("LoginId");
+    var RoleId = localStorage.getItem("RoleId");
+  
     var firstname = localStorage.getItem("firstname");
     var lastname = localStorage.getItem('lastname');
     if (id != null) {
      // this.displayName = firstname + " " + lastname;
      this.displayName = firstname
     }
+    if(RoleId == "17"){
+      this.isOperatorUser=true
+    }
+    else{
+      this.isOperatorUser=false
+    }
+
     if (this.authService.user) {
 
-    }
-     ;
+    } ;
     var profile = localStorage.getItem("ProfilePath");
     if (profile == "null") {
       this.profilepath = "/assets/img/profile-pic-l.jpg";
@@ -116,6 +127,7 @@ export class TopnavComponent implements OnInit, OnDestroy {
       }
     );
     this.GetNotificationsList();
+    this.getOperatorById(id)
   }
 
   ngOnDestroy(): void {
@@ -382,5 +394,23 @@ export class TopnavComponent implements OnInit, OnDestroy {
     if (!clickedInside && this.isDropdownOpen) {
       this.isDropdownOpen = false;
     }
+  }
+
+  imageUrl
+  getOperatorById(id){
+    debugger
+    this.authService.GetUsersById(id).subscribe((result: any) => {
+      var finalresult = JSON.parse(result);
+      finalresult.result.operatorLogo
+
+      if (finalresult && finalresult.result && finalresult.result.operatorLogo) {
+        // Assuming 'operatorLogo' contains the logo URL or base64 string
+        this.imageUrl = this.authService.imageBindUrl+finalresult.result.operatorLogo;
+      } else {
+        this.imageUrl = '';  // Clear if no logo is found
+      }
+
+      console.log("ImageUrl2",this.imageUrl)
+    });
   }
 }

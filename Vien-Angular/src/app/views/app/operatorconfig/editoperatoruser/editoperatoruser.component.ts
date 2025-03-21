@@ -91,7 +91,6 @@
     }
    
     this.authService.GetUsersById(id).subscribe((result: any) => {
-         ;
         var finalresult = JSON.parse(result);
         finalresult=finalresult.result;
         console.log("editdata",result);
