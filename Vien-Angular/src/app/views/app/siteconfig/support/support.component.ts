@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewChild, OnDestroy, Renderer2, TemplateRef, EventEmitter, Output, Input } from '@angular/core';
+import { Component, OnInit, ViewChild, OnDestroy, Renderer2, TemplateRef, EventEmitter, Output, Input, HostListener } from '@angular/core';
 import { ColumnMode, DatatableComponent, SelectionType } from '@swimlane/ngx-datatable';
 import { Router } from '@angular/router';
 import { AuthService } from 'src/app/shared/auth.service';
@@ -76,6 +76,8 @@ export class SupportComponent implements OnInit, OnDestroy {
   supports: any = [];
 
   constructor(private spinner: NgxSpinnerService, private translate: TranslateService, private modalService: BsModalService, private router: Router, private renderer: Renderer2, private notifications: NotificationsService, private authService: AuthService,) { }
+
+  switchStates: { [key: number]: boolean } = {};
 
   ngOnInit() {
      ;
@@ -262,20 +264,33 @@ export class SupportComponent implements OnInit, OnDestroy {
   ngAfterViewInit(): void {
     this.spinnerload();
   }
-  openModal(template: TemplateRef<any>, id) {
-    this.ticketid = id;
-    this.modalRef = this.modalService.show(template, { class: 'modal-sm' });
+
+openModal(template: TemplateRef<any>, id: number) {
+  debugger
+  this.ticketid = id;
+  this.modalRef = this.modalService.show(template, { class: 'modal-sm' });
+}
+
+confirm(): void {
+  this.closeticket(this.ticketid);
+  this.modalRef.hide();
+}
+
+
+decline(): void {
+  this.modalRef.hide();
+  this.switchStates[this.ticketid] = false;
+}
+
+  @HostListener('document:click', ['$event'])
+  onClickOutside(event: Event) {
+    if (!this.modalRef?.content) { 
+      Object.keys(this.switchStates).forEach(ticketId => {
+        this.switchStates[+ticketId] = false; 
+      });
+    }
   }
 
-  confirm(): void {
-    this.closeticket(parseInt(this.ticketid))
-    this.modalRef.hide();
-  }
-
-  decline(): void {
-
-    this.modalRef.hide();
-  }
 
   ngOnDestroy() {
     this.renderer.removeClass(document.body, 'right-menu');

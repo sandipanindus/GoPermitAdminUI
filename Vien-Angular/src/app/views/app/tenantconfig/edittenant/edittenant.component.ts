@@ -41,6 +41,8 @@ import * as XLSX from 'xlsx';
     ]
 })
 export class EditTenantComponent implements OnInit, OnDestroy {
+    view: boolean = false;
+
     tenantsubmitted = false;
     tenantForm: FormGroup;
     firstname: string;
@@ -840,8 +842,27 @@ export class EditTenantComponent implements OnInit, OnDestroy {
     //     a.click();
     //     document.body.removeChild(a);
     //   }
+    // urlOfImg
+    // async showViewModal(id) {
+    //     debugger
+    //     const imageUrlForView = new URL(this.residencyproofid).pathname;
+    //     const responseForView = await fetch(imageUrlForView);
+    //     this.urlOfImg = responseForView.url;
+    //   }
 
 
+    showModal: boolean = false;
+    modalImageUrl: string = '';
+    urlOfImg
+    async openImageModal(imageUrl: string) {
+        debugger
+        this.modalImageUrl = imageUrl;
+        this.showModal = true;
+    }
+
+    closeModal() {
+        this.showModal = false;
+    }
 
 
     async downloadResidencyProofImage() {

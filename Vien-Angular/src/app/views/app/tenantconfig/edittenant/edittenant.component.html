@@ -204,7 +204,15 @@
                             <div>
                                 <img style="width: 50%;  border: 1px solid #555" src="{{residencyproofid}}" alt="ResidencyProof">
                                 <i (click)="downloadResidencyProofImage()" class="iconsminds-download" style="font-size: 2em;"></i>
+                                    <!-- <a class="glyph-icon simple-icon-eye" [href]="urlOfImg" target="_blank" (click)="showViewModal(residencyproofid)" style="font-size: 20px;">
+                                    </a> -->
+                                    <a class="glyph-icon simple-icon-eye" 
+                                    href="javascript:void(0);" 
+                                    (click)="openImageModal(residencyproofid)" 
+                                    style="font-size: 20px;">
+                                 </a>
                             </div>
+
                         </div>
                         <div class="form-group col-md-4">
                             <p>IdentityProof</p>
@@ -214,6 +222,19 @@
                             </div>
                         </div>
                     </div>
+
+                    <!-- Modal Popup -->
+<div class="modal-overlay" *ngIf="showModal" (click)="closeModal()">
+    <div class="modal-content" (click)="$event.stopPropagation()">
+        <div class="modal-header">
+            <h5>Residency Proof</h5>
+            <button class="close-btn" (click)="closeModal()">&times;</button>
+        </div>
+        <div class="modal-body">
+            <img [src]="modalImageUrl" alt="Residency Proof" class="modal-image">
+        </div>
+    </div>
+</div>
 
                     <h5 [ngStyle]="{'display':bayconfigdiv}" class="mb-4">{{ 'tenants.bayconfig' | translate }}</h5>
                     <!-- <div class="row" [ngStyle]="{'display':bayconfigdiv}" style="height: 150px;"> -->

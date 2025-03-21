@@ -78,6 +78,7 @@
               <th scope="col" (click)="onSortClick($event,'subject')" class="up">Subject</th>
               <th scope="col" (click)="onSortClick($event,'subject')" class="up">Status</th>
               <th scope="col">Action</th>
+              <th scope="col">Close Ticket</th>
             </tr>
           </thead>
           <tbody>
@@ -110,12 +111,49 @@
                   <div *ngIf="support.status!='Closed' && delete==true" style="margin-left: 10px;">
                     <a (click)="openModal(template,support.ticketId)">
                       <div class="simple-icon-close" style="color:blue;font-size: 20px;">
-
                       </div>
                     </a>
                   </div>
                 </div>
               </td>
+
+              <td>
+
+                <!-- <div *ngIf="support.status !== 'Closed' && delete" class="custom-control custom-switch">
+                  <input 
+                    type="checkbox" 
+                    [(ngModel)]="switchStates[support.ticketId]" 
+                    class="custom-control-input" 
+                    [id]="'switch_' + support.ticketId"
+                    (change)="openModal(template, support.ticketId)">
+                  <label class="custom-control-label" [for]="'switch_' + support.ticketId"></label>
+                </div> -->
+
+                <!-- First condition: When status is NOT 'Closed' and delete is true -->
+                <div *ngIf="support.status != 'Closed' && delete == true" class="custom-control custom-switch">
+                  <input 
+                    type="checkbox" 
+                    [(ngModel)]="switchStates[(((support.pageNo)-1)*10)+i+1]"
+                    class="custom-control-input" 
+                    [id]="'customSwitch' + i"
+                    (change)="openModal(template, support.ticketId)">
+                  <label class="custom-control-label" [for]="'customSwitch' + i"></label>
+                </div>
+
+
+                <!-- Second condition: When status is 'Closed' -->
+                <div *ngIf="support.status === 'Closed'" class="custom-control custom-switch">
+                  <input 
+                    type="checkbox" 
+                    [checked]="true"
+                    class="custom-control-input"
+                    [id]="'customSwitchClosed' + i"
+                    [disabled]="true">
+                  <label class="custom-control-label" [for]="'customSwitchClosed' + i"></label>
+                </div>
+
+              </td>
+
             </tr>
 
           </tbody>
