@@ -34,25 +34,26 @@ export class AuthService {
 // this.baseUrl='http://goapi.fadelsoft.co.in/'
 //  this.imageBindUrl='http://goapi.fadelsoft.co.in'
 
- // this.baseUrl='http://api.gopermit.co.uk/'
+// this.baseUrl='http://api.gopermit.co.uk/'
  // this.imageBindUrl='http://api.gopermit.co.uk'
 
  this.baseUrl = 'https://localhost:5001/';
-  this.imageBindUrl = 'https://localhost:5001'
+ this.imageBindUrl = 'https://localhost:5001'
+
     //this.baseUrl = 'https://api.gopermit.co.uk/';
 
-    this.proxyConf = {
-      "/TenantResidencyFiles": {
-        "target": this.imageBindUrl,
-        "secure": false,
-        "changeOrigin": true
-      },
-      "/TenantIdentityProofFiles": {
-          "target": this.imageBindUrl,
-          "secure": false,
-          "changeOrigin": true
-        }
-  };
+  //   this.proxyConf = {
+  //     "/TenantResidencyFiles": {
+  //       "target": this.imageBindUrl,
+  //       "secure": false,
+  //       "changeOrigin": true
+  //     },
+  //     "/TenantIdentityProofFiles": {
+  //         "target": this.imageBindUrl,
+  //         "secure": false,
+  //         "changeOrigin": true
+  //       }
+  // };
   this.writeProxyConfig();
 
   }

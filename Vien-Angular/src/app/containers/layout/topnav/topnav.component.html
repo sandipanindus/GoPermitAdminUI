@@ -44,13 +44,13 @@
       target="_blank">&nbsp;BUY&nbsp;</a> -->
   </div>
 
-  <a *ngIf="!imageUrl" class="navbar-logo" routerLink="/app/dashboards/default" >
+  <a *ngIf="!uploadedImg" class="navbar-logo" routerLink="/app/dashboards/default" >
     <span class="logo d-none d-xs-block"></span>
     <span class="logo-mobile d-block d-xs-none"></span>
   </a>
 
-  <div *ngIf="imageUrl"  class="navbar-logo" >
-    <img class="logo"  src="{{imageUrl}}" alt="identityproofid" routerLink="/app/dashboards/default">
+  <div *ngIf="uploadedImg"  class="navbar-logo" >
+    <img class="logo"  src="{{uploadedImg}}" alt="identityproofid" routerLink="/app/dashboards/default">
   </div>
 
   <div class="navbar-right">
@@ -299,7 +299,7 @@
  
   <div
     (click)="toggleDropdown()"
-    style="display: inline-flex; align-items: center; padding: 5px ; border: 2px solid #5a638f; border-radius: 999px; background-color: #f9f9f9; cursor: pointer;"
+    style="display: inline-flex; align-items: center; padding: 5px ;  background-color: #f9f9f9; cursor: pointer;"
   >
   <!-- <span>
     <i class="simple-icon-user" style="font-size: 1.2em; margin-right: 6px;" ></i>
@@ -309,7 +309,7 @@
     </span>
   </div>
 
-  <div *ngIf="isDropdownOpen" class="dropdown-menu">
+  <!-- <div *ngIf="isDropdownOpen" class="dropdown-menu">
     <p style="margin: 0 0 6px; font-size: 1.1em; cursor: default; color: #555;">
      Welcome
      
@@ -323,13 +323,6 @@
       Change Password
     </p>
 
-    <hr *ngIf="isOperatorUser" style="margin: 8px 0; border: 0; border-top: 1px solid #e0e0e0;" />
-
-    <p *ngIf="isOperatorUser" style="margin: 0; font-size: 1.2em; cursor: pointer; color: #5a638f;" (click)="uploadLogo()">
-      <i class="simple-icon-arrow-up-circle" style="font-size: 1.2em; margin-right: 6px;"></i>
-      Upload Logo
-    </p>
-
     <hr style="margin: 8px 0; border: 0; border-top: 1px solid #e0e0e0;" />
 
   
@@ -339,7 +332,30 @@
     </p>
   
    
+  </div> -->
+  
+
+  <div *ngIf="isDropdownOpen" class="dropdown-menu">
+    <p class="menu-item" style="margin: 0 0 0px; font-size: 1.1em; cursor: default;">
+      Welcome
+      <span style="font-weight: bold; ">{{ displayName }}</span>
+    </p>
+  
+    <hr style="margin: 0px 0; border: 0; border-top: 1px solid #e0e0e0;" />
+  
+    <p class="menu-item" (click)="changePassword()">
+      <i class="simple-icon-lock" style="font-size: 1.2em; margin-right: 6px;"></i>
+      Change Password
+    </p>
+  
+    <hr style="margin: 0px 0; border: 0; border-top: 1px solid #e0e0e0;" />
+  
+    <p class="menu-item" (click)="logout()">
+      <i class="simple-icon-logout" style="font-size: 1.2em; margin-right: 6px; transform: scaleX(-1);"></i>
+      Logout
+    </p>
   </div>
+
   
 </div>
 

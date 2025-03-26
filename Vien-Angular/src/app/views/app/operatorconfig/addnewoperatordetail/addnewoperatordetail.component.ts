@@ -114,7 +114,7 @@ onCheckboxChange(event: Event): void {
 
 }
 onSubmit(): void {
-   
+   debugger
   if (this.addNewGeneratorForm.invalid) {
     alert("Please fill all required fields correctly.");
     return;

@@ -168,18 +168,8 @@ editid:any;
       });
 
 
-      this.Getcountries();
-
-
-
-
-
-
-
-
-
+        this.Getcountries();
         this.agent=this.getBrowserName();
-
         var id = this.approute.snapshot.params['id']
         var value = this.approute.snapshot.params['value']
         this.Edit(id, value);
@@ -833,33 +823,7 @@ editid:any;
         });
     }
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+    uploadedImg
     formatDate(dateString: string): string {
       return dateString.split("T")[0]; // Extract only the YYYY-MM-DD part
     }
@@ -913,7 +877,7 @@ editid:any;
             this.Heading = finalresult.heading;
             this.Content = finalresult.content;
             this.IsMicrosoftAccount = finalresult.isMicrosoftAccount;
-          
+            this.uploadedImg=this.authService.imageBindUrl +'\\'+ finalresult.profile
           
               // if (finalresult.result.isActive == true) {
               //     var check = document.getElementById("userchkactive") as HTMLInputElement;

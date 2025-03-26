@@ -86,6 +86,7 @@ export class LoginComponent implements OnInit {
         localStorage.setItem("SiteId", finalresult.result.siteId);
         localStorage.setItem("subdomain", finalresult.result.subdomain);
         localStorage.setItem("ProfilePath", finalresult.result.profilePath);
+        localStorage.setItem("OperatorId", finalresult.result.operatorId);
         this.buttonDisabled = false;
         this.buttonState = '';
         this.router.navigate(['/app/dashboards/default']);

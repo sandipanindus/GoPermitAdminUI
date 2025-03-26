@@ -865,13 +865,44 @@ export class EditTenantComponent implements OnInit, OnDestroy {
     }
 
 
+    // async downloadResidencyProofImage() {
+    //     debugger
+    //     const imageUrl = new URL(this.residencyproofid).pathname;
+    //     const fileName = imageUrl.split('/').pop();
+      
+    //     try {
+    //       const response = await fetch(imageUrl);
+    //       const blob = await response.blob();
+    //       const url = URL.createObjectURL(blob);
+      
+    //       const a = document.createElement('a');
+    //       a.href = url;
+    //       a.download = fileName;
+    //       document.body.appendChild(a);
+    //       a.click();
+    //       document.body.removeChild(a);
+      
+    //       URL.revokeObjectURL(url);
+    //     } catch (error) {
+    //       console.error('Error downloading image:', error);
+    //     }
+    //   }
+
+
     async downloadResidencyProofImage() {
-        debugger
-        const imageUrl = new URL(this.residencyproofid).pathname;
-        const fileName = imageUrl.split('/').pop();
+        debugger;
+      
+        // Use relative path to leverage proxy config
+        const imageUrl = `/TenantResidencyFiles/${this.residencyproofid.split('/').pop()}`;  
+        const fileName = imageUrl.split('/').pop() || 'downloaded_image.png';
       
         try {
           const response = await fetch(imageUrl);
+      
+          if (!response.ok) {
+            throw new Error(`Failed to fetch image: ${response.status} ${response.statusText}`);
+          }
+      
           const blob = await response.blob();
           const url = URL.createObjectURL(blob);
       
@@ -887,6 +918,7 @@ export class EditTenantComponent implements OnInit, OnDestroy {
           console.error('Error downloading image:', error);
         }
       }
+      
 
     async downloadIdentityProofImage() {
         debugger

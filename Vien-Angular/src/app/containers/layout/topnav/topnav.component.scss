@@ -60,4 +60,19 @@ hr {
     top: 15px; /* Moves the count down */
     /* Optionally adjust left or right if needed */
   }
+
+  .menu-item {
+    margin: 0;
+    font-size: 1.2em;
+    cursor: pointer;
+    color: #5a638f;
+    transition: background-color 0.3s ease;  /* Smooth transition */
+    padding: 8px 12px;  /* Add padding for better hover effect */
+    border-radius: 4px;  /* Slight rounding for smoothness */
+  }
+  
+  .menu-item:hover {
+    background-color: gray;  /* Gray background on hover */
+    color: #fff;  /* Optional: White text for contrast */
+  }
   

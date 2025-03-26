@@ -83,7 +83,7 @@ export class TopnavComponent implements OnInit, OnDestroy {
   ngOnInit() {
     var id = localStorage.getItem("LoginId");
     var RoleId = localStorage.getItem("RoleId");
-  
+    var OperatorId = localStorage.getItem("OperatorId");
     var firstname = localStorage.getItem("firstname");
     var lastname = localStorage.getItem('lastname');
     if (id != null) {
@@ -127,7 +127,8 @@ export class TopnavComponent implements OnInit, OnDestroy {
       }
     );
     this.GetNotificationsList();
-    this.getOperatorById(id)
+  //  this.getOperatorById(id)
+    this.getOperatordetailsbyid(OperatorId)
   }
 
   ngOnDestroy(): void {
@@ -411,6 +412,20 @@ export class TopnavComponent implements OnInit, OnDestroy {
       }
 
       console.log("ImageUrl2",this.imageUrl)
+    });
+  }
+
+
+  uploadedImg
+  getOperatordetailsbyid(id){
+    this.authService.Getoperatorbyid(id).subscribe((result: any) => {
+      ;
+     var finalresult = JSON.parse(result);
+     console.log("editdata",result);
+     if (finalresult) {
+      this.uploadedImg=this.authService.imageBindUrl +'\\'+ finalresult.profile
+
+     }
     });
   }
 }

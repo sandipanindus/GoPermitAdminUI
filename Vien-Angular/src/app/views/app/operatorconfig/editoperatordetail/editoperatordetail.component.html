@@ -1,6 +1,6 @@
 <div class="container">
     <div class="form-group">
-      <h2>Edit New Operator</h2>
+      <h2>Edit Operator Detail</h2>
     </div>
     <div class="loading" style="display: none;" id="loading"></div>
 
@@ -207,7 +207,7 @@
           <label for="Profile" class="me-2 w-25 text-end">Profile</label>
           <input  type="file" (change)="onFileSelect($event)" class="form-control" style="width: 40%;">
           <div class="d-block">
-           {{Profile}}
+          
           </div>
 
           <!-- <input type="file" id="Profile" class="form-control w-70"  formControlName="Profile"> -->
@@ -215,6 +215,7 @@
           class="text-danger"> Profile Required
           </div>
        </div>
+      
      </div>
 
    
@@ -226,6 +227,13 @@
         <div *ngIf="addNewGeneratorForm.get('Notes').invalid && addNewGeneratorForm.get('Notes').touched" 
         class="text-danger"> Notes Required
         </div>
+      </div>
+
+      <div class="form-group col-md-6 d-flex align-items-center">
+      <p>Uploaded Profile</p>
+      <div>
+        <img style="width: 50%;  border: 1px solid #555" src="{{uploadedImg}}" alt="ResidencyProof">
+       </div>
       </div>
       <!-- <div class="col-md-6">
         <h5 class="section-title">Contents To The Email Template, If Any</h5>
