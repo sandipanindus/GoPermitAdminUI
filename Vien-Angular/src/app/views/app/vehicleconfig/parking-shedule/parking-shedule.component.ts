@@ -349,7 +349,7 @@ onbaynoset(event) {
   enddate
 
   GetProfile(){
-     
+     debugger
     this.showdatepicker=false;
     this.Single=false;
     this.multiple=false;
@@ -362,7 +362,7 @@ onbaynoset(event) {
           if(data.result!=null)
           {
 
-console.log(data.result);
+  console.log(data.result);
   //element.style.display = 'none';
   this.Name=data.result.firstName+' '+data.result.lastName;
   this.email=data.result.email;
@@ -382,6 +382,7 @@ console.log(data.result);
 
 
   this.authService.getvehiclestimedetails(this.bayid.registerUserId.toString(), this.bayid.id.toString()).subscribe((data: any) => {
+    debugger
     if (data.status == "200") {
       if(data.result != null)
       {
@@ -400,9 +401,19 @@ console.log(data.result);
   
                 this.addEvent(data.result.data[i][0].selectedddates[k].fromDate);
   
-                //this.onValueChange1(new Date(data.result.data[i][0].selectedddates[k].fromDate))
               }
             }
+
+            // for (let i = 0; i < data.result.data[0].length; i++) {
+            //   if (data.result.data[0][i] != undefined) {
+            //     for (let k = 0; k < data.result.data[0][i].selectedddates.length; k++) {
+    
+    
+            //       this.addEvent(data.result.data[0][i].selectedddates[k].fromDate);
+    
+            //       //this.onValueChange1(new Date(data.result.data[i][0].selectedddates[k].fromDate))
+            //     }
+            //   }
   
           }
   

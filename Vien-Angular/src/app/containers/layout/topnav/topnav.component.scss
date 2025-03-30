@@ -70,6 +70,16 @@ hr {
     padding: 8px 12px;  /* Add padding for better hover effect */
     border-radius: 4px;  /* Slight rounding for smoothness */
   }
+
+  .menu-item1 {
+    margin: 0;
+    font-size: 1.2em;
+    cursor: pointer;
+    color: #5a638f;
+    transition: background-color 0.3s ease;  /* Smooth transition */
+    padding: 8px 12px;  /* Add padding for better hover effect */
+    border-radius: 4px;  /* Slight rounding for smoothness */
+  }
   
   .menu-item:hover {
     background-color: gray;  /* Gray background on hover */

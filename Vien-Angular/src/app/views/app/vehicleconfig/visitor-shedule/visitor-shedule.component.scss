@@ -178,3 +178,17 @@ tbody th {
 {
 max-width: 37%!important;
 }
+
+
+.dialog-container {
+  position: absolute;
+  z-index: 9999;
+  background: white;
+  border: 1px solid #ccc;
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+  border-radius: 8px;
+  padding: 15px;
+  width: 400px;
+  max-width: 90%;
+  pointer-events: none; /* Prevent flickering */
+}

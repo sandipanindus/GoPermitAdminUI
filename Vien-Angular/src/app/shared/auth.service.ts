@@ -38,7 +38,7 @@ export class AuthService {
  // this.imageBindUrl='http://api.gopermit.co.uk'
 
  this.baseUrl = 'https://localhost:5001/';
- this.imageBindUrl = 'https://localhost:5001'
+  this.imageBindUrl = 'https://localhost:5001'
 
     //this.baseUrl = 'https://api.gopermit.co.uk/';
 

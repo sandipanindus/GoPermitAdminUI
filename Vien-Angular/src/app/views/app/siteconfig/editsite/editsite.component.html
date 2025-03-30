@@ -120,9 +120,9 @@
             </div>
 
             
-            <label class="col-sm-2 col-form-label">{{"site.state" | translate}}</label>
+            <label class="col-sm-2 col-form-label">{{"County" | translate}}</label>
             <div class="col-sm-4">
-              <input type="text" class="form-control" id="txtstate" placeholder="{{ 'site.state' | translate }}"
+              <input type="text" class="form-control" id="txtstate" placeholder="{{ 'County' | translate }}"
                 [(ngModel)]="state" formControlName="rstate"
                 [ngClass]="{ 'is-invalid': sitesubmitted && r.rstate.errors }" />
               <div *ngIf="sitesubmitted && r.rstate.errors" class="invalid-feedback">
@@ -136,9 +136,9 @@
 
           <div class="form-group row col-lg-12">
 
-            <label class="col-sm-2 col-form-label">{{"site.zipcode" | translate }}</label>
+            <label class="col-sm-2 col-form-label">{{"Postcode" | translate }}</label>
             <div class="col-sm-4">
-              <input type="text" class="form-control" id="txtzipcode" placeholder="{{ 'site.zipcode' | translate }}"
+              <input type="text" class="form-control" id="txtzipcode" placeholder="{{ 'Postcode' | translate }}"
                 [(ngModel)]="zipcode" formControlName="rzipcode"
                 [ngClass]="{ 'is-invalid': sitesubmitted && r.rzipcode.errors }" />
               <div *ngIf="sitesubmitted && r.rzipcode.errors" class="invalid-feedback">

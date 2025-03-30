@@ -1,4 +1,4 @@
-import { Component, TemplateRef, OnInit, ViewChild, OnDestroy, Injectable, Input, ElementRef } from '@angular/core';
+import { Component, TemplateRef, OnInit, ViewChild, OnDestroy, Injectable, Input, ElementRef, Renderer2 } from '@angular/core';
 import { NgxSpinnerService } from 'ngx-spinner';
 import { AuthService } from 'src/app/shared/auth.service';
 import {
@@ -43,6 +43,8 @@ const colors: any = {
 export class VisitorSheduleComponent implements OnInit {
 //calener
 
+@ViewChild('dialogTemplate') dialogTemplate!: TemplateRef<any>;
+@ViewChild('dialogContainer', { static: false }) dialogContainer!: ElementRef;
 @ViewChild('template') model: any;
 
 view: CalendarView = CalendarView.Month;
@@ -76,7 +78,9 @@ modalRef: BsModalRef;
   siteId: any;
 
 
-  constructor(private spinner: NgxSpinnerService,private authService: AuthService,private modalService: BsModalService,) { 
+  constructor(private spinner: NgxSpinnerService,private authService: AuthService,private modalService: BsModalService,
+    private renderer: Renderer2
+  ) { 
     this.loginid= parseInt(localStorage.getItem("LoginId"));
 
   }
@@ -104,7 +108,7 @@ this.GetSites();
  Visitordetails:any
 eventClicked(data)
 {
-   
+   debugger
   this.spinner.show();
 this.showtable=false;
 
@@ -136,6 +140,8 @@ this.showtable=false;
   }, 2000);
 }
 
+showDialog: boolean = false;
+
   //calendar
 
   /**
@@ -143,54 +149,154 @@ this.showtable=false;
    * vrm no and time
    */
 
- assigntoTable() {
-   
+
+  assigntoTable1() {
+    debugger
+        for ( let i = 0 ; i < this.Visitordetails.length ; i++ ) {
     
-
-    for ( let i = 0 ; i < this.Visitordetails.length ; i++ ) {
-
-      for ( let j = 0 ; j < this.Visitordetails[i].result.length ; j++ ) {
-
-        var d = new Date(this.Visitordetails[i].result[j].startDate);
-        var n = d.getHours();
-
-        (document.getElementById(n +'-' + (this.Visitordetails[i].id))).innerHTML += '<p       data-tooltip="Hovered content"  style="background: gold; border-radius:4px;text-align: center;margin-bottom:0px !important;" class="cls'+ this.Visitordetails[i].result[j].id +'" id="'+ this.Visitordetails[i].result[j].id +'" > '+ this.Visitordetails[i].result[j].vrmNumber +'  <br> </p>';
-      
-        
-        
-      
-        //document.getElementById(('0-' + (this.Visitordetails[i].id)).innerHTML="newtext";
-       // (document.getElementById(n +'-' + (this.Visitordetails[i].id)) as HTMLInputElement).setAttribute("name", this.Visitordetails[i].result[j].id);
-      }
-
-      for ( let i = 0 ; i < this.Visitordetails.length ; i++ ) {
-
-        for ( let j = 0 ; j < this.Visitordetails[i].result.length ; j++ ) {
-          setTimeout(() => {
-            let children = document.getElementsByClassName('cls'+this.Visitordetails[i].result[j].id);
-  
-          for (let i = 0; i < children.length; i++) {
-              children[i].addEventListener("mouseenter", (event: Event) => {
-                this.testing(event);
-              });
+          for ( let j = 0 ; j < this.Visitordetails[i].result.length ; j++ ) {
+    
+            var d = new Date(this.Visitordetails[i].result[j].startDate);
+            var n = d.getHours();
+    
+            (document.getElementById(n +'-' + (this.Visitordetails[i].id))).innerHTML += '<p       data-tooltip="Hovered content"  style="background: gold; border-radius:4px;text-align: center;margin-bottom:0px !important;" class="cls'+ this.Visitordetails[i].result[j].id +'" id="'+ this.Visitordetails[i].result[j].id +'" > '+ this.Visitordetails[i].result[j].vrmNumber +'  <br> </p>';
+          
+            
+            
+          
+            //document.getElementById(('0-' + (this.Visitordetails[i].id)).innerHTML="newtext";
+           // (document.getElementById(n +'-' + (this.Visitordetails[i].id)) as HTMLInputElement).setAttribute("name", this.Visitordetails[i].result[j].id);
           }
-          }, 3000);
+    
+          for ( let i = 0 ; i < this.Visitordetails.length ; i++ ) {
+    
+            for ( let j = 0 ; j < this.Visitordetails[i].result.length ; j++ ) {
+              setTimeout(() => {
+                let children = document.getElementsByClassName('cls'+this.Visitordetails[i].result[j].id);
+      
+              for (let i = 0; i < children.length; i++) {
+
+                  children[i].addEventListener("mouseenter", (event: Event) => {
+                    this.testing(event);
+                  });
+              }
+              }, 3000);
+            }
+          }
+    
+        }
+    
+     }
+
+     assigntoTable() {
+      for (let i = 0; i < this.Visitordetails.length; i++) {
+        for (let j = 0; j < this.Visitordetails[i].result.length; j++) {
+          const result = this.Visitordetails[i].result[j];
+    
+          const startDate = new Date(result.startDate);
+          const endDate = new Date(result.endDate);
+    
+          const startHour = startDate.getHours();
+          const endHour = endDate.getHours();
+    
+          for (let hour = startHour; hour <= endHour; hour++) {
+            const cellId = `${hour}-${this.Visitordetails[i].id}`;
+            const cell = document.getElementById(cellId);
+    
+            if (cell) {
+              const slot = document.createElement('p');
+              slot.className = `slot cls${result.id}`;
+              slot.id = `${result.id}-${hour}`;
+              slot.innerHTML = `${result.vrmNumber}<br>`;
+              slot.style.background = 'gold';
+              slot.style.borderRadius = '4px';
+              slot.style.textAlign = 'center';
+              slot.style.marginBottom = '0px';
+              slot.style.padding = '5px';
+              slot.style.cursor = 'pointer';
+    
+              // Append slot to the cell
+              cell.appendChild(slot);
+    
+              // ✅ Trigger testing() with the correct ID on hover
+              slot.addEventListener('mouseenter', (event) => {
+                const elementId = `${result.id}`;  // Extract the ID
+                this.testing(elementId);           // Call testing with the ID
+              });
+    
+              slot.addEventListener('mouseleave', () => this.hideDialog());
+            }
+          }
         }
       }
-
     }
+    
 
- }
+  showDialogOnHover(event: MouseEvent, details: any) {
+    this.details = [details];
+    this.showDialog = true;
+
+    const dialogEl = this.dialogContainer.nativeElement;
+    const offsetX = 10; // Add some offset
+    const offsetY = 10;
+
+    // Set the position of the dialog near the hovered element
+    this.renderer.setStyle(dialogEl, 'top', `${event.clientY + offsetY}px`);
+    this.renderer.setStyle(dialogEl, 'left', `${event.clientX + offsetX}px`);
+  }
+
+  // Hide the dialog on mouse leave
+  hideDialog() {
+    this.showDialog = false;
+  }
+  
+  
+  
 details:any;
 count=1;
- testing(id){
-   ;
-  var length=this.Visitordetails.length ; 
+
+testing1(id){
+  debugger
+ var length=this.Visitordetails.length ; 
 if(this.count==length)
 {
+ this.showdetails=false;
+ 
+ this.authService.Getvistordeatilsbyid(id.toElement.id).subscribe((result: any) => {
+    ;
+   var finalresult = JSON.parse(result);
+   if (finalresult.status == "200") {
+     console.log(finalresult);
+     this.showdetails=true;
+     this.count=1;
+
+    this.details=finalresult.result;
+
+    // this.openModal(this.model)
+   }
+
+ })
+
+}
+else
+{
+ this.count++;
+}
+
+
+  
+ //var name =(document.getElementById('20-1380') as HTMLInputElement).name;
+
+  
+}
+
+ testing(id){
+   debugger
+  var length=this.Visitordetails.length ; 
+
   this.showdetails=false;
   
-  this.authService.Getvistordeatilsbyid(id.toElement.id).subscribe((result: any) => {
+  this.authService.Getvistordeatilsbyid(id).subscribe((result: any) => {
      ;
     var finalresult = JSON.parse(result);
     if (finalresult.status == "200") {
@@ -198,18 +304,18 @@ if(this.count==length)
       this.showdetails=true;
       this.count=1;
 
-      this.details=finalresult.result;
+     this.details=finalresult.result;
 
      // this.openModal(this.model)
     }
 
   })
 
-}
-else
-{
-  this.count++;
-}
+
+// else
+// {
+//   this.count++;
+// }
 
 
    
