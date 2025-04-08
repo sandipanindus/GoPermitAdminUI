@@ -191,6 +191,7 @@ onbaynoset(event) {
    */
   Bindbasedondate(date) {
     debugger
+    console.log("Test")
     this.authService.getvehiclestimedetailsbydate(this.bayid.registerUserId.toString(), this.bayid.id.toString(), date).subscribe((data: any) => {
       if (data.status === '200') {
         this.showalert = true;
@@ -394,12 +395,12 @@ onbaynoset(event) {
         
         if (data.result.message == "mutilpledata") {
   
-          for (let i = 0; i < data.result.data.length; i++) {
-            if (data.result.data[i][0] != undefined) {
-              for (let k = 0; k < data.result.data[i][0].selectedddates.length; k++) {
+          for (let i = 0; i < data.result.data[0].length; i++) {
+            if (data.result.data[0][i] != undefined) {
+              for (let k = 0; k < data.result.data[0][i].selectedddates.length; k++) {
   
   
-                this.addEvent(data.result.data[i][0].selectedddates[k].fromDate);
+                this.addEvent(data.result.data[0][i].selectedddates[k].fromDate);
   
               }
             }
@@ -482,6 +483,7 @@ selectedClass = [];
 
 
   addEvent(date): void {
+    debugger
     this.events = [
       ...this.events,
       {

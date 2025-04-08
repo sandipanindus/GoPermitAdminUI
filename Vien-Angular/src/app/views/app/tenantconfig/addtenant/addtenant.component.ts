@@ -94,7 +94,9 @@ export class AddTenantComponent implements OnInit, OnDestroy {
 
     }
     get r() { return this.tenantForm.controls; }
+    loginId
     ngOnInit() {
+        this.loginId=localStorage.getItem("LoginId")
         this.agent = this.getBrowserName();
 
         this.siteId = "";
@@ -355,7 +357,7 @@ export class AddTenantComponent implements OnInit, OnDestroy {
         // element.style.display = 'block';
         var SiteId = localStorage.getItem("SiteId");
         var RoleId = localStorage.getItem("RoleId");
-        this.authService.GetSites(1, 0, 1, RoleId, SiteId).subscribe((result: any) => {
+        this.authService.GetSites(1, 0, this.loginId, RoleId, SiteId).subscribe((result: any) => {
              ;
             var finalresult = JSON.parse(result);
             console.log("forbay",finalresult)
