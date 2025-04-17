@@ -12,13 +12,20 @@ import { Router } from '@angular/router';
 })
 export class DashboardsComponent implements OnInit {
 
+  // cards = [
+  //   { title: 'Operators', count: 0,color:'blue' },
+  //   { title: 'Operator Users', count: 0,color:'green' },
+  //   { title: 'Sites', count: 0 ,color:'red'},
+  //   { title: 'Site Users', count: 0,color:'orange' }
+  // ];
+
   cards = [
-    { title: 'Operators', count: 0,color:'blue' },
-    { title: 'Operator Users', count: 0,color:'green' },
-    { title: 'Sites', count: 0 ,color:'red'},
-    { title: 'Site Users', count: 0,color:'orange' },
-    { title: 'Tenant Users', count: 0,color:'orange' }
+    { title: 'Operators', displayTitle: 'Operators', count: 0, color: 'blue', image: 'assets/icons/operator.png' },
+    { title: 'Operator Users', displayTitle: 'Operator Users', count: 0, color: 'green', image: 'assets/icons/operator_user.png' },
+    { title: 'Sites', displayTitle: 'Sites', count: 0, color: 'red', image: 'assets/icons/sites.png' },
+    { title: 'Site Users', displayTitle: 'Tenant Users', count: 0, color: 'orange', image: 'assets/icons/tenant_user.png' }
   ];
+  
   operatordata: any;
   sites: any;
   operatorusers: any;
