@@ -34,14 +34,14 @@ export class AuthService {
 // this.baseUrl='http://goapi.fadelsoft.co.in/'
 //  this.imageBindUrl='http://goapi.fadelsoft.co.in'
 
-// this.baseUrl='https://apiuat.gopermit.co.uk/'
-// this.imageBindUrl='https://apiuat.gopermit.co.uk'
+this.baseUrl='https://apiuat.gopermit.co.uk/'
+  this.imageBindUrl='https://apiuat.gopermit.co.uk'
 
 // this.baseUrl='https://api.gopermit.co.uk/'
  // this.imageBindUrl='https://api.gopermit.co.uk'
 
-this.baseUrl = 'https://localhost:5001/';
-this.imageBindUrl = 'https://localhost:5001'
+// this.baseUrl = 'https://localhost:5001/';
+// this.imageBindUrl = 'https://localhost:5001'
 
     //this.baseUrl = 'https://api.gopermit.co.uk/';
 

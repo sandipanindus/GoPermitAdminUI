@@ -39,6 +39,7 @@ export class EditSiteComponent implements OnInit, OnDestroy {
     tenantparkingbay: string;
     visitorparkingbay: string;
     SiteId: any;
+    APIKey
     @Input() currentState = '';
     buttonDisabled = false;
     buttonState = '';
@@ -89,7 +90,8 @@ export class EditSiteComponent implements OnInit, OnDestroy {
             OperatorId: ['', Validators.required],
             industryId: ['', Validators.required],
             enfService: ['', Validators.required],
-            rcustomRadio1:['']
+            rcustomRadio1:[''],
+            APIKey: ['', Validators.required],
         });
         this.parkingbayForm = this.formBuilder.group({
 
@@ -538,6 +540,7 @@ export class EditSiteComponent implements OnInit, OnDestroy {
             this.siteForm.controls['OperatorId'].disable();
             this.siteForm.controls['industryId'].disable();
             this.siteForm.controls['enfService'].disable();
+            this.siteForm.controls['APIKey'].disable();
             this.parkingbayForm.controls['psection'].disable();
             this.parkingbayForm.controls['pseperatorId'].disable();
             this.visitorbayForm.controls['vsection'].disable();
@@ -594,12 +597,13 @@ export class EditSiteComponent implements OnInit, OnDestroy {
             this.siteForm.controls['OperatorId'].disable();
             this.siteForm.controls['enfService'].enable();
             this.siteForm.controls['rvehiclesperbay'].enable();
+            this.siteForm.controls['APIKey'].enable();
             this.parkingbayForm.controls['psection'].disable();
             this.parkingbayForm.controls['pseperatorId'].disable();
             this.visitorbayForm.controls['vsection'].disable();
             this.visitorbayForm.controls['vseperatorId'].disable();
             this.visitorbayForm.controls['vmaxparkingsession'].enable();
-
+            
             // (document.getElementById("txtsitename") as HTMLInputElement).disabled = false;
             // (document.getElementById("txtsitecode") as HTMLInputElement).disabled = false;
             // (document.getElementById("txtsiteaddress") as HTMLInputElement).disabled = false;
@@ -659,6 +663,7 @@ export class EditSiteComponent implements OnInit, OnDestroy {
                 this.OperatorId = finalresult.result.operatorId;
                 this.industryId = finalresult.result.industryId;
                 this.enfService = finalresult.result.enforcementService;
+                this.APIKey = finalresult.result.apiKey;
                 this.parkingbaydiv = 'block';
                 this.visitorbaydiv = 'block';
                 this.maxparkingsession = finalresult.result.visitorbays[0].maxParkingSession;
@@ -838,7 +843,9 @@ export class EditSiteComponent implements OnInit, OnDestroy {
             if (this.vehiclesperbay == undefined || this.vehiclesperbay == null || this.vehiclesperbay == "") {
                 document.getElementById("txtvehiclesperbay").className = "form-control invalid-color";
             }
-
+            if (this.vehiclesperbay == undefined || this.vehiclesperbay == null || this.vehiclesperbay == "") {
+                document.getElementById("txtapikey").className = "form-control invalid-color";
+            }
             element.style.display = 'none';
             return;
         }
@@ -1054,6 +1061,8 @@ export class EditSiteComponent implements OnInit, OnDestroy {
             VisitorSessions: this.visitorsessions,
             OperatorId: this.OperatorId,
             industryId: this.industryId,
+            enforcementService:this.siteForm.value?.enfService,
+            APIKey:this.APIKey
         }
 
  

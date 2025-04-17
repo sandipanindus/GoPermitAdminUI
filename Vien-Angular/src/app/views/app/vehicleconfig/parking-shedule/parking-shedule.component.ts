@@ -191,7 +191,6 @@ onbaynoset(event) {
    */
   Bindbasedondate(date) {
     debugger
-    console.log("Test")
     this.authService.getvehiclestimedetailsbydate(this.bayid.registerUserId.toString(), this.bayid.id.toString(), date).subscribe((data: any) => {
       if (data.status === '200') {
         this.showalert = true;

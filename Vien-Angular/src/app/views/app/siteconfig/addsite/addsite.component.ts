@@ -51,6 +51,7 @@ export class AddSiteComponent implements OnInit, OnDestroy {
     vehiclesperbay: string;
     maxparkingsession: string;
     timeunit: string;
+    APIKey
     operatordata:any[] = [];
     industrydata:any[] = [];
     constructor(private spinner: NgxSpinnerService, private translate: TranslateService, private modalService: BsModalService, private formBuilder: FormBuilder,
@@ -71,6 +72,7 @@ export class AddSiteComponent implements OnInit, OnDestroy {
             rvisitorparkingbay: ['', Validators.required],
             rvehiclesperbay: ['', Validators.required],
             OperatorId: ['', Validators.required],
+            APIKey: ['', Validators.required],
             industryId: ['']
         });
         this.parkingbayForm = this.formBuilder.group({
@@ -414,6 +416,9 @@ export class AddSiteComponent implements OnInit, OnDestroy {
             if (this.vehiclesperbay == undefined || this.vehiclesperbay == null || this.vehiclesperbay == "") {
                 document.getElementById("txtvehiclesperbay").className = "form-control invalid-color";
             }
+            if (this.vehiclesperbay == undefined || this.vehiclesperbay == null || this.vehiclesperbay == "") {
+                document.getElementById("txtapikey").className = "form-control invalid-color";
+            }
 
             element.style.display = 'none';
             return;
@@ -629,7 +634,8 @@ export class AddSiteComponent implements OnInit, OnDestroy {
             VisitorSessions: this.visitorsessions,
             OperatorId: this.siteForm.value?.OperatorId,
             industryId: this.siteForm.value?.industryId,
-            enforcementService:this.siteForm.value?.enfService
+            enforcementService:this.siteForm.value?.enfService,
+            APIKey:this.APIKey
         }
          
         this.authService.SaveSite(data).subscribe((data: any) => {
