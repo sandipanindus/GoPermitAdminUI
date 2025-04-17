@@ -1,11 +1,23 @@
+// .card {
+//   border-radius: 10px;
+//   background-color: #f8f9fa;
+//   padding: 1rem
+// }
+
+
 .card {
-  border-radius: 10px;
-  background-color: #f8f9fa;
+  height: 250px; /* Set a fixed height you prefer */
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding: 1% !important
+
 }
+
 
 .count-circle {
   width: 60px;
-  height: 60px;
+  height: 30px;
   line-height: 60px;
 
   color: blue;
@@ -13,3 +25,5 @@
   font-weight: 800;
   margin: 10px auto;
 }
+
+

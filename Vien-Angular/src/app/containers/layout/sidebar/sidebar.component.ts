@@ -36,6 +36,7 @@ export class SidebarComponent implements OnInit, OnDestroy {
         // var data=JSON.stringify(result);
         var finalresult = JSON.parse(result);
         if (finalresult.status == "200") {
+          debugger
             this.menuItems = finalresult.result;
             this.selectMenu();
             this.spinner.hide();
