@@ -23,7 +23,9 @@ export class DashboardsComponent implements OnInit {
     { title: 'Operators', displayTitle: 'Operators', count: 0, color: 'blue', image: 'assets/icons/operator.png' },
     { title: 'Operator Users', displayTitle: 'Operator Users', count: 0, color: 'green', image: 'assets/icons/operator_user.png' },
     { title: 'Sites', displayTitle: 'Sites', count: 0, color: 'red', image: 'assets/icons/sites.png' },
-    { title: 'Site Users', displayTitle: 'Tenant Users', count: 0, color: 'orange', image: 'assets/icons/tenant_user.png' }
+    //{ title: 'Site Users', displayTitle: 'Site Users', count: 0, color: 'orange', image: 'assets/icons/tenant_user.png' }
+    { title: 'Tenant Users', displayTitle: 'Tenant Users', count: 0, color: 'orange', image: 'assets/icons/tenant_user.png' }
+
   ];
   
   operatordata: any;
@@ -135,7 +137,9 @@ export class DashboardsComponent implements OnInit {
         if (cardToUpdate) {
           cardToUpdate.count = this.operatordata;
         }
+        
       }
+     
     );
   }
 
@@ -155,6 +159,7 @@ export class DashboardsComponent implements OnInit {
       if (cardToUpdate) {
         cardToUpdate.count = this.tenants;
       }
+      console.log("Cards",this.cards)
     })
   }
 

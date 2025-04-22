@@ -113,10 +113,10 @@ eventClicked(data)
 this.showtable=false;
 
   this.authService.Getvistorbysitedate(this.siteId, this.getDateItem(data.date)).subscribe((result: any) => {
-     ;
     const finalresult = JSON.parse(result);
     if(finalresult.message === 'Success') {
       this.Visitordetails = finalresult.result;
+      console.log("VisitorDetails",this.Visitordetails)
       if(finalresult.result.length>0){
       this.showtable = true;
      
@@ -411,5 +411,31 @@ decline(): void {
 
   this.modalRef.hide();
 }
+
+hours: string[] = Array.from({ length: 24 }, (_, i) =>
+  (i < 10 ? '0' + i : i) + ':00'
+);
+
+getSlotData(hour: string, item: any): any {
+  const targetHour = parseInt(hour.split(':')[0], 10);
+
+  return item.result.find((res: any) => {
+    const startHour = new Date(res.startDate).getHours();
+    const endHour = new Date(res.endDate).getHours() || 24;
+
+    return targetHour >= startHour && targetHour < endHour;
+  });
+}
+
+openDialog(slot: any): void {
+  debugger
+//  const booking = this.getSlotData(hour, item);
+  if (slot) {
+    // Call your dialog method here
+    this.testing(slot.id);
+  }
+}
+
+
 
 }
