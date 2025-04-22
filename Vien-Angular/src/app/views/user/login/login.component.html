@@ -1,3 +1,15 @@
+<div class="card1 auth-card1 authcardst1 " >
+
+
+<div class="text-center mb-4">
+  <img src="assets/img/assets_up.png" alt="Login Banner" class="img-fluid" style="max-width: 100%;">
+</div>
+
+</div>
+
+
+
+
 <div class="card auth-card authcardst  login-card" >
   <!-- <div class="position-relative image-side">
     <p class=" text-white h2">MAGIC IS IN THE DETAILS</p>
@@ -18,14 +30,15 @@
     <div class="loading" style="display: none;" id="loading"></div>
     <form #loginForm="ngForm" class="maindivcls" novalidate (ngSubmit)="onSubmit()">
       <div class="form-group row">
-        <label  class="col-form-label">{{ 'user.username' | translate }}</label>
+
+        <label  class="col-form-label" style="color: white;font-weight: bold;">{{ 'user.username' | translate }}</label>
         <div class="col-sm-10 email_st">
           <input class="form-control" id="txtemail" placeholder="{{ 'user.username' | translate }}" required type="text" name ngModel #name="ngModel" name="name" [(ngModel)]="emailModel">
           <div *ngIf="!name.valid && loginForm.submitted" class="invalid-tooltip">Username is required!</div>
         </div>
       </div>
       <div class="form-group row">
-        <label  class="col-form-label">{{ 'user.password' | translate }}</label>
+        <label  class="col-form-label" style="color: white;font-weight: bold;">{{ 'user.password' | translate }}</label>
         <div class="col-sm-10 email_st">
           <input class="form-control" id="txtpassword" type="password" placeholder="{{ 'user.password' | translate }}" required ngModel #password="ngModel" name="password"
           [(ngModel)]="passwordModel">
@@ -44,7 +57,7 @@
         <div *ngIf="!password.valid && loginForm.submitted" class="invalid-tooltip">Password is required!</div>
       </label> -->
       <div class="d-flex justify-content-between align-items-center">
-        <a routerLink="/user/forgot-password">{{ 'user.forgot-password' | translate }}?</a>
+        <a routerLink="/user/forgot-password" style="font-size:0.9rem; color: white;font-weight: bold;">{{ 'user.forgot-password' | translate }}?</a>
         <app-state-button [btnClass]="'btn btn-primary btn-lg btn-shadow'" [currentState]="buttonState"
           [isDisabled]="buttonDisabled" click="onLoginClick()">
           {{ 'user.login-button' | translate }}

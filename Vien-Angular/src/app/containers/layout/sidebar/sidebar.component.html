@@ -8,7 +8,13 @@
                         <i [ngClass]="item.icon"></i>{{item.label | translate}}</a>
                     <a *ngIf="!item.newWindow && item.subs &&  item.subs.length>0"
                         (click)="openSubMenu($event,item); false" [href]="item.to">
-                        <i [ngClass]="item.icon"></i> {{item.label | translate}}</a>
+                        <!-- <i [ngClass]="item.icon"></i> -->
+                        <img [src]="'assets/icons/' + item.icon" 
+                        alt="{{item.label}}" 
+                        width="50" 
+                        height="45" 
+                        style=" vertical-align: middle; color: white;" />
+                         {{item.label | translate}}</a>
                     <a *ngIf="!item.newWindow && (!item.subs || (item.subs &&  item.subs.length===0))"
                         (click)="changeSelectedParentHasNoSubmenu(item.id); false" [routerLink]="item.to">
                         <i [ngClass]="item.icon"></i> {{item.label | translate}}</a>
@@ -28,11 +34,53 @@
                         <i [ngClass]="sub.icon"></i>
                         <span class="d-inline-block">{{sub.label | translate}}</span>
                     </a>
-                    <a *ngIf="!sub.newWindow && (!sub.subs || sub.subs.length<=0)" [routerLink]="[sub.to]"
+                    <!-- <a *ngIf="!sub.newWindow && (!sub.subs || sub.subs.length<=0)" [routerLink]="[sub.to]"
                         routerLinkActive="active">
                         <i [ngClass]="sub.icon"></i>
                         <span class="d-inline-block">{{sub.label | translate}}</span>
-                    </a>
+                    </a> -->
+                    <!-- <a *ngIf="!sub.newWindow && (!sub.subs || sub.subs.length <= 0)" 
+                        [routerLink]="[sub.to]" 
+                        routerLinkActive="active">
+
+                        <img [src]="'assets/icons/subicons/' + sub.icon" 
+                            alt="{{ sub.label }}" 
+                            width="45" 
+                            height="35" 
+                            style="vertical-align: middle;" />
+
+                            
+                        <span class="d-inline-block">{{ sub.label | translate }}</span>
+                        </a> -->
+
+
+
+                        <a *ngIf="!sub.newWindow && (!sub.subs || sub.subs.length <= 0)"
+   [routerLink]="[sub.to]"
+   routerLinkActive="active"
+   class="d-flex align-items-center">
+
+  <!-- Image icon (if it contains an image extension) -->
+  <ng-container *ngIf="isImage(sub.icon); else fontIcon">
+    <img [src]="'assets/icons/subicons/' + sub.icon"
+         [alt]="sub.label"
+         width="45"
+         height="35"
+         style="vertical-align: middle; margin-right: 8px;" />
+  </ng-container>
+
+  <!-- Font icon fallback -->
+  <ng-template #fontIcon>
+    <i [ngClass]="sub.icon"
+       style="vertical-align: middle; font-size: 20px; margin-right: 8px;"></i>
+  </ng-template>
+
+  <span class="d-inline-block">{{ sub.label | translate }}</span>
+</a>
+
+
+                        
+
                     <a (click)="toggleCollapse(sub.id)" *ngIf="sub.subs && sub.subs.length > 0"
                       [ngClass]="{'rotate-arrow-icon opacity-50 c-pointer': true, 'collapsed': closedCollapseList.includes(sub.id)}">
                         <i class="simple-icon-arrow-down"></i>

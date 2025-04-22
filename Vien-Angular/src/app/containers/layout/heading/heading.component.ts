@@ -8,6 +8,8 @@ import { filter, map } from 'rxjs/operators';
 })
 export class HeadingComponent {
   currentRoute = '';
+  currentMonthYear: string;
+
 
   constructor(private router: Router, private activatedRoute: ActivatedRoute) {
     this.router.events
@@ -24,5 +26,11 @@ export class HeadingComponent {
       const pathArr = path.split('/').slice(0, path.split('/').length - paramtersLen);
       this.currentRoute = pathArr[pathArr.length - 1];
     });
+
+
+
+    const date = new Date();
+    const options = { year: 'numeric', month: 'short' } as const;
+    this.currentMonthYear = date.toLocaleDateString('en-US', options); // e.g., "Apr 2025"
   }
 }

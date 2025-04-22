@@ -162,7 +162,8 @@ body.show {
 }
 
 .fixed-background {
-  background: url("../../../img/backimage1.jpg") no-repeat center center fixed;
+ // background: url("../../../img/backimage1.jpg") no-repeat center center fixed;
+ background-color: #535D7E;
   background-size: cover;
   width: 100%;
   height: 100%;

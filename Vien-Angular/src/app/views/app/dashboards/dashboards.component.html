@@ -28,6 +28,7 @@
 
 
 
+ <h1 style="font-size: 40px;font-weight: bold;">Analytics </h1>
 
  <!-- /app/dashboards/* custom container -->
  <div class="row">
@@ -42,7 +43,16 @@
                   <div class="card shadow text-center p-2">
                       <div class="card-body">
                           <!-- Image above title -->
-                          <img [src]="card.image" alt="{{ card.title }}" style="width: 40%; height: 40%; margin-bottom: 5px;">
+                          <!-- <img [src]="card.image" alt="{{ card.title }}" style="width: 40%; height: 40%; margin-bottom: 5px;"> -->
+                          <img 
+                          [src]="card.image" 
+                          alt="{{ card.title }}" 
+                          [ngStyle]="{
+                              'width': card.title === 'Sites' ? '45%' : '40%',
+                              'height': '40%',
+                              'margin-bottom': '5px'
+                          }"
+                      >
                           <!-- Title below image -->
                           <h6 class="card-title mb-1">{{ card.displayTitle }}</h6>
                           <!-- Count below title -->

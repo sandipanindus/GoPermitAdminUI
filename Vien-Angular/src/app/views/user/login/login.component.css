@@ -18,7 +18,8 @@
 .login-card {
     margin: auto;
     width: 60%;
-    background: rgb(245 242 242 / 60%);
+    /* background: rgb(245 242 242 / 60%); */
+    background: #67738f ;
     color: #333 !important;
     box-shadow: 0 0px 56px rgba(0, 0, 0, 0.3);
 }
@@ -36,3 +37,36 @@
 }
 
 
+
+
+
+
+
+.card1 {
+    width: 100%;
+    max-width: 600px; /* Adjust based on design */
+    margin: 0 auto;
+    border-radius: 8px;
+    overflow: hidden;
+
+  }
+  
+  .image-wrapper {
+    width: 100%;
+  }
+  
+  .login-banner-img {
+    width: 100%;
+    height: auto;
+    display: block;
+    border-top-left-radius: 8px;
+    border-top-right-radius: 8px;
+  }
+  
+
+
+  ::ng-deep .btn-primary{
+    background-color: #ed7124 !important;
+    border-color: #ed7124 !important;
+    color: #fff;
+}

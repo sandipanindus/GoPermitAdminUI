@@ -256,4 +256,10 @@ if(menuItem.id=="dashboard"){
 
    
   }
+
+
+  isImage(icon: string): boolean {
+    return /\.(png|jpe?g|svg|webp)$/i.test(icon);
+  }
+  
 }
