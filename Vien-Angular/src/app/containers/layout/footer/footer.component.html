@@ -1,24 +1,558 @@
   <footer class="page-footer">
     <div class="footer-content">
       <div class="container-fluid">
-        <div class="row" style="display: none;">
+        <div class="row" >
           <div class="col-12 col-sm-6">
-            <p class="mb-0 text-muted">ColoredStrategies 2020</p>
+            <!-- <a  class="navbar-logo" style="margin-top: 20px" >
+              <span class="logo d-none d-xs-block"></span>
+              <span class="logo-mobile d-block d-xs-none"></span>
+            </a> -->
+
+            <p class="mb-0 text-muted">© {{date | date: 'yyyy'}} GO PERMIT - All rights reserved.</p>
+            <p class="mb-0 text-muted">Version 1.2</p>
           </div>
           <div class="col-sm-6 d-none d-sm-block">
-            <ul class="breadcrumb pt-0 pr-0 float-right">
-              <li class="breadcrumb-item mb-0">
-                <a href="javascript:;" class="btn-link">Review</a>
-              </li>
-              <li class="breadcrumb-item mb-0">
-                <a href="javascript:;" class="btn-link">Purchase</a>
-              </li>
-              <li class="breadcrumb-item mb-0">
-                <a href="javascript:;" class="btn-link">Docs</a>
-              </li>
-            </ul>
+
+    <ul class="breadcrumb pt-0 pr-0 float-right">
+       <li class="breadcrumb-item mb-0">
+     <a href="javascript:;" class="btn-link" (click)="openModal()">Terms & Conditions</a>
+     </li>
+      <li class="breadcrumb-item mb-0">
+    <a href="javascript:;" class="btn-link" (click)="openModal2()">Privacy Policy</a>
+    </li>
+    <li class="breadcrumb-item mb-0">
+    <a href="javascript:;" class="btn-link" (click)="openModal3()">End User Agreement</a>
+  </li>
+  </ul>
+
           </div>
         </div>
       </div>
     </div>
   </footer>
+
+
+  <div 
+  *ngIf="termsandconditionopen" 
+  style="position: fixed; top: 20px; left: 0; width: 100%; height: 100%; background: rgba(75, 71, 71, 0.5); display: flex; justify-content: center; align-items: center; z-index: 1000;">
+
+  <div style="position: relative; background: #fff; padding: 20px; border-radius: 8px; text-align: left; max-width: 600px; max-height: 70vh; overflow-y: auto; width: 100%; box-shadow: 0px 4px 6px rgba(0,0,0,0.1);">
+
+    <!-- Cancel Icon -->
+    <button 
+      (click)="termsandconditionopen = false"
+      style="position: absolute; top: 10px; right: 10px; background: none; border: none; font-size: 20px; cursor: pointer;">
+      &times;
+    </button>
+
+    <h3 style="text-align: center; margin-bottom: 10px;">Terms and Conditions – Data Collection, Use, and Protection</h3>
+
+    <div style="font-size: 14px; line-height: 1.6; white-space: pre-line; text-align: justify;">
+
+      <!-- <strong>Terms and Conditions – Data Collection, Use, and Protection</strong><br><br> -->
+    
+      These Terms and Conditions apply to your use of the GoPermitor web application (“GoPermit App”), which is operated by Euro Parking Services. By using the App to pre-book parking spaces, you confirm that you have read, understood and agree to these Terms, including how your personal data is collected, processed and shared.
+    
+      <br><br><strong>1. Collection of Personal Data</strong><br>
+      When you use the App, we may collect and process personal data including, but not limited to:
+      <ul>
+        <li>Full name</li>
+        <li>Vehicle Registration Mark (VRM)</li>
+        <li>Email address</li>
+        <li>Mobile number</li>
+        <li>Parking booking details (e.g., location, date and time)</li>
+        <li>IP address and device/browser information</li>
+        <li>Any other information voluntarily submitted via the App required to enhance service experience</li>
+      </ul>
+      This data is collected directly from you via your interaction with the App/website.
+    
+      <br><br><strong>2. Use of Personal Data</strong><br>
+      Your personal data is used for the following purposes:
+      <ul>
+        <li>To enable and manage parking space pre-bookings</li>
+        <li>To identify and verify your vehicle and contact information</li>
+        <li>To communicate with you regarding bookings, cancellations or updates</li>
+        <li>To provide customer support and respond to your queries</li>
+        <li>To ensure proper functioning, security and improvement of the App</li>
+        <li>To comply with legal or regulatory obligations</li>
+        <li>To prevent fraud, misuse or unauthorised access</li>
+        <li>To enforce these Terms and Conditions or applicable laws</li>
+        <li>To enhance the service experience of the users</li>
+      </ul>
+    
+      Your data will be processed lawfully, fairly and in a transparent manner. The legal bases on which we process your personal data are as follows:
+      <ul>
+        <li><strong>Performance  of a contract (UK GDPR Article 6(1)(b)) </strong> – where processing is necessary to provide our services to you under the terms of a booking</li>
+        <li><strong>Compliance with legal obligations (Article 6(1)(c)) </strong> – where we are legally required to retain records or cooperate with law enforcement</li>
+        <li><strong>Legitimate interests (Article 6(1)(f)) </strong> – including for business administration, security, fraud prevention and service improvement, provided that such interests are not overridden by your fundamental rights</li>
+        <li><strong>Consent (Article 6(1)(a)) </strong> – where required, particularly for optional features such as receiving marketing communications</li>
+      </ul>
+    
+      <br><strong>3. Data Sharing</strong><br>
+      We may share your personal data with:
+      <ul>
+        <li>Internal staff and systems for service delivery and support</li>
+        <li>Parking operators or enforcement personnel involved in managing your booking</li>
+        <li>IT service providers (e.g., hosting, maintenance, analytics), under binding contractual obligations</li>
+        <li>Regulatory bodies, law enforcement, or courts where legally required</li>
+      </ul>
+      We ensure that all third-party recipients are under data protection and confidentiality obligations that meet or exceed applicable legal requirements.
+    
+      <br><strong>Data Security Disclaimer:</strong><br>
+      While we implement appropriate technical and organisational measures to safeguard the security of your data in accordance with Article 32 of the UK GDPR, we cannot guarantee absolute security during transmission. Consequently, in the unlikely event of a data compromise beyond our control, we shall not be held liable for any resulting loss or damage.
+    
+      <br><br><strong>4. International Data Transfers</strong><br>
+      Where it is necessary to transfer your data outside the UK, we will ensure appropriate safeguards are in place, such as the use of Standard Contractual Clauses or reliance on adequacy decisions, in accordance with Chapter V of the UK GDPR.
+    
+      <br><br><strong>5. Data Retention</strong><br>
+      We retain your personal data only for as long as necessary to fulfil the purposes set out in these Terms, including to:
+      <ul>
+        <li>Provide and support the services you request</li>
+        <li>Comply with legal, regulatory, tax or reporting requirements</li>
+        <li>Resolve disputes and enforce contractual terms</li>
+      </ul>
+      When personal data is no longer required, it will be securely deleted or anonymised. The minimum retention period would be 3 Years.
+    
+      <br><br><strong>6. Data Security</strong><br>
+      We implement appropriate technical and organisational measures to protect your personal data against unauthorised access, accidental loss, or unlawful processing. These include, but are not limited to:
+      <ul>
+        <li>Encrypted communications</li>
+        <li>Access controls</li>
+        <li>Secure servers</li>
+        <li>Regular audits</li>
+        <li>Staff training</li>
+      </ul>
+      While we take all reasonable steps to safeguard your data, no system is entirely immune from risk. By using the App/website, you acknowledge that we cannot guarantee absolute security and agree that we will not be held liable for data breaches that occur despite the implementation of appropriate and proportionate safeguards.
+    
+      <br><br><strong>7. Your Rights</strong><br>
+      You have the following rights under the UK GDPR and Data Protection Act 2018:
+      <ul>
+        <li>Right to be Informed</li>
+        <li>Right of Access</li>
+        <li>Right to Rectification</li>
+        <li>Right to Erasure</li>
+        <li>Right to Restrict Processing</li>
+        <li>Right to Data Portability</li>
+        <li>Right to Object</li>
+        <li>Rights in Relation to Automated Decision-Making and Profiling</li>
+      </ul>
+      To exercise any of your rights, please contact us at GoPermit DPO:<br>
+      Email: <a href="mailto:dpo@gopermit.co.uk">dpo@gopermit.co.uk</a>
+    
+      <br><br><strong>8. Changes to These Terms</strong><br>
+      We may update these Terms and Conditions from time to time. Significant changes will be communicated via the App or email. Your continued use of the App after such updates constitutes your acceptance of the revised Terms.
+    
+      <br><br><strong>Contact Us</strong><br>
+      If you have any questions or concerns about how we handle your personal data, you may contact our<br>
+      <strong> Data Protection Officer (DPO) at </strong>: <a href="mailto:dpo@gopermit.co.uk">dpo@gopermit.co.uk</a><br>
+
+      Postal Address: Office 2, 51 Pinfold Street, Birmingham, West Midlands, B2 4AY
+    
+    </div>
+    
+
+  </div>
+</div>
+
+
+<div 
+  *ngIf="privacypolicy" 
+  style="position: fixed; top: 20px; left: 0; width: 100%; height: 100%; background: rgba(75, 71, 71, 0.5); display: flex; justify-content: center; align-items: center; z-index: 1000;">
+
+  <div style="position: relative; background: #fff; padding: 20px; border-radius: 8px; text-align: left; max-width: 600px; max-height: 70vh; overflow-y: auto; width: 100%; box-shadow: 0px 4px 6px rgba(0,0,0,0.1);">
+    <!-- Close Icon -->
+    <button 
+      (click)="privacypolicy = false"
+      style="position: absolute; top: 10px; right: 10px; background: none; border: none; font-size: 24px; cursor: pointer;">
+      &times;
+    </button>
+
+    <h2 style="margin-bottom: 10px;">Privacy Policy</h2>
+
+    <div style="font-size: 14px; line-height: 1.6; white-space: pre-line; text-align: justify;">
+
+      <strong>Summary</strong>
+      <p>
+        GoPermit is a permit management provider and acts as the data controller under the UK GDPR and Data Protection Act 2018. 
+        We collect personal data, such as vehicle details and contact information, to issue permits and manage parking access on behalf of landowners and tenants.
+      </p>
+      <p>
+        Your data may be shared with approved third parties where necessary, including the DVLA and regulatory bodies. 
+        We only collect what is needed, keep it secure, and retain it only for as long as required.
+      </p>
+  
+  
+ 
+      <strong>Overview</strong>
+      <p>
+        GoPermit is a company that specialises in providing permit management system. GoPermit is the 'data controller' for the purpose of General Data Protection Regulation. 
+        This policy has been produced and will continue to be updated in line with the Data Protection Act 2018 and the General Data Protection Regulation.
+      </p>
+      <p>
+        This policy will explain your rights and what to expect when we 'the data controller' collect personal data from you, including information about the right to access the information obtained.
+      </p>
+      <p>
+        GoPermit has authorisation from 'Landowners' and 'tenants' to whitelist their visitors' vehicles using a variety of different services. 
+        This includes ANPR, CCTV and Warden monitoring. Signage is accurately placed for efficient operations and conveying parking regulations.
+      </p>
+    
+  
+    
+      <strong>What we do</strong>
+      <p>
+        We monitor the entry and exit of our privately managed ANPR and CCTV car park sites and allow tenants and landowners to whitelist their parking spaces.
+      </p>
+      <p>
+        We obtain images of people and vehicles, including vehicle registration numbers, these are obtained to confirm the length of stay and enforce non-compliance with the Terms and Conditions of entry onto our privately owned sites.
+      </p>
+   
+  
+ 
+      <strong>Who we are</strong>
+      <p>
+        GoPermit is a company registered in England and Wales whose registered office is at Office 2 51 Pinfold Street, Birmingham, West Midlands, B2 4AY.
+      </p>
+    
+  
+   
+      <strong>How do we collect data?</strong>
+      <p>
+        GoPermit primarily collects data from its digital platform. Tenants and landowners input their personal data and specific information into their system to issue permits allowing visitors to park on their premises. 
+      </p>
+      <p>
+        GoPermit would be processor and controller of the data that is being collected for GoPermit service and operations. 
+      </p>
+      <p>
+        GoPermit, as detailed on its website, specialises in simplifying the process of obtaining permits for various purposes, such as parking permits and visitor permits. 
+        Their services focus on streamlining administrative tasks for individuals and organisations by providing an online platform that facilitates permit applications and management.
+      </p>
+      <p>
+        GoPermit collects data primarily through its digital platform. Users input their personal data, VRM and application-specific information into the system when applying for permits. 
+        This data is used to process applications, verify eligibility and issue permits. Additionally, GoPermit employs secure methods to ensure compliance with data protection regulations while handling sensitive user information.
+      </p>
+      <p>
+        GoPermit for the purposes set out in this Privacy Policy under all sections; when information is provided in relation to a Parking Charge, GoPermit may share it with the following services outlined below:
+      </p>
+      <ul>
+        <li>The International Parking Community for auditing purposes of our car park management services.</li>
+        <li>The DVLA (Driver Vehicle Licence Agency) to obtain the registered keeper details.</li>
+        <li>The Independent Appeal Service (IAS) to consider any appeal made.</li>
+      </ul>
+      <p>
+        Other than stated above, information supplied to us is subject to confidentiality and will not be disclosed otherwise without your prior consent.
+      </p>
+      <p>
+        When sharing personal data, we strictly adhere to the applicable Standard Contractual Clauses (SCCs) to ensure adequate safeguards are in place, in full compliance with data protection laws.
+      </p>
+      <p>
+        We will not ask you for any more information than we need, and we do not keep your information for any longer than we need to.
+      </p>
+      <p>
+        We take reasonable steps to keep your details up-to-date and accurate. Please keep in mind that we may hold your records after your appeal has been considered as we are required to have effective audit trails and to comply with regulatory and legislative requirements.
+      </p>
+      <p>
+        General Data Protection Regulation (GDPR) gives you the right to access information held about you. 
+      </p>
+      <p>
+        As an organisation, we look after your personal data by having security that is appropriate for its nature and the harm that might result from a breach of security. 
+        Unfortunately, the transmission of information via the Internet is not completely secure. Although we will do our best to protect your personal data, we cannot guarantee the security of your data transmitted to our site. 
+        Any transmission therefore is at your own risk. Once we have received your information, we will use strict procedures and security features to try to prevent unauthorised access.
+      </p>
+    
+  
+   
+      <strong>The Legal Position</strong>
+      <p>
+        This privacy notice includes the following information to help you understand clearly how your data is being used:
+      </p>
+      <ul>
+        <li>
+          <strong>The lawful basis for processing your data:</strong>
+          <ul>
+            <li>
+              <strong>Consent (Article 6(1)(a) UK GDPR)</strong><br>
+              Data is processed when individuals give clear and informed consent for their information to be used for specific purposes—such as creating an account or applying for a permit.
+            </li>
+            <li>
+              <strong>Contractual Necessity (Article 6(1)(b) UK GDPR)</strong><br>
+              Processing is necessary for the performance of a contract, for example, issuing permits or managing parking access in accordance with agreements between GoPermit, landowners, and tenants.
+            </li>
+            <li>
+              <strong>Legal Obligation (Article 6(1)(c) UK GDPR)</strong><br>
+              GoPermit may process data to comply with legal requirements, such as requests from authorities like the DVLA or to maintain audit trails in line with regulatory bodies.
+            </li>
+            <li>
+              <strong>Legitimate Interests (Article 6(1)(f) UK GDPR)</strong><br>
+              Data may be processed where it is necessary for GoPermit's legitimate interests—such as maintaining site security or enforcing parking compliance—provided these interests do not override individuals' data protection rights.
+            </li>
+            <li>
+              <strong>Public Task or Legal Authority (where applicable) (Article 6(1)(e) UK GDPR)</strong><br>
+              In certain scenarios, data may be processed where it is necessary for the performance of a task carried out in the public interest or under official authority vested in the controller.
+            </li>
+          </ul>
+        </li>
+        <li>Categories of data processed</li>
+        <li>What we do with your personal data</li>
+      </ul>
+  
+      <p>
+        Your rights under the DPA are as follows:
+      </p>
+      <ul>
+        <li>The right to be informed</li>
+        <li>The right of access</li>
+        <li>The right to rectification</li>
+        <li>The right to erasure</li>
+        <li>The right to restrict processing</li>
+        <li>The right to data portability</li>
+        <li>The right to object</li>
+      </ul>
+      <p>
+        Please note that you have the right to request the above, however, when we receive your requests, we may object to your request if we do not agree with it. 
+        However, if you do make the request, we will tell you if the request has been granted or not and the reason why.
+        You can make a Data Subject Access Request by contacting us at <a href="mailto:dpo@gopermit.co.uk">dpo@gopermit.co.uk</a>. 
+        In accordance with Article 15 of the UK GDPR, we will respond within one month of receiving your request.
+      </p>
+      <p>
+        Requests are processed free of charge. However, if you wish to expedite your request, a discretionary £10 administrative fee may apply, in line with Article 12(5) and Recital 63 of the UK GDPR.
+      </p>
+   
+  
+ 
+      <strong>Our Legitimate Interest in Processing Your Personal Data</strong>
+      <p>
+        The processing is necessary for a contract that has been entered into and there is a legitimate interest to do so. We are entitled to ensure safety and security and help deter/detect criminal activity.
+      </p>
+   
+   
+      <strong>Sharing Your Personal Data</strong>
+      <p>
+        Where necessary to ensure compliance with the data protection laws we will disclose your data by ensuring adequate safety measures. 
+      </p>
+  
+    
+      <strong>The Categories of "Personal Data" we Process</strong>
+      <p>
+        The personal details we will obtain include:
+      </p>
+      <ul>
+        <li>The name and address of the registered keeper</li>
+        <li>The make, model, and colour of the vehicle</li>
+        <li>Confirmation of the registration number</li>
+        <li>Any other information that we gather, that is shared with us during the whitelisting process.</li>
+      </ul>
+      <p>
+        Your data will be held for sufficient time to enable the application/software to process your slot booking request, by you or another person and resolve any dispute. 
+        However, your data will not normally be held for longer than 6 years in such circumstances. In some circumstances, your data may be held for longer than 6 years. 
+        Examples of when we may hold your data for longer are:
+      </p>
+      <ul>
+        <li>When there is an ongoing dispute that requires us to hold the data for longer than normal.</li>
+      </ul>
+    
+  
+  
+      <strong>Changes to Our Privacy Notice</strong>
+      <p>
+        From time to time we may amend the way in which we process personal data. This may lead to changes in how we collect and/or use your personal information. 
+        We may amend the terms of this Privacy Policy at any time.
+      </p>
+ 
+  
+   
+      <strong>GoPermit Website Privacy Policy</strong>
+      <p>
+        We take care to protect the privacy of users of the GoPermit Website, with regard to each of your visits to our website we may automatically collect technical information, 
+        including the Internet protocol (IP) address used to connect your computer to the Internet, your login information, browser type and version, time zone setting and versions, 
+        operating system and platform; information about your visit, including the full Uniform Resource Locators (URL) clickstream to, through and from our site (including date and time); 
+        products you viewed or searched for; page response times, download errors, length of visits to certain pages, page interaction information (such as scrolling, clicks, and mouse-overs), 
+        and methods used to browse away from the page and any phone number used to call our customer service number.
+      </p>
+      <p>
+        The information which we collect and store during normal use of the site is used to monitor and analyse how parts of the site are used. 
+        Such use does not result in any personally identifiable data being collected or stored
+      </p>
+      <p>
+        By submitting your information and/or use of this website, you consent to the use of that information as set out in this Privacy Policy.
+      </p>
+ 
+  
+
+      <strong>Use of the Information</strong>
+      <p>
+        Information supplied to us is subject to confidentiality and will not be disclosed without your prior consent other than in line with this purpose, whereby it may be necessary to share data with the IPC, DVLA, and IAS.
+      </p>
+      <p>
+        We look after your personal data by having security that is appropriate for its nature and the harm that might result from a breach of security. 
+        Unfortunately, the transmission of information via the Internet is not completely secure. Although we will do our best to protect your personal data, 
+        we cannot guarantee the security of your data transmitted to our site; any transmission is at your own risk and you should take the appropriate steps in respect of this risk.
+      </p>
+    
+  
+    
+      <strong>Commercial Enquiries – Privacy Statement</strong>
+      <p>
+        When you make an enquiry via our Commercial Enquiries heading you accept that GoPermit will collect and process personal data such information may include, 
+        your name, company name, email address, telephone number, and the details of your message. These details will be used to contact you to discuss any opportunity, 
+        provide you with brochures or bespoke sales information, and add you to our customer contact database. This information may be shared with other personnel in the business to deal with your enquiry such information will only be held for as long as necessary according to the nature of the enquiry. 
+        If you do not wish to be added to our customer contact database, please email
+      </p>
+ 
+  
+   
+      <strong>Police Enquiries – Privacy Statement</strong>
+      <p>
+        This privacy statement has been produced in accordance with the Data Protection Act 2018 and the General Data Protection Regulation. 
+        The statement applies to all personal data. GoPermit will only process and supply information to the Police Services for the purpose of their grounds to request personal data as stated in the British Transport Police information request form under the Data Protection Act 2018 and in line with the General Data Protection Regulation (GDPR).
+      </p>
+    
+  
+    
+      <strong>How to Complain</strong>
+      <p>
+        GoPermit is committed to ensuring your data rights are upheld, if you are unhappy with how we have used your personal data or with any correspondence received you can contact us via email at <a href="mailto:info@gopermit.co.uk">info@gopermit.co.uk</a>
+      </p>
+    
+  
+   
+      <strong>Contact Us</strong>
+      <p>
+        If you have any queries relating to this Privacy Policy, please contact us by <br> <strong>E-mail at </strong>: <a href="mailto:info@gopermit.co.uk">info@gopermit.co.uk</a>
+      </p>
+      <p>
+        You can contact the ICO if you are not satisfied with your Data Queries at <br> Website: <a href="https://www.ico.org.uk" target="_blank">https://www.ico.org.uk</a>
+      </p>
+  
+      
+    </div>
+
+  </div>
+</div>
+
+
+<div 
+  *ngIf="enduseragreement" 
+  style="position: fixed; top: 20px; left: 0; width: 100%; height: 100%; background: rgba(75, 71, 71, 0.5); display: flex; justify-content: center; align-items: center; z-index: 1000;">
+
+  <div style="position: relative; background: #fff; padding: 20px; border-radius: 8px; text-align: left; max-width: 600px; max-height: 70vh; overflow-y: auto; width: 100%; box-shadow: 0px 4px 6px rgba(0,0,0,0.1);">
+    <!-- Close Icon -->
+    <button 
+      (click)="enduseragreement = false"
+      style="position: absolute; top: 10px; right: 10px; background: none; border: none; font-size: 24px; cursor: pointer;">
+      &times;
+    </button>
+
+    <!-- <h2 style="margin-bottom: 10px;">Privacy Policy</h2> -->
+
+    <div style="font-size: 14px; line-height: 1.6; white-space: pre-line; text-align: justify;">
+
+      <h2>GoPermit End User Agreement</h2>
+    
+      <strong>1. Introduction</strong><br>
+      This End User Agreement (“Agreement”) governs your use of the GoPermit application and associated web services (“GoPermit App”), a platform operated to facilitate the digital management and issuance of parking permits.
+      By accessing or using the GoPermit App, you confirm that you have read, understood, and agreed to be bound by the terms of this Agreement, including our privacy obligations under the UK General Data Protection Regulation (UK GDPR) and the Data Protection Act 2018.
+    
+      <br><br><strong>2. Definitions</strong><br>
+      <ul>
+        <li>“GoPermit” refers to the permit management system.</li>
+        <li>“User”, “You”, or “Your” refers to any individual using the GoPermit App.</li>
+        <li>“Personal Data” refers to information that relates to an identified or identifiable natural person.</li>
+        <li>“Landowners” and “Tenants” refer to entities authorised to whitelist vehicles through the GoPermit platform.</li>
+      </ul>
+    
+      <br><strong>3. Data Collection and Use</strong><br>
+      We collect and process the following categories of personal data to enable, manage and enforce parking access and permit issuance:
+      <ul>
+        <li>Full name</li>
+        <li>Vehicle Registration Mark (VRM)</li>
+        <li>Contact information (email address, phone number)</li>
+        <li>Permit booking or whitelisting details</li>
+        <li>Device information, IP address, and usage data</li>
+        <li>Photographic or CCTV data from monitored sites</li>
+      </ul>
+      This data is collected via our digital platform, tenant inputs, or through Automatic Number Plate Recognition (ANPR), CCTV and Warden enforcement.
+    
+      <br><br><strong>4. Lawful Basis for Processing</strong><br>
+      We process your personal data in accordance with the lawful bases defined under the UK GDPR:
+      <ul>
+        <li>Consent – Article 6(1)(a): Clear, informed, unambiguous consent (e.g., marketing communications).</li>
+        <li>Contractual Necessity – Article 6(1)(b): Required to perform a contract or pre-contractual steps.</li>
+        <li>Legal Obligation – Article 6(1)(c): Compliance with legal duties (e.g., DVLA, IPC requests).</li>
+        <li>Legitimate Interests – Article 6(1)(f): Operational efficiency, system monitoring, and fraud prevention.</li>
+        <li>Public Task / Legal Authority – Article 6(1)(e): Tasks carried out in the public interest (e.g., parking enforcement).</li>
+      </ul>
+    
+      <br><br><strong>5. Data Sharing</strong><br>
+      We may share your data with:
+      <ul>
+        <li>Our internal staff and systems</li>
+        <li>Parking operators, landowners or enforcement teams</li>
+        <li>Approved third-party processors (e.g., IT and hosting providers)</li>
+        <li>Regulatory bodies like DVLA or IPC when required, or any other relevant Statutory Authorities</li>
+      </ul>
+      All data sharing adheres to strict confidentiality agreements and UK GDPR-compliant safeguards.
+    
+      <br><br><strong>6. International Data Transfers</strong><br>
+      Where data is transferred outside the UK, we ensure it is protected by appropriate safeguards such as:
+      <ul>
+        <li>Standard Contractual Clauses (SCCs)</li>
+        <li>Adequacy decisions under the UK GDPR</li>
+      </ul>
+    
+      <br><br><strong>7. Data Retention</strong><br>
+      We retain your personal data only for as long as necessary, including:
+      <ul>
+        <li>Permit or booking management</li>
+        <li>Auditing and compliance</li>
+        <li>Legal obligations</li>
+      </ul>
+      Typically, data is retained for a minimum of 3 years and up to 6 years for legal or dispute resolution purposes.
+    
+      <br><br><strong>8. Data Security</strong><br>
+      We use appropriate technical and organisational measures including:
+      <ul>
+        <li>Encrypted communications</li>
+        <li>Access control and system logging</li>
+        <li>Secure data storage and firewalls</li>
+        <li>Regular security audits and staff training</li>
+      </ul>
+      However, we cannot guarantee absolute data security. By using the GoPermit App, you acknowledge and accept this risk.
+    
+      <br><br><strong>9. Your Rights</strong><br>
+      Under the UK GDPR, you have the right to:
+      <ul>
+        <li>Be informed</li>
+        <li>Access your data</li>
+        <li>Rectify inaccurate data</li>
+        <li>Request erasure</li>
+        <li>Restrict processing</li>
+        <li>Data portability</li>
+        <li>Object to processing</li>
+        <li>Challenge automated decision-making</li>
+      </ul>
+      To exercise these rights, please contact us at: <br>
+      Email: dpo@gopermit.co.uk <br>
+      We will respond to Subject Access Requests within one month. Expedited requests may incur a discretionary fee in line with Article 12(5) of the UK GDPR.
+    
+      <br><br><strong>10. Commercial and Police Enquiries</strong><br>
+      <ul>
+        <li>Commercial enquiries: We may collect and retain your contact details to manage your request and may share these within our organisation.</li>
+        <li>Police enquiries: Data will only be provided to police forces on lawful grounds and in line with the Data Protection Act 2018.</li>
+      </ul>
+    
+      <br><br><strong>11. Updates to the Agreement</strong><br>
+      This Agreement may be updated from time to time. Significant changes will be notified via email or through the App. Continued use of the App following such changes will constitute your acceptance.
+    
+      <br><br><strong>12. Contact Details</strong><br>
+      If you have any queries or complaints, contact: <br>
+      Data Protection Officer (DPO): dpo@gopermit.co.uk <br>
+      Email: info@gopermit.co.uk <br>
+      Postal Address: Office 2, 51 Pinfold Street, Birmingham, West Midlands, B2 4AY <br>
+      ICO Complaint Link: <a href="https://www.ico.org.uk" target="_blank">www.ico.org.uk</a>
+    
+    </div>
+    
+
+  </div>
+</div>
+

@@ -123,4 +123,17 @@ toggleConfirmPasswordVisibility(): void {
     this.passwordMismatchVisible = false;
     this.canSubmit = false;
   }
+
+
+  showPassword = false;
+  showConfirmPassword1 = false;
+  
+  togglePasswordVisibility(field: 'password' | 'reenter') {
+    if (field === 'password') {
+      this.showPassword = !this.showPassword;
+    } else if (field === 'reenter') {
+      this.showConfirmPassword1 = !this.showConfirmPassword1;
+    }
+  }
+
 }

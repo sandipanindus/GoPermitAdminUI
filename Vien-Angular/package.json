@@ -1,7 +1,7 @@
 {
   "name": "vien-angular",
   "version": "1.1.1",
- "scripts": {
+  "scripts": {
     "ng": "ng",
     "start": "node --openssl-legacy-provider ./node_modules/@angular/cli/bin/ng serve --port 4600",
     "build": "node --openssl-legacy-provider ./node_modules/@angular/cli/bin/ng build",
@@ -40,6 +40,7 @@
     "chart.js": "^2.9.3",
     "date-fns": "^2.8.0",
     "firebase": "^7.8.1",
+    "font-awesome": "^4.7.0",
     "jquery": "^3.5.1",
     "ng-multiselect-dropdown": "^0.3.7",
     "ng2-nouislider": "^1.8.2",
