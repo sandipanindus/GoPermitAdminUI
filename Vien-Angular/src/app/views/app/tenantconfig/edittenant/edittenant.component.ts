@@ -490,7 +490,8 @@ export class EditTenantComponent implements OnInit, OnDestroy {
         // element.style.display = 'block';
         var SiteId = localStorage.getItem("SiteId");
         var RoleId = localStorage.getItem("RoleId");
-        this.authService.GetSites(1, 0, 1, RoleId, SiteId).subscribe((result: any) => {
+        var LogInId = localStorage.getItem("LoginId");
+        this.authService.GetSites(1, 0, LogInId, RoleId, SiteId).subscribe((result: any) => {
              ;
             //  var data = JSON.stringify(result);
             var finalresult = JSON.parse(result);

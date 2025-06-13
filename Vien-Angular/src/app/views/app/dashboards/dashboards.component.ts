@@ -148,8 +148,9 @@ export class DashboardsComponent implements OnInit {
     var loginId = localStorage.getItem("LoginId");
     var RoleId = localStorage.getItem("RoleId");
     var SiteId = localStorage.getItem("SiteId");
+   var OperatorId = localStorage.getItem("OperatorId");
 
-    this.authService.GetTenantUsers(1, 1000, loginId, RoleId, SiteId).subscribe((result: any) => {
+    this.authService.GetTenantUsers(1, 1000, loginId, RoleId, SiteId, OperatorId).subscribe((result: any) => {
       var finalresult = JSON.parse(result);
       if (finalresult.status == "200") {
         this.tenants = finalresult?.result?.length; 

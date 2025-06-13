@@ -248,13 +248,14 @@ export class TenantComponent implements OnInit, OnDestroy {
     var loginId = localStorage.getItem("LoginId");
     var RoleId = localStorage.getItem("RoleId");
     var SiteId = localStorage.getItem("SiteId");
+    var OperatorId = localStorage.getItem("OperatorId");
     if (RoleId == "1") {
       this.showsite = true;
     }
     else {
       this.showsite = false;
     }
-    this.authService.GetTenantUsers(this.currentPage, this.itemsPerPage, loginId, RoleId, SiteId).subscribe((result: any) => {
+    this.authService.GetTenantUsers(this.currentPage, this.itemsPerPage, loginId, RoleId, SiteId,OperatorId).subscribe((result: any) => {
       var finalresult = JSON.parse(result);
       if (finalresult.status == "200") {
          ;

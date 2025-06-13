@@ -34,14 +34,14 @@ export class AuthService {
 // this.baseUrl='http://goapi.fadelsoft.co.in/'
 //  this.imageBindUrl='http://goapi.fadelsoft.co.in'
 
-// this.baseUrl='https://apiuat.gopermit.co.uk/'
- // this.imageBindUrl='https://apiuat.gopermit.co.uk'
+this.baseUrl='https://apiuat.gopermit.co.uk/'
+ this.imageBindUrl='https://apiuat.gopermit.co.uk'
 
  // this.baseUrl='https://api.gopermit.co.uk/'
  // this.imageBindUrl='https://api.gopermit.co.uk'
 
- this.baseUrl = 'https://localhost:5001/';
-  this.imageBindUrl = 'https://localhost:5001'
+//  this.baseUrl = 'https://localhost:5001/';
+//   this.imageBindUrl = 'https://localhost:5001'
 
     //this.baseUrl = 'https://api.gopermit.co.uk/';
 
@@ -152,6 +152,11 @@ export class AuthService {
   public AddUser(data): Observable<any> {
     return this.http.post(this.baseUrl + "api/Admin/AddUser", data, { responseType: 'text' });
   }
+
+   public AddOperatorUser(data): Observable<any> {
+    return this.http.post(this.baseUrl + "api/Admin/AddOperatorUser", data, { responseType: 'text' });
+  }
+
   public UpdateUser(data): Observable<any> {
     return this.http.post(this.baseUrl + "api/Admin/UpdateUserProfile", data, { responseType: 'text' });
   }
@@ -213,8 +218,8 @@ export class AuthService {
   public GetSearchTenants(PageNo, PageSize, FirstName, LastName, Email, MobileNumber, SiteName, SiteId,vrm): Observable<any> {
     return this.http.get(this.baseUrl + "api/Admin/GetSearchTenant?PageNo=" + PageNo + "&PageSize=" + PageSize + "&FirstName=" + FirstName + "&LastName=" + LastName + "&Email=" + Email + "&MobileNumber=" + MobileNumber + "&SiteName=" + SiteName +  "&SiteId=" + SiteId+ "&VRM=" + vrm, { responseType: 'text' });
   }
-  public GetTenantUsers(PageNo, PageSize, Id, RoleId, SiteId): Observable<any> {
-    return this.http.get(this.baseUrl + "api/Admin/GetTenantUsers?PageNo=" + PageNo + "&PageSize=" + PageSize + "&LoginId=" + Id + "&RoleId=" + RoleId + "&SiteId=" + SiteId, { responseType: 'text' });
+  public GetTenantUsers(PageNo, PageSize, Id, RoleId, SiteId, OperatorId): Observable<any> {
+    return this.http.get(this.baseUrl + "api/Admin/GetTenantUsers?PageNo=" + PageNo + "&PageSize=" + PageSize + "&LoginId=" + Id + "&RoleId=" + RoleId + "&SiteId=" + SiteId + "&OperatorId=" + OperatorId, { responseType: 'text' });
   }
   public GetRegisterUsers(Id): Observable<any> {
     return this.http.get(this.baseUrl + "api/Admin/GetRegisterUsers?LoginId=" + Id, { responseType: 'text' });

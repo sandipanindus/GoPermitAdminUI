@@ -135,7 +135,7 @@ export class ZatparkComponent implements OnInit, OnDestroy {
     });
   }
   SearchZatpark() {
-     ;
+    debugger
     var element = document.getElementById("loading") as HTMLDivElement;
     element.style.display = 'block';
     var loginId = localStorage.getItem("LoginId");
@@ -146,8 +146,8 @@ export class ZatparkComponent implements OnInit, OnDestroy {
     if (this.sitename != '' || this.tenant != '' || this.bayname != '' || fromdate !='' || todate!='') {
 
       if(this.fromdate!=undefined && this.todate!=undefined){
-        let date1= this.datePipe.transform(this.fromdate,"dd-MM-yyyy");
-        let date2= this.datePipe.transform(this.todate,"dd-MM-yyyy");
+        let date1= this.datePipe.transform(this.fromdate,"yyyy-MM-dd");
+        let date2= this.datePipe.transform(this.todate,"yyyy-MM-dd");
         if(date2<date1){
             this.alert("to date should be greater than from date");
             element.style.display = 'none';

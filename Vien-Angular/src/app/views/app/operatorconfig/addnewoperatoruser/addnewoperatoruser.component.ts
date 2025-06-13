@@ -66,9 +66,9 @@ this.Getroles()
          
         console.log("role,",response)
         if (JSON.parse(response) ) {
-  const data=JSON.parse(response);
+        const data=JSON.parse(response);
           this.Rolesdata = data.result;
-          this.Rolesdata= this.Rolesdata.filter((item)=>item.name=='Operator User Admin')
+        //  this.Rolesdata= this.Rolesdata.filter((item)=>item.name=='Operator User Admin')
 
         } else {
           this.Rolesdata = []; // Default to an empty array if the response is not in the expected format
@@ -147,7 +147,7 @@ this.Getroles()
             LoginId: parseInt(localStorage.getItem("LoginId")),
             EmailCode:emailcode.toString()
         }
-        this.authService.AddUser(data).subscribe((data: any) => {
+        this.authService.AddOperatorUser(data).subscribe((data: any) => {
              ;
             var result = JSON.parse(data);
             if (result.status == "200") {
