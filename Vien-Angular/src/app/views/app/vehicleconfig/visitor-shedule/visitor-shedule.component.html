@@ -180,6 +180,24 @@
               </span>
             </td>
           </tr>
+
+
+          <!-- <tr *ngFor="let hour of hours">
+            <th>{{ hour }}</th>
+            <td *ngFor="let item of Visitordetails" [id]="hour + '-' + item.id">
+              <span
+                [ngClass]="{
+                  'slot-booked': getSlotData(hour, item)
+                }"
+                [tooltip]="tolTemplate"
+                placement="auto"
+                (mouseenter)="openDialog(getSlotData(hour, item))"
+              >
+                {{ getSlotData(hour, item)?.vrmNumber || '' }}
+              </span>
+            </td>
+          </tr> -->
+
         </tbody>
       </table>
     </div>
@@ -387,9 +405,7 @@
 <ng-template #tolTemplate>
   <div class="row col-12 no-gutters" *ngFor="let i of details">
     <div class="row col-lg-12" style="font-weight: 500">
-      <label class="col-sm-6 col-form-label" style="text-align: left;">{{
-        "tenants.Drivername2" | translate
-      }}</label>
+      <label class="col-sm-6 col-form-label" style="text-align: left;">Visitor Name</label>
       <label class="col-sm-6 col-form-label" style="text-align: left;">
         :{{ i.drivername | titlecase  }}
       </label>

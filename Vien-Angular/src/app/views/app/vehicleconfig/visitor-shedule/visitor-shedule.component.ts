@@ -106,9 +106,12 @@ this.GetSites();
   }
  iterations:any
  Visitordetails:any
+ selectedDate
 eventClicked(data)
 {
    debugger
+   //this.selectedDate=data.date
+   this.selectedDate = new Date(data.date)
   this.spinner.show();
 this.showtable=false;
 
@@ -189,6 +192,7 @@ showDialog: boolean = false;
      }
 
      assigntoTable() {
+      debugger
       for (let i = 0; i < this.Visitordetails.length; i++) {
         for (let j = 0; j < this.Visitordetails[i].result.length; j++) {
           const result = this.Visitordetails[i].result[j];
@@ -231,6 +235,68 @@ showDialog: boolean = false;
       }
     }
     
+// assigntoTable() {
+//   debugger;
+//   const selectedDate = new Date(this.selectedDate); // e.g., 2025-07-01
+//   const selectedDateStr = selectedDate.toDateString(); // for comparison
+
+//   for (let i = 0; i < this.Visitordetails.length; i++) {
+//     const visitor = this.Visitordetails[i];
+
+//     for (let j = 0; j < visitor.result.length; j++) {
+//       const result = visitor.result[j];
+
+//       const startDate = new Date(result.startDate);
+//       const endDate = new Date(result.endDate);
+
+//       // Loop from start hour to end hour, but filtered by selected date
+//       let current = new Date(startDate);
+//       current.setMinutes(0, 0, 0); // normalize minutes
+
+//       while (current <= endDate) {
+//         const currentDateStr = current.toDateString();
+
+//         if (currentDateStr === selectedDateStr) {
+//           const hour = current.getHours();
+//           const cellId = `${hour}-${visitor.id}`;
+//          // const cellId = `${hour}-${this.Visitordetails[i].id}`;
+
+//           const cell = document.getElementById(cellId);
+//           if (!cell) {
+//             console.warn(`❌ Cell not found: ${cellId}`);
+//           } else {
+//             if (!document.getElementById(`${result.id}-${hour}`)) {
+//               const slot = document.createElement('p');
+//               slot.className = `slot cls${result.id}`;
+//               slot.id = `${result.id}-${hour}`;
+//               slot.innerHTML = `${result.vrmNumber}<br>`;
+//               slot.style.background = 'gold';
+//               slot.style.borderRadius = '4px';
+//               slot.style.textAlign = 'center';
+//               slot.style.marginBottom = '0px';
+//               slot.style.padding = '5px';
+//               slot.style.cursor = 'pointer';
+
+//               cell.appendChild(slot);
+
+//               slot.addEventListener('mouseenter', () => {
+//                 this.testing(result.id.toString());
+//               });
+
+//               slot.addEventListener('mouseleave', () => this.hideDialog());
+//             }
+//           }
+//         }
+
+//         current.setHours(current.getHours() + 1);
+//       }
+//     }
+//   }
+// }
+
+
+
+
 
   showDialogOnHover(event: MouseEvent, details: any) {
     this.details = [details];
@@ -343,55 +409,110 @@ else
             }
         }
         this.spinner.hide();
-    });
+    });this.assigntoTable();
 }
 
+// Getbaybysite() {
+//    debugger
+//   for (let i = 0; i < this.events.length; i++) {
+//     this.events.splice(i, this.events.length);
+//   }
+//   this.authService.Getvistordeatilsbysite(this.siteId).subscribe((result: any) => {
+//     const responce = JSON.parse(result);
+//     console.log(responce);
+//     if (responce.status === "200") {
+//       this.showdatepicker=true;
+//       if (responce.result.length > 0) {
+//         for (let k = 0; k < responce.result.length; k++) {
+//           this.showtable=false;
+//           this.showdatepicker=true;
+//          var filterdateforbublelist= this.filtergriddata(responce.result[k].startDate);
+
+//          if (filterdateforbublelist.length == 0) {
+//           this.addEvent(responce.result[k].startDate);
+
+//          }
+//          // this.onValueChange1(new Date(data.result[0].selectedddates[k].fromDate))
+//         }
+//       }
+//       else
+//       {
+//         this.showtable=false;
+//           this.showdatepicker=false;
+//            this.showdetails=false;
+
+//       }
+//     }
+//   });
+ 
+// }
+
+
 Getbaybysite() {
-   
-  for (let i = 0; i < this.events.length; i++) {
-    this.events.splice(i, this.events.length);
-  }
+  debugger
+  this.events = [];
+
   this.authService.Getvistordeatilsbysite(this.siteId).subscribe((result: any) => {
-     ;
-    const responce = JSON.parse(result);
-    console.log(responce);
-    if (responce.status === "200") {
+    const response = JSON.parse(result);
 
-     
-      
-      this.showdatepicker=true;
-      if (responce.result.length > 0) {
-        for (let k = 0; k < responce.result.length; k++) {
-          this.showtable=false;
-          this.showdatepicker=true;
-         var filterdateforbublelist= this.filtergriddata(responce.result[k].startDate);
+    if (response.status === "200") {
+      this.showdatepicker = true;
 
-         if (filterdateforbublelist.length == 0) {
-          this.addEvent(responce.result[k].startDate);
+      if (response.result.length > 0) {
+        this.showtable = false;
 
-         }
-         // this.onValueChange1(new Date(data.result[0].selectedddates[k].fromDate))
+        for (let entry of response.result) {
+          const start = new Date(entry.startDate);
+          const end = new Date(entry.endDate);
+
+          const sameDay = start.toDateString() === end.toDateString();
+
+          if (sameDay) {
+            // Same-day event: use original times
+            this.addEvent(start, end);
+          } else {
+            // Split into 2 events
+
+            // Day 1: From start time to 23:59:59
+            const endOfDay = new Date(start);
+            endOfDay.setHours(23, 59, 59, 999);
+            this.addEvent(start, endOfDay);
+
+            // Day 2: From 00:00 to end time
+            const startOfNext = new Date(end);
+            startOfNext.setHours(0, 0, 0, 0);
+            this.addEvent(startOfNext, end);
+          }
         }
-      }
-      else
-      {
-        this.showtable=false;
-          this.showdatepicker=false;
-           this.showdetails=false;
-
+      } else {
+        this.showtable = false;
+        this.showdatepicker = false;
+        this.showdetails = false;
       }
     }
   });
- 
 }
 
-addEvent(date): void {
+
+// addEvent(date): void {
+//   this.events = [
+//     ...this.events,
+//     {
+//       start: addDays(new Date(date), 0),
+//                 title: 'Date Configured',
+//                 color: colors.color2
+//     }
+//   ];
+// }
+
+addEvent(start: Date, end: Date): void {
   this.events = [
     ...this.events,
     {
-      start: addDays(new Date(date), 0),
-                title: 'Date Configured',
-                color: colors.color2
+      start: new Date(start),
+      end: new Date(end),
+      title: 'Date Configured',
+      color: colors.color2
     }
   ];
 }
@@ -416,16 +537,39 @@ hours: string[] = Array.from({ length: 24 }, (_, i) =>
   (i < 10 ? '0' + i : i) + ':00'
 );
 
+// getSlotData(hour: string, item: any): any {
+//   debugger
+//   const targetHour = parseInt(hour.split(':')[0], 10);
+
+//   return item.result.find((res: any) => {
+//     const startHour = new Date(res.startDate).getHours();
+//     const endHour = new Date(res.endDate).getHours() || 24;
+
+//     return targetHour >= startHour && targetHour < endHour;
+//   });
+// }
+
 getSlotData(hour: string, item: any): any {
   const targetHour = parseInt(hour.split(':')[0], 10);
+  const targetMinute = parseInt(hour.split(':')[1], 10) || 0;
+
+  const targetTime = new Date(this.selectedDate);
+  targetTime.setHours(targetHour, targetMinute, 0, 0);
 
   return item.result.find((res: any) => {
-    const startHour = new Date(res.startDate).getHours();
-    const endHour = new Date(res.endDate).getHours() || 24;
+    const start = new Date(res.startDate);
+    const end = new Date(res.endDate);
 
-    return targetHour >= startHour && targetHour < endHour;
+    // Check if selected date is in the range of booking
+    const isSameDay =
+      targetTime >= start &&
+      targetTime < end; // strictly less than end time
+
+    return isSameDay;
   });
 }
+
+
 
 openDialog(slot: any): void {
   debugger
